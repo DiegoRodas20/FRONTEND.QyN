@@ -1,0 +1,44 @@
+<!-- Nav Bar -->
+<div class="top-bar">
+
+    <!-- Bread Crumb -->
+    <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
+        <app-breadcrumb></app-breadcrumb>
+    </nav>
+
+    <!-- Input Search -->
+    <div class="intro-x relative mr-3 sm:mr-6">
+
+        <div class="search hidden sm:block">
+            <input type="text" class="search__input form-control border-transparent" placeholder="Search...">
+            <lucide-icon class="search__icon dark:text-slate-500" name="search"></lucide-icon>
+        </div>
+
+        <a class="notification sm:hidden">
+            <lucide-icon class="notification__icon dark:text-slate-500" name="search"></lucide-icon>
+        </a>
+
+    </div>
+
+    <!-- Notificactions -->
+    <div class="intro-x dropdown mr-auto sm:mr-6">
+
+        <div class="dropdown-toggle notification notification--bullet cursor-pointer" role="button"
+            aria-expanded="false" data-tw-toggle="dropdown">
+            <lucide-icon class="notification__icon dark:text-slate-500" name="bell"></lucide-icon>
+        </div>
+
+    </div>
+
+    <!-- Account Settings -->
+    <div class="intro-x dropdown w-8 h-8">
+
+        <!-- User Photo -->
+        <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in" role="button"
+            aria-expanded="false" data-tw-toggle="dropdown">
+            <img alt="Midone - HTML Admin Template" src="../../../../assets/images/default-user.png">
+        </div>
+
+    </div>
+
+</div>

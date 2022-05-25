@@ -1,0 +1,48 @@
+<!-- Side Bar -->
+<nav class="side-nav">
+
+    <!-- Header -->
+    <a class="intro-x flex items-center justify-center pt-4">
+        <img class="w-logo" src="../../../../assets/images/QNLogo.jpeg">
+    </a>
+
+    <!-- Divider Line -->
+    <div class="side-nav__devider my-6"></div>
+
+    <!-- Options -->
+    <ul>
+        <li *ngFor="let menu of lMenu">
+
+            <a [ngClass]="'side-menu '+ (menu.idpadre == idPadreSeleccionado ? 'side-menu--active' : '')" [routerLink]="menu.url"
+                (click)="menu.submenu ? showSubmenu(menu.idpadre) : routerlinkactive(menu.idpadre); showSubmenu(menu.idpadre)">
+                <div class="side-menu__icon">
+                    <lucide-icon name="{{menu.icono}}"></lucide-icon>
+                </div>
+                <div class="side-menu__title">
+                    {{menu.titulo}}
+                    <div *ngIf="menu.submenu && menu.idpadre != idPadre"
+                        class="side-menu__sub-icon transform rotate-180">
+                        <lucide-icon class="h-inherit" name="chevron-down"></lucide-icon>
+                    </div>
+                    <div *ngIf="menu.submenu && menu.idpadre == idPadre"
+                        class="side-menu__sub-icon transform rotate-180">
+                        <lucide-icon class="h-inherit" name="chevron-up"></lucide-icon>
+                    </div>
+                </div>
+            </a>
+
+            <ul *ngIf="menu.submenu && menu.idpadre == idPadre" class="side-menu__sub-open">
+                <li *ngFor="let submenu of menu.submenu">
+                    <a class="side-menu" routerLinkActive="side-menu--active" [routerLink]="submenu.url" (click)="routerlinkactive(menu.idpadre)">
+                        <div class="side-menu__icon">
+                            <lucide-icon name="{{submenu.icono}}"></lucide-icon>
+                        </div>
+                        <div class="side-menu__title">{{submenu.titulo}}</div>
+                    </a>
+                </li>
+            </ul>
+
+        </li>
+    </ul>
+
+</nav>
