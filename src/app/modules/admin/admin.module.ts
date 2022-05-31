@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { LucideAngularModule , icons} from 'lucide-angular';
+import { LucideAngularModule, icons } from 'lucide-angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AdminRoutingModule } from './admin.routing';
 import { AlmacenModule } from './almacen/almacen.module';
@@ -20,7 +21,9 @@ const COMPONENTS = [
         COMPONENTS
     ],
     exports: [
-        COMPONENTS
+        COMPONENTS,
+        FormsModule,
+        ReactiveFormsModule,
     ],
     imports: [
         CommonModule,

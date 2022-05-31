@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { icons, LucideAngularModule } from 'lucide-angular';
 import { VerUsuarioComponent } from './gestionar-usuario/components/ver-usuario/ver-usuario.component';
@@ -20,7 +21,9 @@ const COMPONENTS = [
         CommonModule,
         RouterModule,
         UsuariosRoutingModule,
-
+        FormsModule,
+        ReactiveFormsModule,
+        
         LucideAngularModule.pick(icons)
     ],
     exports: [],

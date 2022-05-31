@@ -8,40 +8,46 @@
 <!-- Inputs -->
 <div class="intro-y box py-10 sm:py-20 mt-5">
     <div class="px-5 sm:px-20 dark:border-darkmode-400">
-        <div class="font-medium text-base">Usuario: 2</div>
-        <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+        <div class="font-medium text-base">ID Usuario: {{idUsuario}}</div>
+        <form [formGroup]="formUsuario">
+            <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
 
-            <!-- First Name -->
-            <div class="intro-y col-span-12 sm:col-span-6">
-                <label for="input-wizard-1" class="form-label">Nombre</label>
-                <input id="input-wizard-1" type="text" class="form-control" placeholder="Ingresa tu nombre">
-            </div>
+                <!-- First Name -->
+                <div class="intro-y col-span-12 sm:col-span-6">
+                    <label for="input-wizard-1" class="form-label">Nombre</label>
+                    <input id="input-wizard-1" formControlName="firstName" type="text" class="form-control"
+                        placeholder="Ingresa tu nombre" readonly>
+                </div>
 
-            <!-- Last Name -->
-            <div class="intro-y col-span-12 sm:col-span-6">
-                <label for="input-wizard-2" class="form-label">Apellidos</label>
-                <input id="input-wizard-2" type="text" class="form-control" placeholder="Ingresa tu apellido">
-            </div>
-            
-            <!-- E-mail -->
-            <div class="intro-y col-span-12 sm:col-span-6">
-                <label for="input-wizard-3" class="form-label">E-mail</label>
-                <input id="input-wizard-3" type="text" class="form-control" placeholder="user@hotmail.com">
-            </div>
+                <!-- Last Name -->
+                <div class="intro-y col-span-12 sm:col-span-6">
+                    <label for="input-wizard-2" class="form-label">Apellidos</label>
+                    <input id="input-wizard-2" formControlName="lastName" type="text" class="form-control"
+                        placeholder="Ingresa tu apellido" readonly>
+                </div>
 
-            <!-- Estado -->
-            <div class="intro-y col-span-12 sm:col-span-6">
-                <label for="input-wizard-4" class="form-label">Estado</label>
-                <input id="input-wizard-4" type="text" class="form-control" placeholder="Selecciona tu estado">
-            </div>
+                <!-- E-mail -->
+                <div class="intro-y col-span-12 sm:col-span-6">
+                    <label for="input-wizard-3" class="form-label">E-mail</label>
+                    <input id="input-wizard-3" formControlName="email" type="text" class="form-control"
+                        placeholder="user@hotmail.com" readonly>
+                </div>
 
-            <!-- Options -->
-            <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                <button class="btn btn-secondary w-24">Atrás</button>
-                <button class="btn btn-primary w-24 ml-2">Registrar</button>
-            </div>
+                <!-- Estado -->
+                <div class="intro-y col-span-12 sm:col-span-6">
+                    <label for="input-wizard-4" class="form-label">Estado</label>
+                    <input id="input-wizard-4" formControlName="estado" type="text" class="form-control"
+                        placeholder="Selecciona tu estado" readonly>
+                </div>
 
-        </div>
+                <!-- Options -->
+                <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                    <button class="btn btn-secondary w-24" (click)="cerrarVentana()">Atrás</button>
+                    <button class="btn btn-primary w-24 ml-2">Registrar</button>
+                </div>
+
+            </div>
+        </form>
     </div>
 </div>
 <!-- END: Wizard Layout -->

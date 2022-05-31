@@ -6,8 +6,12 @@ import { GestionarUsuarioComponent } from './gestionar-usuario/gestionar-usuario
 
 const routes: Routes = [
 
-    { path: 'gestionarusuario', component: GestionarUsuarioComponent, data: { titulo: 'Gestionar Usuario' } },
-    { path: 'verusuario', component: VerUsuarioComponent, data: { titulo: 'Ver Usuario' } }
+    {
+        path: 'gestionarusuario', children: [
+            { path: '', component: GestionarUsuarioComponent, data: { titulo: 'Gestionar Usuario' } },
+            { path: 'ver/:id', component: VerUsuarioComponent, data: { titulo: 'Ver Usuario' } }
+        ]
+    },
 
 ]
 

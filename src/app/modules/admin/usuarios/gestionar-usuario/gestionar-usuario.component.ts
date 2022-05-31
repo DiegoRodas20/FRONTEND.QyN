@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 
 
@@ -13,7 +14,8 @@ export class GestionarUsuarioComponent implements OnInit {
     Mensaje: string
 
     constructor(
-        private _usuarioService: UserService
+        private _usuarioService: UserService,
+        private _router: Router,
     ) { }
 
     ngOnInit() {
@@ -35,4 +37,9 @@ export class GestionarUsuarioComponent implements OnInit {
         }
 
     }
+
+    verUsuario(idUsuario: string) {
+        this._router.navigate(['/usuarios/gestionarusuario/ver/' + idUsuario])
+    }
+
 }
