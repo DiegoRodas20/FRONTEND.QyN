@@ -11621,6 +11621,11 @@ html body {
   border-color: rgb(var(--color-slate-200) / var(--tw-border-opacity));
 }
 
+.main{
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
 .login {
   position: relative;
   overflow: hidden;
@@ -15730,8 +15735,6 @@ html body {
 .breadcrumb.breadcrumb-light {
   margin-left: 2.5rem;
   height: 100%;
-  border-left-width: 1px;
-  border-color: rgb(255 255 255 / 0.08);
   padding-left: 2.5rem;
 }
 
@@ -18363,6 +18366,12 @@ lucide-icon {
 .before\:bg-gradient-to-t::before {
   content: var(--tw-content);
   background-image: linear-gradient(to top, var(--tw-gradient-stops));
+}
+
+.before\:from-black::before {
+  content: var(--tw-content);
+  --tw-gradient-from: #000;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(0 0 0 / 0));
 }
 
 .before\:from-black\/90::before {

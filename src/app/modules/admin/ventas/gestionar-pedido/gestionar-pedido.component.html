@@ -11,7 +11,7 @@
 
         <button class="btn btn-primary shadow-md mr-2">Registrar Pedido</button>
 
-        <div class="hidden md:block mx-auto text-slate-500">Mensaje de prueba</div>
+        <div class="hidden md:block mx-auto text-slate-500">{{Mensaje}}</div>
 
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
@@ -28,24 +28,27 @@
             <thead>
                 <tr>
                     <th class="text-center whitespace-nowrap">ID</th>
-                    <th class="text-center whitespace-nowrap">CÓDIGO</th>
-                    <th class="text-center whitespace-nowrap">NOMBRE</th>
-                    <th class="text-center whitespace-nowrap">TIPO</th>
+                    <th class="text-center whitespace-nowrap">COMENTARIO</th>
+                    <th class="text-center whitespace-nowrap">FECHA CREADA</th>
+                    <th class="text-center whitespace-nowrap">CLIENTE</th>
+                    <th class="text-center whitespace-nowrap">CORREO</th>
                     <th class="text-center whitespace-nowrap">ESTADO</th>
                     <th class="text-center whitespace-nowrap">ACCIONES</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="intro-x">
-                    <td class="text-center font-medium whitespace-nowrap"> 001 </td>
-                    <td class="text-center font-medium whitespace-nowrap"> PEDIDO - 001</td>
-                    <td class="text-center font-medium whitespace-nowrap"> PEDIDO NOMBRE </td>
-                    <td class="text-center font-medium whitespace-nowrap"> PEDIDO TIPO </td>
-
+                <tr class="intro-x" *ngFor="let pedido of lPedidos">
+                    <td class="text-center font-medium whitespace-nowrap"> {{ pedido.id }} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{ pedido.comments }} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{ pedido.createdAt | date: 'dd/MM/yyyy' }} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{ pedido.updatedAt | date: 'dd/MM/yyyy' }} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{ pedido.client.name }} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{ pedido.client.email }} </td>
+                    
                     <td class="w-40">
                         <div class="flex items-center justify-center text-success">
                             <lucide-icon class="w-4 h-4 mr-2" name="check-square"></lucide-icon>
-                            Active
+                            {{ pedido.status }}
                         </div>
                     </td>
 
@@ -77,7 +80,7 @@
             <ul class="pagination">
 
                 <li class="page-item">
-                    <a class="page-link" href="#"> 
+                    <a class="page-link" href="#">
                         <lucide-icon class="w-4 h-4" name="chevrons-left"></lucide-icon>
                     </a>
                 </li>
@@ -92,12 +95,12 @@
                 <li class="page-item"> <a class="page-link" href="#">2</a> </li>
                 <li class="page-item"> <a class="page-link" href="#">3</a> </li>
                 <li class="page-item">
-                    <a class="page-link" href="#"> 
-                        <lucide-icon class="w-4 h-4" name="chevron-right"></lucide-icon>        
+                    <a class="page-link" href="#">
+                        <lucide-icon class="w-4 h-4" name="chevron-right"></lucide-icon>
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="#"> 
+                    <a class="page-link" href="#">
                         <lucide-icon class="w-4 h-4" name="chevrons-right"></lucide-icon>
                     </a>
                 </li>
