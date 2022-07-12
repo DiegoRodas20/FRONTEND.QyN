@@ -18,4 +18,27 @@ export class PedidoService {
         return this.http.get(url)
     }
 
+    // Listado general de estados
+    getEstadosPedido(): Observable<any> {
+
+        const url = `${PEDIDO_URL}/states`
+        return this.http.get(url)
+    }
+
+    // Listar Pedido por ID
+    getPedidoxID(idPedido: string): Observable<any> {
+
+        const url = `${PEDIDO_URL}/${idPedido}`
+        return this.http.get(url)
+    }
+
+    // Actualizar Pedido
+    actualizarPedido(idPedido: string, pedido: any): Promise<any> {
+
+        const url = `${PEDIDO_URL}/${idPedido}`
+
+        return this.http.put<any>(url, pedido).toPromise()
+    }
+
+
 }

@@ -9,13 +9,11 @@
     <!-- Cabecera -->
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
 
-        <button class="btn btn-primary shadow-md mr-2">Registrar Pedido</button>
-
         <div class="hidden md:block mx-auto text-slate-500">{{Mensaje}}</div>
 
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
-                <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
+                <input [formControl]="filtro" type="text" class="form-control w-56 box pr-10" placeholder="Buscar...">
                 <lucide-icon class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" name="search"></lucide-icon>
             </div>
         </div>
@@ -28,21 +26,22 @@
             <thead>
                 <tr>
                     <th class="text-center whitespace-nowrap">ID</th>
+                    <th class="text-center whitespace-nowrap">CLIENTE</th>
                     <th class="text-center whitespace-nowrap">COMENTARIO</th>
                     <th class="text-center whitespace-nowrap">FECHA CREADA</th>
-                    <th class="text-center whitespace-nowrap">CLIENTE</th>
+                    <th class="text-center whitespace-nowrap">FECHA ACTUALIZACIÓN</th>
                     <th class="text-center whitespace-nowrap">CORREO</th>
                     <th class="text-center whitespace-nowrap">ESTADO</th>
                     <th class="text-center whitespace-nowrap">ACCIONES</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="intro-x" *ngFor="let pedido of lPedidos">
+                <tr class="intro-x" *ngFor="let pedido of lPedidos | filterPipe: filtro.value | paginate: { itemsPerPage: 5, currentPage: p }">
                     <td class="text-center font-medium whitespace-nowrap"> {{ pedido.id }} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{ pedido.client.name }} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{ pedido.comments }} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{ pedido.createdAt | date: 'dd/MM/yyyy' }} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{ pedido.updatedAt | date: 'dd/MM/yyyy' }} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{ pedido.client.name }} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{ pedido.client.email }} </td>
                     
                     <td class="w-40">
@@ -55,12 +54,12 @@
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
 
-                            <button class="flex items-center mr-3">
+                            <button class="flex items-center mr-3" (click)="actualizarPedido(pedido.id)">
                                 <lucide-icon class="w-4 h-4 mr-1" name="check-square"></lucide-icon>
                                 Editar
                             </button>
 
-                            <button class="flex items-center text-primary">
+                            <button class="flex items-center text-primary" (click)="verPedido(pedido.id)">
                                 <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
                                 Ver
                             </button>
@@ -73,48 +72,9 @@
         </table>
     </div>
 
-    <!-- Paginacion -->
-    <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
-
-        <nav class="w-full sm:w-auto sm:mr-auto">
-            <ul class="pagination">
-
-                <li class="page-item">
-                    <a class="page-link" href="#">
-                        <lucide-icon class="w-4 h-4" name="chevrons-left"></lucide-icon>
-                    </a>
-                </li>
-
-                <li class="page-item">
-                    <a class="page-link" href="#">
-                        <lucide-icon class="w-4 h-4" name="chevron-left"></lucide-icon>
-                    </a>
-                </li>
-
-                <li class="page-item active"> <a class="page-link" href="#">1</a> </li>
-                <li class="page-item"> <a class="page-link" href="#">2</a> </li>
-                <li class="page-item"> <a class="page-link" href="#">3</a> </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">
-                        <lucide-icon class="w-4 h-4" name="chevron-right"></lucide-icon>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">
-                        <lucide-icon class="w-4 h-4" name="chevrons-right"></lucide-icon>
-                    </a>
-                </li>
-
-            </ul>
-        </nav>
-
-        <select class="w-20 form-select box mt-3 sm:mt-0">
-            <option>10</option>
-            <option>25</option>
-            <option>35</option>
-            <option>50</option>
-        </select>
-
+    <div class="intro-y col-span-12 text-right">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
+
 
 </div>

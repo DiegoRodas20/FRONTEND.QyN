@@ -1,0 +1,121 @@
+<!-- Cabecera -->
+<div class="flex items-center mt-8">
+    <h2 class="intro-y text-lg font-medium mr-auto">
+        Ver Pedido
+    </h2>
+</div>
+
+<!-- Inputs -->
+<div class="intro-y box py-10 sm:py-10 mt-5">
+    <div class="px-10 sm:px-10 dark:border-darkmode-400">
+
+        <div class="font-medium text-base">Cliente</div>
+
+        <form [formGroup]="formCliente">
+            <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+
+                <!-- Nombre -->
+                <div class="intro-y col-span-12 sm:col-span-4">
+                    <label class="form-label">Nombre</label>
+                    <input formControlName="name" type="text" class="form-control" readonly>
+                </div>
+
+                <!-- RUC -->
+                <div class="intro-y col-span-12 sm:col-span-4">
+                    <label class="form-label">RUC</label>
+                    <input formControlName="ruc" type="text" class="form-control" readonly>
+                </div>
+
+                <!-- Area -->
+                <div class="intro-y col-span-12 sm:col-span-4">
+                    <label class="form-label">Area</label>
+                    <input formControlName="area" type="text" class="form-control" readonly>
+                </div>
+
+                <!-- Phone -->
+                <div class="intro-y col-span-12 sm:col-span-4">
+                    <label class="form-label">Nro. Teléfono</label>
+                    <input formControlName="phone" type="text" class="form-control" readonly>
+                </div>
+
+                <!-- Email -->
+                <div class="intro-y col-span-12 sm:col-span-4">
+                    <label class="form-label">E-mail</label>
+                    <input formControlName="email" type="text" class="form-control" readonly>
+                </div>
+
+            </div>
+        </form>
+
+        <div class="font-medium text-base pt-8">Detalle del Pedido</div>
+
+        <form [formGroup]="formPedido">
+            <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+
+                <!-- Estado -->
+                <div class="intro-y col-span-12 sm:col-span-4">
+                    <label class="form-label">Estado</label>
+                    <select class="form-select sm:mr-2" formControlName="status" readonly>
+                        <option *ngFor="let estadosPedido of lEstadosPedido">
+                            {{estadosPedido}}
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Fecha Estimada -->
+                <div class="intro-y col-span-12 sm:col-span-4">
+                    <label class="form-label">Fecha estimada de entrega</label>
+                    <input formControlName="estimatedDate" type="text" class="form-control" readonly>
+                </div>
+
+                <!-- Comentarios -->
+                <div class="intro-y col-span-12 sm:col-span-4">
+                    <label class="form-label">Comentarios</label>
+                    <input formControlName="comments" type="text" class="form-control" readonly>
+                </div>
+
+            </div>
+        </form>
+
+
+        <div class="font-medium text-base pt-8">Productos</div>
+
+        <!-- Table Productos -->
+        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible mt-5">
+            <table class="table table-report -mt-2">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="text-center whitespace-nowrap">IMAGEN</th>
+                        <th class="text-center whitespace-nowrap">NOMBRE</th>
+                        <th class="text-center whitespace-nowrap">TIPO</th>
+                        <th class="text-center whitespace-nowrap">CANTIDAD</th>
+                        <th class="text-center whitespace-nowrap">PRECIO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="intro-x" *ngFor="let productosPedido of lProductosPedido">
+
+                        <td class="">
+                            <div class="flex items-center justify-center text-success">
+                                <div class="w-10 h-10 image-fit zoom-in">
+                                    <img class="tooltip rounded-full" [src]="productosPedido.product.urlImage">
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center font-medium whitespace-nowrap"> {{ productosPedido.product.name }} </td>
+                        <td class="text-center font-medium whitespace-nowrap"> {{ productosPedido.product.type }} </td>
+                        <td class="text-center font-medium whitespace-nowrap"> {{ productosPedido.quantity }} </td>
+                        <td class="text-center font-medium whitespace-nowrap"> S/. {{ productosPedido.product.salesPrice
+                            * productosPedido.quantity }} </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Options -->
+        <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+            <button class="btn btn-secondary w-24" (click)="cerrarVentana()">Atrás</button>
+        </div>
+    </div>
+</div>

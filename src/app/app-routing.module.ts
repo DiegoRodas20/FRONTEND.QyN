@@ -1,8 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+const DEFAULT_ROUTE: string = 'ventas/gestionarpedido'
+
 const routes: Routes = [
 
+    {
+        path: '',
+        redirectTo: DEFAULT_ROUTE,
+        pathMatch: 'full'
+    },
+    
     // Admin Module
     {
         path: '',
@@ -14,12 +22,7 @@ const routes: Routes = [
         path: 'login',
         loadChildren: () => import('./modules/auth/auth.module').then( (m) => m.AuthModule )
     },
-
-    // Client Module
-    {
-        path: 'client',
-        loadChildren: () => import('./modules/client/client.module').then( (m) => m.ClientModule )
-    }
+    
 ]
 
 @NgModule({
