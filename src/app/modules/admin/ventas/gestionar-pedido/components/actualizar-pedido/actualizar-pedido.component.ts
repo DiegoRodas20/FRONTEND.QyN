@@ -78,7 +78,9 @@ export class ActualizarPedidoComponent implements OnInit {
             this.lProductosPedido = data.data.orderDetails
             this.formCliente.patchValue(data.data.client)
             this.formPedido.patchValue(data.data)
-            this.formPedido.controls['estimatedDate'].setValue(this._datePipe.transform(data.data.estimatedDate, 'dd/MM/yyyy'))
+            let date = new Date(data.data.estimatedDate)
+            date.setDate(date.getDate() + 1);
+            this.formPedido.controls['estimatedDate'].setValue(this._datePipe.transform(date, 'yyyy-MM-dd'))
         }
         catch (error) {
             console.log("Error: ", error)
@@ -91,7 +93,8 @@ export class ActualizarPedidoComponent implements OnInit {
         let Pedido: any = {
             comments: form.comments,
             address: form.address,
-            status: form.status
+            status: form.status,
+            estimatedDate: (form.estimatedDate)
         }
 
         try {
