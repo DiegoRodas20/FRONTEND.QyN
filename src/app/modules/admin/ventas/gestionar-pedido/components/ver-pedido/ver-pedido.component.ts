@@ -43,6 +43,7 @@ export class VerPedidoComponent implements OnInit {
         this.formPedido = this._formBuilder.group({
             status: [null, []],
             estimatedDate: [null, []],
+            address: [null, []],
             comments: [null, []]
         })
     }

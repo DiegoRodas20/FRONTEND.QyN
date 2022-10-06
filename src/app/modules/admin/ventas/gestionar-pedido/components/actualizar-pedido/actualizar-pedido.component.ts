@@ -44,6 +44,7 @@ export class ActualizarPedidoComponent implements OnInit {
         this.formPedido = this._formBuilder.group({
             status: [null, []],
             estimatedDate: [null, []],
+            address: [null, []],
             comments: [null, []]
         })
     }
@@ -89,6 +90,7 @@ export class ActualizarPedidoComponent implements OnInit {
         let form = this.formPedido.value
         let Pedido: any = {
             comments: form.comments,
+            address: form.address,
             status: form.status
         }
 

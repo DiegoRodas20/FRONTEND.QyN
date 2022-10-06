@@ -45,10 +45,37 @@
                     <td class="text-center font-medium whitespace-nowrap"> {{ pedido.client.email }} </td>
                     
                     <td class="w-40">
-                        <div class="flex items-center justify-center text-success">
+
+                        <div *ngIf="pedido.status=='Creado'" class="flex items-center justify-center text-primary">
+                            <lucide-icon class="w-4 h-4 mr-2" name="file-plus-2"></lucide-icon>
+                            {{ pedido.status }}
+                        </div>
+
+                        <div *ngIf="pedido.status=='Aceptado'"class="flex items-center justify-center text-success">
                             <lucide-icon class="w-4 h-4 mr-2" name="check-square"></lucide-icon>
                             {{ pedido.status }}
                         </div>
+
+                        <div *ngIf="pedido.status=='Listo para enviar'" class="flex items-center justify-center text-warning">
+                            <lucide-icon class="w-4 h-4 mr-2" name="package-plus"></lucide-icon>
+                            {{ pedido.status }}
+                        </div>
+
+                        <div *ngIf="pedido.status=='En camino'" class="flex items-center justify-center text-secondary">
+                            <lucide-icon class="w-4 h-4 mr-2" name="baggage-claim"></lucide-icon>
+                            {{ pedido.status }}
+                        </div>
+
+                        <div *ngIf="pedido.status=='Entregado'" class="flex items-center justify-center text-dark">
+                            <lucide-icon class="w-4 h-4 mr-2" name="package-check"></lucide-icon>
+                            {{ pedido.status }}
+                        </div>
+
+                        <div *ngIf="pedido.status=='Rechazado'" class="flex items-center justify-center text-danger">
+                            <lucide-icon class="w-4 h-4 mr-2" name="package-x"></lucide-icon>
+                            {{ pedido.status }}
+                        </div>
+
                     </td>
 
                     <td class="table-report__action w-56">

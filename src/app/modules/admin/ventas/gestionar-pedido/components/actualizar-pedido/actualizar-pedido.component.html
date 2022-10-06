@@ -65,13 +65,20 @@
                 <!-- Fecha Estimada -->
                 <div class="intro-y col-span-12 sm:col-span-4">
                     <label class="form-label">Fecha estimada de entrega</label>
-                    <input formControlName="estimatedDate" type="text" class="form-control" readonly>
+                    <input formControlName="estimatedDate" type="date" class="form-control">
+                </div>
+
+                <!-- Direccion -->
+                <div class="intro-y col-span-12 sm:col-span-4">
+                    <label class="form-label">Dirección</label>
+                    <input formControlName="address" type="text" class="form-control">
                 </div>
 
                 <!-- Comentarios -->
-                <div class="intro-y col-span-12 sm:col-span-4">
+                <div class="intro-y col-span-12 sm:col-span-12">
                     <label class="form-label">Comentarios</label>
-                    <input formControlName="comments" type="text" class="form-control">
+                    <textarea class="form-control" rows="4" placeholder="Ingresa un comentario deseado."
+                            formControlName="comments"></textarea>
                 </div>
 
             </div>

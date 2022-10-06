@@ -56,7 +56,7 @@
                 <div class="intro-y col-span-12 sm:col-span-4">
                     <label class="form-label">Estado</label>
                     <select class="form-select sm:mr-2" formControlName="status" readonly>
-                        <option *ngFor="let estadosPedido of lEstadosPedido">
+                        <option *ngFor="let estadosPedido of lEstadosPedido" disabled>
                             {{estadosPedido}}
                         </option>
                     </select>
@@ -68,10 +68,17 @@
                     <input formControlName="estimatedDate" type="text" class="form-control" readonly>
                 </div>
 
-                <!-- Comentarios -->
+                <!-- Direccion -->
                 <div class="intro-y col-span-12 sm:col-span-4">
+                    <label class="form-label">Dirección</label>
+                    <input formControlName="address" type="text" class="form-control" readonly>
+                </div>
+
+                <!-- Comentarios -->
+                <div class="intro-y col-span-12 sm:col-span-12">
                     <label class="form-label">Comentarios</label>
-                    <input formControlName="comments" type="text" class="form-control" readonly>
+                    <textarea class="form-control" rows="4" placeholder="Ingresa un comentario deseado."
+                            formControlName="comments" readonly></textarea>
                 </div>
 
             </div>
