@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
+import { AlertDialogComponent } from 'src/app/shared/components/alertdialog/alertdialog.component';
 
 
 @Component({
@@ -12,10 +13,14 @@ export class GestionarUsuarioComponent implements OnInit {
 
     lUsuarios: any[] = []
     Mensaje: string
+    pruebatitulo = "prueba titulo"
+    pruebacontenido = "prueba contenido"
+    pruebaestilo = ""
 
     constructor(
         private _usuarioService: UserService,
         private _router: Router,
+        // private _dialog: MatDialog
     ) { }
 
     ngOnInit() {
@@ -32,6 +37,7 @@ export class GestionarUsuarioComponent implements OnInit {
             this.Mensaje = data.message
             this.lUsuarios = data.data
         }
+        
         catch (error) {
             console.log("Error: ", error)
         }
@@ -42,4 +48,11 @@ export class GestionarUsuarioComponent implements OnInit {
         this._router.navigate(['/usuarios/gestionarusuario/ver/' + idUsuario])
     }
 
+    pruebaDialog() {
+        this.pruebaestilo = "overflow-y-auto show modal-show"
+    }
+
+    cambiarestilo(event) {
+        this.pruebaestilo = event
+    }
 }

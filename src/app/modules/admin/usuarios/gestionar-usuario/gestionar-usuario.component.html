@@ -30,6 +30,20 @@
 </div>
 <!-- END: Modal Content -->
 
+<!-- BEGIN: Modal Toggle -->
+<div class="text-center">
+    <a (click)="pruebaDialog()" class="btn btn-primary">
+        Alert Dialog
+    </a>
+</div>
+<!-- END: Modal Toggle -->
+
+<app-alertdialog 
+    [titulo]="pruebatitulo" 
+    [contenido]="pruebacontenido" 
+    [estilo]="pruebaestilo"
+    (closestyle)="cambiarestilo($event)">
+</app-alertdialog>
 
 <!-- Cuerpo -->
 <div class="grid grid-cols-12 gap-6 mt-5">
@@ -37,7 +51,8 @@
     <!-- Cabecera -->
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
 
-        <button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal" data-tw-target="#prueba" >Registrar Usuario</button>
+        <button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal" data-tw-target="#prueba">Registrar
+            Usuario</button>
 
         <div class="hidden md:block mx-auto text-slate-500">{{Mensaje}}</div>
 

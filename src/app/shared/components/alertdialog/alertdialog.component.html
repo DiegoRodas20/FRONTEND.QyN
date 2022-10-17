@@ -1,0 +1,16 @@
+<div [class]='"modal " + estilo'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="p-5 text-center">
+                    <lucide-icon name="check-circle" class="w-16 h-16 text-success mx-auto mt-3"></lucide-icon>
+                    <div class="text-3xl mt-5">{{titulo}}</div>
+                    <div class="text-slate-500 mt-2">{{contenido}}</div>
+                </div>
+                <div class="px-5 pb-8 text-center">
+                    <button class="btn btn-primary w-24" (click)="onClose()">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

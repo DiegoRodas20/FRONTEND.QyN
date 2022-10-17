@@ -32,6 +32,7 @@ const COMPONENTS = [
         AdminRoutingModule,
         LucideAngularModule.pick(icons),
 
+        // Modulos
         UsuariosModule,
         AlmacenModule,
         VentasModule,
