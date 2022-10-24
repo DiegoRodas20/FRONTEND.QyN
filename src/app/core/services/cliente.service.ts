@@ -25,5 +25,13 @@ export class ClienteService {
         return this.http.get(url)
     }
 
+    // Actualizar Cliente
+    actualizarCliente(idCliente: string, cliente: any): Promise<any> {
+
+        const url = `${CLIENT_URL}/${idCliente}`
+
+        return this.http.put<any>(url, cliente).toPromise()
+    }
+
 
 }

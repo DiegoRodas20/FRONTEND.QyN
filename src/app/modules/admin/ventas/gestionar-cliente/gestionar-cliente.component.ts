@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClienteService } from 'src/app/core/services/cliente.service';
+import { Router } from '@angular/router';
 import { ProductoService } from 'src/app/core/services/product.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class GestionarClienteComponent implements OnInit {
     mensaje;
 
     constructor(
-        private _clienteService: ClienteService
+        private _clienteService: ClienteService,
+        private _router: Router,
     ) { }
 
     ngOnInit() {
@@ -29,11 +31,11 @@ export class GestionarClienteComponent implements OnInit {
         console.log(this.clientes)
     }
 
-    verCliente(id: number) {
-        console.log(id)
+    verCliente(id: string) {
+        this._router.navigate(['/ventas/gestionarcliente/ver/' + id])
     }
 
-    actualizarCliente(id: number) {
-
+    actualizarCliente(id: string) {
+        this._router.navigate(['/ventas/gestionarcliente/actualizar/' + id])
     }
 }
