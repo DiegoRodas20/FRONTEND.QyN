@@ -1,4 +1,3 @@
-//import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,7 +23,7 @@ export class VerClienteComponent implements OnInit {
 
     ngOnInit() {
         this.crearFormCliente()
-        //this.listarClientexID()
+        //this.listarClientexID(this.idCliente)
 
         this._route.params.subscribe(params => {
             this.idCliente = params.id
@@ -33,17 +32,18 @@ export class VerClienteComponent implements OnInit {
     }
 
     crearFormCliente() {
-      this.formCliente = this._formBuilder.group({
-          name: [null, []],
-          documento: [null, []],
-          phone: [null, []],
+        this.formCliente = this._formBuilder.group({
+            address: [null, []],
+            numberDocument: [null, []],
+            phone: [null, []],
       })
   }
 
     async listarClientexID(idCliente: string) {
       try {
           const data: any = await this._clienteService.getClientxID(idCliente).toPromise()
-          this.formCliente.patchValue(data.data.client)
+          console.log(data.data)
+          this.formCliente.patchValue(data.data)
       }
       catch (error) {
           console.log("Error: ", error)

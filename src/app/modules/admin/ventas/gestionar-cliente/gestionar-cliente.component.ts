@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ClienteService } from 'src/app/core/services/cliente.service';
 import { Router } from '@angular/router';
-import { ProductoService } from 'src/app/core/services/product.service';
 
 @Component({
     selector: 'app-gestionar-cliente',
@@ -12,6 +12,11 @@ export class GestionarClienteComponent implements OnInit {
 
     clientes;
     mensaje;
+
+    /*lCliente: any[] = []
+    Mensaje: string
+    filtro = new FormControl();
+    p: number = 1; */
 
     constructor(
         private _clienteService: ClienteService,
