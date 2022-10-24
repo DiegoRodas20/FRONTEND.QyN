@@ -52,7 +52,11 @@
             <!-- Status -->
             <div class="intro-y col-span-6 mt-5">
                 <label class="form-label">Estado</label>
-                <input formControlName="status" type="text" class="form-control">
+                <select class="form-select sm:mr-2" formControlName="status">
+                    <option [value]="estado.status" *ngFor="let estado of lEstados">
+                        {{estado.name}}
+                    </option>
+                </select>
             </div>
 
             <!--Boton Actualizar y Atras-->

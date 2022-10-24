@@ -17,6 +17,7 @@ export class VerVehiculoComponent implements OnInit {
     idVehiculo: string
     lTipoVehiculo: any[] = []
     lConductores: any[] = []
+    lEstados: any [] = [{status: true, name: 'Activo'},{status: false, name: 'Inactivo'}]
     formVehiculo: FormGroup
 
     constructor(

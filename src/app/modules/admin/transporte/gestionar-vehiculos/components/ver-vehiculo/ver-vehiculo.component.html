@@ -51,9 +51,13 @@
             </div>
 
              <!-- Status -->
-             <div class="intro-y col-span-6 mt-5">
+            <div class="intro-y col-span-6 mt-5">
                 <label class="form-label">Estado</label>
-                <input formControlName="status" type="text" class="form-control" readonly>
+                <select class="form-select sm:mr-2" formControlName="status" readonly>
+                    <option [value]="estado.status" *ngFor="let estado of lEstados" disabled>
+                        {{estado.name}}
+                    </option>
+                </select>
             </div>
 
             <!--Boton Registrar y Atras-->
