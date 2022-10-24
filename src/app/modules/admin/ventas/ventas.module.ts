@@ -11,13 +11,17 @@ import { VerPedidoComponent } from './gestionar-pedido/components/ver-pedido/ver
 import { GestionarPedidoComponent } from './gestionar-pedido/gestionar-pedido.component';
 import { GestionarVentaComponent } from './gestionar-venta/gestionar-venta.component';
 import { VentasRoutingModule } from './ventas.routing';
+import { VerClienteComponent } from './gestionar-cliente/components/ver-cliente/ver-cliente.component';
+import { ActualizarClienteComponent } from './gestionar-cliente/components/actualizar-cliente/actualizar-cliente.component';
 
 const COMPONENTS = [
     GestionarVentaComponent,
     GestionarClienteComponent,
     GestionarPedidoComponent,
     VerPedidoComponent,
-    ActualizarPedidoComponent
+    ActualizarPedidoComponent,
+    ActualizarClienteComponent,
+    VerClienteComponent,
 ]
 
 const PIPES = [
@@ -27,7 +31,9 @@ const PIPES = [
 @NgModule({
     declarations: [
         COMPONENTS,
-        PIPES
+        PIPES,
+        VerClienteComponent,
+        ActualizarClienteComponent
     ],
     imports: [
         CommonModule,

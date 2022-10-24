@@ -11,7 +11,7 @@
 
         <button class="btn btn-primary shadow-md mr-2">Registrar Cliente</button>
 
-        <div class="hidden md:block mx-auto text-slate-500">Mensaje de prueba</div>
+        <div class="hidden md:block mx-auto text-slate-500">{{mensaje}}</div>
 
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
@@ -28,36 +28,29 @@
             <thead>
                 <tr>
                     <th class="text-center whitespace-nowrap">ID</th>
-                    <th class="text-center whitespace-nowrap">CÓDIGO</th>
-                    <th class="text-center whitespace-nowrap">NOMBRE</th>
-                    <th class="text-center whitespace-nowrap">TIPO</th>
-                    <th class="text-center whitespace-nowrap">ESTADO</th>
-                    <th class="text-center whitespace-nowrap">ACCIONES</th>
+                    <th class="text-center whitespace-nowrap">Nombre Cliente</th>
+                    <th class="text-center whitespace-nowrap">Documento</th>
+                    <th class="text-center whitespace-nowrap">Numero de telefono</th>
+                    <th class="text-center whitespace-nowrap">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="intro-x">
-                    <td class="text-center font-medium whitespace-nowrap"> 001 </td>
-                    <td class="text-center font-medium whitespace-nowrap"> CLIENTE - 001</td>
-                    <td class="text-center font-medium whitespace-nowrap"> CLIENTE NOMBRE </td>
-                    <td class="text-center font-medium whitespace-nowrap"> CLIENTE TIPO </td>
-
-                    <td class="w-40">
-                        <div class="flex items-center justify-center text-success">
-                            <lucide-icon class="w-4 h-4 mr-2" name="check-square"></lucide-icon>
-                            Active
-                        </div>
-                    </td>
+                <tr *ngFor="let cliente of clientes" class="intro-x">
+                    <td class="text-center font-medium whitespace-nowrap"> {{cliente.id}} </td>
+                    <td class="text-center font-medium whitespace-nowrap">{{cliente.name}}</td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{cliente.numberDocument}} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{cliente.phone}}</td>
 
                     <td class="table-report__action w-56">
+
                         <div class="flex justify-center items-center">
 
-                            <button class="flex items-center mr-3">
+                            <button (click)="actualizarCliente(cliente.id)" class="flex items-center mr-3">
                                 <lucide-icon class="w-4 h-4 mr-1" name="check-square"></lucide-icon>
                                 Editar
                             </button>
 
-                            <button class="flex items-center text-primary">
+                            <button (click)="verCliente(cliente.id)" class="flex items-center text-primary">
                                 <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
                                 Ver
                             </button>
@@ -77,7 +70,7 @@
             <ul class="pagination">
 
                 <li class="page-item">
-                    <a class="page-link" href="#"> 
+                    <a class="page-link" href="#">
                         <lucide-icon class="w-4 h-4" name="chevrons-left"></lucide-icon>
                     </a>
                 </li>
@@ -92,12 +85,12 @@
                 <li class="page-item"> <a class="page-link" href="#">2</a> </li>
                 <li class="page-item"> <a class="page-link" href="#">3</a> </li>
                 <li class="page-item">
-                    <a class="page-link" href="#"> 
-                        <lucide-icon class="w-4 h-4" name="chevron-right"></lucide-icon>        
+                    <a class="page-link" href="#">
+                        <lucide-icon class="w-4 h-4" name="chevron-right"></lucide-icon>
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="#"> 
+                    <a class="page-link" href="#">
                         <lucide-icon class="w-4 h-4" name="chevrons-right"></lucide-icon>
                     </a>
                 </li>

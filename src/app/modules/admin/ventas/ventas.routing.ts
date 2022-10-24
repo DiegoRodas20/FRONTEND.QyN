@@ -10,6 +10,7 @@ const routes: Routes = [
 
     { path: 'gestionarventa', component: GestionarVentaComponent, data: { titulo: 'Gestionar Venta' } },
     { path: 'gestionarcliente', component: GestionarClienteComponent, data: { titulo: 'Gestionar Cliente' } },
+    
     {
         path: 'gestionarpedido', children: [
             { path: '', component: GestionarPedidoComponent, data: { titulo: 'Gestionar Pedido' } },
@@ -17,6 +18,7 @@ const routes: Routes = [
             { path: 'actualizar/:id', component: ActualizarPedidoComponent, data: { titulo: 'Actualizar Pedido' } },
         ]
     },
+
 ]
 
 @NgModule({
