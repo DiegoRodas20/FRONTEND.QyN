@@ -9,13 +9,13 @@
     <!-- Cabecera -->
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
 
-        <button class="btn btn-primary shadow-md mr-2">Registrar Vehiculos</button>
+        <button class="btn btn-primary shadow-md mr-2" (click)="registrarVehiculo()" >Registrar Vehiculos</button>
 
-        <div class="hidden md:block mx-auto text-slate-500">Mensaje de prueba</div>
+        <div class="hidden md:block mx-auto text-slate-500"> {{Mensaje}} </div>
 
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
-                <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
+                <input [formControl]="filtro" type="text" class="form-control w-56 box pr-10" placeholder="Search...">
                 <lucide-icon class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" name="search"></lucide-icon>
             </div>
         </div>
@@ -27,37 +27,37 @@
         <table class="table table-report -mt-2">
             <thead>
                 <tr>
-                    <th class="text-center whitespace-nowrap">ID</th>
+                    <!-- <th class="text-center whitespace-nowrap">ID</th> -->
                     <th class="text-center whitespace-nowrap">CÓDIGO</th>
-                    <th class="text-center whitespace-nowrap">NOMBRE</th>
+                    <th class="text-center whitespace-nowrap">PLACA</th>
                     <th class="text-center whitespace-nowrap">TIPO</th>
                     <th class="text-center whitespace-nowrap">ESTADO</th>
                     <th class="text-center whitespace-nowrap">ACCIONES</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="intro-x">
-                    <td class="text-center font-medium whitespace-nowrap"> 001 </td>
-                    <td class="text-center font-medium whitespace-nowrap"> VEHICULOS - 001</td>
-                    <td class="text-center font-medium whitespace-nowrap"> VEHICULOS NOMBRE </td>
-                    <td class="text-center font-medium whitespace-nowrap"> VEHICULOS TIPO </td>
+                <tr class="intro-x" *ngFor="let vehiculo of lVehiculos | paginate: { itemsPerPage: 5, currentPage: p }">
+                    <!-- <td class="text-center font-medium whitespace-nowrap">  </td> -->
+                    <td class="text-center font-medium whitespace-nowrap"> {{vehiculo.id}} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{vehiculo.plate}} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{vehiculo.typeVehicle}}  </td>
 
                     <td class="w-40">
                         <div class="flex items-center justify-center text-success">
                             <lucide-icon class="w-4 h-4 mr-2" name="check-square"></lucide-icon>
-                            Active
+                            {{vehiculo.status}}
                         </div>
                     </td>
 
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
 
-                            <button class="flex items-center mr-3">
+                            <button class="flex items-center mr-3" (click)="actualizarVehiculo(vehiculo.id)">
                                 <lucide-icon class="w-4 h-4 mr-1" name="check-square"></lucide-icon>
                                 Editar
                             </button>
 
-                            <button class="flex items-center text-primary">
+                            <button class="flex items-center text-primary" (click)="verVehiculo(vehiculo.id)">
                                 <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
                                 Ver
                             </button>
