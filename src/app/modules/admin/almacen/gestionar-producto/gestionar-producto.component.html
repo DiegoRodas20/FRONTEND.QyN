@@ -86,14 +86,6 @@
                 <lucide-icon class="w-4 h-4 mr-1" name="edit"></lucide-icon>
                 Editar
               </button>
-              <button
-                class="flex items-center mr-3 text-danger"
-                data-tw-toggle="modal"
-                data-tw-target="#eliminar"
-              >
-                <lucide-icon class="w-4 h-4 mr-1" name="delete"></lucide-icon>
-                Eliminar
-              </button>
             </div>
           </td>
         </tr>
@@ -160,6 +152,23 @@
           <div class="grid grid-cols-12 gap-6 mt-5">
             <div class="intro-y col-span-12 sm:col-span-6">
               <div>
+                <label for="codigoRegister" class="form-label">Codigo</label>
+                <input
+                  #codigoRegister
+                  id="codigoRegister"
+                  name="codigoRegister"
+                  type="text"
+                  class="form-control"
+                  placeholder="Codigo"
+                  required minlength="2"
+                  ngModel required
+                  ng-model="codigoRegister"
+                  requiered
+                />
+              </div>
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-6">
+              <div>
                 <label for="nombre" class="form-label">Nombre</label>
                 <input
                   #nombreRegister
@@ -177,30 +186,14 @@
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
               <div>
-                <label for="tipo" class="form-label">Tipo</label>
-                <input
-                  #tipoRegister
-                  id="tipo"
-                  name="tipo"
-                  type="text"
-                  class="form-control"
-                  placeholder="Tipo"
-                  required
-                />
-              </div>
-            </div>
-            <div class="intro-y col-span-12 sm:col-span-6">
-              <div>
-                <label for="estado" class="form-label">Estado</label>
-                <input
-                  #estadoRegister
-                  id="estado"
-                  name="estado"
-                  type="text"
-                  class="form-control"
-                  placeholder="Estado"
-                  required = "true"
-                />
+                <label for="tipoRegister" class="form-label">Tipo</label>
+                <select #tipoRegister
+                id="tipoRegister"
+                name="tipoRegister" class="form-control" placeholder="Tipo" formControlName="tipoRegister" required>
+                  <option *ngFor="let cate of lCategorias">
+                      {{cate.name}}
+                  </option>
+              </select>
               </div>
             </div>
           </div>
@@ -214,9 +207,9 @@
             data-tw-target="#exito"
             (click)="
               registrarProducto(
+                codigoRegister.value,
                 nombreRegister.value,
-                tipoRegister.value,
-                estadoRegister.value
+                tipoRegister.value
               )
             "
           >
@@ -249,7 +242,7 @@
                   type="text"
                   class="form-control"
                   placeholder="Codigo"
-                  value=""
+                  value="{{codeProducto}}"
                   disabled
                 />
               </div>
@@ -262,7 +255,7 @@
                   type="text"
                   class="form-control"
                   placeholder="Nombre"
-                  value=""
+                  value="{{nameProducto}}"
                   disabled
                 />
               </div>
@@ -275,6 +268,7 @@
                   type="text"
                   class="form-control"
                   placeholder="Tipo"
+                  value="{{categoryId}}"
                   disabled
                 />
               </div>
@@ -287,7 +281,7 @@
                   type="text"
                   class="form-control"
                   placeholder="Estado"
-                  value=""
+                  value="{{statusProducto}}"
                   disabled
                 />
               </div>
@@ -330,6 +324,7 @@
                   type="text"
                   class="form-control"
                   placeholder="Codigo"
+                  value="{{idProducto}}"
                   disabled
                 />
               </div>
@@ -344,6 +339,7 @@
                     type="text"
                     class="form-control"
                     placeholder="Nombre"
+                    value="{{nameProducto}}"
                     [disabled]="stateName"
                   />
                   <span>&nbsp;&nbsp;</span>
@@ -360,14 +356,13 @@
                 <div>
                   <label for="tipo" class="form-label">Tipo</label>
                   <div class="input-group">
-                    <input
-                      #tipoEdit
-                      id="tipo"
-                      type="text"
-                      class="form-control"
-                      placeholder="Tipo"
-                      [disabled]="stateType"
-                    />
+                    <select #tipoEdit
+                id="tipoEdit"
+                name="tipoEdit" class="form-control" placeholder="Tipo" formControlName="tipoEdit" value="{{categoryId}}" required [disabled]="stateType">
+                  <option *ngFor="let cate of lCategorias">
+                      {{cate.name}}
+                  </option>
+              </select>
                     <span>&nbsp;&nbsp;</span>
                     <button
                       class="flex items-center mr-3 text-warning"
@@ -386,15 +381,12 @@
                 <div>
                   <label for="estado" class="form-label">Estado</label>
                   <div class="input-group">
-                    <input
-                      #estadoEdit
-                      id="estado"
-                      type="text"
-                      class="form-control"
-                      placeholder="Estado"
-                      value=""
-                      [disabled]="stateState"
-                    />
+                    <select #estadoEdit
+                    id="estado" class="form-control" placeholder="Estado" value="{{statusProducto}}" formControlName="status" [disabled]="stateState">
+                      <option *ngFor="let estadosProducto of lEstadosProducto">
+                          {{estadosProducto}}
+                      </option>
+                  </select>
                     <span>&nbsp;&nbsp;</span>
                     <button
                       class="flex items-center mr-3 text-warning"
@@ -437,36 +429,6 @@
   <!-- END: Modal Content -->
 
   <!-- BEGIN: Modal Content -->
-  <div id="eliminar" class="modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body p-0">
-          <div class="p-5 text-center">
-            <lucide-icon
-              name="delete"
-              class="w-16 h-16 text-danger mx-auto mt-3"
-            ></lucide-icon>
-            <div class="text-3xl mt-5">Eliminar Producto</div>
-            <div class="text-gray-600 mt-2">
-              ¿Estas seguro de eliminar este producto?
-            </div>
-          </div>
-          <div class="px-5 pb-8 text-center">
-            <button
-              type="button"
-              data-tw-dismiss="modal"
-              class="btn btn-primary w-24"
-              data-tw-toggle="modal"
-              data-tw-target="#exito"
-              (click)="eliminarProductoConfirm()"
-            >
-              Eliminar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <div id="exito" class="modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">

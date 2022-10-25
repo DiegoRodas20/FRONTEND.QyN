@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core"
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
-import { PRODUCT_URL } from "../utils/url_constants";
+import { CATEGORIAS_URL, PRODUCT_URL } from "../utils/url_constants";
 
 @Injectable({
     providedIn: 'root'
@@ -23,6 +23,21 @@ export class ProductoService {
 
         const url = `${PRODUCT_URL}/${idProducto}`
         return this.http.get(url)
+    }
+
+    getCategorias(): Observable<any> {
+
+        const url = `${CATEGORIAS_URL}`
+        return this.http.get(url)
+    }
+    postProducto(producto: any): Observable<any> {
+        const url = `${PRODUCT_URL}`
+        return this.http.post(url, producto)
+    }
+
+    putProducto(idProducto: string, producto: any): Observable<any> {
+        const url = `${PRODUCT_URL}/${idProducto}`
+        return this.http.put(url, producto)
     }
 
 
