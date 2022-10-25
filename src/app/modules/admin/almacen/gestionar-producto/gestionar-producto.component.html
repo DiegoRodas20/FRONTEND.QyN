@@ -38,7 +38,6 @@
       <thead>
         <tr>
           <th class="text-center whitespace-nowrap">ID</th>
-          <th class="text-center whitespace-nowrap">CÓDIGO</th>
           <th class="text-center whitespace-nowrap">NOMBRE</th>
           <th class="text-center whitespace-nowrap">TIPO</th>
           <th class="text-center whitespace-nowrap">ESTADO</th>
@@ -49,9 +48,6 @@
         <tr class="intro-x" *ngFor="let producto of lProductos">
           <td class="text-center font-medium whitespace-nowrap">
             {{ producto.id }}
-          </td>
-          <td class="text-center font-medium whitespace-nowrap">
-            {{ producto.code }}
           </td>
           <td class="text-center font-medium whitespace-nowrap">
             {{ producto.name }}
