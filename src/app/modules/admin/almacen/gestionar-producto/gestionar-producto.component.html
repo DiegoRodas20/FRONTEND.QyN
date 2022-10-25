@@ -1,119 +1,499 @@
 <!-- Titulo -->
-<h2 class="intro-y text-lg font-medium mt-10">
-    Gestionar Producto
-</h2>
+<h2 class="intro-y text-lg font-medium mt-10">Gestionar Producto</h2>
 
 <!-- Cuerpo -->
 <div class="grid grid-cols-12 gap-6 mt-5">
+  <!-- Cabecera -->
+  <div
+    class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2"
+  >
+    <button
+      class="btn btn-primary shadow-md mr-2"
+      data-tw-toggle="modal"
+      data-tw-target="#registrar"
+    >
+      Registrar Producto
+    </button>
 
-    <!-- Cabecera -->
-    <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
+    <div class="hidden md:block mx-auto text-slate-500">{{ Mensaje }}</div>
 
-        <button class="btn btn-primary shadow-md mr-2">Registrar Producto</button>
+    <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+      <div class="w-56 relative text-slate-500">
+        <input
+          type="text"
+          class="form-control w-56 box pr-10"
+          placeholder="Search..."
+        />
+        <lucide-icon
+          class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0"
+          name="search"
+        ></lucide-icon>
+      </div>
+    </div>
+  </div>
 
-        <div class="hidden md:block mx-auto text-slate-500">{{Mensaje}}</div>
+  <!-- Table -->
+  <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+    <table class="table table-report -mt-2">
+      <thead>
+        <tr>
+          <th class="text-center whitespace-nowrap">ID</th>
+          <th class="text-center whitespace-nowrap">CÓDIGO</th>
+          <th class="text-center whitespace-nowrap">NOMBRE</th>
+          <th class="text-center whitespace-nowrap">TIPO</th>
+          <th class="text-center whitespace-nowrap">ESTADO</th>
+          <th class="text-center whitespace-nowrap">ACCIONES</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="intro-x" *ngFor="let producto of lProductos">
+          <td class="text-center font-medium whitespace-nowrap">
+            {{ producto.id }}
+          </td>
+          <td class="text-center font-medium whitespace-nowrap">
+            {{ producto.code }}
+          </td>
+          <td class="text-center font-medium whitespace-nowrap">
+            {{ producto.name }}
+          </td>
+          <td class="text-center font-medium whitespace-nowrap">
+            {{ producto.type }}
+          </td>
 
-        <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
-            <div class="w-56 relative text-slate-500">
-                <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
-                <lucide-icon class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" name="search"></lucide-icon>
+          <td class="w-40">
+            <div class="flex items-center justify-center text-success">
+              <lucide-icon
+                class="w-4 h-4 mr-2"
+                name="check-square"
+              ></lucide-icon>
+              Activo
             </div>
+          </td>
+
+          <td class="table-report__action w-56">
+            <div class="flex justify-center items-center">
+              <button
+                class="flex items-center mr-3 text-primary"
+                (click)="verProducto(producto.id)"
+                data-tw-toggle="modal"
+                data-tw-target="#ver"
+              >
+                <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
+                Ver
+              </button>
+              <button
+                class="flex items-center mr-3 text-warning"
+                data-tw-toggle="modal"
+                data-tw-target="#editar"
+                (click)="verProducto(producto.id)"
+              >
+                <lucide-icon class="w-4 h-4 mr-1" name="edit"></lucide-icon>
+                Editar
+              </button>
+              <button
+                class="flex items-center mr-3 text-danger"
+                data-tw-toggle="modal"
+                data-tw-target="#eliminar"
+              >
+                <lucide-icon class="w-4 h-4 mr-1" name="delete"></lucide-icon>
+                Eliminar
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Paginacion -->
+  <div
+    class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center"
+  >
+    <nav class="w-full sm:w-auto sm:mr-auto">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#">
+            <lucide-icon class="w-4 h-4" name="chevrons-left"></lucide-icon>
+          </a>
+        </li>
+
+        <li class="page-item">
+          <a class="page-link" href="#">
+            <lucide-icon class="w-4 h-4" name="chevron-left"></lucide-icon>
+          </a>
+        </li>
+
+        <li class="page-item"><a class="page-link" href="#">...</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">...</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">
+            <lucide-icon class="w-4 h-4" name="chevron-right"></lucide-icon>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">
+            <lucide-icon class="w-4 h-4" name="chevrons-right"></lucide-icon>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <select class="w-20 form-select box mt-3 sm:mt-0">
+      <option>10</option>
+      <option>25</option>
+      <option>35</option>
+      <option>50</option>
+    </select>
+  </div>
+</div>
+
+<!-- BEGIN: Modal Content -->
+<div id="registrar" class="modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="p-5 text-center">
+          <lucide-icon
+            name="plus-circle"
+            class="w-16 h-16 text-primary mx-auto mt-3"
+          ></lucide-icon>
+          <div class="text-3xl mt-5">Registrar Producto</div>
+          <div class="grid grid-cols-12 gap-6 mt-5">
+            <div class="intro-y col-span-12 sm:col-span-6">
+              <div>
+                <label for="nombre" class="form-label">Nombre</label>
+                <input
+                  #nombreRegister
+                  id="nombre"
+                  name="nombre"
+                  type="text"
+                  class="form-control"
+                  placeholder="Nombre"
+                  required minlength="4"
+                  ngModel required
+                  ng-model="nombre"
+                  requiered
+                />
+              </div>
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-6">
+              <div>
+                <label for="tipo" class="form-label">Tipo</label>
+                <input
+                  #tipoRegister
+                  id="tipo"
+                  name="tipo"
+                  type="text"
+                  class="form-control"
+                  placeholder="Tipo"
+                  required
+                />
+              </div>
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-6">
+              <div>
+                <label for="estado" class="form-label">Estado</label>
+                <input
+                  #estadoRegister
+                  id="estado"
+                  name="estado"
+                  type="text"
+                  class="form-control"
+                  placeholder="Estado"
+                  required = "true"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-
+        <div class="px-5 pb-8 text-center">
+          <button
+            type="submit"
+            data-tw-dismiss="modal"
+            class="btn btn-primary w-24"
+            data-tw-toggle="modal"
+            data-tw-target="#exito"
+            (click)="
+              registrarProducto(
+                nombreRegister.value,
+                tipoRegister.value,
+                estadoRegister.value
+              )
+            "
+          >
+            Registrar
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
+<!-- END: Modal Content -->
 
-    <!-- Table -->
-    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
-        <table class="table table-report -mt-2">
-            <thead>
-                <tr>
-                    <th class="text-center whitespace-nowrap">ID</th>
-                    <th class="text-center whitespace-nowrap">CÓDIGO</th>
-                    <th class="text-center whitespace-nowrap">NOMBRE</th>
-                    <th class="text-center whitespace-nowrap">TIPO</th>
-                    <th class="text-center whitespace-nowrap">ESTADO</th>
-                    <th class="text-center whitespace-nowrap">ACCIONES</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="intro-x" *ngFor="let producto of lProductos">
-                    <td class="text-center font-medium whitespace-nowrap"> {{ producto.id }} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{ producto.code }} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{ producto.name }} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{ producto.type }} </td>
-
-                    <td class="w-40">
-                        <div class="flex items-center justify-center text-success">
-                            <lucide-icon class="w-4 h-4 mr-2" name="check-square"></lucide-icon>
-                            Active
-                        </div>
-                    </td>
-
-                    <td class="table-report__action w-56">
-                        <div class="flex justify-center items-center">
-
-                            <button class="flex items-center mr-3">
-                                <lucide-icon class="w-4 h-4 mr-1" name="check-square"></lucide-icon>
-                                Editar
-                            </button>
-
-                            <button class="flex items-center text-primary">
-                                <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
-                                Ver
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-
-
-            </tbody>
-        </table>
+<!-- BEGIN: Modal Content -->
+<div id="ver" class="modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="p-5 text-center">
+          <lucide-icon
+            name="view"
+            class="w-16 h-16 text-primary mx-auto mt-3"
+          ></lucide-icon>
+          <div class="text-3xl mt-5">Ver Producto</div>
+          <div class="grid grid-cols-12 gap-6 mt-5">
+            <div class="intro-y col-span-12 sm:col-span-6">
+              <div>
+                <label for="codigo" class="form-label">Codigo</label>
+                <input
+                  id="codigo"
+                  type="text"
+                  class="form-control"
+                  placeholder="Codigo"
+                  value=""
+                  disabled
+                />
+              </div>
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-6">
+              <div>
+                <label for="nombre" class="form-label">Nombre</label>
+                <input
+                  id="nombre"
+                  type="text"
+                  class="form-control"
+                  placeholder="Nombre"
+                  value=""
+                  disabled
+                />
+              </div>
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-6">
+              <div>
+                <label for="tipo" class="form-label">Tipo</label>
+                <input
+                  id="tipo"
+                  type="text"
+                  class="form-control"
+                  placeholder="Tipo"
+                  disabled
+                />
+              </div>
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-6">
+              <div>
+                <label for="estado" class="form-label">Estado</label>
+                <input
+                  id="estado"
+                  type="text"
+                  class="form-control"
+                  placeholder="Estado"
+                  value=""
+                  disabled
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-5 pb-8 text-center">
+          <button
+            type="button"
+            data-tw-dismiss="modal"
+            class="btn btn-primary w-24"
+          >
+            Aceptar
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
+<!-- END: Modal Content -->
 
-    <!-- Paginacion -->
-    <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
-
-        <nav class="w-full sm:w-auto sm:mr-auto">
-            <ul class="pagination">
-
-                <li class="page-item">
-                    <a class="page-link" href="#"> 
-                        <lucide-icon class="w-4 h-4" name="chevrons-left"></lucide-icon>
-                    </a>
-                </li>
-
-                <li class="page-item">
-                    <a class="page-link" href="#">
-                        <lucide-icon class="w-4 h-4" name="chevron-left"></lucide-icon>
-                    </a>
-                </li>
-
-                <li class="page-item"> <a class="page-link" href="#">...</a> </li>
-                <li class="page-item"> <a class="page-link" href="#">1</a> </li>
-                <li class="page-item active"> <a class="page-link" href="#">2</a> </li>
-                <li class="page-item"> <a class="page-link" href="#">3</a> </li>
-                <li class="page-item"> <a class="page-link" href="#">...</a> </li>
-                <li class="page-item">
-                    <a class="page-link" href="#"> 
-                        <lucide-icon class="w-4 h-4" name="chevron-right"></lucide-icon>        
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#"> 
-                        <lucide-icon class="w-4 h-4" name="chevrons-right"></lucide-icon>
-                    </a>
-                </li>
-
-            </ul>
-        </nav>
-
-        <select class="w-20 form-select box mt-3 sm:mt-0">
-            <option>10</option>
-            <option>25</option>
-            <option>35</option>
-            <option>50</option>
-        </select>
-
+<!-- BEGIN: Modal Content -->
+<div id="editar" class="modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="p-5 text-center">
+          <lucide-icon
+            name="edit"
+            class="w-16 h-16 text-warning mx-auto mt-3"
+          ></lucide-icon>
+          <div class="text-3xl mt-5">Editar Producto</div>
+          <div class="grid grid-cols-12 gap-6 mt-5">
+            <div class="intro-y col-span-12 sm:col-span-6 hidden">
+              <div>
+                <label for="codigo" class="form-label">ID</label>
+                <input
+                  #idEdit
+                  id="codigo"
+                  type="text"
+                  class="form-control"
+                  placeholder="Codigo"
+                  disabled
+                />
+              </div>
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-12">
+              <div>
+                <label for="nombre" class="form-label">Nombre</label>
+                <div class="input-group">
+                  <input
+                    #nombreEdit
+                    id="nombre"
+                    type="text"
+                    class="form-control"
+                    placeholder="Nombre"
+                    [disabled]="stateName"
+                  />
+                  <span>&nbsp;&nbsp;</span>
+                  <button
+                    class="flex items-center mr-3 text-warning"
+                    (click)="editLockedName()"
+                  >
+                    <lucide-icon class="w-4 h-4 mr-1" name="edit"></lucide-icon>
+                  </button>
+                </div>
+              </div>
+              <span>&nbsp;&nbsp;</span>
+              <div class="intro-y col-span-12 sm:col-span-12">
+                <div>
+                  <label for="tipo" class="form-label">Tipo</label>
+                  <div class="input-group">
+                    <input
+                      #tipoEdit
+                      id="tipo"
+                      type="text"
+                      class="form-control"
+                      placeholder="Tipo"
+                      [disabled]="stateType"
+                    />
+                    <span>&nbsp;&nbsp;</span>
+                    <button
+                      class="flex items-center mr-3 text-warning"
+                      (click)="editLockedType()"
+                    >
+                      <lucide-icon
+                        class="w-4 h-4 mr-1"
+                        name="edit"
+                      ></lucide-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <span>&nbsp;&nbsp;</span>
+              <div class="intro-y col-span-12 sm:col-span-12">
+                <div>
+                  <label for="estado" class="form-label">Estado</label>
+                  <div class="input-group">
+                    <input
+                      #estadoEdit
+                      id="estado"
+                      type="text"
+                      class="form-control"
+                      placeholder="Estado"
+                      value=""
+                      [disabled]="stateState"
+                    />
+                    <span>&nbsp;&nbsp;</span>
+                    <button
+                      class="flex items-center mr-3 text-warning"
+                      (click)="editLockedState()"
+                    >
+                      <lucide-icon
+                        class="w-4 h-4 mr-1"
+                        name="edit"
+                      ></lucide-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span>&nbsp;&nbsp;</span>
+          <div class="px-5 pb-8 text-center">
+            <button
+              type="button"
+              data-tw-dismiss="modal"
+              class="btn btn-primary w-24"
+              data-tw-toggle="modal"
+              data-tw-target="#exito"
+              (click)="
+                editarProducto(
+                  idEdit.value,
+                  nombreEdit.value,
+                  tipoEdit.value,
+                  estadoEdit.value
+                )
+              "
+            >
+              Actualizar
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+  <!-- END: Modal Content -->
 
+  <!-- BEGIN: Modal Content -->
+  <div id="eliminar" class="modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="p-5 text-center">
+            <lucide-icon
+              name="delete"
+              class="w-16 h-16 text-danger mx-auto mt-3"
+            ></lucide-icon>
+            <div class="text-3xl mt-5">Eliminar Producto</div>
+            <div class="text-gray-600 mt-2">
+              ¿Estas seguro de eliminar este producto?
+            </div>
+          </div>
+          <div class="px-5 pb-8 text-center">
+            <button
+              type="button"
+              data-tw-dismiss="modal"
+              class="btn btn-primary w-24"
+              data-tw-toggle="modal"
+              data-tw-target="#exito"
+              (click)="eliminarProductoConfirm()"
+            >
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="exito" class="modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="p-5 text-center">
+            <lucide-icon
+              name="check-circle"
+              class="w-16 h-16 text-success mx-auto mt-3"
+            ></lucide-icon>
+            <div class="text-3xl mt-5">Operacion Exitosa!</div>
+          </div>
+          <div class="px-5 pb-8 text-center">
+            <button
+              type="button"
+              data-tw-dismiss="modal"
+              class="btn btn-primary w-24"
+            >
+              Ok
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END: Modal Content -->
 </div>
