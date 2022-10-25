@@ -48,3 +48,140 @@
     background: #062b60;
     transition-duration: 300ms;
 }
+
+/*----  Material modal ----*/
+.modal-show {
+    margin-top: 0px !important;
+    margin-left: 0px !important;
+    padding-left: 0px !important;
+    z-index: 10000;
+}
+
+.modal{
+    max-width: inherit !important;
+    position: fixed !important;
+    display: inherit !important;
+}
+
+.mat-dialog-container {
+    overflow: hidden !important;
+}
+
+// .modal-prueba{
+//     margin-top: 0px;
+//     margin-left: 0px;
+//     padding-left: 0px;
+
+//     transition: visibility 0s ease-in-out 0s, opacity 0.4s ease-in-out 0s;
+//     visibility: visible;
+//     opacity: 1;
+//     z-index: 10000;
+// }
+
+// ----------------
+
+.ngx-pagination {
+    margin-left: 0;
+    margin-bottom: 1rem;
+}
+
+.ngx-pagination::before,
+.ngx-pagination::after {
+    content: ' ';
+    display: table;
+}
+
+.ngx-pagination::after {
+    clear: both;
+}
+
+.ngx-pagination li {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    margin-right: 0.0625rem;
+    border-radius: 0;
+}
+
+.ngx-pagination li {
+    display: inline-block;
+}
+
+.ngx-pagination a,
+.ngx-pagination button {
+    color: #0a0a0a;
+    display: block;
+    padding: 0.1875rem 0.625rem;
+    border-radius: 0;
+}
+
+.ngx-pagination a:hover,
+.ngx-pagination button:hover {
+    background: #e6e6e6;
+}
+
+.ngx-pagination .current {
+    color: inherit !important;
+    font-weight: 500;
+    box-shadow: 0px 3px 20px #0000000b;
+    position: relative;
+    border-radius: 0.375rem;
+    border-color: transparent;
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.ngx-pagination .disabled {
+    padding: 0.1875rem 0.625rem;
+    color: #cacaca;
+    cursor: default;
+}
+
+.ngx-pagination .disabled:hover {
+    background: transparent;
+}
+
+.ngx-pagination a,
+.ngx-pagination button {
+    cursor: pointer;
+}
+
+.ngx-pagination .pagination-previous a::before,
+.ngx-pagination .pagination-previous.disabled::before {
+    content: '\u00AB';
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.ngx-pagination .pagination-next a::after,
+.ngx-pagination .pagination-next.disabled::after {
+    content: '\u00BB';
+    display: inline-block;
+    margin-left: 0.5rem;
+}
+
+.ngx-pagination .show-for-sr {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+.ngx-pagination .small-screen {
+    display: none;
+}
+
+@media screen and (max-width: 601px) {
+    .ngx-pagination.responsive .small-screen {
+        display: inline-block;
+    }
+
+    .ngx-pagination.responsive li:not(.small-screen):not(.pagination-previous):not(.pagination-next) {
+        display: none;
+    }
+}

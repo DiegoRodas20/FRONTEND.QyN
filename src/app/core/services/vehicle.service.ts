@@ -7,19 +7,19 @@ import { CLIENT_URL } from "../utils/url_constants";
     providedIn: 'root'
 })
 
-export class ClienteService {
+export class VehicleService {
 
     constructor(private http: HttpClient) { }
 
     // Listado general de Clientes
-    getClientes(): Observable<any> {
+    getVehicles(): Observable<any> {
 
         const url = `${CLIENT_URL}`
         return this.http.get(url)
     }
 
     // Listar Cliente por ID
-    getClientxID(idCliente: string): Observable<any> {
+    getVehiclexID(idCliente: string): Observable<any> {
 
         const url = `${CLIENT_URL}/${idCliente}`
         return this.http.get(url)

@@ -1,9 +1,10 @@
 import { environment } from "src/environments/environment"
 
+export const AUTH_URL           = `${environment.API_URL}login`
+export const USER_URL           = `${environment.API_URL}user`
 
-export const AUTH_URL           = `${environment.API_URL}Login`
-export const USER_URL           = `${environment.API_URL}User`
-export const CLIENT_URL         = `${environment.API_URL}Client`
-export const PRODUCT_URL        = `${environment.API_URL}Product`
-export const CATALOGO_URL       = `${environment.API_URL}product/catalog`
-export const PEDIDO_URL         = `${environment.API_URL}order`
+export const CLIENT_URL         = `${environment.API_URL}client`
+export const PRODUCT_URL        = `${environment.API_URL}product`
+export const ORDER_URL          = `${environment.API_URL}order`
+export const VEHICLE_URL        = `${environment.API_URL}vehicle`
+export const DRIVER_URL         = `${environment.API_URL}driver`

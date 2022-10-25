@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { icons, LucideAngularModule } from 'lucide-angular';
-import { AlertDialogComponent } from 'src/app/shared/components/alertdialog/alertdialog.component';
+import { AlertComponent } from 'src/app/shared/components/alert/alert.component';
+import { DropdownComponent } from 'src/app/shared/components/dropdown/dropdown.component';
 import { VerUsuarioComponent } from './gestionar-usuario/components/ver-usuario/ver-usuario.component';
 import { GestionarUsuarioComponent } from './gestionar-usuario/gestionar-usuario.component';
 import { UsuariosRoutingModule } from './usuarios.routing';
@@ -12,7 +13,8 @@ import { UsuariosRoutingModule } from './usuarios.routing';
 const COMPONENTS = [
     GestionarUsuarioComponent,
     VerUsuarioComponent,
-    AlertDialogComponent
+    // AlertComponent,
+    DropdownComponent
 ]
 
 @NgModule({

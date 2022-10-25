@@ -27,8 +27,7 @@
                 <tr>
                     <th class="text-center whitespace-nowrap">ID</th>
                     <th class="text-center whitespace-nowrap">CLIENTE</th>
-                    <th class="text-center whitespace-nowrap">COMENTARIO</th>
-                    <th class="text-center whitespace-nowrap">FECHA CREADA</th>
+                    <th class="text-center whitespace-nowrap">FECHA CREACIÓN</th>
                     <th class="text-center whitespace-nowrap">FECHA ACTUALIZACIÓN</th>
                     <th class="text-center whitespace-nowrap">CORREO</th>
                     <th class="text-center whitespace-nowrap">ESTADO</th>
@@ -38,44 +37,16 @@
             <tbody>
                 <tr class="intro-x" *ngFor="let pedido of lPedidos | filterPipe: filtro.value | paginate: { itemsPerPage: 5, currentPage: p }">
                     <td class="text-center font-medium whitespace-nowrap"> {{ pedido.id }} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{ pedido.client.name }} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{ pedido.comments }} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{ pedido.clientName }} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{ pedido.createdAt | date: 'dd/MM/yyyy' }} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{ pedido.updatedAt | date: 'dd/MM/yyyy' }} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{ pedido.client.email }} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{ pedido.clientEmail}} </td>
                     
                     <td class="w-40">
-
-                        <div *ngIf="pedido.status=='Creado'" class="flex items-center justify-center text-primary">
-                            <lucide-icon class="w-4 h-4 mr-2" name="file-plus-2"></lucide-icon>
-                            {{ pedido.status }}
+                        <div [class]="'flex items-center justify-center ' + colorStatusPedido(pedido.orderStatusId)">
+                            <lucide-icon class="w-4 h-4 mr-2" name="file-plus-2" [name]="iconStatusPedido(pedido.orderStatusId)"></lucide-icon>
+                            {{ pedido.orderStatus }}
                         </div>
-
-                        <div *ngIf="pedido.status=='Aceptado'"class="flex items-center justify-center text-success">
-                            <lucide-icon class="w-4 h-4 mr-2" name="check-square"></lucide-icon>
-                            {{ pedido.status }}
-                        </div>
-
-                        <div *ngIf="pedido.status=='Listo para enviar'" class="flex items-center justify-center text-warning">
-                            <lucide-icon class="w-4 h-4 mr-2" name="package-plus"></lucide-icon>
-                            {{ pedido.status }}
-                        </div>
-
-                        <div *ngIf="pedido.status=='En camino'" class="flex items-center justify-center text-secondary">
-                            <lucide-icon class="w-4 h-4 mr-2" name="baggage-claim"></lucide-icon>
-                            {{ pedido.status }}
-                        </div>
-
-                        <div *ngIf="pedido.status=='Entregado'" class="flex items-center justify-center text-dark">
-                            <lucide-icon class="w-4 h-4 mr-2" name="package-check"></lucide-icon>
-                            {{ pedido.status }}
-                        </div>
-
-                        <div *ngIf="pedido.status=='Rechazado'" class="flex items-center justify-center text-danger">
-                            <lucide-icon class="w-4 h-4 mr-2" name="package-x"></lucide-icon>
-                            {{ pedido.status }}
-                        </div>
-
                     </td>
 
                     <td class="table-report__action w-56">
@@ -99,8 +70,13 @@
         </table>
     </div>
 
+    <!-- Pagination -->
     <div class="intro-y col-span-12 text-right">
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        <pagination-controls 
+            previousLabel="Anterior" 
+            nextLabel="Siguiente" 
+            (pageChange)="p = $event">
+        </pagination-controls>
     </div>
 
 

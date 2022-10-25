@@ -20,10 +20,10 @@
                     <input formControlName="name" type="text" class="form-control" readonly>
                 </div>
 
-                <!-- RUC -->
+                <!-- Documento -->
                 <div class="intro-y col-span-12 sm:col-span-4">
-                    <label class="form-label">RUC</label>
-                    <input formControlName="ruc" type="text" class="form-control" readonly>
+                    <label class="form-label">{{tipoDocumento}}</label>
+                    <input formControlName="numberDocument" type="text" class="form-control" readonly>
                 </div>
 
                 <!-- Area -->
@@ -55,9 +55,9 @@
                 <!-- Estado -->
                 <div class="intro-y col-span-12 sm:col-span-4">
                     <label class="form-label">Estado</label>
-                    <select class="form-select sm:mr-2" formControlName="status" readonly>
-                        <option *ngFor="let estadosPedido of lEstadosPedido" disabled>
-                            {{estadosPedido}}
+                    <select class="form-select sm:mr-2" formControlName="orderStatusId" readonly>
+                        <option *ngFor="let estadosPedido of lEstadosPedido" [value]="estadosPedido.id" disabled>
+                            {{estadosPedido.name}}
                         </option>
                     </select>
                 </div>
@@ -78,7 +78,7 @@
                 <div class="intro-y col-span-12 sm:col-span-12">
                     <label class="form-label">Comentarios</label>
                     <textarea class="form-control" rows="4" placeholder="Ingresa un comentario deseado."
-                            formControlName="comments" readonly></textarea>
+                        formControlName="comments" readonly></textarea>
                 </div>
 
             </div>
@@ -105,14 +105,14 @@
                         <td class="">
                             <div class="flex items-center justify-center text-success">
                                 <div class="w-10 h-10 image-fit zoom-in">
-                                    <img class="tooltip rounded-full" [src]="productosPedido.product.urlImage">
+                                    <img class="tooltip rounded-full" [src]="productosPedido.urlImage">
                                 </div>
                             </div>
                         </td>
-                        <td class="text-center font-medium whitespace-nowrap"> {{ productosPedido.product.name }} </td>
-                        <td class="text-center font-medium whitespace-nowrap"> {{ productosPedido.product.type }} </td>
+                        <td class="text-center font-medium whitespace-nowrap"> {{ productosPedido.name }} </td>
+                        <td class="text-center font-medium whitespace-nowrap"> {{ productosPedido.type }} </td>
                         <td class="text-center font-medium whitespace-nowrap"> {{ productosPedido.quantity }} </td>
-                        <td class="text-center font-medium whitespace-nowrap"> S/. {{ productosPedido.product.salesPrice
+                        <td class="text-center font-medium whitespace-nowrap"> S/. {{ productosPedido.salesPrice
                             * productosPedido.quantity }} </td>
                     </tr>
 

@@ -30,101 +30,101 @@ export class SidebarComponent implements OnInit {
                 "url": "/dashboard",
                 "icono": "home"
             },
+            // {
+            //     "idpadre": 1,
+            //     "titulo": "Usuarios",
+            //     "icono": "users",
+            //     "submenu": [
+            //         {
+            //             "idhijo": 0,
+            //             "titulo": "Gestionar Usuario",
+            //             "url": "/usuarios/gestionarusuario",
+            //             "icono": "user"
+            //         }
+            //     ],
+            // },
             {
                 "idpadre": 1,
-                "titulo": "Usuarios",
-                "icono": "users",
-                "submenu": [
-                    {
-                        "idhijo": 0,
-                        "titulo": "Gestionar Usuario",
-                        "url": "/usuarios/gestionarusuario",
-                        "icono": "user"
-                    }
-                ],
-            },
-            {
-                "idpadre": 2,
                 "titulo": "Almacén",
                 "icono": "clipboard-list",
                 "submenu": [
+                    // {
+                    //     "idhijo": 0,
+                    //     "titulo": "Gestionar Almacén",
+                    //     "url": "/almacen/gestionaralmacen",
+                    //     "icono": "clipboard-list"
+                    // },
                     {
                         "idhijo": 0,
-                        "titulo": "Gestionar Almacén",
-                        "url": "/almacen/gestionaralmacen",
-                        "icono": "clipboard-list"
-                    },
-                    {
-                        "idhijo": 1,
                         "titulo": "Gestionar Producto",
                         "url": "/almacen/gestionarproducto",
                         "icono": "box"
                     },
-                    {
-                        "idhijo": 2,
-                        "titulo": "Gestionar Movimiento",
-                        "url": "/almacen/gestionarmovimiento",
-                        "icono": "package-search"
-                    }
+                    // {
+                    //     "idhijo": 2,
+                    //     "titulo": "Gestionar Movimiento",
+                    //     "url": "/almacen/gestionarmovimiento",
+                    //     "icono": "package-search"
+                    // }
                 ],
             },
             {
                 "titulo": "Ventas",
-                "idpadre": 3,
+                "idpadre": 2,
                 "icono": "shopping-cart",
                 "submenu": [
+                    // {
+                    //     "idhijo": 0,
+                    //     "titulo": "Gestionar Venta",
+                    //     "url": "/ventas/gestionarventa",
+                    //     "icono": "shopping-cart"
+                    // },
                     {
                         "idhijo": 0,
-                        "titulo": "Gestionar Venta",
-                        "url": "/ventas/gestionarventa",
-                        "icono": "shopping-cart"
-                    },
-                    {
-                        "idhijo": 1,
                         "titulo": "Gestionar Cliente",
                         "url": "/ventas/gestionarcliente",
                         "icono": "users"
                     },
                     {
-                        "idhijo": 2,
+                        "idhijo": 1,
                         "titulo": "Gestionar Pedido",
                         "url": "/ventas/gestionarpedido",
                         "icono": "package"
                     }
                 ],
             },
-            {
-                "titulo": "Fabricación",
-                "idpadre": 4,
-                "icono": "factory",
-                "submenu": [
-                    {
-                        "idhijo": 0,
-                        "titulo": "Gestionar Fabricación",
-                        "url": "/fabricacion/gestionarfabricacion",
-                        "icono": "factory"
-                    },
-                    {
-                        "idhijo": 1,
-                        "titulo": "Gestionar Formulación",
-                        "url": "/fabricacion/gestionarformulacion",
-                        "icono": "sigma"
-                    }
-                ]
-            },
+            // {
+            //     "titulo": "Fabricación",
+            //     "idpadre": 4,
+            //     "icono": "factory",
+            //     "submenu": [
+            //         {
+            //             "idhijo": 0,
+            //             "titulo": "Gestionar Fabricación",
+            //             "url": "/fabricacion/gestionarfabricacion",
+            //             "icono": "factory"
+            //         },
+            //         {
+            //             "idhijo": 1,
+            //             "titulo": "Gestionar Formulación",
+            //             "url": "/fabricacion/gestionarformulacion",
+            //             "icono": "sigma"
+            //         }
+            //     ]
+            // },
             {
                 "titulo": "Transporte",
-                "idpadre": 5,
+                "idpadre": 3,
                 "icono": "truck",
                 "submenu": [
+                    // {
+                    //     "idhijo": 0,
+                    //     "titulo": "Asignar Transporte",
+                    //     "url": "/transporte/asignartransporte",
+                    //     "icono": "home"
+                    // },
                     {
                         "idhijo": 0,
-                        "titulo": "Asignar Transporte",
-                        "url": "/transporte/asignartransporte",
-                        "icono": "home"
-                    },
-                    {
-                        "idhijo": 1,
                         "titulo": "Gestionar Vehículos",
                         "url": "/transporte/gestionarvehiculos",
                         "icono": "home"

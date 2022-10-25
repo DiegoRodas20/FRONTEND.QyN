@@ -4,7 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { icons, LucideAngularModule } from 'lucide-angular';
 import { NgxPaginationModule } from 'ngx-pagination';
+
 import { FilterTablePipe } from 'src/app/core/pipes/filterTable.pipe';
+import { PipeModule } from 'src/app/core/pipes/pipe.module';
+import { AlertComponent } from 'src/app/shared/components/alert/alert.component';
 import { GestionarClienteComponent } from './gestionar-cliente/gestionar-cliente.component';
 import { ActualizarPedidoComponent } from './gestionar-pedido/components/actualizar-pedido/actualizar-pedido.component';
 import { VerPedidoComponent } from './gestionar-pedido/components/ver-pedido/ver-pedido.component';
@@ -17,20 +20,17 @@ const COMPONENTS = [
     GestionarClienteComponent,
     GestionarPedidoComponent,
     VerPedidoComponent,
-    ActualizarPedidoComponent
-]
-
-const PIPES = [
-    FilterTablePipe
+    ActualizarPedidoComponent,
+    AlertComponent
 ]
 
 @NgModule({
     declarations: [
-        COMPONENTS,
-        PIPES
+        COMPONENTS
     ],
     imports: [
         CommonModule,
+        PipeModule,
         RouterModule,
         VentasRoutingModule,
         FormsModule,
@@ -39,7 +39,6 @@ const PIPES = [
         LucideAngularModule.pick(icons)
     ],
     exports: [
-        PIPES
     ],
 })
 

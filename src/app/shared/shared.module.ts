@@ -6,6 +6,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { MaterialModule } from './material/material.module';
 
 const COMPONENTS = [
     SidebarComponent,
@@ -23,6 +24,7 @@ const COMPONENTS = [
     imports: [
         CommonModule,
         RouterModule,
+        MaterialModule,
         LucideAngularModule.pick(icons)
     ]
 })

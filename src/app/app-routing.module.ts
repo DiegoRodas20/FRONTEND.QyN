@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const DEFAULT_ROUTE: string = 'ventas/gestionarpedido'
+const DEFAULT_ROUTE: string = 'dashboard'
 
 const routes: Routes = [
 

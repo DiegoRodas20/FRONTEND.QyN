@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/core/services/user.service';
-import { AlertDialogComponent } from 'src/app/shared/components/alertdialog/alertdialog.component';
+import { AlertComponent } from 'src/app/shared/components/alert/alert.component';
 
 
 @Component({
@@ -13,46 +12,26 @@ export class GestionarUsuarioComponent implements OnInit {
 
     lUsuarios: any[] = []
     Mensaje: string
-    pruebatitulo = "prueba titulo"
-    pruebacontenido = "prueba contenido"
-    pruebaestilo = ""
+
+    typeModal: string
+    openModal: boolean = false
 
     constructor(
-        private _usuarioService: UserService,
-        private _router: Router,
-        // private _dialog: MatDialog
+        private _router: Router
     ) { }
 
-    ngOnInit() {
-        this.getUsuarios()
-    }
-
-    async getUsuarios() {
-
-        try {
-
-            const data: any = await this._usuarioService.getUsuarios().toPromise()
-            console.log(data)
-
-            this.Mensaje = data.message
-            this.lUsuarios = data.data
-        }
-        
-        catch (error) {
-            console.log("Error: ", error)
-        }
-
-    }
+    ngOnInit() { }
 
     verUsuario(idUsuario: string) {
         this._router.navigate(['/usuarios/gestionarusuario/ver/' + idUsuario])
     }
 
-    pruebaDialog() {
-        this.pruebaestilo = "overflow-y-auto show modal-show"
+    onOpenModal() {
+        this.openModal = true
+        this.typeModal = 'success'
     }
 
-    cambiarestilo(event) {
-        this.pruebaestilo = event
+    onCloseModal(event: boolean) {
+        this.openModal = event
     }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from 'src/app/core/services/user.service';
 
 
 @Component({
@@ -17,7 +16,6 @@ export class VerUsuarioComponent implements OnInit {
     constructor(
         private _router: Router,
         private _route: ActivatedRoute,
-        private _usuarioService: UserService,
         private _formBuilder: FormBuilder,
     ) { }
 
@@ -41,9 +39,9 @@ export class VerUsuarioComponent implements OnInit {
 
     async listarUsuarioxID(idTramite: string) {
         try {
-            const data: any = await this._usuarioService.getUsuarioxID(idTramite).toPromise()
-            this.formUsuario.patchValue(data.data)
-            this.formUsuario.controls['estado'].setValue(data.data.isActive ? 'Activo' : 'Inactivo')
+            // const data: any = await this._usuarioService.getUsuarioxID(idTramite).toPromise()
+            // this.formUsuario.patchValue(data.data)
+            // this.formUsuario.controls['estado'].setValue(data.data.isActive ? 'Activo' : 'Inactivo')
         }
         catch (error) {
             console.log("Error: ", error)

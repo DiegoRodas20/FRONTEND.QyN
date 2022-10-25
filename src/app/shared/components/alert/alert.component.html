@@ -1,10 +1,15 @@
-<div [class]='"modal " + estilo'>
+<div [class]="!open ? 'modal modal-show' : 'modal overflow-y-auto show modal-show'" data-tw-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body p-0">
                 <div class="p-5 text-center">
-                    <lucide-icon name="check-circle" class="w-16 h-16 text-success mx-auto mt-3"></lucide-icon>
-                    <div class="text-3xl mt-5">{{titulo}}</div>
+
+                    <lucide-icon 
+                        [name]="iconAlert(type)" 
+                        [class]="'w-16 h-16 mx-auto mt-3 ' + colorAlert(type)">
+                    </lucide-icon>
+
+                    <div class="text-3xl mt-5">{{titleAlert(type)}}</div>
                     <div class="text-slate-500 mt-2">{{contenido}}</div>
                 </div>
                 <div class="px-5 pb-8 text-center">

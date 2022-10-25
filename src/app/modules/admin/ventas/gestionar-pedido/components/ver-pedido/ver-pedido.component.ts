@@ -2,7 +2,10 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PedidoService } from 'src/app/core/services/pedido.service';
+import { OrderStatus } from 'src/app/core/models/order.model';
+import { Product } from 'src/app/core/models/product.model';
+import { ResponseData } from 'src/app/core/models/response.model';
+import { OrderService } from 'src/app/core/services/order.service';
 
 
 @Component({
@@ -14,15 +17,16 @@ import { PedidoService } from 'src/app/core/services/pedido.service';
 export class VerPedidoComponent implements OnInit {
 
     idPedido: string
-    lEstadosPedido: any[] = []
-    lProductosPedido: any[] = []
+    tipoDocumento: string
+    lEstadosPedido: OrderStatus[] = []
+    lProductosPedido: Product[] = []
     formPedido: FormGroup
     formCliente: FormGroup
 
     constructor(
         private _router: Router,
         private _route: ActivatedRoute,
-        private _pedidoService: PedidoService,
+        private _orderService: OrderService,
         private _formBuilder: FormBuilder,
         private _datePipe: DatePipe
     ) { }
@@ -41,7 +45,7 @@ export class VerPedidoComponent implements OnInit {
 
     crearFormPedido() {
         this.formPedido = this._formBuilder.group({
-            status: [null, []],
+            orderStatusId: [null, []],
             estimatedDate: [null, []],
             address: [null, []],
             comments: [null, []]
@@ -51,7 +55,8 @@ export class VerPedidoComponent implements OnInit {
     crearFormCliente() {
         this.formCliente = this._formBuilder.group({
             name: [null, []],
-            ruc: [null, []],
+            typeDocument: [null, []],
+            numberDocument: [null, []],
             area: [null, []],
             phone: [null, []],
             email: [null, []],
@@ -61,7 +66,7 @@ export class VerPedidoComponent implements OnInit {
     async listarEstadosPedido() {
 
         try {
-            const data: any = await this._pedidoService.getEstadosPedido().toPromise()
+            const data: ResponseData = await this._orderService.getEstadosPedido().toPromise()
             this.lEstadosPedido = data.data
         }
         catch (error) {
@@ -72,12 +77,13 @@ export class VerPedidoComponent implements OnInit {
 
     async listarPedidoxID(idPedido: string) {
         try {
-            const data: any = await this._pedidoService.getPedidoxID(idPedido).toPromise()
+            const data: ResponseData = await this._orderService.getPedidoxID(idPedido).toPromise()
 
-            this.lProductosPedido = data.data.orderDetails
-            this.formCliente.patchValue(data.data.client)
+            this.lProductosPedido = data.data['orderDetails']
+            this.tipoDocumento = data.data['client'].typeDocument
+            this.formCliente.patchValue(data.data['client'])
             this.formPedido.patchValue(data.data)
-            this.formPedido.controls['estimatedDate'].setValue(this._datePipe.transform(data.data.estimatedDate,'dd/MM/yyyy'))
+            this.formPedido.controls['estimatedDate'].setValue(this._datePipe.transform(data.data['estimatedDate'], 'dd/MM/yyyy'))
         }
         catch (error) {
             console.log("Error: ", error)

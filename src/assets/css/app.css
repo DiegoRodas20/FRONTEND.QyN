@@ -2709,6 +2709,18 @@ select {
   object-fit: cover;
 }
 
+.image-contain {
+  position: relative;
+}
+
+.image-contain>img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+
 .input-group {
   display: flex;
 }
@@ -2796,6 +2808,9 @@ select {
 
 .modal.show>.modal-dialog {
   margin-top: 4rem;
+}
+.modal-component>.modal-dialog {
+  margin-top: 4rem !important;
 }
 
 .modal .modal-dialog {

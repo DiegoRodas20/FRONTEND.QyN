@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Product } from 'src/app/core/models/product.model';
+import { ResponseData } from 'src/app/core/models/response.model';
 import { ProductoService } from 'src/app/core/services/product.service';
+import { VerProductoComponent } from './ver-producto/ver-producto.component';
 
 @Component({
     selector: 'app-gestionar-producto',
@@ -8,11 +13,15 @@ import { ProductoService } from 'src/app/core/services/product.service';
 
 export class GestionarProductoComponent implements OnInit {
 
-    lProductos: any[] = []
+    lProductos: Product[] = []
     Mensaje: string
+    urlPorDefecto: string = '../../../../../assets/images/productodefault.jpg'
+    filtro = new FormControl();
+    p: number = 1;
 
     constructor(
-        private _productoService: ProductoService
+        private _productoService: ProductoService,
+        private _dialog: MatDialog
     ) { }
 
     ngOnInit() {
@@ -22,9 +31,7 @@ export class GestionarProductoComponent implements OnInit {
     async getProductos() {
 
         try {
-
-            const data: any = await this._productoService.geProductos().toPromise()
-            console.log(data)
+            const data: ResponseData = await this._productoService.getProductos().toPromise()
 
             this.Mensaje = data.message
             this.lProductos = data.data
@@ -33,6 +40,22 @@ export class GestionarProductoComponent implements OnInit {
             console.log("Error: ", error)
         }
 
+    }
+
+    registrarProducto() { }
+
+    actualizarProducto(idProducto: number) { }
+
+    verProducto(idProducto: number) {
+
+        const dialogConfig = new MatDialogConfig()
+
+        dialogConfig.panelClass = ['modal', 'overflow-y-auto', 'show', 'modal-show']
+        dialogConfig.data = idProducto 
+
+        console.log(dialogConfig.data)
+        const dialogReg = this._dialog.open(VerProductoComponent, dialogConfig)
+        dialogReg.afterClosed().subscribe(result => console.log(result))
     }
 
 }

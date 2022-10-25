@@ -20,10 +20,10 @@
                     <input formControlName="name" type="text" class="form-control" readonly>
                 </div>
 
-                <!-- RUC -->
+                <!-- Documento -->
                 <div class="intro-y col-span-12 sm:col-span-4">
-                    <label class="form-label">RUC</label>
-                    <input formControlName="ruc" type="text" class="form-control" readonly>
+                    <label class="form-label">{{tipoDocumento}}</label>
+                    <input formControlName="numberDocument" type="text" class="form-control" readonly>
                 </div>
 
                 <!-- Area -->
@@ -55,9 +55,9 @@
                 <!-- Estado -->
                 <div class="intro-y col-span-12 sm:col-span-4">
                     <label class="form-label">Estado</label>
-                    <select class="form-select sm:mr-2" formControlName="status">
-                        <option *ngFor="let estadosPedido of lEstadosPedido">
-                            {{estadosPedido}}
+                    <select class="form-select sm:mr-2 dropdown-content" formControlName="orderStatusId">
+                        <option *ngFor="let estadosPedido of lEstadosPedido" [value]="estadosPedido.id" class="dropdown-item">
+                            {{estadosPedido.name}}
                         </option>
                     </select>
                 </div>
@@ -78,7 +78,7 @@
                 <div class="intro-y col-span-12 sm:col-span-12">
                     <label class="form-label">Comentarios</label>
                     <textarea class="form-control" rows="4" placeholder="Ingresa un comentario deseado."
-                            formControlName="comments"></textarea>
+                        formControlName="comments"></textarea>
                 </div>
 
             </div>
@@ -105,14 +105,14 @@
                         <td class="">
                             <div class="flex items-center justify-center text-success">
                                 <div class="w-10 h-10 image-fit zoom-in">
-                                    <img class="tooltip rounded-full" [src]="productosPedido.product.urlImage">
+                                    <img class="tooltip rounded-full" [src]="productosPedido.urlImage">
                                 </div>
                             </div>
                         </td>
-                        <td class="text-center font-medium whitespace-nowrap"> {{ productosPedido.product.name }} </td>
-                        <td class="text-center font-medium whitespace-nowrap"> {{ productosPedido.product.type }} </td>
+                        <td class="text-center font-medium whitespace-nowrap"> {{ productosPedido.name }} </td>
+                        <td class="text-center font-medium whitespace-nowrap"> {{ productosPedido.type }} </td>
                         <td class="text-center font-medium whitespace-nowrap"> {{ productosPedido.quantity }} </td>
-                        <td class="text-center font-medium whitespace-nowrap"> S/. {{ productosPedido.product.salesPrice
+                        <td class="text-center font-medium whitespace-nowrap"> S/. {{ productosPedido.salesPrice
                             * productosPedido.quantity }} </td>
                     </tr>
 
@@ -128,21 +128,9 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div [ngClass]="'modal' + modalClass" style="margin-top: 0px; margin-left: 0px; padding-left: 0px; z-index: 10000;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body p-0">
-                <div class="p-5 text-center">
-                    <lucide-icon name="check-circle" class="w-16 h-16 text-success mx-auto mt-3"></lucide-icon>
-                    <div class="text-3xl mt-5">¡Éxito!</div>
-                    <div class="text-slate-500 mt-2">Se actualizó correctamente.</div>
-                </div>
-                <div class="px-5 pb-8 text-center">
-                    <button type="button" data-tw-dismiss="modal" class="btn btn-primary w-24"
-                        (click)="modificarCSSModal()">Aceptar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<alert
+    [type]="typeModal"
+    [open]="openModal"
+    [contenido]="contenidoModal"
+    (close)="onCloseModal($event)">
+</alert>

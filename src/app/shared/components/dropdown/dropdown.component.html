@@ -1,0 +1,9 @@
+<div class="dropdown">
+    <button class="dropdown-toggle btn btn-primary" (click)="openDropdown()">Prueba</button>
+    <div [class]="show ? 'dropdown-menu w-40 show': 'dropdown-menu w-40'">
+        <ul class="dropdown-content">
+            <li> <a href="" class="dropdown-item">New Dropdown</a> </li>
+            <li> <a href="" class="dropdown-item">Delete Dropdown</a> </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,97 @@
+<div class="modal-component">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+
+            <!-- Cabecera -->
+            <div class="modal-header">
+                <h2 class="font-medium intro-y text-lg mr-auto">Ver Producto</h2>
+            </div>
+
+            <!-- Cuerpo -->
+            <div class="modal-body p-0">
+
+                <!-- Inputs -->
+                <div class="intro-y box py-10 sm:py-10">
+                    <div class="px-10 sm:px-10 dark:border-darkmode-400">
+
+                        <form [formGroup]="formProducto">
+                            <div class="grid grid-cols-12 gap-4 gap-y-5">
+
+                                <!-- Código -->
+                                <div class="intro-y col-span-12 sm:col-span-4">
+                                    <label class="form-label">Código</label>
+                                    <input formControlName="code" type="text" class="form-control" readonly>
+                                </div>
+
+                                <!-- Nombre -->
+                                <div class="intro-y col-span-12 sm:col-span-4">
+                                    <label class="form-label">Nombre</label>
+                                    <input formControlName="name" type="text" class="form-control" readonly>
+                                </div>
+
+                                <!-- Precio de compra -->
+                                <div class="intro-y col-span-12 sm:col-span-4">
+                                    <label class="form-label">Precio de compra</label>
+                                    <input formControlName="purchasePrice" type="text" class="form-control" readonly>
+                                </div>
+
+                                <!-- Precio de venta -->
+                                <div class="intro-y col-span-12 sm:col-span-4">
+                                    <label class="form-label">Precio de venta</label>
+                                    <input formControlName="salesPrice" type="text" class="form-control" readonly>
+                                </div>
+
+                                <!-- Stock Minimo -->
+                                <div class="intro-y col-span-12 sm:col-span-4">
+                                    <label class="form-label">Stock Minimo</label>
+                                    <input formControlName="minStock" type="text" class="form-control" readonly>
+                                </div>
+
+                                <!-- Stock Maximo -->
+                                <div class="intro-y col-span-12 sm:col-span-4">
+                                    <label class="form-label">Stock Maximo</label>
+                                    <input formControlName="maxStock" type="text" class="form-control" readonly>
+                                </div>
+
+                                <!-- Imagen -->
+                                <div class="intro-y col-span-12 sm:col-span-12">
+                                    <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
+                                        <h2 class="font-medium text-base mr-auto">
+                                            Imagen
+                                        </h2>
+                                    </div>
+                                    <div id="multiple-file-upload" class="p-5">
+                                        <div class="preview">
+                                            <form action="/file-upload" class="dropzone">
+                                                <div class="fallback">
+                                                    <!-- <input name="file" type="file" multiple/> -->
+                                                </div>
+                                                <div class="dz-message w-full h-64 my-5 image-contain object-cover" data-dz-message>
+                                                    <img [src]="urlImage == '' ? urlPorDefecto : urlImage" class="w-full rounded-md">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="source-code hidden">
+                                            <button data-target="#copy-multiple-file-upload" class="copy-code btn py-1 px-2 btn-outline-secondary"> <i data-lucide="file" class="w-4 h-4 mr-2"></i> Copy example code </button>
+                                            <div class="overflow-y-auto mt-3 rounded-md">
+                                                <pre id="copy-multiple-file-upload" class="source-preview"> <code class="html"> HTMLOpenTagform action=&quot;/file-upload&quot; class=&quot;dropzone&quot;HTMLCloseTag HTMLOpenTagdiv class=&quot;fallback&quot;HTMLCloseTag HTMLOpenTaginput name=&quot;file&quot; type=&quot;file&quot; multiple/HTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTagdiv class=&quot;dz-message&quot; data-dz-messageHTMLCloseTag HTMLOpenTagdiv class=&quot;text-lg font-medium&quot;HTMLCloseTagDrop files here or click to upload.HTMLOpenTag/divHTMLCloseTag HTMLOpenTagdiv class=&quot;text-slate-500&quot;HTMLCloseTag This is just a demo dropzone. Selected files are HTMLOpenTagspan class=&quot;font-medium&quot;HTMLCloseTagnotHTMLOpenTag/spanHTMLCloseTag actually uploaded. HTMLOpenTag/divHTMLCloseTag HTMLOpenTag/divHTMLCloseTag HTMLOpenTag/formHTMLCloseTag </code> </pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer intro-y">
+                <button class="btn btn-primary w-20" (click)="salir()">Atrás
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
