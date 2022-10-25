@@ -24,7 +24,7 @@
             <!-- Driver -->
             <div class="intro-y col-span-6">
                 <label class="form-label">Conductor</label>
-                <select class="form-select sm:mr-2" formControlName="idTypeVehicle">
+                <select class="form-select sm:mr-2" formControlName="idDriver">
                     <option [value]="conductor.id" *ngFor="let conductor of lConductores">
                         {{conductor.firstName}} {{conductor.lastName}}
                     </option>
