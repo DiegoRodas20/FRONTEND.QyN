@@ -62,7 +62,7 @@ export class ActualizarClienteComponent implements OnInit {
   try {
       let data = await this._clienteService.actualizarCliente(this.idCliente, Cliente)
       console.log(data)
-      this.actualizarCliente()
+      //this.actualizarCliente()
       this.modalClass = ' overflow-y-auto show'
   }
   catch (error) {
