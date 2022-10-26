@@ -8,3 +8,4 @@ export const PRODUCT_URL        = `${environment.API_URL}product`
 export const ORDER_URL          = `${environment.API_URL}order`
 export const VEHICLE_URL        = `${environment.API_URL}vehicle`
 export const DRIVER_URL         = `${environment.API_URL}driver`
+export const PURCHASE_ORDER_URL = `${environment.API_URL}purchaseorder`

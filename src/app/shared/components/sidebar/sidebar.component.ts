@@ -90,7 +90,13 @@ export class SidebarComponent implements OnInit {
                         "titulo": "Gestionar Pedido",
                         "url": "/ventas/gestionarpedido",
                         "icono": "package"
-                    }
+                    },
+                    {
+                      "idhijo": 2,
+                      "titulo": "Gestionar Orden de Compra",
+                      "url": "/ventas/gestionarOrdenCompra",
+                      "icono": "package"
+                  }
                 ],
             },
             // {
