@@ -32,7 +32,7 @@ export class ActualizarClienteComponent implements OnInit {
 
   crearFormCliente() {
         this.formCliente = this._formBuilder.group({
-          address: [null, []],
+        address: [null, []],
         numberDocument: [null, []],
         phone: [null, []],
   })
@@ -42,7 +42,6 @@ export class ActualizarClienteComponent implements OnInit {
     
     try {
         const data: any = await this._clienteService.getClientxID(idCliente).toPromise()
-        console.log(data.data)
         this.formCliente.patchValue(data.data)
         }
     catch (error) {
@@ -61,7 +60,7 @@ export class ActualizarClienteComponent implements OnInit {
 
   try {
       let data = await this._clienteService.actualizarCliente(this.idCliente, Cliente)
-      console.log(data)
+      this.listarClientexID(this.idCliente)
       this.modalClass = ' overflow-y-auto show'
   }
   catch (error) {
