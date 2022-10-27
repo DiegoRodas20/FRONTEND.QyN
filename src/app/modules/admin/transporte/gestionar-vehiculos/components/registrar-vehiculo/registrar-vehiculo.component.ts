@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehiculoService } from 'src/app/core/services/vehicle.service';
 import { DriverService } from 'src/app/core/services/driver.service';
@@ -37,11 +37,11 @@ export class RegistrarVehiculoComponent implements OnInit {
 
     crearFormVehiculo(){
         this.formVehiculo = this._formBuildaer.group({
-            typeVehicleId: [null, []],
-            driverId: [null, []],
-            plate: [null, []],
-            brand: [null, []],
-            color: [null, []],
+            typeVehicleId: [null, [Validators.required]],
+            driverId: [null, [Validators.required]],
+            plate: [null, [Validators.required]],
+            brand: [null, [Validators.required, Validators.maxLength(20)]],
+            color: [null, [Validators.required, Validators.maxLength(20)]],
         })
     }
 
@@ -68,6 +68,9 @@ export class RegistrarVehiculoComponent implements OnInit {
     }
 
     async registrarVehiculo(){
+        if(this.formVehiculo.invalid){
+            return
+        }
         let form = this.formVehiculo.value
         let Vehiculo: any = {
             typeVehicleId: form.typeVehicleId,

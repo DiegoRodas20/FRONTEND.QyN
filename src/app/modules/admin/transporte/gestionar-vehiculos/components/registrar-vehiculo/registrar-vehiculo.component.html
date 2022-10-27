@@ -19,6 +19,7 @@
                         {{tipoVehiculo.name}}
                     </option>
                 </select>
+                <div *ngIf="formVehiculo.controls['typeVehicleId'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
             </div>
 
             <!-- Driver -->
@@ -29,24 +30,30 @@
                         {{conductor.firstName}} {{conductor.lastName}}
                     </option>
                 </select>
+                <div *ngIf="formVehiculo.controls['driverId'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
             </div>
 
             <!-- Plate -->
             <div class="intro-y col-span-6 mt-5">
                 <label class="form-label">Placa</label>
                 <input formControlName="plate" type="text" class="form-control">
+                <div *ngIf="formVehiculo.controls['plate'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
             </div>
 
             <!-- Brand -->
             <div class="intro-y col-span-6 mt-5">
                 <label class="form-label">Marca</label>
-                <input formControlName="brand" type="text" class="form-control">
+                <input formControlName="brand" type="text" maxLength="30" class="form-control">
+                <div *ngIf="formVehiculo.controls['brand'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
+                <div *ngIf="formVehiculo.controls['brand'].hasError('maxlength')" class="text-danger mt-2">Maximo de 20 caracteres</div>
             </div>
 
             <!-- Color -->
             <div class="intro-y col-span-6 mt-5">
                 <label class="form-label">Color</label>
-                <input formControlName="color" type="text" class="form-control">
+                <input formControlName="color" type="text" maxLength="30" class="form-control">
+                <div *ngIf="formVehiculo.controls['color'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
+                <div *ngIf="formVehiculo.controls['color'].hasError('maxlength')" class="text-danger mt-2">Maximo de 20 caracteres</div>
             </div>
 
             <!--Boton Registrar y Atras-->
