@@ -9,8 +9,6 @@
     <!-- Cabecera -->
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
 
-        <div class="hidden md:block mx-auto text-slate-500">{{Mensaje}}</div>
-
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
                 <input [formControl]="filtro" type="text" class="form-control w-56 box pr-10" placeholder="Buscar...">
@@ -18,6 +16,7 @@
             </div>
         </div>
 
+        <div class="hidden md:block mx-auto text-slate-500">{{Mensaje}}</div>
     </div>
 
     <!-- Table -->
@@ -42,7 +41,7 @@
                     <td class="text-center font-medium whitespace-nowrap"> {{ pedido.updatedAt | date: 'dd/MM/yyyy' }} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{ pedido.clientEmail}} </td>
                     
-                    <td class="w-40">
+                    <td class="w-60">
                         <div [class]="'flex items-center justify-center ' + colorStatusPedido(pedido.orderStatusId)">
                             <lucide-icon class="w-4 h-4 mr-2" name="file-plus-2" [name]="iconStatusPedido(pedido.orderStatusId)"></lucide-icon>
                             {{ pedido.orderStatus }}
