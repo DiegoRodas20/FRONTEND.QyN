@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehiculoService } from 'src/app/core/services/vehicle.service';
 import { DriverService } from 'src/app/core/services/driver.service';
@@ -41,12 +41,12 @@ export class ActualizarVehiculoComponent implements OnInit {
 
     crearFormVehiculo(){
         this.formVehiculo = this._formBuildaer.group({
-            idTypeVehicle: [null, []],
-            idDriver: [null, []],
-            plate: [null, []],
-            brand: [null, []],
-            color: [null, []],
-            status: [null, []]
+            idTypeVehicle: [null, [Validators.required]],
+            idDriver: [null, [Validators.required]],
+            plate: [null, [Validators.required]],
+            brand: [null, [Validators.required, Validators.maxLength(20)]],
+            color: [null, [Validators.required, Validators.maxLength(20)]],
+            status: [null, [Validators.required]]
         })
     }
 
@@ -84,6 +84,9 @@ export class ActualizarVehiculoComponent implements OnInit {
     }
 
     async actualizarVehiculo(){
+        if(this.formVehiculo.invalid){
+            return
+        }
         let form = this.formVehiculo.value
         let Vehiculo: any = {
             typeVehicleId: form.idTypeVehicle,
