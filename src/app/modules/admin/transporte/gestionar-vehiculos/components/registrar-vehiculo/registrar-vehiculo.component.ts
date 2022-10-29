@@ -40,8 +40,8 @@ export class RegistrarVehiculoComponent implements OnInit {
             typeVehicleId: [null, [Validators.required]],
             driverId: [null, [Validators.required]],
             plate: [null, [Validators.required]],
-            brand: [null, [Validators.required, Validators.maxLength(20)]],
-            color: [null, [Validators.required, Validators.maxLength(20)]],
+            brand: [null, [Validators.required, Validators.maxLength(20), Validators.pattern('[A-Za-z]*')]],
+            color: [null, [Validators.required, Validators.maxLength(20), Validators.pattern('[A-Za-z]*')]],
         })
     }
 

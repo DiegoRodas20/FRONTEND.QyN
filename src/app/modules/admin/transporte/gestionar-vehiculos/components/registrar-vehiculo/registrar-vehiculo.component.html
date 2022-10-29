@@ -46,6 +46,7 @@
                 <input formControlName="brand" type="text" maxLength="30" class="form-control">
                 <div *ngIf="formVehiculo.controls['brand'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
                 <div *ngIf="formVehiculo.controls['brand'].hasError('maxlength')" class="text-danger mt-2">Maximo de 20 caracteres</div>
+                <div *ngIf="formVehiculo.controls['brand'].hasError('pattern')" class="text-danger mt-2">Solo ingrese letras</div>
             </div>
 
             <!-- Color -->
@@ -54,6 +55,7 @@
                 <input formControlName="color" type="text" maxLength="30" class="form-control">
                 <div *ngIf="formVehiculo.controls['color'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
                 <div *ngIf="formVehiculo.controls['color'].hasError('maxlength')" class="text-danger mt-2">Maximo de 20 caracteres</div>
+                <div *ngIf="formVehiculo.controls['color'].hasError('pattern')" class="text-danger mt-2">Solo ingrese letras</div>
             </div>
 
             <!--Boton Registrar y Atras-->
