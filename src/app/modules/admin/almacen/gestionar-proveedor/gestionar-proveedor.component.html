@@ -36,12 +36,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="intro-x">
-                    <td class="text-center font-medium whitespace-nowrap"> 001 </td>
-                    <td class="text-center font-medium whitespace-nowrap"> PROVEEDOR RUC</td>
-                    <td class="text-center font-medium whitespace-nowrap"> PROVEEDOR NOMBRE </td>
-                    <td class="text-center font-medium whitespace-nowrap"> PROVEEDOR AREA </td>
-                    <td class="text-center font-medium whitespace-nowrap"> PROVEEDOR EMAIL </td>
+                <tr class="intro-x" *ngFor="let proveedor of lProveedores">
+                    <td class="text-center font-medium whitespace-nowrap"> {{proveedor.id}} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{proveedor.ruc}}</td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{proveedor.name}} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{proveedor.area}} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{proveedor.email}} </td>
 
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
