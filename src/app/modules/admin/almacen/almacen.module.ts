@@ -6,11 +6,13 @@ import { AlmacenRoutingModule } from './almacen.routing';
 import { GestionarAlmacenComponent } from './gestionar-almacen/gestionar-almacen.component';
 import { GestionarMovimientoComponent } from './gestionar-movimiento/gestionar-movimiento.component';
 import { GestionarProductoComponent } from './gestionar-producto/gestionar-producto.component';
+import { GestionarProveedorComponent } from './gestionar-proveedor/gestionar-proveedor.component';
 
 const COMPONENTS = [
     GestionarAlmacenComponent,
     GestionarProductoComponent,
-    GestionarMovimientoComponent
+    GestionarMovimientoComponent,
+    GestionarProveedorComponent
 ]
 
 @NgModule({
