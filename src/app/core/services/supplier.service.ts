@@ -25,7 +25,7 @@ export class SupplierService {
     }
 
     //Listar proveedores por ID
-    gestProveedoresxID(idProveedor: string): Observable<any>{
+    getProveedoresxID(idProveedor: string): Observable<any>{
 
         const url = `${SUPPLIER_URL}/${idProveedor}`
         return this.http.get(url)

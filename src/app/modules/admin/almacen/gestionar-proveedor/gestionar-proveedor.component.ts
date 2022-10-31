@@ -36,13 +36,13 @@ export class GestionarProveedorComponent implements OnInit {
      }
 
      registrarProveedor(){
-        this._router.navigate(['/almacen/gestionarproveedores/registrar'])
+        this._router.navigate(['/almacen/gestionarproveedor/registrar'])
      }
      verProveedor(idProveedor: string){
-        this._router.navigate(['/almacen/gestionarproveedores/ver/' + idProveedor])
+        this._router.navigate(['/almacen/gestionarproveedor/ver/' + idProveedor])
      }
      actualizarProveedor(idProveedor: string){
-        this._router.navigate(['/almacen/gestionarproveedores/actualizar/' + idProveedor])
+        this._router.navigate(['/almacen/gestionarproveedor/actualizar/' + idProveedor])
      }
 
 }

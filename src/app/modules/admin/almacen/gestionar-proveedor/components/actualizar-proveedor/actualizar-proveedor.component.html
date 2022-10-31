@@ -1,0 +1,66 @@
+<!-- Cabecera -->
+<div class="flex items-center mt-8">
+    <h2 class="intro-y text-lg font-medium mr-auto">
+        Actualizar Proveedor
+    </h2>
+</div>
+
+<!-- Inputs -->
+<div class="intro-y box py-10 sm:py-10 mt-5">
+    <div class="px-10 sm:px-10 dark:border-darkmode-400">
+
+        <div class="font-medium text-base">Proveedor</div>
+
+    <form [formGroup]="formProveedor"> 
+        <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+
+            <!-- RUC-->
+             <div class="intro-y col-span-6 mt-5">
+                <label class="form-label">Ruc</label>
+                <input formControlName="ruc" type="text" class="form-control" >
+            </div>
+
+            <!-- name-->
+            <div class="intro-y col-span-6 mt-5">
+                <label class="form-label">Nombre</label>
+                <input formControlName="name" type="text" class="form-control" >
+            </div>
+
+            <!-- area-->
+            <div class="intro-y col-span-6 mt-5">
+                <label class="form-label">Area</label>
+                <input formControlName="area" type="text" class="form-control" >
+            </div>
+
+            <!-- email-->
+            <div class="intro-y col-span-6 mt-5">
+                <label class="form-label">Email</label>
+                <input formControlName="email" type="text" class="form-control" >
+            </div>
+        </div>
+    </form> 
+            <!--Boton Atras-->
+            <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                <button class="btn btn-primary w-24" (click)="actualizarProveedor()">Actualizar</button>
+                <button class="btn btn-secondary mx-2 w-24" (click)="cerrarVentana()">Atrás</button>
+            </div>
+        </div>
+    </div>
+
+    <div [ngClass]="'modal' + modalClass" style="margin-top: 0px; margin-left: 0px; padding-left: 0px; z-index: 10000;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="p-5 text-center">
+                        <lucide-icon name="check-circle" class="w-16 h-16 text-success mx-auto mt-3"></lucide-icon>
+                        <div class="text-3xl mt-5">¡Éxito!</div>
+                        <div class="text-slate-500 mt-2">Se actualizó correctamente.</div>
+                    </div>
+                    <div class="px-5 pb-8 text-center">
+                        <button type="button" data-tw-dismiss="modal" class="btn btn-primary w-24"
+                            (click)="modificarCSSModal()">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
