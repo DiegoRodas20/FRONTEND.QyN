@@ -28,10 +28,10 @@ export class RegistrarProveedorComponent implements OnInit {
 
     crearFormPorveedor(){
         this.formProveedor = this._formBuildaer.group({
-            ruc: [null, []],
-            name: [null, []],
-            area: [null, []],
-            email: [null, []],
+            ruc: [null, [Validators.required, Validators.pattern('[0-9]*'), Validators.maxLength(11)]],
+            name: [null, [Validators.required, Validators.maxLength(30)]],
+            area: [null, [Validators.required, Validators.maxLength(30)]],
+            email: [null, [Validators.required, Validators.email, Validators.maxLength(30)]],
         })
     }
 

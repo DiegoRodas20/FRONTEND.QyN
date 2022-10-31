@@ -17,25 +17,35 @@
             <!-- RUC-->
              <div class="intro-y col-span-6 mt-5">
                 <label class="form-label">Ruc</label>
-                <input formControlName="ruc" type="text" class="form-control" >
+                <input formControlName="ruc" type="text" maxLength="20" class="form-control" >
+                <div *ngIf="formProveedor.controls['ruc'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
+                <div *ngIf="formProveedor.controls['ruc'].hasError('pattern')" class="text-danger mt-2">Solamente numeros</div>
+                <div *ngIf="formProveedor.controls['ruc'].hasError('maxlength')" class="text-danger mt-2">Maximo de 11 caracteres</div>
             </div>
 
             <!-- name-->
             <div class="intro-y col-span-6 mt-5">
                 <label class="form-label">Nombre</label>
-                <input formControlName="name" type="text" class="form-control" >
+                <input formControlName="name" type="text" maxLength="40" class="form-control" >
+                <div *ngIf="formProveedor.controls['name'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
+                <div *ngIf="formProveedor.controls['name'].hasError('maxlength')" class="text-danger mt-2">Maximo de 30 caracteres</div>
             </div>
 
             <!-- area-->
             <div class="intro-y col-span-6 mt-5">
                 <label class="form-label">Area</label>
-                <input formControlName="area" type="text" class="form-control" >
+                <input formControlName="area" type="text" maxLength="40" class="form-control" >
+                <div *ngIf="formProveedor.controls['area'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
+                <div *ngIf="formProveedor.controls['area'].hasError('maxlength')" class="text-danger mt-2">Maximo de 30 caracteres</div>
             </div>
 
             <!-- email-->
             <div class="intro-y col-span-6 mt-5">
                 <label class="form-label">Email</label>
                 <input formControlName="email" type="text" class="form-control" >
+                <div *ngIf="formProveedor.controls['email'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
+                <div *ngIf="formProveedor.controls['email'].hasError('maxlength')" class="text-danger mt-2">Maximo de 30 caracteres</div>
+                <div *ngIf="formProveedor.controls['email'].hasError('email')" class="text-danger mt-2">Formato de email incorrecto</div>
             </div>
         </div>
     </form> 

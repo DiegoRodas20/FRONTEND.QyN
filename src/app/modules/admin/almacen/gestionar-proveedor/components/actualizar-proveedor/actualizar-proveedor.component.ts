@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SupplierService } from 'src/app/core/services/supplier.service';
 
@@ -34,10 +34,10 @@ export class ActualizarProveedorComponent implements OnInit {
 
     crearFormProveedor() {
         this.formProveedor = this._formBuilder.group({
-            ruc: [null, []],
-            name: [null, []],
-            area: [null, []],
-            email: [null, []]
+            ruc: [null, [Validators.required, Validators.pattern('[0-9]*'), Validators.maxLength(11)]],
+            name: [null, [Validators.required, Validators.maxLength(30)]],
+            area: [null, [Validators.required, Validators.maxLength(30)]],
+            email: [null, [Validators.required, Validators.email, Validators.maxLength(30)]]
   })
 }
 
@@ -53,7 +53,9 @@ export class ActualizarProveedorComponent implements OnInit {
   }
 
   async actualizarProveedor() {
-
+    if(this.formProveedor.invalid){
+        return
+    }
         let form = this.formProveedor.value
         let Proveedor: any = {
             ruc: form.ruc,
