@@ -1,0 +1,66 @@
+<!-- Cabecera -->
+<div class="flex items-center mt-8">
+  <h2 class="intro-y text-lg font-medium mr-auto">
+    Ver Orden de Compra
+  </h2>
+</div>
+
+<!-- Inputs -->
+<div class="intro-y box py-10 sm:py-10 mt-5">
+  <div class="px-10 sm:px-10 dark:border-darkmode-400">
+
+    <form [formGroup]="formOrdenCompra">
+      <div class="grid grid-cols-12 gap-4 gap-y-5">
+        <!-- Supplier -->
+        <div class="col-span-12">
+          <h2 class="intro-y text-lg font-medium mr-auto">
+           Supplier
+          </h2>
+          <div formGroupName="supplierData">
+            <div class="mt-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" formControlName="name" readonly>
+            </div>
+            <div class="mt-3">
+              <label class="form-label">RUC</label>
+              <input type="text" class="form-control" formControlName="ruc" readonly>
+            </div>
+            <div class="mt-3">
+              <label class="form-label">Area</label>
+              <input type="text" class="form-control" formControlName="area" readonly>
+            </div>
+            <div class="mt-3">
+              <label class="form-label">Email</label>
+              <input type="text" class="form-control" formControlName="email" readonly>
+            </div>
+
+
+          </div>
+        </div>
+
+        <!-- Fecha LLegada -->
+        <div class="intro-y col-span-6 mt-5">
+          <label class="form-label">Fecha de llegada</label>
+          <input formControlName="arrivalDate" type="text" class="form-control" readonly>
+        </div>
+
+        <!-- Comentario -->
+        <div class="intro-y col-span-6 mt-5">
+          <label class="form-label">Comentario</label>
+          <input formControlName="comments" type="text" class="form-control" readonly>
+        </div>
+
+        <!-- Estado -->
+        <div class="intro-y col-span-6 mt-5">
+          <label class="form-label">Estado</label>
+          <input formControlName="purchaseOrderStatusId" type="text" class="form-control" readonly>
+        </div>
+
+        <!--Boton Registrar y Atras-->
+        <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+          <button class="btn btn-secondary mx-2 w-24" (click)="moveToGestionarOrdenCompra()">Atrás</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

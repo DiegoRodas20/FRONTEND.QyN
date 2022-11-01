@@ -25,4 +25,9 @@ export class OrdenCompraService {
         return this.http.get(url)
     }
 
+    getEstadosOrdenCompra(): Observable<any>{
+      const url = `${PURCHASE_ORDER_URL}/status`
+      return this.http.get(url)
+    }
+
 }

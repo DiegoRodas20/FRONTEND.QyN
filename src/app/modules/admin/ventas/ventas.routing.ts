@@ -6,6 +6,8 @@ import { ActualizarPedidoComponent } from './gestionar-pedido/components/actuali
 import { VerPedidoComponent } from './gestionar-pedido/components/ver-pedido/ver-pedido.component';
 import { GestionarPedidoComponent } from './gestionar-pedido/gestionar-pedido.component';
 import { GestionarVentaComponent } from './gestionar-venta/gestionar-venta.component';
+import { VerOrdenCompraComponent } from './gestionar-orden-compra/ver-orden-compra/ver-orden-compra.component';
+import { ActualizarOrdenCompraComponent } from './gestionar-orden-compra/actualizar-orden-compra/actualizar-orden-compra.component';
 
 const routes: Routes = [
 
@@ -18,7 +20,12 @@ const routes: Routes = [
             { path: 'actualizar/:id', component: ActualizarPedidoComponent, data: { titulo: 'Actualizar Pedido' } },
         ]
     },
-    {path: 'gestionarOrdenCompra', component: GestionarOrdenCompraComponent, data: {titulo: 'Gestionar Orden Compra'}}
+    {
+        path: 'gestionarOrdenCompra',children: [
+          { path: '',component: GestionarOrdenCompraComponent, data: {titulo: 'Gestionar Orden Compra'} },
+          { path: 'ver/:id', component: VerOrdenCompraComponent, data: {titulo: 'Ver Orden Compra'}},
+          { path: 'actualizar/:id', component: ActualizarOrdenCompraComponent, data: {titulo: 'Ver Orden Compra'}}
+    ] }
 ]
 
 @NgModule({

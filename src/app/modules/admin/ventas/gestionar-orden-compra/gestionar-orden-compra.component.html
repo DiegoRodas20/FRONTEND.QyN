@@ -9,7 +9,7 @@
     <!-- Cabecera -->
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
 
-        <button class="btn btn-primary shadow-md mr-2">Registrar Orden de Compra</button>
+        <button class="btn btn-primary shadow-md mr-2" (click)="openCreatePurchaseOrderDialog()">Registrar Orden de Compra</button>
 
         <div class="hidden md:block mx-auto text-slate-500">{{Mensaje}}</div>
 
@@ -47,12 +47,12 @@
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
 
-                            <button class="flex items-center mr-3">
+                            <button class="flex items-center mr-3" (click)="moveToUpdateOrdenCompra(ordenCompra.id)">
                                 <lucide-icon class="w-4 h-4 mr-1" name="check-square"></lucide-icon>
                                 Editar
                             </button>
 
-                            <button class="flex items-center text-primary">
+                            <button class="flex items-center text-primary" (click)="moveToVerOrdenCompra(ordenCompra.id)">
                                 <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
                                 Ver
                             </button>
