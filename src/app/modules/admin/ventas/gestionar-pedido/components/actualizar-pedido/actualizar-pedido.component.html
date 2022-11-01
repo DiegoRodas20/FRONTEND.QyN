@@ -113,7 +113,7 @@
                         <td class="text-center font-medium whitespace-nowrap"> {{ productosPedido.type }} </td>
                         <td class="text-center font-medium whitespace-nowrap"> {{ productosPedido.quantity }} </td>
                         <td class="text-center font-medium whitespace-nowrap"> S/. {{ productosPedido.salesPrice
-                            * productosPedido.quantity }} </td>
+                            * productosPedido.quantity | number:'1.2-2'}} </td>
                     </tr>
 
                 </tbody>

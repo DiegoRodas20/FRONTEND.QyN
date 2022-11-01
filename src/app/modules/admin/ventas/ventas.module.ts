@@ -8,6 +8,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FilterTablePipe } from 'src/app/core/pipes/filterTable.pipe';
 import { PipeModule } from 'src/app/core/pipes/pipe.module';
 import { AlertComponent } from 'src/app/shared/components/alert/alert.component';
+import { ActualizarClienteComponent } from './gestionar-cliente/components/actualizar-cliente/actualizar-cliente.component';
+import { VerClienteComponent } from './gestionar-cliente/components/ver-cliente/ver-cliente.component';
 import { GestionarClienteComponent } from './gestionar-cliente/gestionar-cliente.component';
 import { ActualizarPedidoComponent } from './gestionar-pedido/components/actualizar-pedido/actualizar-pedido.component';
 import { GestionarOrdenCompraComponent } from './gestionar-orden-compra/gestionar-orden-compra.component';
@@ -34,7 +36,10 @@ const COMPONENTS = [
     ActualizarPedidoComponent,
     AlertComponent,
     CreatePurchaseOrderDialog,
-    ActualizarOrdenCompraComponent
+    ActualizarOrdenCompraComponent,
+    VerClienteComponent,
+    ActualizarClienteComponent,
+    AlertComponent
 ]
 
 @NgModule({

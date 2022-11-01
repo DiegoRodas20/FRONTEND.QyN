@@ -1,9 +1,23 @@
-<div class="dropdown">
+<!-- <div class="dropdown">
     <button class="dropdown-toggle btn btn-primary" (click)="openDropdown()">Prueba</button>
     <div [class]="show ? 'dropdown-menu w-40 show': 'dropdown-menu w-40'">
         <ul class="dropdown-content">
-            <li> <a href="" class="dropdown-item">New Dropdown</a> </li>
-            <li> <a href="" class="dropdown-item">Delete Dropdown</a> </li>
+            <li *ngFor="let item of lArray">
+                <a class="dropdown-item">{{item.name}}</a>
+            </li>
         </ul>
+    </div>
+</div> -->
+
+<div class="tom-select w-full single">
+    <div class="items ts-input full has-items dropdown-active" (click)="openDropdown()">
+        <div class="item">{{itemActually == '' ? 'Seleccione una opción' : itemActually}}</div>
+    </div>
+    <div [class]="show ? 'ts-dropdown w-full dropdown-show': 'ts-dropdown w-full dropdown-hidden'">
+        <div class="dropdown-content">
+            <div *ngFor="let item of lArray" class="dropdown-item" (click)="selectedItem(item)">
+                {{item.name}}
+            </div>
+        </div>
     </div>
 </div>

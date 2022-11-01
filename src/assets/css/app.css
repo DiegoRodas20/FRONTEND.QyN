@@ -2809,6 +2809,7 @@ select {
 .modal.show>.modal-dialog {
   margin-top: 4rem;
 }
+
 .modal-component>.modal-dialog {
   margin-top: 4rem !important;
 }
@@ -11636,7 +11637,7 @@ html body {
   border-color: rgb(var(--color-slate-200) / var(--tw-border-opacity));
 }
 
-.main{
+.main {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
 }
@@ -12190,7 +12191,7 @@ html body {
 }
 
 .content {
-  border-radius: 35px/50px 0px 0px 0px;
+  border-radius: 30px 0px 0px 0px;
   padding: 0px 22px;
   min-height: 100vh;
   min-width: 0px;
@@ -12208,6 +12209,7 @@ html body {
 @media (max-width: calc(768px - 1px)) {
   .content {
     max-width: 100%;
+    border-radius: 30px;
   }
 
   .content {
@@ -13479,6 +13481,9 @@ html body {
   .side-nav {
     width: 85px
   }
+  .w-logo {
+    width: 100%;
+}
 }
 
 @media (max-width: calc(768px - 1px)) {

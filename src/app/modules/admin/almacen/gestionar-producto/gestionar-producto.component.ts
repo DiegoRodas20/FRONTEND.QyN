@@ -51,7 +51,7 @@ export class GestionarProductoComponent implements OnInit {
         const dialogConfig = new MatDialogConfig()
 
         dialogConfig.panelClass = ['modal', 'overflow-y-auto', 'show', 'modal-show']
-        dialogConfig.data = idProducto 
+        dialogConfig.data = idProducto
 
         console.log(dialogConfig.data)
         const dialogReg = this._dialog.open(VerProductoComponent, dialogConfig)

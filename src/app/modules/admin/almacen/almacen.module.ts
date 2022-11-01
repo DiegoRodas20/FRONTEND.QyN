@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { LucideAngularModule, icons } from 'lucide-angular';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PipeModule } from 'src/app/core/pipes/pipe.module';
+import { DropdownComponent } from 'src/app/shared/components/dropdown/dropdown.component';
 import { AlmacenRoutingModule } from './almacen.routing';
 import { GestionarAlmacenComponent } from './gestionar-almacen/gestionar-almacen.component';
 import { GestionarMovimientoComponent } from './gestionar-movimiento/gestionar-movimiento.component';
@@ -15,7 +16,8 @@ const COMPONENTS = [
     GestionarAlmacenComponent,
     GestionarProductoComponent,
     GestionarMovimientoComponent,
-    VerProductoComponent
+    VerProductoComponent,
+    DropdownComponent
 ]
 
 @NgModule({

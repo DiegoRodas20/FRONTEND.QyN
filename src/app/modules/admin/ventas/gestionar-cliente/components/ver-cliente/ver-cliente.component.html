@@ -1,0 +1,79 @@
+<div class="modal-dialog modal-xl">
+    <div class="modal-content">
+
+        <!-- Cabecera -->
+        <div class="modal-header">
+            <h2 class="font-medium intro-y text-lg mr-auto">Ver Cliente</h2>
+        </div>
+
+        <!-- Cuerpo -->
+        <div class="modal-body p-0">
+            <!-- Inputs -->
+            <div class="intro-y box py-8 sm:py-8">
+                <div class="px-8 sm:px-8 dark:border-darkmode-400">
+
+                    <form [formGroup]="formCliente">
+                        <div class="grid grid-cols-12 gap-4 gap-y-5">
+
+                            <!-- Tipo Documento -->
+                            <div class="intro-y col-span-12 sm:col-span-4">
+                                <label class="form-label">Tipo Documento</label>
+                                <select class="form-select sm:mr-2 dropdown-content" formControlName="typeDocumentId"
+                                    readonly>
+                                    <option *ngFor="let typedocument of lTypeDocument" [value]="typedocument.id" disabled>
+                                        {{typedocument.name}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Numero Documento -->
+                            <div class="intro-y col-span-12 sm:col-span-4">
+                                <label class="form-label">Numero Documento</label>
+                                <input formControlName="numberDocument" type="text" class="form-control" readonly>
+                            </div>
+
+                            <!-- Nombre -->
+                            <div class="intro-y col-span-12 sm:col-span-4">
+                                <label class="form-label">Nombre</label>
+                                <input formControlName="name" type="text" class="form-control" readonly>
+                            </div>
+
+                            <!-- Area -->
+                            <div class="intro-y col-span-12 sm:col-span-4">
+                                <label class="form-label">Area</label>
+                                <input formControlName="area" type="text" class="form-control" readonly>
+                            </div>
+
+                            <!-- Telefono -->
+                            <div class="intro-y col-span-12 sm:col-span-4">
+                                <label class="form-label">Telefono</label>
+                                <input formControlName="phone" type="text" class="form-control" readonly>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="intro-y col-span-12 sm:col-span-4">
+                                <label class="form-label">Email</label>
+                                <input formControlName="email" type="text" class="form-control" readonly>
+                            </div>
+
+                            <!-- Direccion -->
+                            <div class="intro-y col-span-12 sm:col-span-4">
+                                <label class="form-label">Direccion</label>
+                                <input formControlName="address" type="text" class="form-control" readonly>
+                            </div>
+
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="modal-footer intro-y">
+            <button class="btn btn-primary w-20" (click)="salir()">Atrás
+            </button>
+        </div>
+    </div>
+</div>
