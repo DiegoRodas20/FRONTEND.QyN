@@ -5,6 +5,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Supplier } from 'src/app/core/models/supplier.model';
 import { PurchaseOrderStatus } from 'src/app/core/models/purchaseOrder';
+import { ProductoService } from 'src/app/core/services/product.service';
+import { Product } from 'src/app/core/models/product.model';
 
 
 @Component({
@@ -20,6 +22,7 @@ export class ActualizarOrdenCompraComponent implements OnInit {
   constructor(
     private _ordenCompraService: OrdenCompraService,
     private _supplierService: SupplierService,
+    private _productoService: ProductoService,
     private _router: Router,
     private _route: ActivatedRoute,
     private _formBuilder: FormBuilder
@@ -28,6 +31,7 @@ export class ActualizarOrdenCompraComponent implements OnInit {
   ngOnInit() {
     this._route.params.subscribe(params => {
       this.idOrdenCompra = params.id
+      this.getProductList()
       this.getInitalData().then(() => {
         this.getOrdenCompraxID(this.idOrdenCompra)
       })
@@ -46,9 +50,10 @@ export class ActualizarOrdenCompraComponent implements OnInit {
   ordenCompraData: Object
   Mensaje: string
   filtro = new FormControl();
-  estadosOrdenesCompra: [];
+  estadosOrdenesCompra: PurchaseOrderStatus[];
   listaSupplier: [];
   p: number = 1;
+  lProducts: Product[] = []
 
   formOrdenCompra: FormGroup
 
@@ -56,7 +61,7 @@ export class ActualizarOrdenCompraComponent implements OnInit {
     try {
       const data: any = await this._ordenCompraService.gestOrdenCompraxID(idOrdenCompra).toPromise()
       this.Mensaje = data.message
-      this.formOrdenCompra.patchValue({ ...data.data, supplierData: this.getPurchaseOrderSupplierData(data.data.supplierId), purchaseOrderStatusId: this.getPurchaseOrderStatusName(data.data.purchaseOrderStatusId) })
+      this.formOrdenCompra.patchValue({ ...data.data, supplierData: this.getPurchaseOrderSupplierData(data.data.supplierId), arrivalDate: this.formatDateControl(data.data.arrivalDate) })
       this.datePicker = data.data.arrivalDate
     }
     catch (error) {
@@ -74,6 +79,11 @@ export class ActualizarOrdenCompraComponent implements OnInit {
     }
   }
 
+  formatDateControl(date: string) {
+    let newDate = new Date(date)
+    return newDate.toISOString().split('T')[0]
+  }
+
   async getSuppliers() {
     try {
       const data: any = await this._supplierService.getSuppliers().toPromise()
@@ -87,6 +97,22 @@ export class ActualizarOrdenCompraComponent implements OnInit {
   async getInitalData() {
     await this.getSuppliers();
     await this.getStatusPurchaseOrder();
+  }
+
+  getProductList() {
+    this._productoService.getProductos().subscribe((res) => {
+      this.lProducts = res.data
+    })
+  }
+
+  updateOrdenCompra() {
+    let updateOrden = {
+      id: this.idOrdenCompra,
+      arrivalDate: new Date(this.formOrdenCompra.value.arrivalDate),
+      comments: this.formOrdenCompra.value.comments,
+      purchaseOrderStatusId: this.formOrdenCompra.value.purchaseOrderStatusId
+    }
+    this._ordenCompraService.updateOrdenCompra(this.idOrdenCompra, updateOrden)
   }
 
   getPurchaseOrderStatusName(idEstadoOrdenCompra) {

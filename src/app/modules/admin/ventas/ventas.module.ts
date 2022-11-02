@@ -18,7 +18,7 @@ import { VerPedidoComponent } from './gestionar-pedido/components/ver-pedido/ver
 import { GestionarPedidoComponent } from './gestionar-pedido/gestionar-pedido.component';
 import { GestionarVentaComponent } from './gestionar-venta/gestionar-venta.component';
 import { VentasRoutingModule } from './ventas.routing';
-import { CreatePurchaseOrderDialog } from './gestionar-orden-compra/components/createPurchaseOrderDialog/createPurchaseOrderDialog.component';
+import { CrearOrdenCompraComponent } from './gestionar-orden-compra/crear-orden-compra/crear-orden-compra.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { ActualizarOrdenCompraComponent } from './gestionar-orden-compra/actualizar-orden-compra/actualizar-orden-compra.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -35,7 +35,7 @@ const COMPONENTS = [
     VerPedidoComponent,
     ActualizarPedidoComponent,
     AlertComponent,
-    CreatePurchaseOrderDialog,
+    CrearOrdenCompraComponent,
     ActualizarOrdenCompraComponent,
     VerClienteComponent,
     ActualizarClienteComponent,

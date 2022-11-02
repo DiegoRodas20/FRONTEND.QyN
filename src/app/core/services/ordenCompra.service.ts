@@ -30,4 +30,14 @@ export class OrdenCompraService {
       return this.http.get(url)
     }
 
+    postOrdenCompra(ordenCompra:any): Observable<any> {
+      const url = `${PURCHASE_ORDER_URL}`
+      return this.http.post(url,ordenCompra)
+    }
+
+    updateOrdenCompra(idOrdenCompra: string,updateOrden:any): Observable<any> {
+      const url = `${PURCHASE_ORDER_URL}/${idOrdenCompra}`
+      return this.http.put(url,updateOrden)
+    }
+
 }

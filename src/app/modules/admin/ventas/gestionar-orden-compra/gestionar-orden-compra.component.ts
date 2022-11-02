@@ -3,8 +3,8 @@ import { OrdenCompraService } from 'src/app/core/services/ordenCompra.service';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PurchaseOrder } from 'src/app/core/models/purchaseOrder';
-import { MatDialog } from '@angular/material/dialog';
-import { CreatePurchaseOrderDialog } from './components/createPurchaseOrderDialog/createPurchaseOrderDialog.component';
+import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
+import { CrearOrdenCompraComponent } from './crear-orden-compra/crear-orden-compra.component';
 
 @Component({
     selector: 'app-gestionar-orden-compra',
@@ -16,7 +16,8 @@ export class GestionarOrdenCompraComponent implements OnInit {
     constructor(
       private _ordenCompraService: OrdenCompraService,
         private _router: Router,
-        public createPurchaseOrderDialog:MatDialog
+        public createPurchaseOrderDialog:MatDialog,
+        private _dialog: MatDialog
     ) { }
 
     ngOnInit() {
@@ -40,9 +41,15 @@ export class GestionarOrdenCompraComponent implements OnInit {
    }
 
    openCreatePurchaseOrderDialog(): void {
-    const dialogRef = this.createPurchaseOrderDialog.open(CreatePurchaseOrderDialog,{
-      width: '250px',
-      height: '300px'
+    const dialogConfig = new MatDialogConfig()
+
+    dialogConfig.panelClass = ['modal', 'overflow-y-auto', 'show', 'modal-show']
+
+    const dialogReg = this._dialog.open(CrearOrdenCompraComponent, dialogConfig)
+    dialogReg.afterClosed().subscribe(result => {
+      if(result != undefined && result.error == null){
+        this.getOrdenesCompra()
+      }
     })
    }
 

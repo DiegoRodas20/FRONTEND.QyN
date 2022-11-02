@@ -57,10 +57,31 @@
         </div>
 
         <!--Boton Registrar y Atras-->
-        <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
-          <button class="btn btn-secondary mx-2 w-24" (click)="moveToGestionarOrdenCompra()">Atrás</button>
-        </div>
+
       </div>
     </form>
+    <h4 class="font-medium intro-y text-md mr-auto mt-5 intro-y">Lista Productos</h4>
+
+    <table class="table table-report text-center" >
+      <thead>
+        <tr >
+          <th class="text-center">Producto</th>
+          <th class="text-center">Precio</th>
+          <th class="text-center">Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of formOrdenCompra.value.purchaseOrderDetails" class="intro-y">
+          <td class="text-center">{{product.productName}}</td>
+          <td class="text-center">{{product.purchasePrice}}</td>
+          <td class="text-center">{{product.quantity}}</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+      <button class="btn btn-secondary mx-2 w-24" (click)="moveToGestionarOrdenCompra()">Atrás</button>
+    </div>
   </div>
 </div>

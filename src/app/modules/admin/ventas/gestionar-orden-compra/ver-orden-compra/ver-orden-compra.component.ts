@@ -5,7 +5,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Supplier } from 'src/app/core/models/supplier.model';
 import { PurchaseOrderStatus } from 'src/app/core/models/purchaseOrder';
-
+import { ProductoService } from 'src/app/core/services/product.service';
+import { Product } from 'src/app/core/models/product.model';
 @Component({
   selector: 'app-ver-orden-compra',
   templateUrl: 'ver-orden-compra.component.html'
@@ -17,6 +18,7 @@ export class VerOrdenCompraComponent implements OnInit {
 
   constructor(
     private _ordenCompraService: OrdenCompraService,
+    private _productoService: ProductoService,
     private _supplierService: SupplierService,
     private _router: Router,
     private _route: ActivatedRoute,
@@ -45,6 +47,7 @@ export class VerOrdenCompraComponent implements OnInit {
   Mensaje: string
   filtro = new FormControl();
   estadosOrdenesCompra: [];
+  lProducts: Product[] = []
   listaSupplier: [];
   p: number = 1;
 
@@ -96,6 +99,18 @@ export class VerOrdenCompraComponent implements OnInit {
     let supplierOrdenCompra: Supplier
     supplierOrdenCompra = this.listaSupplier.find(({ id }) => id === idSupplierOrdenCompra)
     return supplierOrdenCompra
+  }
+
+  getProductList(){
+    this._productoService.getProductos().subscribe((res)=>{
+      this.lProducts = res.data
+    })
+  }
+
+  getNameProduct(idProduct : number) {
+    let productData : Product
+    productData = this.lProducts.find(({id})=> id == idProduct)
+    return productData
   }
 
   moveToGestionarOrdenCompra() {
