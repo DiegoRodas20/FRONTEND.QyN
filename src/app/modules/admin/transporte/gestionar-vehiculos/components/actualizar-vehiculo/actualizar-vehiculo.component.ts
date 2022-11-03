@@ -89,8 +89,8 @@ export class ActualizarVehiculoComponent implements OnInit {
         }
         let form = this.formVehiculo.value
         let Vehiculo: any = {
-            typeVehicleId: form.idTypeVehicle,
-            driverId: form.idDriver,
+            typeVehicleId: +form.idTypeVehicle,
+            driverId: +form.idDriver,
             plate: form.plate,
             brand: form.brand,
             color: form.color,

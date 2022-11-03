@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehiculoService } from 'src/app/core/services/vehicle.service';
 import { DriverService } from 'src/app/core/services/driver.service';
@@ -35,7 +35,7 @@ export class RegistrarVehiculoComponent implements OnInit {
         this.listarDriver()
     }
 
-    crearFormVehiculo(){
+    crearFormVehiculo() {
         this.formVehiculo = this._formBuildaer.group({
             typeVehicleId: [null, [Validators.required]],
             driverId: [null, [Validators.required]],
@@ -45,41 +45,41 @@ export class RegistrarVehiculoComponent implements OnInit {
         })
     }
 
-    async listarTipoVehiculos(){
+    async listarTipoVehiculos() {
 
         try {
             const data: any = await this._typeVehicleService.getTypeVehicle().toPromise()
             this.lTipoVehiculo = data.data
         }
         catch (error) {
-            console.log("Error: ",error)
+            console.log("Error: ", error)
         }
     }
 
-    async listarDriver(){
+    async listarDriver() {
 
         try {
             const data: any = await this._driverService.getDriver().toPromise()
             this.lConductores = data.data
         }
         catch (error) {
-            console.log("Error: ",error)
+            console.log("Error: ", error)
         }
     }
 
-    async registrarVehiculo(){
-        if(this.formVehiculo.invalid){
+    async registrarVehiculo() {
+        if (this.formVehiculo.invalid) {
             return
         }
         let form = this.formVehiculo.value
         let Vehiculo: any = {
-            typeVehicleId: form.typeVehicleId,
-            driverId: form.driverId,
+            typeVehicleId: +form.typeVehicleId,
+            driverId: +form.driverId,
             plate: form.plate,
             brand: form.brand,
             color: form.color,
         }
-        try{
+        try {
             let data = await this._vehiculoService.registrarVehiculo(Vehiculo)
             this.modalClass = ' overflow-y-auto show'
         }
