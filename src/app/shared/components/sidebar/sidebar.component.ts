@@ -60,12 +60,18 @@ export class SidebarComponent implements OnInit {
                         "url": "/almacen/gestionarproducto",
                         "icono": "box"
                     },
-                    // {
-                    //     "idhijo": 2,
-                    //     "titulo": "Gestionar Movimiento",
-                    //     "url": "/almacen/gestionarmovimiento",
-                    //     "icono": "package-search"
-                    // }
+                    {
+                        "idhijo": 2,
+                        "titulo": "Gestionar Movimiento",
+                        "url": "/almacen/gestionarmovimiento",
+                        "icono": "package-search"
+                    },
+                    {
+                        "idhijo": 3,
+                        "titulo": "Gestionar Proveedor",
+                        "url": "/almacen/gestionarproveedor",
+                        "icono": "user"
+                    }
                 ],
             },
             {

@@ -1,6 +1,6 @@
 <!-- Titulo -->
 <h2 class="intro-y text-lg font-medium mt-10">
-    Gestionar Vehiculos
+    Gestionar Proveedor
 </h2>
 
 <!-- Cuerpo -->
@@ -9,13 +9,13 @@
     <!-- Cabecera -->
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
 
-        <button class="btn btn-primary shadow-md mr-2" (click)="registrarVehiculo()" >Registrar Vehiculos</button>
+        <button class="btn btn-primary shadow-md mr-2" (click)="registrarProveedor()">Registrar Proveedor</button>
 
         <div class="hidden md:block mx-auto text-slate-500"> {{Mensaje}} </div>
 
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
-                <input [formControl]="filtro" type="text" class="form-control w-56 box pr-10" placeholder="Search...">
+                <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
                 <lucide-icon class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" name="search"></lucide-icon>
             </div>
         </div>
@@ -27,43 +27,31 @@
         <table class="table table-report -mt-2">
             <thead>
                 <tr>
-                    <!-- <th class="text-center whitespace-nowrap">ID</th> -->
-                    <th class="text-center whitespace-nowrap">CÓDIGO</th>
-                    <th class="text-center whitespace-nowrap">PLACA</th>
-                    <th class="text-center whitespace-nowrap">TIPO</th>
-                    <th class="text-center whitespace-nowrap">ESTADO</th>
+                    <th class="text-center whitespace-nowrap">ID</th>
+                    <th class="text-center whitespace-nowrap">RUC</th>
+                    <th class="text-center whitespace-nowrap">NOMBRE</th>
+                    <th class="text-center whitespace-nowrap">AREA</th>
+                    <th class="text-center whitespace-nowrap">EMAIL</th>
                     <th class="text-center whitespace-nowrap">ACCIONES</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="intro-x" *ngFor="let vehiculo of lVehiculos | paginate: { itemsPerPage: 5, currentPage: p }">
-                    <!-- <td class="text-center font-medium whitespace-nowrap">  </td> -->
-                    <td class="text-center font-medium whitespace-nowrap"> {{vehiculo.id}} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{vehiculo.plate}} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{vehiculo.typeVehicle}}  </td>
-
-                    <td class="w-40">
-                        <div *ngIf="vehiculo.status== true" class="flex items-center justify-center text-success">
-                            <lucide-icon class="w-4 h-4 mr-2" name="check-square"></lucide-icon>
-                            Activo
-                        </div>
-
-                        <div *ngIf="vehiculo.status== false" class="flex items-center justify-center text-danger">
-                            <lucide-icon class="w-4 h-4 mr-2" name="package-x"></lucide-icon>
-                            Inactivo
-                        </div>
-
-                    </td>
+                <tr class="intro-x" *ngFor="let proveedor of lProveedores">
+                    <td class="text-center font-medium whitespace-nowrap"> {{proveedor.id}} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{proveedor.ruc}}</td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{proveedor.name}} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{proveedor.area}} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{proveedor.email}} </td>
 
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
 
-                            <button class="flex items-center mr-3" (click)="actualizarVehiculo(vehiculo.id)">
+                            <button class="flex items-center mr-3" (click)="actualizarProveedor(proveedor.id)">
                                 <lucide-icon class="w-4 h-4 mr-1" name="check-square"></lucide-icon>
                                 Editar
                             </button>
 
-                            <button class="flex items-center text-primary" (click)="verVehiculo(vehiculo.id)">
+                            <button class="flex items-center text-primary" (click)="verProveedor(proveedor.id)">
                                 <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
                                 Ver
                             </button>
@@ -119,5 +107,5 @@
         </select>
 
     </div>
-
+    
 </div>

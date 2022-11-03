@@ -11,13 +11,21 @@ import { GestionarAlmacenComponent } from './gestionar-almacen/gestionar-almacen
 import { GestionarMovimientoComponent } from './gestionar-movimiento/gestionar-movimiento.component';
 import { GestionarProductoComponent } from './gestionar-producto/gestionar-producto.component';
 import { VerProductoComponent } from './gestionar-producto/ver-producto/ver-producto.component';
+import { GestionarProveedorComponent } from './gestionar-proveedor/gestionar-proveedor.component';
+import { RegistrarProveedorComponent } from './gestionar-proveedor/components/registrar-proveedor/registrar-proveedor.component';
+import { ActualizarProveedorComponent } from './gestionar-proveedor/components/actualizar-proveedor/actualizar-proveedor.component';
+import { VerProveedorComponent } from './gestionar-proveedor/components/ver-proveedor/ver-proveedor.component';
 
 const COMPONENTS = [
     GestionarAlmacenComponent,
     GestionarProductoComponent,
     GestionarMovimientoComponent,
     VerProductoComponent,
-    DropdownComponent
+    DropdownComponent,
+    GestionarProveedorComponent,
+    RegistrarProveedorComponent,
+    ActualizarProveedorComponent,
+    VerProveedorComponent
 ]
 
 @NgModule({
@@ -32,6 +40,9 @@ const COMPONENTS = [
         FormsModule,
         ReactiveFormsModule,
         NgxPaginationModule,
+        FormsModule,
+        ReactiveFormsModule,
+
         LucideAngularModule.pick(icons)
     ],
     exports: [

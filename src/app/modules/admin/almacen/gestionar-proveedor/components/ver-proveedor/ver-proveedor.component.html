@@ -1,0 +1,47 @@
+<!-- Cabecera -->
+<div class="flex items-center mt-8">
+    <h2 class="intro-y text-lg font-medium mr-auto">
+        Ver Proveedor
+    </h2>
+</div>
+
+<!-- Inputs -->
+<div class="intro-y box py-10 sm:py-10 mt-5">
+    <div class="px-10 sm:px-10 dark:border-darkmode-400">
+        <div class="font-medium text-base">Proveedor</div>
+
+    <form [formGroup]="formProveedor"> 
+        <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+
+            <!-- RUC-->
+             <div class="intro-y col-span-6 mt-5">
+                <label class="form-label">Ruc</label>
+                <input formControlName="ruc" type="text" class="form-control" readonly>
+            </div>
+
+            <!-- name-->
+            <div class="intro-y col-span-6 mt-5">
+                <label class="form-label">Nombre</label>
+                <input formControlName="name" type="text" class="form-control" readonly>
+            </div>
+
+            <!-- area-->
+            <div class="intro-y col-span-6 mt-5">
+                <label class="form-label">Area</label>
+                <input formControlName="area" type="text" class="form-control" readonly>
+            </div>
+
+            <!-- email-->
+            <div class="intro-y col-span-6 mt-5">
+                <label class="form-label">Email</label>
+                <input formControlName="email" type="text" class="form-control" readonly>
+            </div>
+        </div>
+    </form> 
+            <!--Boton Atras-->
+            <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                <button class="btn btn-secondary mx-2 w-24" (click)="cerrarVentana()">Atrás</button>
+            </div>
+        </div>
+    </div>
+

@@ -1,29 +1,41 @@
 import { Injectable } from "@angular/core"
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
-import { CLIENT_URL } from "../utils/url_constants";
+import { VEHICLE_URL } from "../utils/url_constants";
 
 @Injectable({
     providedIn: 'root'
 })
 
-export class VehicleService {
+export class VehiculoService {
 
-    constructor(private http: HttpClient) { }
+    constructor( private http: HttpClient ) { }
 
-    // Listado general de Clientes
-    getVehicles(): Observable<any> {
+    //Listado general de los vehiculos
+    getVehiculos(): Observable<any> {
 
-        const url = `${CLIENT_URL}`
+        const url = `${VEHICLE_URL}`
         return this.http.get(url)
     }
 
-    // Listar Cliente por ID
-    getVehiclexID(idCliente: string): Observable<any> {
+    //Registrar Vehiculo
+    registrarVehiculo(vehiculo: any): Promise<any>{
+        const url = `${VEHICLE_URL}`
+        return this.http.post<any>(url, vehiculo).toPromise()
+    }
 
-        const url = `${CLIENT_URL}/${idCliente}`
+    //Listar Vehiculo por ID
+    gestVehiculoxID(idVehiculo: string): Observable<any>{
+
+        const url = `${VEHICLE_URL}/${idVehiculo}`
         return this.http.get(url)
     }
 
+    //Actualizar Vehiculo por ID
+    actualizarVehiculo(idVehiculo: string, vehiculo: any): Promise<any>{
 
+        const url = `${VEHICLE_URL}/${idVehiculo}`
+        return this.http.put<any>(url, vehiculo).toPromise()
+    }
 }
+

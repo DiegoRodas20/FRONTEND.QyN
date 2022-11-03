@@ -11,3 +11,7 @@ export const DRIVER_URL         = `${environment.API_URL}driver`
 
 export const CATEGORY_URL       = `${environment.API_URL}category`
 export const TYPEDOCUMENT_URL   = `${environment.API_URL}typedocument`
+export const CATALOGO_URL       = `${environment.API_URL}product/catalog`
+export const PEDIDO_URL         = `${environment.API_URL}order`
+export const TYPEVEHICLE_URL    = `${environment.API_URL}typevehicle`
+export const SUPPLIER_URL       = `${environment.API_URL}supplier`
