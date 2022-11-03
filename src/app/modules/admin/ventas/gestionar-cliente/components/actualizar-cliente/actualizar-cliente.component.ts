@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UpdateClient } from 'src/app/core/models/client.model';
 import { ResponseData } from 'src/app/core/models/response.model';
-import { TypeDocument } from 'src/app/core/models/typeDocument.model';
+import { TypeDocument } from 'src/app/core/models/typedocument.model';
 import { ClientService } from 'src/app/core/services/client.service';
 import { TypeDocumentService } from 'src/app/core/services/typedocument.service';
 
@@ -79,7 +79,7 @@ export class ActualizarClienteComponent implements OnInit {
             numberDocument: form.numberDocument,
             name: form.name,
             area: form.area,
-            phone: form.commphoneents,
+            phone: form.phone,
             email: form.email,
             address: form.address
         }
@@ -120,8 +120,9 @@ export class ActualizarClienteComponent implements OnInit {
 
     onCloseModal(event: boolean) {
         this.openModal = event
+        this._dialogRef.close()
     }
-    
+
     salir() {
         this._dialogRef.close()
     }

@@ -80,7 +80,7 @@
     </div>
 </div>
 
-<alert
+<alert *ngIf="openModal"
     [type]="typeModal"
     [open]="openModal"
     [contenido]="contenidoModal"

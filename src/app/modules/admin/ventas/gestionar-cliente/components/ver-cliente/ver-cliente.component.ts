@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Category } from 'src/app/core/models/category.model';
 import { ResponseData } from 'src/app/core/models/response.model';
-import { TypeDocument } from 'src/app/core/models/typeDocument.model';
+import { TypeDocument } from 'src/app/core/models/typedocument.model';
 import { ClientService } from 'src/app/core/services/client.service';
 import { TypeDocumentService } from 'src/app/core/services/typedocument.service';
 
