@@ -28,6 +28,11 @@ export class CrearOrdenCompraComponent implements OnInit {
   precio: number
   cantidad: number
 
+  // Alert Modal
+  typeModal: string
+  openModal: boolean = false
+  contenidoModal: string
+
   constructor(
     private _productoService: ProductoService,
     private _supplierService: SupplierService,
@@ -71,7 +76,7 @@ export class CrearOrdenCompraComponent implements OnInit {
     this.formOrdenCompra = this._formBuilder.group({
       supplierId: [1, Validators.required],
       arrivalDate: [null, Validators.required],
-      comments: [null, []],
+      comments: ['', []],
       purchaseOrderDetails: this._formBuilder.array([]),
     })
   }
@@ -116,11 +121,23 @@ export class CrearOrdenCompraComponent implements OnInit {
   }
 
   registerPurchaseOrder() {
-    this._ordenCompraService.postOrdenCompra(this.formOrdenCompra.value).subscribe((res) => this._dialogRef.close(res))
+    this.formOrdenCompra.patchValue({supplierId: +this.formOrdenCompra.value.supplierId})
+    this._ordenCompraService.postOrdenCompra(this.formOrdenCompra.value).subscribe((res) => {
+      this.typeModal = 'success'
+      this.contenidoModal = 'La orden de compra fue registrada'
+      this.openModal = true
+
+    })
   }
 
   salir() {
     this._dialogRef.close()
   }
+
+  onCloseModal(event: boolean) {
+    this.openModal = event
+    this._dialogRef.close()
+  }
+
 
 }

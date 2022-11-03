@@ -28,6 +28,11 @@ export class ActualizarOrdenCompraComponent implements OnInit {
     private _formBuilder: FormBuilder
   ) { }
 
+      // Alert Modal
+      typeModal: string
+      openModal: boolean = false
+      contenidoModal: string
+
   ngOnInit() {
     this._route.params.subscribe(params => {
       this.idOrdenCompra = params.id
@@ -105,14 +110,24 @@ export class ActualizarOrdenCompraComponent implements OnInit {
     })
   }
 
-  updateOrdenCompra() {
+  async updateOrdenCompra() {
     let updateOrden = {
       id: this.idOrdenCompra,
       arrivalDate: new Date(this.formOrdenCompra.value.arrivalDate),
       comments: this.formOrdenCompra.value.comments,
-      purchaseOrderStatusId: this.formOrdenCompra.value.purchaseOrderStatusId
+      purchaseOrderStatusId: +this.formOrdenCompra.value.purchaseOrderStatusId
     }
-    this._ordenCompraService.updateOrdenCompra(this.idOrdenCompra, updateOrden)
+    await this._ordenCompraService.updateOrdenCompra(this.idOrdenCompra, updateOrden).subscribe(
+      res=>{
+        this.typeModal = 'success'
+      this.contenidoModal = 'La orden de compra fue actualizada'
+      this.openModal = true
+    },
+    err =>{
+      this.typeModal = 'error'
+      this.contenidoModal =  err.error.error[0]
+      this.openModal = true
+    })
   }
 
   getPurchaseOrderStatusName(idEstadoOrdenCompra) {
@@ -130,5 +145,9 @@ export class ActualizarOrdenCompraComponent implements OnInit {
   moveToGestionarOrdenCompra() {
     this._router.navigate(['/ventas/gestionarOrdenCompra/'])
   }
+
+  onCloseModal(event: boolean) {
+    this.openModal = event
+}
 
 }

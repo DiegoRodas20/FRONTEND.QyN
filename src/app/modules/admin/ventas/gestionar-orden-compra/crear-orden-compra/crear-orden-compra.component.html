@@ -110,3 +110,10 @@
     </div>
   </div>
 </div>
+
+<alert
+    [type]="typeModal"
+    [open]="openModal"
+    [contenido]="contenidoModal"
+    (close)="onCloseModal($event)">
+</alert>
