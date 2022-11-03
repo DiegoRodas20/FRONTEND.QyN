@@ -10,6 +10,7 @@ import { TransporteRoutingModule } from './transporte.routing';
 import { RegistrarVehiculoComponent } from './gestionar-vehiculos/components/registrar-vehiculo/registrar-vehiculo.component';
 import { VerVehiculoComponent } from './gestionar-vehiculos/components/ver-vehiculo/ver-vehiculo.component';
 import { ActualizarVehiculoComponent } from './gestionar-vehiculos/components/actualizar-vehiculo/actualizar-vehiculo.component';
+import { PipeModule } from 'src/app/core/pipes/pipe.module';
 
 const COMPONENTS = [
     AsignarTransporteComponent,
@@ -25,6 +26,7 @@ const COMPONENTS = [
     ],
     imports: [
         CommonModule,
+        PipeModule,
         RouterModule,
         TransporteRoutingModule,
         NgxPaginationModule,

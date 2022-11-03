@@ -9,7 +9,7 @@
     <!-- Cabecera -->
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
 
-        <button class="btn btn-primary shadow-md mr-2" (click)="registrarVehiculo()" >Registrar Vehiculos</button>
+        <button class="btn btn-primary shadow-md mr-2" (click)="registrarVehiculo()">Registrar Vehiculos</button>
 
         <div class="hidden md:block mx-auto text-slate-500"> {{Mensaje}} </div>
 
@@ -36,11 +36,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="intro-x" *ngFor="let vehiculo of lVehiculos | paginate: { itemsPerPage: 5, currentPage: p }">
+                <tr class="intro-x" *ngFor="let vehiculo of lVehiculos | filterPipe: filtro.value| paginate: { itemsPerPage: 5, currentPage: p }">
                     <!-- <td class="text-center font-medium whitespace-nowrap">  </td> -->
                     <td class="text-center font-medium whitespace-nowrap"> {{vehiculo.id}} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{vehiculo.plate}} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{vehiculo.typeVehicle}}  </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{vehiculo.typeVehicle}} </td>
 
                     <td class="w-40">
                         <div *ngIf="vehiculo.status== true" class="flex items-center justify-center text-success">
@@ -77,47 +77,10 @@
     </div>
 
     <!-- Paginacion -->
-    <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
-
-        <nav class="w-full sm:w-auto sm:mr-auto">
-            <ul class="pagination">
-
-                <li class="page-item">
-                    <a class="page-link" href="#"> 
-                        <lucide-icon class="w-4 h-4" name="chevrons-left"></lucide-icon>
-                    </a>
-                </li>
-
-                <li class="page-item">
-                    <a class="page-link" href="#">
-                        <lucide-icon class="w-4 h-4" name="chevron-left"></lucide-icon>
-                    </a>
-                </li>
-
-                <li class="page-item active"> <a class="page-link" href="#">1</a> </li>
-                <li class="page-item"> <a class="page-link" href="#">2</a> </li>
-                <li class="page-item"> <a class="page-link" href="#">3</a> </li>
-                <li class="page-item">
-                    <a class="page-link" href="#"> 
-                        <lucide-icon class="w-4 h-4" name="chevron-right"></lucide-icon>        
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#"> 
-                        <lucide-icon class="w-4 h-4" name="chevrons-right"></lucide-icon>
-                    </a>
-                </li>
-
-            </ul>
-        </nav>
-
-        <select class="w-20 form-select box mt-3 sm:mt-0">
-            <option>10</option>
-            <option>25</option>
-            <option>35</option>
-            <option>50</option>
-        </select>
-
+    <!-- Paginacion -->
+    <div class="intro-y col-span-12 text-right">
+        <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="p = $event">
+        </pagination-controls>
     </div>
 
 </div>
