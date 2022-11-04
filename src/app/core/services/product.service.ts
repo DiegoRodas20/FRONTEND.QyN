@@ -27,5 +27,12 @@ export class ProductoService {
         return this.http.get<ResponseData>(url)
     }
 
+    // Registrar Producto
+    registrarProducto(producto: any): Promise<Response> {
+        const url = `${PRODUCT_URL}`
+        return this.http.post<Response>(url, producto).toPromise()
+    }
+
+
 
 }

@@ -34,9 +34,10 @@ const COMPONENTS = [
     VerOrdenCompraComponent,
     VerPedidoComponent,
     ActualizarPedidoComponent,
-    AlertComponent,
+
     CrearOrdenCompraComponent,
     ActualizarOrdenCompraComponent,
+
     VerClienteComponent,
     ActualizarClienteComponent,
     AlertComponent
@@ -56,6 +57,7 @@ const COMPONENTS = [
         ReactiveFormsModule,
         NgxPaginationModule,
         LucideAngularModule.pick(icons),
+        
         MatFormFieldModule,
         MatDatepickerModule,
         MatNativeDateModule,

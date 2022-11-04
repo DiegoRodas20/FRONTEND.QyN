@@ -4,7 +4,15 @@
 
 export const environment = {
   production: false,
-  API_URL: "https://web-dev-7c5f.up.railway.app/"
+  API_URL: "https://web-dev-7c5f.up.railway.app/",
+  firebaseKey: {
+    apiKey: "AIzaSyB_lUj0jpQCxpgsghYe8qfvB2lcRqArR68",
+    authDomain: "test-tg-soluciones.firebaseapp.com",
+    projectId: "test-tg-soluciones",
+    storageBucket: "test-tg-soluciones.appspot.com",
+    messagingSenderId: "89602403852",
+    appId: "1:89602403852:web:8145afccab66151eea0829"
+  }
 };
 
 /*

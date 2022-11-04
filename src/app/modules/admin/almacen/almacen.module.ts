@@ -15,17 +15,23 @@ import { GestionarProveedorComponent } from './gestionar-proveedor/gestionar-pro
 import { RegistrarProveedorComponent } from './gestionar-proveedor/components/registrar-proveedor/registrar-proveedor.component';
 import { ActualizarProveedorComponent } from './gestionar-proveedor/components/actualizar-proveedor/actualizar-proveedor.component';
 import { VerProveedorComponent } from './gestionar-proveedor/components/ver-proveedor/ver-proveedor.component';
+import { RegistrarProductoComponent } from './gestionar-producto/registrar-producto/registrar-producto.component';
+import { AlertComponent } from 'src/app/shared/components/alert/alert.component';
 
 const COMPONENTS = [
     GestionarAlmacenComponent,
     GestionarProductoComponent,
     GestionarMovimientoComponent,
     VerProductoComponent,
+    RegistrarProductoComponent,
     DropdownComponent,
+
     GestionarProveedorComponent,
     RegistrarProveedorComponent,
     ActualizarProveedorComponent,
-    VerProveedorComponent
+    VerProveedorComponent,
+
+    // AlertComponent
 ]
 
 @NgModule({

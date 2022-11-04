@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Product } from 'src/app/core/models/product.model';
 import { ResponseData } from 'src/app/core/models/response.model';
 import { ProductoService } from 'src/app/core/services/product.service';
+import { RegistrarProductoComponent } from './registrar-producto/registrar-producto.component';
 import { VerProductoComponent } from './ver-producto/ver-producto.component';
 
 @Component({
@@ -34,6 +35,7 @@ export class GestionarProductoComponent implements OnInit {
             const data: ResponseData = await this._productoService.getProductos().toPromise()
 
             this.Mensaje = data.message
+            console.log(data)
             this.lProductos = data.data
         }
         catch (error) {
@@ -42,7 +44,14 @@ export class GestionarProductoComponent implements OnInit {
 
     }
 
-    registrarProducto() { }
+    registrarProducto() { 
+        const dialogConfig = new MatDialogConfig()
+
+        dialogConfig.panelClass = ['modal', 'overflow-y-auto', 'show', 'modal-show']
+
+        const dialogReg = this._dialog.open(RegistrarProductoComponent, dialogConfig)
+        dialogReg.afterClosed().subscribe(result => console.log(result))
+    }
 
     actualizarProducto(idProducto: number) { }
 
