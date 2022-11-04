@@ -1,0 +1,48 @@
+<div class="modal-dialog modal-xl">
+    <div class="modal-content">
+
+        <!-- Cabecera -->
+        <div class="modal-header">
+            <h2 class="font-medium intro-y text-lg mr-auto">Registar Asignacion</h2>
+        </div>
+
+        <!-- Cuerpo -->
+        <div class="modal-body p-0">
+            <!-- Inputs -->
+            <div class="intro-y box py-8 sm:py-8">
+                <div class="px-8 sm:px-8 dark:border-darkmode-400">
+
+                    <form [formGroup]="formAsignacion">
+                        <div class="grid grid-cols-12 gap-4 gap-y-5">
+
+                            <div class="intro-y col-span-12 sm:col-span-6">
+                                <label class="form-label">Pedido</label>
+                                <select class="form-select sm:mr-2 dropdown-content" formControlName="pedidoId">
+                                    <option *ngFor="let pedido of pedidos" [value]="pedido.id">
+                                        {{pedido.id + ' - ' + pedido.clientName}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="intro-y col-span-12 sm:col-span-6">
+                                <label class="form-label">Fecha de llegada</label>
+                                <input formControlName="arrivalDate" type="date" class="form-control">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="modal-footer intro-y">
+
+
+            <button class="btn btn-secondary w-20 mr-3" (click)="salir()">Atrás
+            </button>
+            <button class="btn btn-primary w-30 " (click)="registrar()" [disabled]="isInvalidForm()">Registrar Asignación
+            </button>
+        </div>
+    </div>
+
+</div>

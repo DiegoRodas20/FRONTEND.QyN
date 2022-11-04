@@ -11,7 +11,7 @@ import { UpdateOrder } from "../models/order.model";
 
 export class OrderService {
 
-    constructor( private http: HttpClient ) { }
+    constructor(private http: HttpClient) { }
 
     // Listado general de Clientes
     getPedidos(): Observable<ResponseData> {
@@ -20,6 +20,12 @@ export class OrderService {
         return this.http.get<ResponseData>(url)
     }
 
+    // Listado general de Clientes
+    getPedidosToAssign(): Observable<ResponseData> {
+
+        const url = `${ORDER_URL}/toAssign`
+        return this.http.get<ResponseData>(url)
+    }
     // Listado general de estados
     getEstadosPedido(): Observable<ResponseData> {
 
