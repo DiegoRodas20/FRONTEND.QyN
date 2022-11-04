@@ -7,21 +7,30 @@ import { GestionarProveedorComponent } from './gestionar-proveedor/gestionar-pro
 import { RegistrarProveedorComponent } from './gestionar-proveedor/components/registrar-proveedor/registrar-proveedor.component';
 import { VerProveedorComponent } from './gestionar-proveedor/components/ver-proveedor/ver-proveedor.component';
 import { ActualizarProveedorComponent } from './gestionar-proveedor/components/actualizar-proveedor/actualizar-proveedor.component';
+import { VisualizarMovimientosComponent } from './gestionar-producto/visualizar-movimientos/visualizar-movimientos.component';
 
 
 const routes: Routes = [
 
     { path: 'gestionaralmacen', component: GestionarAlmacenComponent, data: { titulo: 'Gestionar Almacén' } },
     { path: 'gestionarproducto', component: GestionarProductoComponent, data: { titulo: 'Gestionar Producto' } },
+    {
+        path: 'gestionarproducto', children: [
+            { path: ':id/movimientos', component: VisualizarMovimientosComponent, data: { titulo: 'Ver Movimientos' } },
+        ]
+    },
+
     { path: 'gestionarmovimiento', component: GestionarMovimientoComponent, data: { titulo: 'Gestionar Movimiento' } },
     { path: 'gestionarproveedor', component: GestionarProveedorComponent, data: { titulo: 'Gestionar Proveedor' } },
-    { path: 'gestionarproveedor', children: [ 
-    {path: 'registrar', component: RegistrarProveedorComponent, data: { titulo: 'Registrar Proveedor'}},
-    {path: 'ver/:id', component:  VerProveedorComponent, data: { titulo: 'Ver Proveedor'}},
-    {path: 'actualizar/:id', component: ActualizarProveedorComponent, data: { titulo: 'Actualizar Proveedor'}},
-    ]},
-    
-    
+    {
+        path: 'gestionarproveedor', children: [
+            { path: 'registrar', component: RegistrarProveedorComponent, data: { titulo: 'Registrar Proveedor' } },
+            { path: 'ver/:id', component: VerProveedorComponent, data: { titulo: 'Ver Proveedor' } },
+            { path: 'actualizar/:id', component: ActualizarProveedorComponent, data: { titulo: 'Actualizar Proveedor' } },
+        ]
+    },
+
+
 ]
 
 @NgModule({
