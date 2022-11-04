@@ -17,13 +17,16 @@ import { ActualizarProveedorComponent } from './gestionar-proveedor/components/a
 import { VerProveedorComponent } from './gestionar-proveedor/components/ver-proveedor/ver-proveedor.component';
 import { RegistrarProductoComponent } from './gestionar-producto/registrar-producto/registrar-producto.component';
 import { AlertComponent } from 'src/app/shared/components/alert/alert.component';
+import { ActualizarProductoComponent } from './gestionar-producto/actualizar-producto/actualizar-producto.component';
 
 const COMPONENTS = [
     GestionarAlmacenComponent,
     GestionarProductoComponent,
     GestionarMovimientoComponent,
+
     VerProductoComponent,
     RegistrarProductoComponent,
+    ActualizarProductoComponent,
     DropdownComponent,
 
     GestionarProveedorComponent,

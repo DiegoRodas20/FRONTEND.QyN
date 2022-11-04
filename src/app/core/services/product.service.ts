@@ -16,7 +16,7 @@ export class ProductoService {
     // Listado general de Productos
     getProductos(): Observable<ResponseData> {
 
-        const url = `${PRODUCT_URL}/catalog`
+        const url = `${PRODUCT_URL}`
         return this.http.get<ResponseData>(url)
     }
 
@@ -28,9 +28,15 @@ export class ProductoService {
     }
 
     // Registrar Producto
-    registrarProducto(producto: any): Promise<Response> {
+    registrarProducto(producto: any): Promise<ResponseData> {
         const url = `${PRODUCT_URL}`
-        return this.http.post<Response>(url, producto).toPromise()
+        return this.http.post<ResponseData>(url, producto).toPromise()
+    }
+
+    // Actualizar Producto
+    actualizarProducto(producto: any, idProducto: string) {
+        const url = `${PRODUCT_URL}/${idProducto}`
+        return this.http.put<ResponseData>(url, producto).toPromise()
     }
 
 

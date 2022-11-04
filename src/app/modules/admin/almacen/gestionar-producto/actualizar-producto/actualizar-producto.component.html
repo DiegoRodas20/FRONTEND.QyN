@@ -1,0 +1,133 @@
+<div class="modal-dialog modal-xl">
+    <div class="modal-content">
+
+        <!-- Cabecera -->
+        <div class="modal-header">
+            <h2 class="font-medium intro-y text-lg mr-auto">Actualizar Producto</h2>
+        </div>
+
+        <!-- Cuerpo -->
+        <div class="modal-body p-0">
+            <!-- Inputs -->
+            <div class="intro-y box py-8 sm:py-8">
+                <div class="px-8 sm:px-8 dark:border-darkmode-400">
+
+                    <form [formGroup]="formProducto">
+                        <div class="grid grid-cols-12 gap-4 gap-y-5">
+
+                            <!-- Código -->
+                            <div class="intro-y col-span-12 sm:col-span-4">
+                                <label class="form-label">Código</label>
+                                <input formControlName="code" type="text" class="form-control"
+                                    placeholder="Ingrese el código">
+                            </div>
+
+                            <!-- Nombre -->
+                            <div class="intro-y col-span-12 sm:col-span-4">
+                                <label class="form-label">Nombre</label>
+                                <input formControlName="name" type="text" class="form-control"
+                                    placeholder="Ingrese el nombre">
+                            </div>
+
+                            <!-- Categoria -->
+                            <div class="intro-y col-span-12 sm:col-span-4">
+                                <label class="form-label">Categoría</label>
+                                <select class="form-select sm:mr-2 dropdown-content" formControlName="categoryId">
+                                    <option *ngFor="let categoria of lCategorias" [value]="categoria.id">
+                                        {{categoria.name}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Mostrar en Catalogo -->
+                            <div class="intro-y col-span-12 sm:col-span-4">
+                                <label class="form-label">Mostrar en Catálogo</label>
+                                <select class="form-select sm:mr-2 dropdown-content" formControlName="showInCatalog">
+                                    <option *ngFor="let show of lShowCatalog" [value]="show.value">
+                                        {{show.name}}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Precio de compra -->
+                            <div class="intro-y col-span-12 sm:col-span-4">
+                                <label class="form-label">Precio de compra</label>
+                                <input formControlName="purchasePrice" type="text" class="form-control"
+                                    placeholder="Ingrese el precio de compra">
+                            </div>
+
+                            <!-- Precio de venta -->
+                            <div class="intro-y col-span-12 sm:col-span-4">
+                                <label class="form-label">Precio de venta</label>
+                                <input formControlName="salesPrice" type="text" class="form-control"
+                                    placeholder="Ingrese el precio de venta">
+                            </div>
+
+                            <!-- Stock Minimo -->
+                            <div class="intro-y col-span-12 sm:col-span-4">
+                                <label class="form-label">Stock Minimo</label>
+                                <input formControlName="minStock" type="text" class="form-control"
+                                    placeholder="Ingrese el stock minimo">
+                            </div>
+
+                            <!-- Stock Maximo -->
+                            <div class="intro-y col-span-12 sm:col-span-4">
+                                <label class="form-label">Stock Maximo</label>
+                                <input formControlName="maxStock" type="text" class="form-control"
+                                    placeholder="Ingrese el stock máximo">
+                            </div>
+
+                            <!-- Stock -->
+                            <div class="intro-y col-span-12 sm:col-span-4">
+                                <label class="form-label">Stock</label>
+                                <input formControlName="stock" type="text" class="form-control"
+                                    placeholder="Ingrese el stock">
+                            </div>
+
+                            <!-- Imagen -->
+                            <div class="intro-y col-span-12 sm:col-span-12">
+                                <label class="form-label">Imagen</label>
+                                <input formControlName="urlImage" type="text" class="form-control"
+                                    placeholder="Ingrese el enlace de la imagen">
+                            </div>
+
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="modal-footer intro-y">
+
+            <button class="btn btn-primary w-20 mr-2" (click)="actualizarProducto()">Actualizar
+            </button>
+
+            <button class="btn btn-secondary w-20" (click)="salir()">Atrás
+            </button>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div [ngClass]="'modal' + modalClass" style="margin-top: 0px; margin-left: 0px; padding-left: 0px; z-index: 10000;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="p-5 text-center">
+                    <lucide-icon name="check-circle" class="w-16 h-16 text-success mx-auto mt-3"></lucide-icon>
+                    <div class="text-3xl mt-5">¡Éxito!</div>
+                    <div class="text-slate-500 mt-2">{{mensaje}}.</div>
+                </div>
+                <div class="px-5 pb-8 text-center">
+                    <button type="button" data-tw-dismiss="modal" class="btn btn-primary w-24"
+                        (click)="modificarCSSModal()">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

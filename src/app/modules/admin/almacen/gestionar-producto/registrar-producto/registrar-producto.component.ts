@@ -21,6 +21,9 @@ export class RegistrarProductoComponent implements OnInit {
     lCategorias: Category[] = []
     itemActually: string = ''
 
+    mensaje = "";
+    modalClass: string = ''
+
     lShowCatalog: any[] = [
         { value: true, name: 'Si' },
         { value: false, name: 'No' }
@@ -85,13 +88,19 @@ export class RegistrarProductoComponent implements OnInit {
             maxStock: Number(form.maxStock),
             stock: Number(form.stock),
             showInCatalog: Boolean(form.showInCatalog),
-            urlImage: form.code
+            urlImage: form.urlImage
         }
 
         console.log(producto)
 
         try {
-            let data = await this._productoService.registrarProducto(producto)
+            let data: ResponseData = await this._productoService.registrarProducto(producto)
+
+            if(!data.error){
+                this.modalClass = ' overflow-y-auto show'
+                this.mensaje = "Se registro el producto correctamente."
+            }
+
             console.log(data)
         }
         catch (error) {
@@ -129,6 +138,10 @@ export class RegistrarProductoComponent implements OnInit {
     //             (err2) => { reject(err2); console.error(err2) });
     //     })
     // }
+
+    modificarCSSModal() {
+        this.modalClass = ''
+      }
 
     salir() {
         this._dialogRef.close()
