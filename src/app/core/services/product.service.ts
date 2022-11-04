@@ -16,7 +16,7 @@ export class ProductoService {
     // Listado general de Productos
     getProductos(): Observable<ResponseData> {
 
-        const url = `${PRODUCT_URL}`
+        const url = `${PRODUCT_URL}/`
         return this.http.get<ResponseData>(url)
     }
 
@@ -39,6 +39,13 @@ export class ProductoService {
         return this.http.put<ResponseData>(url, producto).toPromise()
     }
 
+
+    // Listado general de Productos
+    getMovimientosProductos(idProducto: number): Observable<ResponseData> {
+
+        const url = `${PRODUCT_URL}/${idProducto}/movement`
+        return this.http.get<ResponseData>(url)
+    }
 
 
 }

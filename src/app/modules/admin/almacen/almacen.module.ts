@@ -18,6 +18,7 @@ import { VerProveedorComponent } from './gestionar-proveedor/components/ver-prov
 import { RegistrarProductoComponent } from './gestionar-producto/registrar-producto/registrar-producto.component';
 import { AlertComponent } from 'src/app/shared/components/alert/alert.component';
 import { ActualizarProductoComponent } from './gestionar-producto/actualizar-producto/actualizar-producto.component';
+import { VisualizarMovimientosComponent } from './gestionar-producto/visualizar-movimientos/visualizar-movimientos.component';
 
 const COMPONENTS = [
     GestionarAlmacenComponent,
@@ -39,7 +40,8 @@ const COMPONENTS = [
 
 @NgModule({
     declarations: [
-        COMPONENTS
+        COMPONENTS,
+        VisualizarMovimientosComponent
     ],
     imports: [
         CommonModule,

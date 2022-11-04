@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Product } from 'src/app/core/models/product.model';
 import { ResponseData } from 'src/app/core/models/response.model';
 import { ProductoService } from 'src/app/core/services/product.service';
@@ -23,7 +24,8 @@ export class GestionarProductoComponent implements OnInit {
 
     constructor(
         private _productoService: ProductoService,
-        private _dialog: MatDialog
+        private _dialog: MatDialog,
+        private _router: Router,
     ) { }
 
     ngOnInit() {
@@ -81,6 +83,10 @@ export class GestionarProductoComponent implements OnInit {
         console.log(dialogConfig.data)
         const dialogReg = this._dialog.open(VerProductoComponent, dialogConfig)
         dialogReg.afterClosed().subscribe(result => console.log(result))
+    }
+
+    verProductoMovimientos(id: number) {
+        this._router.navigate(['/almacen/gestionarproducto/' + id  + '/movimientos'])
     }
 
 }

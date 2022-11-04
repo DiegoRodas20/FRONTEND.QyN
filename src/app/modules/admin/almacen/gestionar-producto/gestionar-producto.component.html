@@ -37,8 +37,7 @@
                     <!-- <td class="">
                         <div class="flex items-center justify-center text-success">
                             <div class="w-10 h-10 image-fit zoom-in">
-                                <img 
-                                    class="rounded-lg border-white shadow-md tooltip"
+                                <img class="rounded-lg border-white shadow-md tooltip"
                                     [src]="producto.urlImage == '' ? urlPorDefecto : producto.urlImage"
                                     data-action="zoom">
                             </div>
@@ -62,6 +61,10 @@
                                 <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
                                 Ver
                             </button>
+                            <button class="flex items-center text-primary" (click)="verProductoMovimientos(producto.id)">
+                                <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
+                                Ver Movimientos
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -73,10 +76,7 @@
 
     <!-- Pagination -->
     <div class="intro-y col-span-12 text-right">
-        <pagination-controls 
-            previousLabel="Anterior" 
-            nextLabel="Siguiente" 
-            (pageChange)="p = $event">
+        <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="p = $event">
         </pagination-controls>
     </div>
 
