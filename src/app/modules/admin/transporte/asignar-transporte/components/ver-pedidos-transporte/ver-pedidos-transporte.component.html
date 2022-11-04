@@ -1,0 +1,84 @@
+<!-- Titulo -->
+<h2 class="intro-y text-lg font-medium mt-10">
+    Pedidos del vehiculo con Id: {{idVehiculo}}
+</h2>
+
+<!-- Cuerpo -->
+<div class="grid grid-cols-12 gap-6 mt-5">
+
+    <!-- Cabecera -->
+    <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
+
+        <div class="hidden md:block mx-auto text-slate-500"> {{'Pedidos encontrados: ' + this.pedidos.length}} </div>
+        <button class="btn btn-primary shadow-md mr-2" (click)="openCreateOrderVehicle()">Registrar Asignacion</button>
+
+    </div>
+
+    <!-- Table -->
+    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+        <table class="table table-report -mt-2">
+            <thead>
+                <tr>
+                    <!-- <th class="text-center whitespace-nowrap">ID</th> -->
+                    <th class="text-center whitespace-nowrap">Id</th>
+                    <th class="text-center whitespace-nowrap">Pedido</th>
+                    <th class="text-center whitespace-nowrap">Nombre Cliente</th>
+                    <th class="text-center whitespace-nowrap">Direccion</th>
+                    <th class="text-center whitespace-nowrap">Fecha LLegada</th>
+
+                    <th class="text-center whitespace-nowrap">ACCIONES</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="intro-x" *ngFor="let pedido of pedidos |paginate: { itemsPerPage: 5, currentPage: p }">
+                    <td class="text-center font-medium whitespace-nowrap"> {{pedido.id}} </td>
+                    <td class="text-center font-medium whitespace-nowrap">
+                        <a target="_blank" [href]="'/ventas/gestionarpedido/ver/' + pedido.orderId">{{pedido.orderId}}</a>
+                    </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{pedido.clientName}} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{pedido.address}} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{pedido.arrivalDate | date: 'dd/MM/yyyy'}} </td>
+
+                    <td class="table-report__action w-56">
+                        <div class="flex justify-center items-center">
+
+                            <button class="flex items-center text-primary" (click)="eliminar(pedido.id)">
+                                <lucide-icon class="w-4 h-4 mr-1" name="trash"></lucide-icon>
+                                Eliminar
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Paginacion -->
+    <!-- Paginacion -->
+    <div class="intro-y col-span-12 text-right">
+        <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="p = $event">
+        </pagination-controls>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div [ngClass]="'modal' + modalClass" style="margin-top: 0px; margin-left: 0px; padding-left: 0px; z-index: 10000;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="p-5 text-center">
+                    <lucide-icon name="check-circle" class="w-16 h-16 text-success mx-auto mt-3"></lucide-icon>
+                    <div class="text-3xl mt-5">¡Éxito!</div>
+                    <div class="text-slate-500 mt-2">{{mensaje}}.</div>
+                </div>
+                <div class="px-5 pb-8 text-center">
+                    <button type="button" data-tw-dismiss="modal" class="btn btn-primary w-24"
+                        (click)="modificarCSSModal()">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

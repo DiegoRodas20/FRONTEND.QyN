@@ -129,12 +129,12 @@ export class SidebarComponent implements OnInit {
                 "idpadre": 3,
                 "icono": "truck",
                 "submenu": [
-                    // {
-                    //     "idhijo": 0,
-                    //     "titulo": "Asignar Transporte",
-                    //     "url": "/transporte/asignartransporte",
-                    //     "icono": "home"
-                    // },
+                    {
+                        "idhijo": 0,
+                        "titulo": "Asignar Transporte",
+                        "url": "/transporte/asignartransporte",
+                        "icono": "home"
+                    },
                     {
                         "idhijo": 0,
                         "titulo": "Gestionar Vehículos",

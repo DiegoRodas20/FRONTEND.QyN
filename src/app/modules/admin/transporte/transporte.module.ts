@@ -11,6 +11,8 @@ import { RegistrarVehiculoComponent } from './gestionar-vehiculos/components/reg
 import { VerVehiculoComponent } from './gestionar-vehiculos/components/ver-vehiculo/ver-vehiculo.component';
 import { ActualizarVehiculoComponent } from './gestionar-vehiculos/components/actualizar-vehiculo/actualizar-vehiculo.component';
 import { PipeModule } from 'src/app/core/pipes/pipe.module';
+import { VerPedidosTransporteComponent } from './asignar-transporte/components/ver-pedidos-transporte/ver-pedidos-transporte.component';
+import { RegistrarPedidosTransporteComponent } from './asignar-transporte/components/registrar-pedidos-transporte/registrar-pedidos-transporte.component';
 
 const COMPONENTS = [
     AsignarTransporteComponent,
@@ -22,7 +24,9 @@ const COMPONENTS = [
 
 @NgModule({
     declarations: [
-        COMPONENTS
+        COMPONENTS,
+        VerPedidosTransporteComponent,
+        RegistrarPedidosTransporteComponent
     ],
     imports: [
         CommonModule,
