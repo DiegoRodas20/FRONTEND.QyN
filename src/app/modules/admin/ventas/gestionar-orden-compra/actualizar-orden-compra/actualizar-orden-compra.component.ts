@@ -7,6 +7,7 @@ import { Supplier } from 'src/app/core/models/supplier.model';
 import { PurchaseOrderStatus } from 'src/app/core/models/purchaseOrder';
 import { ProductoService } from 'src/app/core/services/product.service';
 import { Product } from 'src/app/core/models/product.model';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 
 @Component({
@@ -25,13 +26,10 @@ export class ActualizarOrdenCompraComponent implements OnInit {
     private _productoService: ProductoService,
     private _router: Router,
     private _route: ActivatedRoute,
-    private _formBuilder: FormBuilder
-  ) { }
+    private _formBuilder: FormBuilder,
+    private _alertService: AlertService
 
-      // Alert Modal
-      typeModal: string
-      openModal: boolean = false
-      contenidoModal: string
+  ) { }
 
   ngOnInit() {
     this._route.params.subscribe(params => {
@@ -118,16 +116,9 @@ export class ActualizarOrdenCompraComponent implements OnInit {
       purchaseOrderStatusId: +this.formOrdenCompra.value.purchaseOrderStatusId
     }
     await this._ordenCompraService.updateOrdenCompra(this.idOrdenCompra, updateOrden).subscribe(
-      res=>{
-        this.typeModal = 'success'
-      this.contenidoModal = 'La orden de compra fue actualizada'
-      this.openModal = true
-    },
-    err =>{
-      this.typeModal = 'error'
-      this.contenidoModal =  err.error.error[0]
-      this.openModal = true
-    })
+      res => {
+        this._alertService.openModal({ typeModal: 'success', contenidoModal: 'La orden de compra fue actualizada' })
+      },)
   }
 
   getPurchaseOrderStatusName(idEstadoOrdenCompra) {
@@ -145,9 +136,4 @@ export class ActualizarOrdenCompraComponent implements OnInit {
   moveToGestionarOrdenCompra() {
     this._router.navigate(['/ventas/gestionarOrdenCompra/'])
   }
-
-  onCloseModal(event: boolean) {
-    this.openModal = event
-}
-
 }

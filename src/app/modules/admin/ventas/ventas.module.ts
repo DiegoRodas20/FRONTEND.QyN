@@ -34,13 +34,10 @@ const COMPONENTS = [
     VerOrdenCompraComponent,
     VerPedidoComponent,
     ActualizarPedidoComponent,
-
     CrearOrdenCompraComponent,
     ActualizarOrdenCompraComponent,
-
     VerClienteComponent,
     ActualizarClienteComponent,
-    AlertComponent
 ]
 
 @NgModule({
@@ -57,11 +54,10 @@ const COMPONENTS = [
         ReactiveFormsModule,
         NgxPaginationModule,
         LucideAngularModule.pick(icons),
-        
         MatFormFieldModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatInputModule
+        MatInputModule,
     ],
     exports: [
     ],

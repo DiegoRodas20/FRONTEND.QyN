@@ -14,17 +14,17 @@ export class AlertComponent implements OnInit {
 
     @Input() open: boolean
     @Output() close = new EventEmitter<boolean>();
-    
-    constructor( ) { }
+
+    constructor() { }
 
     ngOnInit() { }
 
-    onClose(){
+    onClose() {
         this.open = false
         this.close.emit(this.open)
     }
 
-    colorAlert(typeAlert: string) {
+    colorAlert(typeAlert: string | 'success' | 'error' | 'alert') {
 
         switch (typeAlert) {
             case 'success':
@@ -59,7 +59,7 @@ export class AlertComponent implements OnInit {
         }
     }
 
-    titleAlert(typeAlert: string){
+    titleAlert(typeAlert: string) {
         switch (typeAlert) {
             case 'success':
                 return 'Éxito'

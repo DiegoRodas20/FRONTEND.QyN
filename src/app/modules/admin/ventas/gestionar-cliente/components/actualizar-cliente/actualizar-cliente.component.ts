@@ -6,6 +6,7 @@ import { ResponseData } from 'src/app/core/models/response.model';
 import { TypeDocument } from 'src/app/core/models/typedocument.model';
 import { ClientService } from 'src/app/core/services/client.service';
 import { TypeDocumentService } from 'src/app/core/services/typedocument.service';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
     selector: 'app-actualizar-cliente',
@@ -28,7 +29,9 @@ export class ActualizarClienteComponent implements OnInit {
         private _dialogRef: MatDialogRef<ActualizarClienteComponent>,
         private _formBuilder: FormBuilder,
 
-        @Inject(MAT_DIALOG_DATA) private _dialogData
+        @Inject(MAT_DIALOG_DATA) private _dialogData,
+        private _alertService: AlertService
+
     ) { }
 
     ngOnInit() {
@@ -84,43 +87,14 @@ export class ActualizarClienteComponent implements OnInit {
             address: form.address
         }
 
-        console.log(Cliente)
+        let data: ResponseData = await this._clienteService.actualizarCliente(this._dialogData, Cliente)
 
-        try {
-            let data: ResponseData = await this._clienteService.actualizarCliente(this._dialogData, Cliente)
+        if (!data.error) {
 
-            if (!data.error) {
-
-                let contenido: any = {
-                    type: 'success',
-                    text: data.message
-                }
-
-                this.listarClientexID(this._dialogData)
-                this.onOpenModal(contenido)
-            }
-        }
-        catch (error) {
-            console.log(error)
-
-            let contenido: any = {
-                type: 'error',
-                text: error.error.error
-            }
-            this.onOpenModal(contenido)
+            this.listarClientexID(this._dialogData)
+            this._alertService.openModal({ typeModal: 'success', contenidoModal: data.message })
         }
 
-    }
-
-    onOpenModal(contenido: any) {
-        this.openModal = true
-        this.typeModal = contenido.type
-        this.contenidoModal = contenido.text
-    }
-
-    onCloseModal(event: boolean) {
-        this.openModal = event
-        this._dialogRef.close()
     }
 
     salir() {

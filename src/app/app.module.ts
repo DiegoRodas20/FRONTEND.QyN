@@ -21,7 +21,7 @@ import { SharedModule } from './shared/shared.module';
     
     SharedModule,
     AuthModule,
-    AdminModule
+    AdminModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true }

@@ -9,6 +9,7 @@ import { CategoryService } from 'src/app/core/services/category.service';
 import { ProductoService } from 'src/app/core/services/product.service';
 import { SupplierService } from 'src/app/core/services/supplier.service';
 import { OrdenCompraService } from 'src/app/core/services/ordenCompra.service';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
   selector: 'app-crear-orden-compra',
@@ -28,11 +29,6 @@ export class CrearOrdenCompraComponent implements OnInit {
   precio: number
   cantidad: number
 
-  // Alert Modal
-  typeModal: string
-  openModal: boolean = false
-  contenidoModal: string
-
   constructor(
     private _productoService: ProductoService,
     private _supplierService: SupplierService,
@@ -40,7 +36,8 @@ export class CrearOrdenCompraComponent implements OnInit {
     private _dialogRef: MatDialogRef<CrearOrdenCompraComponent>,
     private _formBuilder: FormBuilder,
 
-    @Inject(MAT_DIALOG_DATA) private _dialogData
+    @Inject(MAT_DIALOG_DATA) private _dialogData,
+    private _alertService: AlertService
   ) { }
 
   get purchaseOrderDetails() {
@@ -123,21 +120,12 @@ export class CrearOrdenCompraComponent implements OnInit {
   registerPurchaseOrder() {
     this.formOrdenCompra.patchValue({supplierId: +this.formOrdenCompra.value.supplierId})
     this._ordenCompraService.postOrdenCompra(this.formOrdenCompra.value).subscribe((res) => {
-      this.typeModal = 'success'
-      this.contenidoModal = 'La orden de compra fue registrada'
-      this.openModal = true
 
+      this._alertService.openModal({typeModal: 'success', contenidoModal: 'La orden de compra fue registrada'})
     })
   }
 
   salir() {
     this._dialogRef.close()
   }
-
-  onCloseModal(event: boolean) {
-    this.openModal = event
-    this._dialogRef.close()
-  }
-
-
 }

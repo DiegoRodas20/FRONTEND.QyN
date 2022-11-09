@@ -1,1 +1,5 @@
 <router-outlet></router-outlet>
+
+<alert [type]="this.alertService.typeModal" [open]="this.alertService.opened" [contenido]="this.alertService.contenidoModal"
+    (close)="this.alertService.closeModal($event)">
+</alert>

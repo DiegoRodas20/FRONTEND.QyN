@@ -14,12 +14,12 @@ const COMPONENTS = [
     NavbarComponent,
     BreadcrumbComponent,
 
-    // AlertComponent
+    AlertComponent
 ]
 
 @NgModule({
     declarations: [
-        COMPONENTS
+        COMPONENTS,
     ],
     exports: [
         COMPONENTS

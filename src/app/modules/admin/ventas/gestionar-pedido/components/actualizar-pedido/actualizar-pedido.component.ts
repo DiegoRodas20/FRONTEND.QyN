@@ -6,6 +6,7 @@ import { OrderStatus, UpdateOrder } from 'src/app/core/models/order.model';
 import { Product } from 'src/app/core/models/product.model';
 import { ResponseData } from 'src/app/core/models/response.model';
 import { OrderService } from 'src/app/core/services/order.service';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class ActualizarPedidoComponent implements OnInit {
         private _route: ActivatedRoute,
         private _orderService: OrderService,
         private _formBuilder: FormBuilder,
-        private _datePipe: DatePipe
+        private _datePipe: DatePipe,
+        private _alertService: AlertService
     ) { }
 
     ngOnInit() {
@@ -100,7 +102,7 @@ export class ActualizarPedidoComponent implements OnInit {
     async actualizarPedido() {
 
         let form = this.formPedido.value
-        
+
         console.log(form)
 
         let Pedido: UpdateOrder = {
@@ -111,20 +113,18 @@ export class ActualizarPedidoComponent implements OnInit {
             estimatedDate: (form.estimatedDate)
         }
 
-        console.log(Pedido)
-
         try {
             let data: ResponseData = await this._orderService.actualizarPedido(this.idPedido, Pedido)
 
             if (!data.error) {
 
                 let contenido: any = {
-                    type: 'success',
-                    text: data.message
+                    typeModal: 'success',
+                    contenidoModal: data.message
                 }
 
                 this.listarPedidoxID(this.idPedido)
-                this.onOpenModal(contenido)
+                this._alertService.openModal(contenido)
             }
         }
         catch (error) {
