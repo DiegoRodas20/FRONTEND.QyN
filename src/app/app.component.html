@@ -3,3 +3,9 @@
 <alert [type]="this.alertService.typeModal" [open]="this.alertService.opened" [contenido]="this.alertService.contenidoModal"
     (close)="this.alertService.closeModal($event)">
 </alert>
+
+<!-- Loader -->
+<app-loader 
+    *ngIf="loaderService.opened"
+    (close)="loaderService.close()">
+</app-loader>

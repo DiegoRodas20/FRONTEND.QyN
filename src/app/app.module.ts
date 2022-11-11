@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ErrorInterceptorService } from './core/interceptors/error.interceptor';
+import { LoaderInterceptorService } from './core/interceptors/loader.interceptor';
 import { AdminModule } from './modules/admin/admin.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { SharedModule } from './shared/shared.module';
@@ -18,13 +19,14 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    
+
     SharedModule,
     AuthModule,
     AdminModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true }
 
   ],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoaderService } from './shared/components/loader/loader.service';
 import { AlertService } from './shared/services/alert.service';
 
 @Component({
@@ -11,7 +12,9 @@ export class AppComponent {
   title = 'FRONTENDQyN';
 
   constructor(
-    public alertService: AlertService
+    public alertService: AlertService,
+    public loaderService: LoaderService
+
   ) {
 
   }

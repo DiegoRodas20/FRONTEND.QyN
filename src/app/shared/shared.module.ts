@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { LucideAngularModule, icons } from 'lucide-angular';
 import { AlertComponent } from './components/alert/alert.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -14,7 +15,8 @@ const COMPONENTS = [
     NavbarComponent,
     BreadcrumbComponent,
 
-    AlertComponent
+    AlertComponent,
+    LoaderComponent,
 ]
 
 @NgModule({
