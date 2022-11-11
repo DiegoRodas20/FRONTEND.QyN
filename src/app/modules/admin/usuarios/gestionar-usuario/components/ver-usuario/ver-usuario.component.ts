@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from 'src/app/core/services/user.service';
 
 
 @Component({
@@ -10,13 +11,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class VerUsuarioComponent implements OnInit {
 
-    idUsuario: string
+    idUsuario: number
     formUsuario: FormGroup
 
     constructor(
         private _router: Router,
         private _route: ActivatedRoute,
         private _formBuilder: FormBuilder,
+        private _usuarioService: UserService
     ) { }
 
     ngOnInit() {
@@ -27,21 +29,34 @@ export class VerUsuarioComponent implements OnInit {
             this.listarUsuarioxID(this.idUsuario)
         })
     }
+    setVacio(dato: string){
+        return dato == '' ? '-' : dato
+    }
+    setEstado(estado: boolean){
+        return estado ? 'Activo' : 'Inactivo'
+    }
+
+    formatDate(){
+        const date = new Date(this.formUsuario.value.bornDate)
+        return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+    }
 
     crearFormUsuario() {
         this.formUsuario = this._formBuilder.group({
+            email: [null, []],
+            isActive: [null, []],
             firstName: [null, []],
             lastName: [null, []],
-            email: [null, []],
-            estado: [null, []]
+            surName: [null, []],
+            bornDate: [null, []],
         })
     }
 
-    async listarUsuarioxID(idTramite: string) {
+    async listarUsuarioxID(idUsuario: number) {
         try {
-            // const data: any = await this._usuarioService.getUsuarioxID(idTramite).toPromise()
-            // this.formUsuario.patchValue(data.data)
-            // this.formUsuario.controls['estado'].setValue(data.data.isActive ? 'Activo' : 'Inactivo')
+            const data: any = await this._usuarioService.getUsuarioxID(idUsuario).toPromise()
+            this.formUsuario.patchValue({...data.data,  bornDate: this.formatDate(), isActive: this.setEstado(data.data.isActive), firstName: this.setVacio(data.data.firstName), lastName: this.setVacio(data.data.lastName), surName: this.setVacio(data.data.surName)})
+            console.log(data.data)
         }
         catch (error) {
             console.log("Error: ", error)

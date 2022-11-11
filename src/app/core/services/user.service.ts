@@ -11,7 +11,15 @@ export class UserService {
 
     constructor(private _http: HttpClient) { }
 
+    //lista general usuario
     getUsuarios(): Observable<any> {
         return this._http.get(USER_URL)
     }
+    
+    //lista usuario por id
+    getUsuarioxID(idUsuario: number): Observable<any> {
+        const url = `${USER_URL}/${idUsuario}`
+        return this._http.get(url)
+    }
+        
 }
