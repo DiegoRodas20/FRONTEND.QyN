@@ -30,21 +30,21 @@ export class SidebarComponent implements OnInit {
                 "url": "/dashboard",
                 "icono": "home"
             },
-            // {
-            //     "idpadre": 1,
-            //     "titulo": "Usuarios",
-            //     "icono": "users",
-            //     "submenu": [
-            //         {
-            //             "idhijo": 0,
-            //             "titulo": "Gestionar Usuario",
-            //             "url": "/usuarios/gestionarusuario",
-            //             "icono": "user"
-            //         }
-            //     ],
-            // },
             {
                 "idpadre": 1,
+                "titulo": "Usuarios",
+                "icono": "users",
+                "submenu": [
+                    {
+                        "idhijo": 0,
+                        "titulo": "Gestionar Usuario",
+                        "url": "/usuarios/gestionarusuario",
+                        "icono": "user"
+                    }
+                ],
+            },
+            {
+                "idpadre": 2,
                 "titulo": "Almacén",
                 "icono": "clipboard-list",
                 "submenu": [
@@ -76,7 +76,7 @@ export class SidebarComponent implements OnInit {
             },
             {
                 "titulo": "Ventas",
-                "idpadre": 2,
+                "idpadre": 3,
                 "icono": "shopping-cart",
                 "submenu": [
                     // {
@@ -126,7 +126,7 @@ export class SidebarComponent implements OnInit {
             // },
             {
                 "titulo": "Transporte",
-                "idpadre": 3,
+                "idpadre": 4,
                 "icono": "truck",
                 "submenu": [
                     {

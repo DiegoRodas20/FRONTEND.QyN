@@ -2,12 +2,6 @@
 <h2 class="intro-y text-lg font-medium mt-10">
     Gestionar Usuario
 </h2>
-<!-- 
-<alert
-    [type]="typeModal"
-    [open]="openModal"
-    (close)="onCloseModal($event)">
-</alert> -->
 
 <!-- Cuerpo -->
 <div class="grid grid-cols-12 gap-6 mt-5">
@@ -15,13 +9,13 @@
     <!-- Cabecera -->
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
 
-        <button class="btn btn-primary shadow-md mr-2" (click)="onOpenModal()">Alert Modal</button>
+        <button class="btn btn-primary shadow-md mr-2">Registrar Usuario</button>
 
-        <div class="hidden md:block mx-auto text-slate-500">{{Mensaje}}</div>
+        <div class="hidden md:block mx-auto text-slate-500"> {{Mensaje}} </div>
 
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
-                <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
+                <input [formControl]="filtro" type="text" class="form-control w-56 box pr-10" placeholder="Search...">
                 <lucide-icon class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" name="search"></lucide-icon>
             </div>
         </div>
@@ -35,25 +29,23 @@
                 <tr>
                     <th class="text-center whitespace-nowrap">ID</th>
                     <th class="text-center whitespace-nowrap">EMAIL</th>
-                    <th class="text-center whitespace-nowrap">NOMBRE</th>
-                    <th class="text-center whitespace-nowrap">APELLIDO</th>
+                    <th class="text-center whitespace-nowrap">NOMBRE COMPLETO</th>
                     <th class="text-center whitespace-nowrap">ESTADO</th>
                     <th class="text-center whitespace-nowrap">ACCIONES</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="intro-x" *ngFor="let producto of lUsuarios">
-                    <td class="text-center font-medium whitespace-nowrap"> {{ producto.id }} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{ producto.email }} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{ producto.firstName }} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{ producto.lastName }} </td>
+                <tr class="intro-x" *ngFor="let user of lUsuarios | paginate: { itemsPerPage: 5, currentPage: p } ">
+                    <td class="text-center font-medium whitespace-nowrap"> {{ user.id }} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{ user.email }} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{ user.fullName }} </td>
 
                     <td class="w-40">
                         <div
-                            [ngClass]="producto.isActive ? 'flex items-center justify-center text-success' : 'flex items-center justify-center text-danger'">
-                            <lucide-icon class="w-4 h-4 mr-2" [name]="producto.isActive ? 'check-square' : 'x-square'">
+                            [ngClass]="user.isActive ? 'flex items-center justify-center text-success' : 'flex items-center justify-center text-danger'">
+                            <lucide-icon class="w-4 h-4 mr-2" [name]="user.isActive ? 'check-square' : 'x-square'">
                             </lucide-icon>
-                            {{producto.isActive ? 'Activo' : 'Inactivo'}}
+                            {{user.isActive ? 'Activo' : 'Inactivo'}}
                         </div>
                     </td>
 
@@ -65,7 +57,7 @@
                                 Editar
                             </button>
 
-                            <button class="flex items-center text-primary" (click)="verUsuario(producto.id)">
+                            <button class="flex items-center text-primary">
                                 <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
                                 Ver
                             </button>
@@ -83,25 +75,27 @@
             <ul class="pagination">
 
                 <li class="page-item">
-                    <a class="page-link" href="#">
+                    <a class="page-link" href="#"> 
                         <lucide-icon class="w-4 h-4" name="chevrons-left"></lucide-icon>
                     </a>
                 </li>
+
                 <li class="page-item">
                     <a class="page-link" href="#">
                         <lucide-icon class="w-4 h-4" name="chevron-left"></lucide-icon>
                     </a>
                 </li>
-                <li class="page-item"> <a class="page-link" href="#">1</a> </li>
-                <li class="page-item active"> <a class="page-link" href="#">2</a> </li>
+
+                <li class="page-item active"> <a class="page-link" href="#">1</a> </li>
+                <li class="page-item"> <a class="page-link" href="#">2</a> </li>
                 <li class="page-item"> <a class="page-link" href="#">3</a> </li>
                 <li class="page-item">
-                    <a class="page-link" href="#">
-                        <lucide-icon class="w-4 h-4" name="chevron-right"></lucide-icon>
+                    <a class="page-link" href="#"> 
+                        <lucide-icon class="w-4 h-4" name="chevron-right"></lucide-icon>        
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="#">
+                    <a class="page-link" href="#"> 
                         <lucide-icon class="w-4 h-4" name="chevrons-right"></lucide-icon>
                     </a>
                 </li>

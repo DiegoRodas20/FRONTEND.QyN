@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertComponent } from 'src/app/shared/components/alert/alert.component';
+import { UserService } from 'src/app/core/services/user.service';
 
 
 @Component({
@@ -12,26 +13,31 @@ export class GestionarUsuarioComponent implements OnInit {
 
     lUsuarios: any[] = []
     Mensaje: string
-
-    typeModal: string
-    openModal: boolean = false
+    filtro = new FormControl();
+    p: number = 1;
 
     constructor(
-        private _router: Router
+        private _usuarioService: UserService,
+        private _router: Router,
     ) { }
 
-    ngOnInit() { }
-
-    verUsuario(idUsuario: string) {
-        this._router.navigate(['/usuarios/gestionarusuario/ver/' + idUsuario])
+    ngOnInit() {
+        this.getUsuarios()
     }
 
-    onOpenModal() {
-        this.openModal = true
-        this.typeModal = 'success'
+    async getUsuarios() {
+        try {
+            const data: any = await this._usuarioService.getUsuarios().toPromise()
+            console.log(data)
+            this.Mensaje = data.message
+            this.lUsuarios = data.data
+        } 
+        catch (error) {
+            console.log("Error: ", error)
+        }
     }
 
-    onCloseModal(event: boolean) {
-        this.openModal = event
-    }
+    // verUsuario(idUsuario: string) {
+    //     this._router.navigate(['/usuarios/gestionarusuario/ver/' + idUsuario])
+    // }
 }
