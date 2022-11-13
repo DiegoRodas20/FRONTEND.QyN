@@ -7,6 +7,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { PipeModule } from 'src/app/core/pipes/pipe.module';
 import { VerUsuarioComponent } from './gestionar-usuario/components/ver-usuario/ver-usuario.component';
 import { RegistrarUsuarioComponent } from './gestionar-usuario/components/registrar-usuario/registrar-usuario.component';
+import { ActualizarUsuarioComponent } from './gestionar-usuario/components/actualizar-usuario/actualizar-usuario.component';
 import { GestionarUsuarioComponent } from './gestionar-usuario/gestionar-usuario.component';
 import { UsuariosRoutingModule } from './usuarios.routing';
 
@@ -15,6 +16,7 @@ const COMPONENTS = [
     GestionarUsuarioComponent,
     VerUsuarioComponent,
     RegistrarUsuarioComponent,
+    ActualizarUsuarioComponent,
 ]
 
 @NgModule({

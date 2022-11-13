@@ -36,10 +36,10 @@ export class VerUsuarioComponent implements OnInit {
         return estado ? 'Activo' : 'Inactivo'
     }
 
-    formatDate(){
-        const date = new Date(this.formUsuario.value.bornDate)
-        return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
-    }
+    // formatDate(){
+    //     const date = new Date(this.formUsuario.value.bornDate)
+    //     return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+    // }
 
     crearFormUsuario() {
         this.formUsuario = this._formBuilder.group({
@@ -55,7 +55,7 @@ export class VerUsuarioComponent implements OnInit {
     async listarUsuarioxID(idUsuario: number) {
         try {
             const data: any = await this._usuarioService.getUsuarioxID(idUsuario).toPromise()
-            this.formUsuario.patchValue({...data.data,  bornDate: this.formatDate(), isActive: this.setEstado(data.data.isActive), firstName: this.setVacio(data.data.firstName), lastName: this.setVacio(data.data.lastName), surName: this.setVacio(data.data.surName)})
+            this.formUsuario.patchValue({...data.data, isActive: this.setEstado(data.data.isActive), firstName: this.setVacio(data.data.firstName), lastName: this.setVacio(data.data.lastName), surName: this.setVacio(data.data.surName)})
             console.log(data.data)
         }
         catch (error) {

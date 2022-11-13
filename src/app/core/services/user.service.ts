@@ -27,4 +27,10 @@ export class UserService {
         const url = `${USER_URL}`
         return this._http.post<any>(url, usuario).toPromise()
     }
+
+    //Actualizar Usuario
+    actualizarUsuario(idUsuario: number, usuario: any): Promise<any> {
+        const url = `${USER_URL}/${idUsuario}`
+        return this._http.put<any>(url, usuario).toPromise()
+    }
 }
