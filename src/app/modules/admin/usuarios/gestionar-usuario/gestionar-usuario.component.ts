@@ -37,6 +37,10 @@ export class GestionarUsuarioComponent implements OnInit {
         }
     }
 
+    registrarUsuario(){
+        this._router.navigate(['/usuarios/gestionarusuario/registrar'])
+    }
+    
     verUsuario(idUsuario: string) {
         this._router.navigate(['/usuarios/gestionarusuario/ver/' + idUsuario])
     }

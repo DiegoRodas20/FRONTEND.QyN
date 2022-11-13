@@ -1,0 +1,78 @@
+<!-- Cabecera -->
+<div class="flex items-center mt-8">
+    <h2 class="intro-y text-lg font-medium mr-auto">
+        Registrar Usuario
+    </h2>
+</div>
+
+<!-- Inputs -->
+<div class="intro-y box py-10 sm:py-10 mt-5">
+    <div class="px-10 sm:px-10 dark:border-darkmode-400">
+        <form [formGroup]="formUsuario">
+            <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+
+                <!-- Email -->
+                <div class="intro-y col-span-6 mt-5">
+                    <label class="form-label">E-mail</label>
+                    <input formControlName="email" type="text" class="form-control">
+                </div>
+
+                <!-- Password -->
+                <div class="intro-y col-span-6 mt-5">
+                    <label class="form-label">Contraseña</label>
+                    <input formControlName="password" type="text" class="form-control">
+                </div>
+                
+                <!-- First Name -->
+                <div class="intro-y col-span-6 mt-5">
+                    <label class="form-label">Primer Nombre</label>
+                    <input formControlName="firstName" type="text" class="form-control">
+                </div>
+
+                <!-- Apellido -->
+                <div class="intro-y col-span-6 mt-5">
+                    <label class="form-label">Apellido</label>
+                    <input formControlName="lastName" type="text" class="form-control">
+                </div>
+
+                 <!-- Segundo Nombre -->
+                 <div class="intro-y col-span-6 mt-5">
+                    <label class="form-label">Segundo Nombre</label>
+                    <input formControlName="surName" type="text" class="form-control">
+                </div>
+
+                <!-- Dia de Nacimiento -->
+                <div class="intro-y col-span-6 mt-5">
+                    <label class="form-label">Fecha de Nacimiento</label>
+                    <input formControlName="bornDate" type="date" class="form-control">
+                </div>
+
+                <!-- Boton de Registrar y Atras -->
+                <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                    <button class="btn btn-primary w-24" (click)="registrarUsuario()">Registrar</button>
+                    <button class="btn btn-secondary mx-2 w-24" (click)="cerrarVentana()">Atrás</button>
+                </div>
+           
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal -->
+<div [ngClass]="'modal' + modalClass" style="margin-top: 0px; margin-left: 0px; padding-left: 0px; z-index: 10000;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="p-5 text-center">
+                    <lucide-icon name="check-circle" class="w-16 h-16 text-success mx-auto mt-3"></lucide-icon>
+                    <div class="text-3xl mt-5">¡Éxito!</div>
+                    <div class="text-slate-500 mt-2">Se registró correctamente.</div>
+                </div>
+                <div class="px-5 pb-8 text-center">
+                    <button type="button" data-tw-dismiss="modal" class="btn btn-primary w-24"
+                        (click)="modificarCSSModal()">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

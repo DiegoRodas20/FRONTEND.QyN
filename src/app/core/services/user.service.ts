@@ -21,5 +21,10 @@ export class UserService {
         const url = `${USER_URL}/${idUsuario}`
         return this._http.get(url)
     }
-        
+    
+    //Registrar Usuario
+    registrarUsuario(usuario: any): Promise<any> {
+        const url = `${USER_URL}`
+        return this._http.post<any>(url, usuario).toPromise()
+    }
 }
