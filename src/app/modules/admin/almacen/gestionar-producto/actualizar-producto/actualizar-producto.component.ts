@@ -98,18 +98,17 @@ export class ActualizarProductoComponent implements OnInit {
             minStock: Number(form.minStock),
             maxStock: Number(form.maxStock),
             stock: Number(form.stock),
-            showInCatalog: Boolean(form.showInCatalog),
+            showInCatalog: form.showInCatalog == "false" ? false : true,
             urlImage: form.urlImage
         }
 
-        console.log(producto)
 
         try {
             let data: ResponseData = await this._productoService.actualizarProducto(producto, this._dialogData)
 
-            if(!data.error){
+            if (!data.error) {
                 this.modalClass = ' overflow-y-auto show'
-                this.mensaje = "Se registro el producto correctamente."
+                this.mensaje = "Se actualizo el producto correctamente."
             }
 
             console.log(data)
