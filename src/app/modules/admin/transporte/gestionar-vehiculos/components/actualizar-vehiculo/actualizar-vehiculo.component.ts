@@ -94,7 +94,7 @@ export class ActualizarVehiculoComponent implements OnInit {
             plate: form.plate,
             brand: form.brand,
             color: form.color,
-            status: (form.status == "true" )? true : false 
+            status: (form.status == "true"  || form.status == true )? true : false 
         }
 
         try {
