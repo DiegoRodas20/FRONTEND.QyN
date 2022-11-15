@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
+import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
+import { ActualizarContrasenaComponent } from './components/actualizar-contraseña/actualizar-contrasena.component';
 
 
 @Component({
@@ -19,6 +21,7 @@ export class GestionarUsuarioComponent implements OnInit {
     constructor(
         private _usuarioService: UserService,
         private _router: Router,
+        private _dialog: MatDialog
     ) { }
 
     ngOnInit() {
@@ -48,4 +51,16 @@ export class GestionarUsuarioComponent implements OnInit {
     actualizarUsuario(idUsuario: number) {
         this._router.navigate(['/usuarios/gestionarusuario/actualizar/' + idUsuario])
     }
+
+    actualizarContrasena(idUsuario: number) { 
+    
+        const dialogConfig = new MatDialogConfig()
+
+        dialogConfig.panelClass = ['modal', 'overflow-y-auto', 'show', 'modal-show']
+        dialogConfig.data = idUsuario
+
+        const dialogReg = this._dialog.open(ActualizarContrasenaComponent, dialogConfig)
+        dialogReg.afterClosed().subscribe(result => this.getUsuarios())
+    }
+
 }

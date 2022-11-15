@@ -52,6 +52,7 @@ export class ActualizarUsuarioComponent implements OnInit {
             date.setDate(date.getDate() + 1);
             this.formUsuario.controls['bornDate'].setValue(this._datePipe.transform(date, 'yyyy-MM-dd'))
             console.log(data.data)
+            console.log(this.formUsuario.value)
         }
         catch (error) {
             console.log("Error: ", error)
@@ -68,7 +69,7 @@ export class ActualizarUsuarioComponent implements OnInit {
             lastName: form.lastName,
             surName: form.surName,
             bornDate: form.bornDate,
-            isActive: (form.isActive == "true")
+            isActive: (form.isActive == "true" || form.isActive == true )? true : false 
         }
 
         try{

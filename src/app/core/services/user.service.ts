@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core"
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { USER_URL } from "src/app/core/utils/url_constants";
+import { updatePassword } from "../models/user.model";
+import { ResponseData } from "../models/response.model";
 
 @Injectable({
     providedIn: 'root'
@@ -32,5 +34,11 @@ export class UserService {
     actualizarUsuario(idUsuario: number, usuario: any): Promise<any> {
         const url = `${USER_URL}/${idUsuario}`
         return this._http.put<any>(url, usuario).toPromise()
+    }
+
+    //ActualizarContraseña
+    actualizarContrasena(idUsuario: number, actualizarUsuarioPassword: updatePassword): Promise<ResponseData>{
+        const url = `${USER_URL}/${idUsuario}/password`
+        return this._http.put<ResponseData>(url,actualizarUsuarioPassword).toPromise()
     }
 }

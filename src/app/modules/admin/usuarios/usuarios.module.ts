@@ -8,6 +8,7 @@ import { PipeModule } from 'src/app/core/pipes/pipe.module';
 import { VerUsuarioComponent } from './gestionar-usuario/components/ver-usuario/ver-usuario.component';
 import { RegistrarUsuarioComponent } from './gestionar-usuario/components/registrar-usuario/registrar-usuario.component';
 import { ActualizarUsuarioComponent } from './gestionar-usuario/components/actualizar-usuario/actualizar-usuario.component';
+import { ActualizarContrasenaComponent } from './gestionar-usuario/components/actualizar-contraseña/actualizar-contrasena.component';
 import { GestionarUsuarioComponent } from './gestionar-usuario/gestionar-usuario.component';
 import { UsuariosRoutingModule } from './usuarios.routing';
 
@@ -17,6 +18,7 @@ const COMPONENTS = [
     VerUsuarioComponent,
     RegistrarUsuarioComponent,
     ActualizarUsuarioComponent,
+    ActualizarContrasenaComponent,
 ]
 
 @NgModule({
