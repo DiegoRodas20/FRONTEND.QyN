@@ -17,6 +17,7 @@
                             <div class="intro-y col-span-12 sm:col-span-6">
                                 <label class="form-label">Contraseña</label>
                                 <input formControlName="password" type="text" class="form-control">
+                                <div *ngIf="formContrasena.controls['password'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
                             </div>
 
                         </div>

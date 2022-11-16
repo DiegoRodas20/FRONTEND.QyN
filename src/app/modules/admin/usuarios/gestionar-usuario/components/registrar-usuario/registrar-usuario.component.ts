@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
+
     selector: 'app-registrar-usuario',
     templateUrl: 'registrar-usuario.component.html'
 })
@@ -22,16 +23,17 @@ export class RegistrarUsuarioComponent implements OnInit {
 
     ngOnInit() {
         this.crearFormUsuario()
+        this.registrarUsuario()
     }
 
     crearFormUsuario() {
         this.formUsuario = this._formBuilder.group({
-            email: [null, []],
-            password: [null, []],
-            firstName: [null, []],
-            lastName: [null, []],
-            surName: [null, []],
-            bornDate: [null, []],
+            email: [null, [Validators.required, Validators.email, Validators.maxLength(30)]],
+            password: [null, [Validators.required, Validators.maxLength(30)]],
+            firstName: [null, [Validators.required, Validators.maxLength(30)]],
+            lastName: [null, [Validators.required, Validators.maxLength(30)]],
+            surName: [null, [Validators.required, Validators.maxLength(30)]],
+            bornDate: [null, [Validators.required]],
         })
     }
 

@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -36,10 +36,10 @@ export class ActualizarUsuarioComponent implements OnInit {
 
     crearFormUsuario(){
         this.formUsuario = this._formBuilder.group({
-            firstName: [null, []],
-            lastName: [null, []],
-            surName: [null, []],
-            bornDate: [null, []],
+            firstName: [null, [Validators.required, Validators.maxLength(30)]],
+            lastName: [null, [Validators.required, Validators.maxLength(30)]],
+            surName: [null, [Validators.required, Validators.maxLength(30)]],
+            bornDate: [null, [Validators.required]],
             isActive: [null, []],
         })
     }

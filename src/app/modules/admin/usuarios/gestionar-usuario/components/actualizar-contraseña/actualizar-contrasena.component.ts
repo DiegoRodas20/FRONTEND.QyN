@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/core/services/user.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AlertService } from 'src/app/shared/services/alert.service';
@@ -46,7 +46,7 @@ export class ActualizarContrasenaComponent implements OnInit {
 
     crearFormContrasena() {
         this.formContrasena = this._formBuilder.group({
-            password: [null, []],
+            password: [null, [Validators.required, Validators.maxLength(30)]],
         })
     }
 

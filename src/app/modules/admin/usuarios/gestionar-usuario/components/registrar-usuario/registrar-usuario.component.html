@@ -15,36 +15,44 @@
                 <div class="intro-y col-span-6 mt-5">
                     <label class="form-label">E-mail</label>
                     <input formControlName="email" type="text" class="form-control">
+                    <div *ngIf="formUsuario.controls['email'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
+                    <div *ngIf="formUsuario.controls['email'].hasError('maxlength')" class="text-danger mt-2">Maximo de 30 caracteres</div>
+                    <div *ngIf="formUsuario.controls['email'].hasError('email')" class="text-danger mt-2">Formato de email incorrecto</div>
                 </div>
 
                 <!-- Password -->
                 <div class="intro-y col-span-6 mt-5">
                     <label class="form-label">Contraseña</label>
                     <input formControlName="password" type="text" class="form-control">
+                    <div *ngIf="formUsuario.controls['password'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>               
                 </div>
                 
                 <!-- First Name -->
                 <div class="intro-y col-span-6 mt-5">
                     <label class="form-label">Primer Nombre</label>
                     <input formControlName="firstName" type="text" class="form-control">
+                    <div *ngIf="formUsuario.controls['firstName'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
                 </div>
 
                 <!-- Apellido -->
                 <div class="intro-y col-span-6 mt-5">
                     <label class="form-label">Apellido</label>
                     <input formControlName="lastName" type="text" class="form-control">
+                    <div *ngIf="formUsuario.controls['lastName'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>                
                 </div>
 
                  <!-- Segundo Nombre -->
                  <div class="intro-y col-span-6 mt-5">
                     <label class="form-label">Segundo Nombre</label>
                     <input formControlName="surName" type="text" class="form-control">
+                    <div *ngIf="formUsuario.controls['surName'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>                             
                 </div>
 
                 <!-- Dia de Nacimiento -->
                 <div class="intro-y col-span-6 mt-5">
                     <label class="form-label">Fecha de Nacimiento</label>
                     <input formControlName="bornDate" type="date" class="form-control">
+                    <div *ngIf="formUsuario.controls['bornDate'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>                                             
                 </div>
 
                 <!-- Boton de Registrar y Atras -->

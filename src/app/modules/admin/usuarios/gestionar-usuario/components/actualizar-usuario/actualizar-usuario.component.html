@@ -16,24 +16,28 @@
                 <div class="intro-y col-span-6 mt-5">
                     <label class="form-label">Primer Nombre</label>
                     <input formControlName="firstName" type="text" class="form-control">
+                    <div *ngIf="formUsuario.controls['firstName'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
                 </div>
 
                 <!-- Apellido -->
                 <div class="intro-y col-span-6 mt-5">
                     <label class="form-label">Apellido</label>
                     <input formControlName="lastName" type="text" class="form-control">
+                    <div *ngIf="formUsuario.controls['lastName'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
                 </div>
 
                 <!-- Segundo Nombre -->
                 <div class="intro-y col-span-6 mt-5">
                     <label class="form-label">Segundo Nombre</label>
                     <input formControlName="surName" type="text" class="form-control">
+                    <div *ngIf="formUsuario.controls['surName'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
                 </div>
 
                 <!-- Fecha de Nacimiento -->
                 <div class="intro-y col-span-6 mt-5">
                     <label class="form-label">Fecha de Nacimiento</label>
                     <input formControlName="bornDate" type="date" class="form-control">
+                    <div *ngIf="formUsuario.controls['bornDate'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>  
                 </div>
 
                  <!-- Estado -->
