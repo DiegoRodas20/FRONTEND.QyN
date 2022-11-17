@@ -20,6 +20,17 @@ export class OrderService {
         return this.http.get<ResponseData>(url)
     }
 
+    getPedidosEntregados(): Observable<ResponseData> {
+
+        const url = `${ORDER_URL}/report/delivered`
+        return this.http.get<ResponseData>(url)
+    }
+
+    getPedidosPuntuacion(): Observable<ResponseData> {
+
+        const url = `${ORDER_URL}/report/punctuation`
+        return this.http.get<ResponseData>(url)
+    }
     // Listado general de Clientes
     getPedidosToAssign(): Observable<ResponseData> {
 

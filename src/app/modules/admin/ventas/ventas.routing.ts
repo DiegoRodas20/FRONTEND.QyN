@@ -8,11 +8,13 @@ import { GestionarPedidoComponent } from './gestionar-pedido/gestionar-pedido.co
 import { GestionarVentaComponent } from './gestionar-venta/gestionar-venta.component';
 import { VerOrdenCompraComponent } from './gestionar-orden-compra/ver-orden-compra/ver-orden-compra.component';
 import { ActualizarOrdenCompraComponent } from './gestionar-orden-compra/actualizar-orden-compra/actualizar-orden-compra.component';
+import { VisualizarReportesComponent } from './visualizar-reportes/visualizar-reportes.component';
 
 const routes: Routes = [
 
     { path: 'gestionarventa', component: GestionarVentaComponent, data: { titulo: 'Gestionar Venta' } },
     { path: 'gestionarcliente', component: GestionarClienteComponent, data: { titulo: 'Gestionar Cliente' } },
+    { path: 'visualizarreporte', component: VisualizarReportesComponent, data: { titulo: 'Visualizar Reporte' } },
     {
         path: 'gestionarpedido', children: [
             { path: '', component: GestionarPedidoComponent, data: { titulo: 'Gestionar Pedido' } },
@@ -21,11 +23,12 @@ const routes: Routes = [
         ]
     },
     {
-        path: 'gestionarOrdenCompra',children: [
-          { path: '',component: GestionarOrdenCompraComponent, data: {titulo: 'Gestionar Orden Compra'} },
-          { path: 'ver/:id', component: VerOrdenCompraComponent, data: {titulo: 'Ver Orden Compra'}},
-          { path: 'actualizar/:id', component: ActualizarOrdenCompraComponent, data: {titulo: 'Ver Orden Compra'}}
-    ] }
+        path: 'gestionarOrdenCompra', children: [
+            { path: '', component: GestionarOrdenCompraComponent, data: { titulo: 'Gestionar Orden Compra' } },
+            { path: 'ver/:id', component: VerOrdenCompraComponent, data: { titulo: 'Ver Orden Compra' } },
+            { path: 'actualizar/:id', component: ActualizarOrdenCompraComponent, data: { titulo: 'Ver Orden Compra' } }
+        ]
+    }
 ]
 
 @NgModule({

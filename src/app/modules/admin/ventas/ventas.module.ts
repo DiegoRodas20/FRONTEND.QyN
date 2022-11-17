@@ -25,6 +25,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { VisualizarReportesComponent } from './visualizar-reportes/visualizar-reportes.component';
 
 const COMPONENTS = [
     GestionarVentaComponent,
@@ -43,7 +44,8 @@ const COMPONENTS = [
 @NgModule({
   providers:[ {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
     declarations: [
-        COMPONENTS
+        COMPONENTS,
+        VisualizarReportesComponent
     ],
     imports: [
         CommonModule,

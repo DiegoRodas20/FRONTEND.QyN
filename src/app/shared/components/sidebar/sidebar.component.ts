@@ -98,11 +98,17 @@ export class SidebarComponent implements OnInit {
                         "icono": "package"
                     },
                     {
-                      "idhijo": 2,
-                      "titulo": "Gestionar Orden de Compra",
-                      "url": "/ventas/gestionarOrdenCompra",
-                      "icono": "package"
-                  }
+                        "idhijo": 2,
+                        "titulo": "Gestionar Orden de Compra",
+                        "url": "/ventas/gestionarOrdenCompra",
+                        "icono": "package"
+                    },
+                    {
+                        "idhijo": 3,
+                        "titulo": "Visualizar Reporte",
+                        "url": "/ventas/visualizarreporte",
+                        "icono": "package"
+                    }
                 ],
             },
             // {

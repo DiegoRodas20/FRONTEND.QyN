@@ -1,0 +1,37 @@
+<!-- Cabecera -->
+<div class="flex items-center mt-8">
+    <h2 class="intro-y text-lg font-medium mr-auto">
+        Ver Pedido
+    </h2>
+</div>
+
+<!-- Inputs -->
+<div class="intro-y box py-10 sm:py-10 mt-5">
+    <div class="px-10 sm:px-10 dark:border-darkmode-400">
+
+
+        <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+
+
+            <div class="intro-y col-span-12 sm:col-span-6">
+                <div class="hidden md:block mx-auto text-slate-500">{{pedidosMensaje}}</div>
+
+                <div class="chart-container">
+
+                    <canvas id="pedidosChart">{{ pedidosChart }}</canvas>
+
+                </div>
+            </div>
+
+            <div class="intro-y col-span-12 sm:col-span-6">
+                <div class="hidden md:block mx-auto text-slate-500">{{puntuacionMensaje}}</div>
+
+                <div class="chart-container">
+
+                    <canvas id="puntuacionChart">{{ puntuacionChart }}</canvas>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
