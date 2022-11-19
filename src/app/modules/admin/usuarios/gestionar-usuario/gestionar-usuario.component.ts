@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
 import { ActualizarContrasenaComponent } from './components/actualizar-contraseña/actualizar-contrasena.component';
-
+import { AsignarRolesComponent } from './components/asignar-roles/asignar-roles.component';
 
 @Component({
     selector: 'app-gestionar-usuario',
@@ -34,7 +34,7 @@ export class GestionarUsuarioComponent implements OnInit {
             console.log(data)
             this.Mensaje = data.message
             this.lUsuarios = data.data
-        } 
+        }
         catch (error) {
             console.log("Error: ", error)
         }
@@ -43,7 +43,7 @@ export class GestionarUsuarioComponent implements OnInit {
     registrarUsuario(){
         this._router.navigate(['/usuarios/gestionarusuario/registrar'])
     }
-    
+
     verUsuario(idUsuario: number) {
         this._router.navigate(['/usuarios/gestionarusuario/ver/' + idUsuario])
     }
@@ -52,8 +52,8 @@ export class GestionarUsuarioComponent implements OnInit {
         this._router.navigate(['/usuarios/gestionarusuario/actualizar/' + idUsuario])
     }
 
-    actualizarContrasena(idUsuario: number) { 
-    
+    actualizarContrasena(idUsuario: number) {
+
         const dialogConfig = new MatDialogConfig()
 
         dialogConfig.panelClass = ['modal', 'overflow-y-auto', 'show', 'modal-show']
@@ -62,5 +62,15 @@ export class GestionarUsuarioComponent implements OnInit {
         const dialogReg = this._dialog.open(ActualizarContrasenaComponent, dialogConfig)
         dialogReg.afterClosed().subscribe(result => this.getUsuarios())
     }
+
+    openAsignarRolesDialog(idUsuario: number): void {
+      const dialogConfig = new MatDialogConfig()
+
+      dialogConfig.panelClass = ['modal', 'overflow-y-auto', 'show', 'modal-show']
+      dialogConfig.data = idUsuario
+
+      const dialogReg = this._dialog.open(AsignarRolesComponent, dialogConfig)
+
+     }
 
 }
