@@ -44,3 +44,11 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+#Angular files
+.angular
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json

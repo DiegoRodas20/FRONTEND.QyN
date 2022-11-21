@@ -38,7 +38,6 @@ export class GestionarProductoComponent implements OnInit {
             const data: ResponseData = await this._productoService.getProductos().toPromise()
 
             this.Mensaje = data.message
-            console.log(data)
             this.lProductos = data.data
         }
         catch (error) {
@@ -80,7 +79,6 @@ export class GestionarProductoComponent implements OnInit {
         dialogConfig.panelClass = ['modal', 'overflow-y-auto', 'show', 'modal-show']
         dialogConfig.data = idProducto
 
-        console.log(dialogConfig.data)
         const dialogReg = this._dialog.open(VerProductoComponent, dialogConfig)
         dialogReg.afterClosed().subscribe(result => console.log(result))
     }

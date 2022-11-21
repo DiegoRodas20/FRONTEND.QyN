@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Category } from 'src/app/core/models/category.model';
 import { Product, RegisterProduct } from 'src/app/core/models/product.model';
 import { ResponseData } from 'src/app/core/models/response.model';
 import { CategoryService } from 'src/app/core/services/category.service';
+import { FirebaseStorageService } from 'src/app/core/services/firebase-storage.service';
 // import { FirebaseStorageService } from 'src/app/core/services/firebase-storage.service';
 import { ProductoService } from 'src/app/core/services/product.service';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
     selector: 'app-registrar-producto',
@@ -29,15 +31,16 @@ export class RegistrarProductoComponent implements OnInit {
         { value: false, name: 'No' }
     ]
 
-    porcentajeFile: number = 0;
-    subiendoArchivo = false;
+    fileToUpload: File | null = null;
 
     constructor(
         private _productoService: ProductoService,
         private _categoryService: CategoryService,
         private _dialogRef: MatDialogRef<RegistrarProductoComponent>,
         private _formBuilder: FormBuilder,
-        // private _firebaseStorage: FirebaseStorageService
+        private _firebaseStorage: FirebaseStorageService,
+        private _alertService: AlertService
+
     ) { }
 
     ngOnInit() {
@@ -56,7 +59,8 @@ export class RegistrarProductoComponent implements OnInit {
             maxStock: [null, []],
             stock: [null, []],
             showInCatalog: [null, []],
-            urlImage: [null, []]
+            urlImage: [null, []],
+            uploadFile: [null, [Validators.required]]
         })
     }
 
@@ -88,26 +92,34 @@ export class RegistrarProductoComponent implements OnInit {
             maxStock: Number(form.maxStock),
             stock: Number(form.stock),
             showInCatalog: Boolean(form.showInCatalog),
-            urlImage: form.urlImage
+            urlImage: ''
         }
 
-        console.log(producto)
-
         try {
+            producto.urlImage = await this.subirImgProducto(this.fileToUpload)
             let data: ResponseData = await this._productoService.registrarProducto(producto)
-
-            if(!data.error){
-                this.modalClass = ' overflow-y-auto show'
-                this.mensaje = "Se registro el producto correctamente."
-            }
-
-            console.log(data)
+            this._alertService.openModal({ typeModal: 'success', contenidoModal: data.message })
+            this._dialogRef.close()
         }
         catch (error) {
             console.log(error)
         }
     }
 
+    async subirImgProducto(file: File) {
+        try {
+            return await this._firebaseStorage.subirArchivo(file)
+        } catch (error) {
+            this._alertService.openModal({ typeModal: 'error', contenidoModal: 'Hubo un error al momento de subir la foto.' })
+            console.log(error)
+
+            throw error;
+        }
+    }
+
+    handleFileInput(event: Event) {
+        this.fileToUpload = event.target['files'].item(0);
+    }
 
     // subirImgProducto(file: File, producto: any) {
 
@@ -141,7 +153,7 @@ export class RegistrarProductoComponent implements OnInit {
 
     modificarCSSModal() {
         this.modalClass = ''
-      }
+    }
 
     salir() {
         this._dialogRef.close()

@@ -3,16 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  firebase: {
+    projectId: 'quimicaynegocios-70ba4',
+    appId: '1:836872548783:web:8bfcc83c3baf6cf8b23f5a',
+    storageBucket: 'quimicaynegocios-70ba4.appspot.com',
+    locationId: 'us-central',
+    apiKey: 'AIzaSyCUrbCrofqJBukZtGdXjmC2HNfnf6ZX4po',
+    authDomain: 'quimicaynegocios-70ba4.firebaseapp.com',
+    messagingSenderId: '836872548783',
+  },
   production: false,
   API_URL: "https://web-dev-7c5f.up.railway.app/",
-  firebaseKey: {
-    apiKey: "AIzaSyB_lUj0jpQCxpgsghYe8qfvB2lcRqArR68",
-    authDomain: "test-tg-soluciones.firebaseapp.com",
-    projectId: "test-tg-soluciones",
-    storageBucket: "test-tg-soluciones.appspot.com",
-    messagingSenderId: "89602403852",
-    appId: "1:89602403852:web:8145afccab66151eea0829"
-  }
 };
 
 /*

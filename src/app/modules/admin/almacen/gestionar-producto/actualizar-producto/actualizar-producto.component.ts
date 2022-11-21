@@ -1,10 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Category } from 'src/app/core/models/category.model';
 import { ResponseData } from 'src/app/core/models/response.model';
 import { CategoryService } from 'src/app/core/services/category.service';
+import { FirebaseStorageService } from 'src/app/core/services/firebase-storage.service';
 import { ProductoService } from 'src/app/core/services/product.service';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
     selector: 'app-actualizar-producto',
@@ -27,13 +29,16 @@ export class ActualizarProductoComponent implements OnInit {
         { value: false, name: 'No' }
     ]
 
+    fileToUpload: File | null = null;
+
     constructor(
         private _productoService: ProductoService,
         private _categoryService: CategoryService,
         private _dialogRef: MatDialogRef<ActualizarProductoComponent>,
         private _formBuilder: FormBuilder,
-
-        @Inject(MAT_DIALOG_DATA) private _dialogData
+        @Inject(MAT_DIALOG_DATA) private _dialogData,
+        private _firebaseStorage: FirebaseStorageService,
+        private _alertService: AlertService
     ) { }
 
     ngOnInit() {
@@ -54,7 +59,8 @@ export class ActualizarProductoComponent implements OnInit {
             maxStock: [null, []],
             stock: [null, []],
             showInCatalog: [null, []],
-            urlImage: [null, []]
+            urlImage: [null, []],
+            uploadFile: [null, []]
         })
     }
 
@@ -98,30 +104,38 @@ export class ActualizarProductoComponent implements OnInit {
             minStock: Number(form.minStock),
             maxStock: Number(form.maxStock),
             stock: Number(form.stock),
-            showInCatalog: form.showInCatalog == "false" ? false : true,
-            urlImage: form.urlImage
+            showInCatalog: (form.showInCatalog == "false" || form.showInCatalog == false) ? false : true,
+            urlImage: form.urlImage,
         }
 
 
         try {
+            producto.urlImage = this.fileToUpload ? await this.subirImgProducto(this.fileToUpload) : producto.urlImage
+
             let data: ResponseData = await this._productoService.actualizarProducto(producto, this._dialogData)
 
-            if (!data.error) {
-                this.modalClass = ' overflow-y-auto show'
-                this.mensaje = "Se actualizo el producto correctamente."
-            }
-
-            console.log(data)
+            this._alertService.openModal({ typeModal: 'success', contenidoModal: data.message });
+            this._dialogRef.close()
         }
         catch (error) {
             console.log(error)
         }
     }
 
-
-    modificarCSSModal() {
-        this.modalClass = ''
+    async subirImgProducto(file: File) {
+        try {
+            return await this._firebaseStorage.subirArchivo(file)
+        } catch (error) {
+            this._alertService.openModal({ typeModal: 'error', contenidoModal: 'Hubo un error al momento de subir la foto.' })
+            console.log(error)
+            throw error;
+        }
     }
+
+    handleFileInput(event: Event) {
+        this.fileToUpload = event.target['files'].item(0);
+    }
+
 
     salir() {
         this._dialogRef.close()
