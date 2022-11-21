@@ -13,7 +13,7 @@ export const environment = {
     messagingSenderId: '836872548783',
   },
   production: false,
-  API_URL: "https://api-qyn.onrender.com/",
+  API_URL: "https://web-production-5687.up.railway.app/",
 };
 
 /*

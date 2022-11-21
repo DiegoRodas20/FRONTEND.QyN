@@ -9,5 +9,5 @@ export const environment = {
     messagingSenderId: '836872548783',
   },
   production: true,
-  API_URL: "https://web-dev-7c5f.up.railway.app/"
+  API_URL: "https://web-production-5687.up.railway.app/"
 };
