@@ -18,7 +18,7 @@
                             <div class="intro-y col-span-12 sm:col-span-6">
                                 <label class="form-label">Pedido</label>
                                 <select class="form-select sm:mr-2 dropdown-content" formControlName="pedidoId">
-                                    <option *ngFor="let pedido of pedidos" [value]="pedido.id">
+                                    <option *ngFor="let pedido of pedidos" [ngValue]="pedido.id">
                                         {{pedido.id + ' - ' + pedido.clientName}}
                                     </option>
                                 </select>

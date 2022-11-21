@@ -44,7 +44,7 @@ export class RegistrarPedidosTransporteComponent implements OnInit {
     let values = this.formAsignacion.value;
     let data = {
       "orderId": values.pedidoId,
-      "vehicleId": this._dialogData,
+      "vehicleId": Number(this._dialogData),
       "date": values.arrivalDate
     }
 

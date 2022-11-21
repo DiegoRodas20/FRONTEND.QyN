@@ -15,7 +15,7 @@
 
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
-                <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
+                <input [formControl]="filtro" type="text" class="form-control w-56 box pr-10" placeholder="Buscar...">
                 <lucide-icon class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" name="search"></lucide-icon>
             </div>
         </div>
@@ -36,7 +36,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="intro-x" *ngFor="let proveedor of lProveedores">
+                <tr class="intro-x"
+                    *ngFor="let proveedor of lProveedores  | filterPipe: filtro.value | paginate: { itemsPerPage: 5, currentPage: p }">
                     <td class="text-center font-medium whitespace-nowrap"> {{proveedor.id}} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{proveedor.ruc}}</td>
                     <td class="text-center font-medium whitespace-nowrap"> {{proveedor.name}} </td>
@@ -64,48 +65,10 @@
         </table>
     </div>
 
-    <!-- Paginacion -->
-    <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
-
-        <nav class="w-full sm:w-auto sm:mr-auto">
-            <ul class="pagination">
-
-                <li class="page-item">
-                    <a class="page-link" href="#"> 
-                        <lucide-icon class="w-4 h-4" name="chevrons-left"></lucide-icon>
-                    </a>
-                </li>
-
-                <li class="page-item">
-                    <a class="page-link" href="#">
-                        <lucide-icon class="w-4 h-4" name="chevron-left"></lucide-icon>
-                    </a>
-                </li>
-
-                <li class="page-item active"> <a class="page-link" href="#">1</a> </li>
-                <li class="page-item"> <a class="page-link" href="#">2</a> </li>
-                <li class="page-item"> <a class="page-link" href="#">3</a> </li>
-                <li class="page-item">
-                    <a class="page-link" href="#"> 
-                        <lucide-icon class="w-4 h-4" name="chevron-right"></lucide-icon>        
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#"> 
-                        <lucide-icon class="w-4 h-4" name="chevrons-right"></lucide-icon>
-                    </a>
-                </li>
-
-            </ul>
-        </nav>
-
-        <select class="w-20 form-select box mt-3 sm:mt-0">
-            <option>10</option>
-            <option>25</option>
-            <option>35</option>
-            <option>50</option>
-        </select>
-
+    <!-- Pagination -->
+    <div class="intro-y col-span-12 text-right">
+        <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="p = $event">
+        </pagination-controls>
     </div>
-    
+
 </div>

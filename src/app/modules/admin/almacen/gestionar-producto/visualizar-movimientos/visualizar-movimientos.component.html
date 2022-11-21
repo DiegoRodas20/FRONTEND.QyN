@@ -22,6 +22,8 @@
                     <th class="text-center whitespace-nowrap">Cantidad</th>
                     <th class="text-center whitespace-nowrap">Tipo</th>
                     <th class="text-center whitespace-nowrap">Fecha Movimiento</th>
+                    <th class="text-center whitespace-nowrap">Hora Movimiento</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +33,9 @@
                     <td class="text-center font-medium whitespace-nowrap"> {{movimiento.typeMovement}} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{movimiento.date | date: 'dd/MM/yyyy'}}
                     </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{movimiento.date | date: 'mediumTime'}}
+                    </td>
+
                 </tr>
 
 
