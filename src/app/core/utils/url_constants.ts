@@ -17,3 +17,4 @@ export const CATALOGO_URL       = `${environment.API_URL}product/catalog`
 export const PEDIDO_URL         = `${environment.API_URL}order`
 export const TYPEVEHICLE_URL    = `${environment.API_URL}typevehicle`
 export const SUPPLIER_URL       = `${environment.API_URL}supplier`
+export const ROLES_URL = `${environment.API_URL}rol`

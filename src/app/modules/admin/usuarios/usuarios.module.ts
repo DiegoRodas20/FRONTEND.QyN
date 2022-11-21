@@ -11,6 +11,7 @@ import { ActualizarUsuarioComponent } from './gestionar-usuario/components/actua
 import { ActualizarContrasenaComponent } from './gestionar-usuario/components/actualizar-contraseña/actualizar-contrasena.component';
 import { GestionarUsuarioComponent } from './gestionar-usuario/gestionar-usuario.component';
 import { UsuariosRoutingModule } from './usuarios.routing';
+import { AsignarRolesComponent } from './gestionar-usuario/components/asignar-roles/asignar-roles.component';
 
 
 const COMPONENTS = [
@@ -19,6 +20,7 @@ const COMPONENTS = [
     RegistrarUsuarioComponent,
     ActualizarUsuarioComponent,
     ActualizarContrasenaComponent,
+    AsignarRolesComponent
 ]
 
 @NgModule({
