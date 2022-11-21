@@ -12,20 +12,6 @@
         <form [formGroup]="formUsuario">
             <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
 
-                <!-- First Name -->
-                <div class="intro-y col-span-12 sm:col-span-6">
-                    <label for="input-wizard-1" class="form-label">Nombre</label>
-                    <input id="input-wizard-1" formControlName="firstName" type="text" class="form-control"
-                        placeholder="Ingresa tu nombre" readonly>
-                </div>
-
-                <!-- Last Name -->
-                <div class="intro-y col-span-12 sm:col-span-6">
-                    <label for="input-wizard-2" class="form-label">Apellidos</label>
-                    <input id="input-wizard-2" formControlName="lastName" type="text" class="form-control"
-                        placeholder="Ingresa tu apellido" readonly>
-                </div>
-
                 <!-- E-mail -->
                 <div class="intro-y col-span-12 sm:col-span-6">
                     <label for="input-wizard-3" class="form-label">E-mail</label>
@@ -36,14 +22,41 @@
                 <!-- Estado -->
                 <div class="intro-y col-span-12 sm:col-span-6">
                     <label for="input-wizard-4" class="form-label">Estado</label>
-                    <input id="input-wizard-4" formControlName="estado" type="text" class="form-control"
-                        placeholder="Selecciona tu estado" readonly>
+                    <input id="input-wizard-4" formControlName="isActive" type="text" class="form-control"
+                        placeholder="Selecciona tu Estado" readonly>
+                </div>
+
+                <!-- Primer Nombre -->
+                <div class="intro-y col-span-12 sm:col-span-6">
+                    <label for="input-wizard-4" class="form-label">Primer Nombre</label>
+                    <input id="input-wizard-4" formControlName="firstName" type="text" class="form-control"
+                        placeholder="Selecciona tu Primer Nombre" readonly>
+                </div>
+
+                <!-- Apellido -->
+                <div class="intro-y col-span-12 sm:col-span-6">
+                    <label for="input-wizard-4" class="form-label">Apellido</label>
+                    <input id="input-wizard-4" formControlName="lastName" type="text" class="form-control"
+                        placeholder="Selecciona tu Apellido" readonly>
+                </div>
+
+                <!-- Segundo Nombre -->
+                <div class="intro-y col-span-12 sm:col-span-6">
+                    <label for="input-wizard-4" class="form-label">Segundo Nombre</label>
+                    <input id="input-wizard-4" formControlName="surName" type="text" class="form-control"
+                        placeholder="Selecciona tu Segundo Nombre" readonly>
+                </div>
+
+                 <!-- Fecha de Nacimiento -->
+                 <div class="intro-y col-span-12 sm:col-span-6">
+                    <label for="input-wizard-4" class="form-label">Fecha de Nacimiento</label>
+                    <input id="input-wizard-4" formControlName="bornDate" type="date" class="form-control"
+                        placeholder="Selecciona tu Fecha de Nacimiento" readonly>
                 </div>
 
                 <!-- Options -->
                 <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
                     <button class="btn btn-secondary w-24" (click)="cerrarVentana()">Atrás</button>
-                    <button class="btn btn-primary w-24 ml-2">Registrar</button>
                 </div>
 
             </div>

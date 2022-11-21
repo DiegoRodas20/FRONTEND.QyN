@@ -1,0 +1,35 @@
+<div class="modal-dialog modal-x2">
+    <div class="modal-content">
+        
+        <!-- Cabecera -->
+        <div class="modal-header">
+            <h2 class="font-medium intro-y text-lg mr-auto">Actualizar Contraseña</h2>
+        </div>
+
+        <div class="modal-body p-0">
+            <!-- Inputs -->
+            <div class="intro-y box py-8 sm:py-8">
+                <div class="px-8 sm:px-8 dark:border-darkmode-400">
+                    <form [formGroup]="formContrasena">
+                        <div class="grid grid-cols-12 gap-4 gap-y-5">
+                            
+                            <!-- Contraseña -->
+                            <div class="intro-y col-span-12 sm:col-span-6">
+                                <label class="form-label">Contraseña</label>
+                                <input formControlName="password" type="text" class="form-control">
+                                <div *ngIf="formContrasena.controls['password'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="modal-footer intro-y">
+            <button class="btn btn-secondary w-20 mr-3" (click)="salir()">Atrás</button>
+            <button class="btn btn-primary w-30" (click)="actualizarContrasena()">Actualizar</button>
+        </div>
+    </div>
+</div>
