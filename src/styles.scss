@@ -86,3 +86,13 @@
     padding-left: 0.75rem;
     padding-right: 0.75rem;
 }
+
+// Calendario
+.fc-v-event {
+    border: 1px solid #062b61 !important;
+    background-color: #062b61 !important;
+}
+
+.fc .fc-timegrid-slot {
+    height: 1.65em !important;
+}

@@ -10,13 +10,18 @@
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
 
         <div class="hidden md:block mx-auto text-slate-500"> {{'Pedidos encontrados: ' + this.pedidos.length}} </div>
-        <button class="btn btn-primary shadow-md mr-2" (click)="openCreateOrderVehicle(null)">Registrar Asignacion</button>
+        <button class="btn btn-primary shadow-md mr-2" (click)="openCreateOrderVehicle(null)">
+            Registrar Asignacion
+        </button>
 
     </div>
 
     <!-- Table -->
     <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
-        <full-calendar [options]="calendarOptions" style="height: 450px;"></full-calendar>
+        <div class="box p-5">
+            <full-calendar class="full-calendar" [options]="calendarOptions">
+            </full-calendar>
+        </div>
 
 
         <!-- <table class="table table-report -mt-2">

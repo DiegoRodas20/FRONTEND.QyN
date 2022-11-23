@@ -14,6 +14,7 @@ import { AlertService } from 'src/app/shared/services/alert.service';
   templateUrl: './ver-pedidos-transporte.component.html',
   styleUrls: ['./ver-pedidos-transporte.component.scss']
 })
+
 export class VerPedidosTransporteComponent implements OnInit {
 
   mensaje = "";
@@ -23,21 +24,34 @@ export class VerPedidosTransporteComponent implements OnInit {
   modalClass: string = ''
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
+
+    droppable: true,
+    navLinks: true,
+    editable: true,
+    dayMaxEvents: true,
+    height: '42rem',
+    slotLabelFormat: {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+      meridiem: 'short',
+    },
+
     locale: esLocale,
     events: [],
     headerToolbar: {
-      start: 'title',
-      center: '',
-      end: 'today prev,next dayGridMonth dayGridWeek'
+      left: "prev,next today",
+      center: "title",
+      right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
     },
     eventClick: (e) => {
       this.verDetalleDePedido(e.event._def.extendedProps.data)
     },
     dateClick: (e) => {
       this.openCreateOrderVehicle(e)
-    },
-    height: '700px'
+    }
   };
+
   constructor(
     private _route: ActivatedRoute,
     private _orderVehicleService: OrderVehicleService,
