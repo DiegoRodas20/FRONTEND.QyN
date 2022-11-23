@@ -22,6 +22,8 @@ export class VerPedidoComponent implements OnInit {
     lProductosPedido: Product[] = []
     formPedido: FormGroup
     formCliente: FormGroup
+    formAsignacion: FormGroup
+    formComentario: FormGroup
 
     constructor(
         private _router: Router,
@@ -34,6 +36,7 @@ export class VerPedidoComponent implements OnInit {
     ngOnInit() {
         this.crearFormPedido()
         this.crearFormCliente()
+        this.crearFormAsignacion()
         this.listarEstadosPedido()
 
         this._route.params.subscribe(params => {
@@ -63,6 +66,17 @@ export class VerPedidoComponent implements OnInit {
         })
     }
 
+    crearFormAsignacion() {
+        this.formAsignacion = this._formBuilder.group({
+            date: [null, []],
+            vehicleId: [null, []],
+            typeVehicle: [null, []],
+            plate: [null, []],
+            brand: [null, []],
+            color: [null, []],
+            driverName: [null, []],
+        })
+    }
     async listarEstadosPedido() {
 
         try {
@@ -84,6 +98,9 @@ export class VerPedidoComponent implements OnInit {
             this.formCliente.patchValue(data.data['client'])
             this.formPedido.patchValue(data.data)
             this.formPedido.controls['estimatedDate'].setValue(this._datePipe.transform(data.data['estimatedDate'], 'dd/MM/yyyy'))
+            this.formAsignacion.patchValue(data.data['assignation'])
+            this.formAsignacion.controls['date'].setValue(this._datePipe.transform(data.data['assignation']['date'], 'dd/MM/yyyy'))
+            console.log(this.formAsignacion.value)
         }
         catch (error) {
             console.log("Error: ", error)
