@@ -17,7 +17,7 @@ export class RegistrarPedidosTransporteComponent implements OnInit {
     private _dialogRef: MatDialogRef<RegistrarPedidosTransporteComponent>,
     private _formBuilder: FormBuilder,
     private _orderService: OrderService,
-    @Inject(MAT_DIALOG_DATA) private _dialogData,
+    @Inject(MAT_DIALOG_DATA) private _dialogData: { idVehiculo: number, date: string },
     private _orderVehicleService: OrderVehicleService,
 
   ) { }
@@ -25,7 +25,7 @@ export class RegistrarPedidosTransporteComponent implements OnInit {
   ngOnInit(): void {
     this.formAsignacion = this._formBuilder.group({
       pedidoId: [null, Validators.required],
-      arrivalDate: [null, Validators.required],
+      arrivalDate: [this._dialogData.date, Validators.required],
     })
     this.listarPedidos()
   }
@@ -44,7 +44,7 @@ export class RegistrarPedidosTransporteComponent implements OnInit {
     let values = this.formAsignacion.value;
     let data = {
       "orderId": values.pedidoId,
-      "vehicleId": Number(this._dialogData),
+      "vehicleId": Number(this._dialogData.idVehiculo),
       "date": values.arrivalDate
     }
 

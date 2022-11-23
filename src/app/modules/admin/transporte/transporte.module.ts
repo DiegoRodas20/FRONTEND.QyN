@@ -13,6 +13,19 @@ import { ActualizarVehiculoComponent } from './gestionar-vehiculos/components/ac
 import { PipeModule } from 'src/app/core/pipes/pipe.module';
 import { VerPedidosTransporteComponent } from './asignar-transporte/components/ver-pedidos-transporte/ver-pedidos-transporte.component';
 import { RegistrarPedidosTransporteComponent } from './asignar-transporte/components/registrar-pedidos-transporte/registrar-pedidos-transporte.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import interactionPlugin from '@fullcalendar/interaction';
+import { AsignacionPedidoDialogComponent } from './asignar-transporte/components/asignacion-pedido-dialog/asignacion-pedido-dialog.component';
+
+FullCalendarModule.registerPlugins([
+    dayGridPlugin,
+    timeGridPlugin,
+    listPlugin,
+    interactionPlugin
+])
 
 const COMPONENTS = [
     AsignarTransporteComponent,
@@ -26,7 +39,8 @@ const COMPONENTS = [
     declarations: [
         COMPONENTS,
         VerPedidosTransporteComponent,
-        RegistrarPedidosTransporteComponent
+        RegistrarPedidosTransporteComponent,
+        AsignacionPedidoDialogComponent
     ],
     imports: [
         CommonModule,
@@ -36,7 +50,8 @@ const COMPONENTS = [
         NgxPaginationModule,
         FormsModule,
         ReactiveFormsModule,
-        LucideAngularModule.pick(icons)
+        LucideAngularModule.pick(icons),
+        FullCalendarModule 
     ],
     exports: [],
 })
