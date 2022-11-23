@@ -75,7 +75,7 @@ export class AsignarRolesComponent implements OnInit {
 
   updateRolesUsuario() {
     let bodyUpdateRoles = {
-      rolIds: '1132',
+      rolIds: this.formRolesUsuario.controls.rolIds.value,
       userId: this._dialogData
     }
     this._userService.actualizarRolesUsuario(this._dialogData, bodyUpdateRoles).then(() => {

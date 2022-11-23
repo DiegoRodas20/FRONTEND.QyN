@@ -1,6 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+
+
+export interface Menu {
+    id: number;
+    url: string;
+    icon: string;
+    title: string;
+    childs: Menu[];
+}
+
 @Component({
     selector: 'app-sidebar',
     templateUrl: 'sidebar.component.html'
@@ -8,7 +18,7 @@ import { ActivatedRoute } from '@angular/router';
 
 export class SidebarComponent implements OnInit {
 
-    lMenu: any[]
+    lMenu: Menu[]
     idPadre: number = 0
     idPadreSeleccionado: number = 0
     openSubmenu = false
@@ -23,138 +33,14 @@ export class SidebarComponent implements OnInit {
     }
 
     setMenu() {
-        this.lMenu = [
-            {
-                "idpadre": 0,
-                "titulo": "Dashboard",
-                "url": "/dashboard",
-                "icono": "home"
-            },
-            {
-                "idpadre": 1,
-                "titulo": "Usuarios",
-                "icono": "users",
-                "submenu": [
-                    {
-                        "idhijo": 0,
-                        "titulo": "Gestionar Usuario",
-                        "url": "/usuarios/gestionarusuario",
-                        "icono": "user"
-                    }
-                ],
-            },
-            {
-                "idpadre": 2,
-                "titulo": "Almacén",
-                "icono": "clipboard-list",
-                "submenu": [
-                    // {
-                    //     "idhijo": 0,
-                    //     "titulo": "Gestionar Almacén",
-                    //     "url": "/almacen/gestionaralmacen",
-                    //     "icono": "clipboard-list"
-                    // },
-                    {
-                        "idhijo": 0,
-                        "titulo": "Gestionar Producto",
-                        "url": "/almacen/gestionarproducto",
-                        "icono": "box"
-                    },
-                    // {
-                    //     "idhijo": 2,
-                    //     "titulo": "Gestionar Movimiento",
-                    //     "url": "/almacen/gestionarmovimiento",
-                    //     "icono": "package-search"
-                    // },
-                    {
-                        "idhijo": 3,
-                        "titulo": "Gestionar Proveedor",
-                        "url": "/almacen/gestionarproveedor",
-                        "icono": "user"
-                    }
-                ],
-            },
-            {
-                "titulo": "Ventas",
-                "idpadre": 3,
-                "icono": "shopping-cart",
-                "submenu": [
-                    // {
-                    //     "idhijo": 0,
-                    //     "titulo": "Gestionar Venta",
-                    //     "url": "/ventas/gestionarventa",
-                    //     "icono": "shopping-cart"
-                    // },
-                    {
-                        "idhijo": 0,
-                        "titulo": "Gestionar Cliente",
-                        "url": "/ventas/gestionarcliente",
-                        "icono": "users"
-                    },
-                    {
-                        "idhijo": 1,
-                        "titulo": "Gestionar Pedido",
-                        "url": "/ventas/gestionarpedido",
-                        "icono": "package"
-                    },
-                    {
-                        "idhijo": 2,
-                        "titulo": "Gestionar Orden de Compra",
-                        "url": "/ventas/gestionarOrdenCompra",
-                        "icono": "package"
-                    },
-                    {
-                        "idhijo": 3,
-                        "titulo": "Visualizar Reporte",
-                        "url": "/ventas/visualizarreporte",
-                        "icono": "package"
-                    }
-                ],
-            },
-            // {
-            //     "titulo": "Fabricación",
-            //     "idpadre": 4,
-            //     "icono": "factory",
-            //     "submenu": [
-            //         {
-            //             "idhijo": 0,
-            //             "titulo": "Gestionar Fabricación",
-            //             "url": "/fabricacion/gestionarfabricacion",
-            //             "icono": "factory"
-            //         },
-            //         {
-            //             "idhijo": 1,
-            //             "titulo": "Gestionar Formulación",
-            //             "url": "/fabricacion/gestionarformulacion",
-            //             "icono": "sigma"
-            //         }
-            //     ]
-            // },
-            {
-                "titulo": "Transporte",
-                "idpadre": 4,
-                "icono": "truck",
-                "submenu": [
-                    {
-                        "idhijo": 0,
-                        "titulo": "Asignar Transporte",
-                        "url": "/transporte/asignartransporte",
-                        "icono": "home"
-                    },
-                    {
-                        "idhijo": 0,
-                        "titulo": "Gestionar Vehículos",
-                        "url": "/transporte/gestionarvehiculos",
-                        "icono": "home"
-                    }
-                ]
-            },
-            {
-                "titulo": "Cerrar Sesión",
-                "url": "/login",
-                "icono": "log-out"
-            },
-        ]
+        this.lMenu = JSON.parse(localStorage.getItem('Usuario')).data.menus
+        this.lMenu.push({
+            id: -1,
+            "title": "Cerrar Sesión",
+            "url": "/login",
+            "icon": "log-out",
+            childs: []
+        })
     }
 
     showSubmenu(idpadre: number) {
@@ -163,7 +49,13 @@ export class SidebarComponent implements OnInit {
 
     routerlinkactive(idpadre: number) {
         this.idPadreSeleccionado = idpadre
-        console.log(this.idPadreSeleccionado)
+    }
+
+    cerrarSesion(id: number) {
+        if (id == -1){
+            localStorage.clear();
+            
+        }
     }
 
 }

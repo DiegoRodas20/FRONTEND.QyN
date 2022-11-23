@@ -50,24 +50,19 @@ export class SignInComponent implements OnInit {
             password: form.password
         }
 
-        try {
-            const data: any = await this._authService.iniciarSesion(signin)
-            const token = data.headers.get('authorization')
-            const usuario = atob(data.headers.get('authorization').split('.')[1])
+        const data: any = await this._authService.iniciarSesion(signin)
+        const token = data.headers.get('authorization')
+        const usuario = atob(data.headers.get('authorization').split('.')[1])
 
-            localStorage.setItem('Usuario', usuario)
-            localStorage.setItem('Token', token)
+        localStorage.setItem('Usuario', usuario)
+        localStorage.setItem('Token', token)
+        this._alertService.openModal({ typeModal: 'success', contenidoModal: data.body.message })
 
-            this._alertService.openModal({ typeModal: 'success', contenidoModal: data.body.message })
+        this._router.navigate(['/dashboard']).then(() => {
+            window.location.reload();
+        })
 
-            this._router.navigate(['/dashboard']).then(() => {
-                window.location.reload();
-            })
-        }
 
-        catch (error) {
-            this._alertService.openModal({ typeModal: 'error', contenidoModal: error.error.error })
-        }
     }
 
 }
