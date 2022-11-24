@@ -98,9 +98,11 @@ export class VerPedidoComponent implements OnInit {
             this.formCliente.patchValue(data.data['client'])
             this.formPedido.patchValue(data.data)
             this.formPedido.controls['estimatedDate'].setValue(this._datePipe.transform(data.data['estimatedDate'], 'dd/MM/yyyy'))
-            this.formAsignacion.patchValue(data.data['assignation'])
-            this.formAsignacion.controls['date'].setValue(this._datePipe.transform(data.data['assignation']['date'], 'dd/MM/yyyy'))
-            console.log(this.formAsignacion.value)
+
+            if (data.data['assignation']) {
+                this.formAsignacion.patchValue(data.data['assignation'])
+                this.formAsignacion.controls['date'].setValue(this._datePipe.transform(data.data['assignation']['date'], 'dd/MM/yyyy'))
+            }
         }
         catch (error) {
             console.log("Error: ", error)

@@ -1,6 +1,6 @@
 <!-- Titulo -->
-<h2 class="intro-y text-lg font-medium mt-10">
-    Movimientos del producto con Id: {{idProducto}}
+<h2 *ngIf="producto" class="intro-y text-lg font-medium mt-10">
+    Movimientos del producto: {{producto?.code + ' - ' + producto?.name}}
 </h2>
 
 <!-- Cuerpo -->
@@ -10,7 +10,10 @@
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
 
         <div class="hidden md:block mx-auto text-slate-500"> {{mensaje}} </div>
+    </div>
+    <div *ngIf="producto" class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
 
+        <div class="hidden md:block mx-auto text-slate-500"> Stock actual: {{producto?.stock}} </div>
     </div>
 
     <!-- Table -->
@@ -21,6 +24,7 @@
                     <!-- <th class="text-center whitespace-nowrap">ID</th> -->
                     <th class="text-center whitespace-nowrap">Cantidad</th>
                     <th class="text-center whitespace-nowrap">Tipo</th>
+                    <th class="text-center whitespace-nowrap">Stock despues</th>
                     <th class="text-center whitespace-nowrap">Fecha Movimiento</th>
                     <th class="text-center whitespace-nowrap">Hora Movimiento</th>
 
@@ -31,6 +35,7 @@
                     *ngFor="let movimiento of movimientos |paginate: { itemsPerPage: 5, currentPage: p }">
                     <td class="text-center font-medium whitespace-nowrap"> {{movimiento.quantity}} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{movimiento.typeMovement}} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{movimiento.stock}} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{movimiento.date | date: 'dd/MM/yyyy'}}
                     </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{movimiento.date | date: 'mediumTime'}}

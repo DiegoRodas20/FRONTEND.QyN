@@ -43,7 +43,7 @@
                             <div class="intro-y col-span-12 sm:col-span-4">
                                 <label class="form-label">Mostrar en Catálogo</label>
                                 <select class="form-select sm:mr-2 dropdown-content" formControlName="showInCatalog">
-                                    <option *ngFor="let show of lShowCatalog" [value]="show.value">
+                                    <option *ngFor="let show of lShowCatalog" [ngValue]="show.value">
                                         {{show.name}}
                                     </option>
                                 </select>
@@ -52,35 +52,35 @@
                             <!-- Precio de compra -->
                             <div class="intro-y col-span-12 sm:col-span-4">
                                 <label class="form-label">Precio de compra</label>
-                                <input formControlName="purchasePrice" type="text" class="form-control"
+                                <input formControlName="purchasePrice" type="number" class="form-control"
                                     placeholder="Ingrese el precio de compra">
                             </div>
 
                             <!-- Precio de venta -->
                             <div class="intro-y col-span-12 sm:col-span-4">
                                 <label class="form-label">Precio de venta</label>
-                                <input formControlName="salesPrice" type="text" class="form-control"
+                                <input formControlName="salesPrice" type="number" class="form-control"
                                     placeholder="Ingrese el precio de venta">
                             </div>
 
                             <!-- Stock Minimo -->
                             <div class="intro-y col-span-12 sm:col-span-4">
                                 <label class="form-label">Stock Minimo</label>
-                                <input formControlName="minStock" type="text" class="form-control"
+                                <input formControlName="minStock" type="number" class="form-control"
                                     placeholder="Ingrese el stock minimo">
                             </div>
 
                             <!-- Stock Maximo -->
                             <div class="intro-y col-span-12 sm:col-span-4">
                                 <label class="form-label">Stock Maximo</label>
-                                <input formControlName="maxStock" type="text" class="form-control"
+                                <input formControlName="maxStock" type="number" class="form-control"
                                     placeholder="Ingrese el stock máximo">
                             </div>
 
                             <!-- Stock -->
                             <div class="intro-y col-span-12 sm:col-span-4">
                                 <label class="form-label">Stock</label>
-                                <input readOnly formControlName="stock" type="text" class="form-control"
+                                <input readOnly formControlName="stock" type="number" class="form-control"
                                     placeholder="Ingrese el stock">
                             </div>
 

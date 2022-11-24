@@ -84,7 +84,7 @@
             </div>
         </form>
 
-        <div class="font-medium text-base pt-8">Asignacion del Pedido</div>
+        <div *ngIf="this.formAsignacion.controls['date'].value" class="font-medium text-base pt-8">Asignacion del Pedido</div>
 
         <form [formGroup]="formAsignacion" *ngIf="this.formAsignacion.controls['date'].value">
             <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">

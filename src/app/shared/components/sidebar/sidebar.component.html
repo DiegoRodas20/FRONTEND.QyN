@@ -13,7 +13,7 @@
     <ul>
         <li *ngFor="let menu of lMenu">
 
-            <a [ngClass]="'side-menu '+ (menu.id == idPadreSeleccionado ? 'side-menu--active' : '')" [routerLink]="menu.url"
+            <a [ngClass]="'side-menu '+ (menu.id == idPadreSeleccionado ? 'side-menu--active' : '')" [routerLink]="menu.url == '' ? null : menu.url"
                 (click)="menu.childs ? showSubmenu(menu.id) : routerlinkactive(menu.id); showSubmenu(menu.id); cerrarSesion(menu.id)">
                 <div class="side-menu__icon">
                     <lucide-icon name="{{menu.icon}}"></lucide-icon>
