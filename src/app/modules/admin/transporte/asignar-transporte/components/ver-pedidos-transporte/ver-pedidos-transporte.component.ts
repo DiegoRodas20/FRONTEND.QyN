@@ -63,7 +63,6 @@ export class VerPedidosTransporteComponent implements OnInit {
 
   ngOnInit(): void {
     this._route.params.subscribe(params => {
-      console.log(params)
       this.idVehiculo = params.id;
       this.listarPedidos(this.idVehiculo);
     })
@@ -106,8 +105,7 @@ export class VerPedidosTransporteComponent implements OnInit {
 
       await this.listarPedidos(this.idVehiculo);
       if (result == 'Register') {
-        this.modalClass = ' overflow-y-auto show'
-        this.mensaje = "Se registro correctamente."
+        this._alertService.openModal({ typeModal: 'success', contenidoModal: "Se registro correctamente." })
       }
     })
   }
