@@ -52,6 +52,7 @@ export class VerPedidosTransporteComponent implements OnInit {
     }
   };
 
+  orderId: number = null;
   constructor(
     private _route: ActivatedRoute,
     private _orderVehicleService: OrderVehicleService,
@@ -62,8 +63,12 @@ export class VerPedidosTransporteComponent implements OnInit {
 
   ngOnInit(): void {
     this._route.params.subscribe(params => {
+      console.log(params)
       this.idVehiculo = params.id;
       this.listarPedidos(this.idVehiculo);
+    })
+    this._route.queryParams.subscribe(params => {
+      this.orderId = isNaN(params.order) ? null : Number(params.order);
     })
   }
 
@@ -94,7 +99,7 @@ export class VerPedidosTransporteComponent implements OnInit {
     const dialogConfig = new MatDialogConfig()
 
     dialogConfig.panelClass = ['modal', 'overflow-y-auto', 'show', 'modal-show']
-    dialogConfig.data = { idVehiculo: this.idVehiculo, date: fecha?.dateStr };
+    dialogConfig.data = { idVehiculo: this.idVehiculo, date: fecha?.dateStr, idPedido: this.orderId };
 
     const dialogReg = this._dialog.open(RegistrarPedidosTransporteComponent, dialogConfig)
     dialogReg.afterClosed().subscribe(async result => {
