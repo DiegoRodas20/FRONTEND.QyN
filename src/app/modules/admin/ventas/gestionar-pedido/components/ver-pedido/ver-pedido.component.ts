@@ -24,6 +24,7 @@ export class VerPedidoComponent implements OnInit {
     formCliente: FormGroup
     formAsignacion: FormGroup
     formComentario: FormGroup
+    actualStatus = 0;
 
     constructor(
         private _router: Router,
@@ -97,6 +98,8 @@ export class VerPedidoComponent implements OnInit {
             this.tipoDocumento = data.data['client'].typeDocument
             this.formCliente.patchValue(data.data['client'])
             this.formPedido.patchValue(data.data)
+            this.actualStatus = data.data['orderStatusId'];
+
             this.formPedido.controls['estimatedDate'].setValue(this._datePipe.transform(data.data['estimatedDate'], 'dd/MM/yyyy'))
 
             if (data.data['assignation']) {
@@ -111,5 +114,12 @@ export class VerPedidoComponent implements OnInit {
 
     cerrarVentana() {
         this._router.navigate(['/ventas/gestionarpedido'])
+    }
+
+    asignarTransporte() {
+        this._router.navigate(
+            ['/transporte/asignartransporte'],
+            { queryParams: { order: this.idPedido } }
+        )
     }
 }
