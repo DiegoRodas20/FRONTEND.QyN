@@ -56,7 +56,8 @@
                 <div class="intro-y col-span-12 sm:col-span-4">
                     <label class="form-label">Estado</label>
                     <select class="form-select sm:mr-2 dropdown-content" formControlName="orderStatusId">
-                        <option *ngFor="let estadosPedido of lEstadosPedido" [value]="estadosPedido.id" class="dropdown-item">
+                        <option *ngFor="let estadosPedido of lEstadosPedido" [value]="estadosPedido.id"
+                            class="dropdown-item">
                             {{estadosPedido.name}}
                         </option>
                     </select>
@@ -84,6 +85,49 @@
             </div>
         </form>
 
+        <div *ngIf="this.formAsignacion.controls['date'].value" class="font-medium text-base pt-8">Asignacion del Pedido
+        </div>
+
+        <form [formGroup]="formAsignacion" *ngIf="this.formAsignacion.controls['date'].value">
+            <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+
+                <!-- Tipo Vehiculo -->
+                <div class="intro-y col-span-12 sm:col-span-4">
+                    <label class="form-label">Tipo Vehiculo</label>
+                    <input formControlName="typeVehicle" type="text" class="form-control" readonly>
+                </div>
+
+                <!-- Placa -->
+                <div class="intro-y col-span-12 sm:col-span-4">
+                    <label class="form-label">Placa</label>
+                    <input formControlName="plate" type="text" class="form-control" readonly>
+                </div>
+
+                <!-- Marca -->
+                <div class="intro-y col-span-12 sm:col-span-4">
+                    <label class="form-label">Marca</label>
+                    <input formControlName="brand" type="text" class="form-control" readonly>
+                </div>
+
+                <!-- Color -->
+                <div class="intro-y col-span-12 sm:col-span-4">
+                    <label class="form-label">Color</label>
+                    <input formControlName="color" type="text" class="form-control" readonly>
+                </div>
+
+                <!-- Conductor -->
+                <div class="intro-y col-span-12 sm:col-span-4">
+                    <label class="form-label">Conductor</label>
+                    <input formControlName="driverName" type="text" class="form-control" readonly>
+                </div>
+
+                <!-- Fecha de llegada de asignacion -->
+                <div class="intro-y col-span-12 sm:col-span-4">
+                    <label class="form-label">Fecha de llegada asignada</label>
+                    <input formControlName="date" type="text" class="form-control" readonly>
+                </div>
+            </div>
+        </form>
 
         <div class="font-medium text-base pt-8">Productos</div>
 
@@ -123,8 +167,10 @@
         <!-- Options -->
         <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
             <button class="btn btn-primary w-24" (click)="actualizarPedido()">Actualizar</button>
+            <button *ngIf="this.actualStatus == 4 && !this.formAsignacion.controls['date'].value"
+                class="btn btn-primary mx-2 w-24" (click)="asignarTransporte()">Asignar
+                transporte</button>
             <button class="btn btn-secondary mx-2 w-24" (click)="cerrarVentana()">Atrás</button>
         </div>
     </div>
 </div>
-

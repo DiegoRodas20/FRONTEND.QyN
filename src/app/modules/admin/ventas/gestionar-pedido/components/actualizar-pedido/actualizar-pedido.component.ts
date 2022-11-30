@@ -23,7 +23,9 @@ export class ActualizarPedidoComponent implements OnInit {
     lProductosPedido: Product[] = []
     formPedido: FormGroup
     formCliente: FormGroup
-
+    formAsignacion: FormGroup
+    formComentario: FormGroup
+    actualStatus = 0;
     // Alert Modal
     typeModal: string
     openModal: boolean = false
@@ -41,13 +43,25 @@ export class ActualizarPedidoComponent implements OnInit {
     ngOnInit() {
         this.crearFormPedido()
         this.crearFormCliente()
-        this.listarEstadosPedido()
+        this.crearFormAsignacion();
 
+        this.listarEstadosPedido()
         this._route.params.subscribe(params => {
             this.idPedido = params.id
             this.listarPedidoxID(this.idPedido)
         })
 
+    }
+    crearFormAsignacion() {
+        this.formAsignacion = this._formBuilder.group({
+            date: [null, []],
+            vehicleId: [null, []],
+            typeVehicle: [null, []],
+            plate: [null, []],
+            brand: [null, []],
+            color: [null, []],
+            driverName: [null, []],
+        })
     }
 
     crearFormPedido() {
@@ -90,9 +104,15 @@ export class ActualizarPedidoComponent implements OnInit {
             this.tipoDocumento = data.data['client'].typeDocument
             this.formCliente.patchValue(data.data['client'])
             this.formPedido.patchValue(data.data)
+            this.actualStatus = data.data['orderStatusId'];
+
             let date = new Date(data.data['estimatedDate'])
             date.setDate(date.getDate() + 1);
             this.formPedido.controls['estimatedDate'].setValue(this._datePipe.transform(date, 'yyyy-MM-dd'))
+            if (data.data['assignation']) {
+                this.formAsignacion.patchValue(data.data['assignation'])
+                this.formAsignacion.controls['date'].setValue(this._datePipe.transform(data.data['assignation']['date'], 'dd/MM/yyyy'))
+            }
         }
         catch (error) {
             console.log("Error: ", error)
@@ -151,5 +171,11 @@ export class ActualizarPedidoComponent implements OnInit {
 
     cerrarVentana() {
         this._router.navigate(['/ventas/gestionarpedido'])
+    }
+    asignarTransporte() {
+        this._router.navigate(
+            ['/transporte/asignartransporte'],
+            { queryParams: { order: this.idPedido } }
+        )
     }
 }

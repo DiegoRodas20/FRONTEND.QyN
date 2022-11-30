@@ -52,6 +52,7 @@ export class VerPedidosTransporteComponent implements OnInit {
     }
   };
 
+  orderId: number = null;
   constructor(
     private _route: ActivatedRoute,
     private _orderVehicleService: OrderVehicleService,
@@ -64,6 +65,9 @@ export class VerPedidosTransporteComponent implements OnInit {
     this._route.params.subscribe(params => {
       this.idVehiculo = params.id;
       this.listarPedidos(this.idVehiculo);
+    })
+    this._route.queryParams.subscribe(params => {
+      this.orderId = isNaN(params.order) ? null : Number(params.order);
     })
   }
 
@@ -94,15 +98,14 @@ export class VerPedidosTransporteComponent implements OnInit {
     const dialogConfig = new MatDialogConfig()
 
     dialogConfig.panelClass = ['modal', 'overflow-y-auto', 'show', 'modal-show']
-    dialogConfig.data = { idVehiculo: this.idVehiculo, date: fecha?.dateStr };
+    dialogConfig.data = { idVehiculo: this.idVehiculo, date: fecha?.dateStr, idPedido: this.orderId };
 
     const dialogReg = this._dialog.open(RegistrarPedidosTransporteComponent, dialogConfig)
     dialogReg.afterClosed().subscribe(async result => {
 
       await this.listarPedidos(this.idVehiculo);
       if (result == 'Register') {
-        this.modalClass = ' overflow-y-auto show'
-        this.mensaje = "Se registro correctamente."
+        this._alertService.openModal({ typeModal: 'success', contenidoModal: "Se registro correctamente." })
       }
     })
   }

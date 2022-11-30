@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { Product } from 'src/app/core/models/product.model';
+import { ResponseData } from 'src/app/core/models/response.model';
 import { ProductoService } from 'src/app/core/services/product.service';
 
 @Component({

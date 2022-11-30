@@ -108,7 +108,7 @@ export class ActualizarProductoComponent implements OnInit {
             minStock: Number(form.minStock),
             maxStock: Number(form.maxStock),
             stock: Number(form.stock),
-            showInCatalog: (form.showInCatalog == "false" || form.showInCatalog == false) ? false : true,
+            showInCatalog: form.showInCatalog,
             urlImage: form.urlImage,
         }
 

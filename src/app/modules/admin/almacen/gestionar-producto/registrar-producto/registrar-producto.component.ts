@@ -99,7 +99,7 @@ export class RegistrarProductoComponent implements OnInit {
             minStock: Number(form.minStock),
             maxStock: Number(form.maxStock),
             stock: Number(form.stock),
-            showInCatalog: Boolean(form.showInCatalog),
+            showInCatalog: form.showInCatalog,
             urlImage: ''
         }
 

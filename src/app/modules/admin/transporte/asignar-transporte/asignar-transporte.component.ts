@@ -35,7 +35,7 @@ export class AsignarTransporteComponent implements OnInit {
     }
 
     verPedidosAsignados(idVehiculo: string) {
-        this._router.navigate(['/transporte/asignartransporte/' + idVehiculo])
+        this._router.navigate(['/transporte/asignartransporte/' + idVehiculo], { queryParamsHandling: 'preserve' })
     }
 
 }

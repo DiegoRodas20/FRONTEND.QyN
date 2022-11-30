@@ -57,7 +57,7 @@
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
 
-                            <button class="flex items-center text-primary" (click)="verPedidosAsignados(vehiculo.id)">
+                            <button [disabled]="!vehiculo.status" class="flex items-center text-primary" (click)="verPedidosAsignados(vehiculo.id)">
                                 <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
                                 Ver Pedidos Asignados
                             </button>
