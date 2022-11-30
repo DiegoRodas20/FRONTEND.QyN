@@ -31,7 +31,7 @@
             </thead>
             <tbody>
                 <tr class="intro-x"
-                    *ngFor="let cliente of lClientes | filterPipe: filtro.value | paginate: { itemsPerPage: 5, currentPage: p }">
+                    *ngFor="let cliente of lClientes | filterPipe: filtro.value | paginate: { itemsPerPage: 8, currentPage: p }">
                     <td class="text-center font-medium whitespace-nowrap"> {{ cliente.id }} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{ cliente.name ? cliente.name : '-'}} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{ cliente.numberDocument }} </td>
@@ -39,14 +39,13 @@
 
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
-                            <button class="flex items-center mr-3" (click)="actualizarCliente(cliente.id)">
-                                <lucide-icon class="w-4 h-4 mr-1" name="check-square"></lucide-icon>
-                                Editar
-                            </button>
-
-                            <button class="flex items-center text-primary" (click)="verCliente(cliente.id)">
+                            <button class="flex items-center mr-3 text-success font-medium" (click)="verCliente(cliente.id)">
                                 <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
                                 Ver
+                            </button>
+                            <button class="flex items-center text-primary font-medium" (click)="actualizarCliente(cliente.id)">
+                                <lucide-icon class="w-4 h-4 mr-1" name="edit"></lucide-icon>
+                                Editar
                             </button>
                         </div>
                     </td>

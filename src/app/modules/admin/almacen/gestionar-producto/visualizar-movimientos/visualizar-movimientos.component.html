@@ -57,7 +57,9 @@
             <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="p = $event">
             </pagination-controls>
         </div>
-
-        <!-- <div class="hidden md:block mx-auto text-slate-500"> Stock actual: {{producto?.stock}} </div> -->
+        
+        <!-- <div *ngIf="producto" class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
+            <div class="hidden md:block mx-auto text-slate-500"> Stock actual: {{producto?.stock}} </div>
+        </div> -->
     </div>
 </div>

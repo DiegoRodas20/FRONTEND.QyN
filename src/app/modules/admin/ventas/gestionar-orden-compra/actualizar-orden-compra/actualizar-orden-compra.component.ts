@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { OrdenCompraService } from 'src/app/core/services/ordenCompra.service';
 import { SupplierService } from 'src/app/core/services/supplier.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -8,6 +8,7 @@ import { PurchaseOrderStatus } from 'src/app/core/models/purchaseOrder';
 import { ProductoService } from 'src/app/core/services/product.service';
 import { Product } from 'src/app/core/models/product.model';
 import { AlertService } from 'src/app/shared/services/alert.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @Component({
@@ -18,35 +19,36 @@ import { AlertService } from 'src/app/shared/services/alert.service';
 export class ActualizarOrdenCompraComponent implements OnInit {
 
   idOrdenCompra: string
-
   datePicker: any
+
   constructor(
     private _ordenCompraService: OrdenCompraService,
     private _supplierService: SupplierService,
     private _productoService: ProductoService,
     private _router: Router,
     private _route: ActivatedRoute,
+    private _dialogRef: MatDialogRef<ActualizarOrdenCompraComponent>,
     private _formBuilder: FormBuilder,
-    private _alertService: AlertService
+    private _alertService: AlertService,
 
+    @Inject(MAT_DIALOG_DATA) private _dialogData,
   ) { }
 
   ngOnInit() {
-    this._route.params.subscribe(params => {
-      this.idOrdenCompra = params.id
-      this.getProductList()
-      this.getInitalData().then(() => {
-        this.getOrdenCompraxID(this.idOrdenCompra)
-      })
-      this.formOrdenCompra = this._formBuilder.group({
-        id: [null, []], supplierData: this._formBuilder.group({
-          id: [null, []],
-          ruc: [null, []],
-          name: [null, []],
-          area: [null, []],
-          email: [null, []]
-        }), arrivalDate: [null, []], comments: [null, []], purchaseOrderStatusId: [null, []], purchaseOrderDetails: [null, []]
-      })
+    this.idOrdenCompra = this._dialogData
+
+    this.getProductList()
+    this.getInitalData().then(() => {
+      this.getOrdenCompraxID(this.idOrdenCompra)
+    })
+    this.formOrdenCompra = this._formBuilder.group({
+      id: [null, []], supplierData: this._formBuilder.group({
+        id: [null, []],
+        ruc: [null, []],
+        name: [null, []],
+        area: [null, []],
+        email: [null, []]
+      }), arrivalDate: [null, []], comments: [null, []], purchaseOrderStatusId: [null, []], purchaseOrderDetails: [null, []]
     })
   }
 
@@ -117,7 +119,8 @@ export class ActualizarOrdenCompraComponent implements OnInit {
     }
     await this._ordenCompraService.updateOrdenCompra(this.idOrdenCompra, updateOrden).subscribe(
       res => {
-        this._alertService.openModal({ typeModal: 'success', contenidoModal: 'La orden de compra fue actualizada' })
+        this.salir()
+        this._alertService.openModal({ typeModal: 'success', contenidoModal: res.message })
       },)
   }
 
@@ -133,7 +136,11 @@ export class ActualizarOrdenCompraComponent implements OnInit {
     return supplierOrdenCompra
   }
 
-  moveToGestionarOrdenCompra() {
-    this._router.navigate(['/ventas/gestionarOrdenCompra/'])
+  salir() {
+    this._dialogRef.close()
   }
+
+  // moveToGestionarOrdenCompra() {
+  //   this._router.navigate(['/ventas/gestionarOrdenCompra/'])
+  // }
 }

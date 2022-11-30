@@ -34,29 +34,32 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="intro-x" *ngFor="let pedido of lPedidos | filterPipe: filtro.value | paginate: { itemsPerPage: 5, currentPage: p }">
+                <tr class="intro-x"
+                    *ngFor="let pedido of lPedidos | filterPipe: filtro.value | paginate: { itemsPerPage: 8, currentPage: p }">
                     <td class="text-center font-medium whitespace-nowrap"> {{ pedido.id }} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{ pedido.clientName }} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{ pedido.createdAt | date: 'dd/MM/yyyy' }} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{ pedido.updatedAt | date: 'dd/MM/yyyy' }} </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{ pedido.createdAt | date: 'dd/MM/yyyy' }}
+                    </td>
+                    <td class="text-center font-medium whitespace-nowrap"> {{ pedido.updatedAt | date: 'dd/MM/yyyy' }}
+                    </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{ pedido.clientEmail}} </td>
-                    
-                    <td class="w-60">
-                        <div [class]="'flex items-center justify-center ' + colorStatusPedido(pedido.orderStatusId)">
-                            <lucide-icon class="w-4 h-4 mr-2" name="file-plus-2" [name]="iconStatusPedido(pedido.orderStatusId)"></lucide-icon>
-                            {{ pedido.orderStatus }}
+                    <td class="w-52">
+                        <div [class]="'badge py-1 ' + colorStatusPedido(pedido.orderStatusId)">
+                            <lucide-icon class="w-4 h-4 mr-1" [name]="iconStatusPedido(pedido.orderStatusId)">
+                            </lucide-icon>
+                            <span>{{pedido.orderStatus}}</span>
                         </div>
                     </td>
 
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
 
-                            <button class="flex items-center mr-3" (click)="actualizarPedido(pedido.id)">
-                                <lucide-icon class="w-4 h-4 mr-1" name="check-square"></lucide-icon>
+                            <button class="flex items-center mr-3 font-medium" (click)="actualizarPedido(pedido.id)">
+                                <lucide-icon class="w-4 h-4 mr-1" name="edit"></lucide-icon>
                                 Editar
                             </button>
 
-                            <button class="flex items-center text-primary" (click)="verPedido(pedido.id)">
+                            <button class="flex items-center text-primary font-medium" (click)="verPedido(pedido.id)">
                                 <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
                                 Ver
                             </button>
@@ -71,10 +74,7 @@
 
     <!-- Pagination -->
     <div class="intro-y col-span-12 text-right">
-        <pagination-controls 
-            previousLabel="Anterior" 
-            nextLabel="Siguiente" 
-            (pageChange)="p = $event">
+        <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="p = $event">
         </pagination-controls>
     </div>
 

@@ -1,87 +1,107 @@
 <!-- Cabecera -->
-<div class="flex items-center mt-8">
-  <h2 class="intro-y text-lg font-medium mr-auto">
-    Ver Orden de Compra
-  </h2>
+<div class="modal-header">
+    <h2 class="intro-y font-medium text-lg mr-auto">
+        Ver Orden de Compra
+    </h2>
 </div>
 
-<!-- Inputs -->
-<div class="intro-y box py-10 sm:py-10 mt-5">
-  <div class="px-10 sm:px-10 dark:border-darkmode-400">
+<!-- Cuerpo -->
+<div class="modal-body px-5 sm:px-10">
 
+    <ul class="nav nav-boxed-tabs" role="tablist">
+        <li id="example-3-tab" class="nav-item flex-1" role="presentation"> <button class="nav-link w-full py-2 active"
+                data-tw-toggle="pill" data-tw-target="#example-tab-3" type="button" role="tab"
+                aria-controls="example-tab-3" aria-selected="true"> Datos del Proveedor </button> </li>
+        <li id="example-4-tab" class="nav-item flex-1" role="presentation"> <button class="nav-link w-full py-2"
+                data-tw-toggle="pill" data-tw-target="#example-tab-4" type="button" role="tab"
+                aria-controls="example-tab-4" aria-selected="false"> Datos Orden Compra </button> </li>
+    </ul>
     <form [formGroup]="formOrdenCompra">
-      <div class="grid grid-cols-12 gap-4 gap-y-5">
-        <!-- Supplier -->
-        <div class="col-span-12">
-          <h2 class="intro-y text-lg font-medium mr-auto">
-           Supplier
-          </h2>
-          <div formGroupName="supplierData">
-            <div class="mt-3">
-              <label class="form-label">Name</label>
-              <input type="text" class="form-control" formControlName="name" readonly>
+
+        <div class="tab-content mt-5">
+            <div id="example-tab-3" class="tab-pane leading-relaxed active" role="tabpanel"
+                aria-labelledby="example-3-tab">
+                <div class="grid grid-cols-12 gap-4 gap-y-5" formGroupName="supplierData">
+
+                    <div class="intro-y col-span-6 sm:col-span-6">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" formControlName="name" readonly>
+                    </div>
+
+                    <div class="intro-y col-span-6 sm:col-span-6">
+                        <label class="form-label">RUC</label>
+                        <input type="text" class="form-control" formControlName="ruc" readonly>
+                    </div>
+
+                    <div class="intro-y col-span-6 sm:col-span-6">
+                        <label class="form-label">Area</label>
+                        <input type="text" class="form-control" formControlName="area" readonly>
+                    </div>
+
+                    <div class="intro-y col-span-6 sm:col-span-6">
+                        <label class="form-label">Email</label>
+                        <input type="text" class="form-control" formControlName="email" readonly>
+                    </div>
+
+                </div>
             </div>
-            <div class="mt-3">
-              <label class="form-label">RUC</label>
-              <input type="text" class="form-control" formControlName="ruc" readonly>
+            <div id="example-tab-4" class="tab-pane leading-relaxed" role="tabpanel" aria-labelledby="example-4-tab">
+                <div class="grid grid-cols-12 gap-4 gap-y-5">
+
+                    <!-- Fecha LLegada -->
+                    <div class="intro-y col-span-4">
+                        <label class="form-label">Fecha de llegada</label>
+                        <input formControlName="arrivalDate" type="text" class="form-control" readonly>
+                    </div>
+
+                    <!-- Comentario -->
+                    <div class="intro-y col-span-4">
+                        <label class="form-label">Comentario</label>
+                        <input formControlName="comments" type="text" class="form-control" readonly>
+                    </div>
+
+                    <!-- Estado -->
+                    <div class="intro-y col-span-4">
+                        <label class="form-label">Estado</label>
+                        <input formControlName="purchaseOrderStatusId" type="text" class="form-control" readonly>
+                    </div>
+
+                </div>
             </div>
-            <div class="mt-3">
-              <label class="form-label">Area</label>
-              <input type="text" class="form-control" formControlName="area" readonly>
-            </div>
-            <div class="mt-3">
-              <label class="form-label">Email</label>
-              <input type="text" class="form-control" formControlName="email" readonly>
-            </div>
-
-
-          </div>
         </div>
-
-        <!-- Fecha LLegada -->
-        <div class="intro-y col-span-6 mt-5">
-          <label class="form-label">Fecha de llegada</label>
-          <input formControlName="arrivalDate" type="text" class="form-control" readonly>
-        </div>
-
-        <!-- Comentario -->
-        <div class="intro-y col-span-6 mt-5">
-          <label class="form-label">Comentario</label>
-          <input formControlName="comments" type="text" class="form-control" readonly>
-        </div>
-
-        <!-- Estado -->
-        <div class="intro-y col-span-6 mt-5">
-          <label class="form-label">Estado</label>
-          <input formControlName="purchaseOrderStatusId" type="text" class="form-control" readonly>
-        </div>
-
-        <!--Boton Registrar y Atras-->
-
-      </div>
     </form>
+
     <h4 class="font-medium intro-y text-md mr-auto mt-5 intro-y">Lista Productos</h4>
 
-    <table class="table table-report text-center" >
-      <thead>
-        <tr >
-          <th class="text-center">Producto</th>
-          <th class="text-center">Precio</th>
-          <th class="text-center">Cantidad</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let product of formOrdenCompra.value.purchaseOrderDetails" class="intro-y">
-          <td class="text-center">{{product.productName}}</td>
-          <td class="text-center">{{product.purchasePrice}}</td>
-          <td class="text-center">{{product.quantity}}</td>
-        </tr>
+    <table class="table table-report text-center">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-center">Imagen</th>
+                <th class="text-center">Producto</th>
+                <th class="text-center">Precio</th>
+                <th class="text-center">Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of formOrdenCompra.value.purchaseOrderDetails" class="intro-y">
+                <td class="">
+                    <div class="flex items-center justify-center text-success">
+                        <div class="w-10 h-10 image-fit zoom-in">
+                            <img class="rounded-lg border-white shadow-md tooltip"
+                                [src]="getNameProduct(product.productId).urlImage" data-action="zoom">
+                        </div>
+                    </div>
+                </td>
+                <td class="text-center font-medium whitespace-nowrap">{{product.productName}}</td>
+                <td class="text-center font-medium whitespace-nowrap">S/. {{product.purchasePrice | number:'1.2-2'}}</td>
+                <td class="text-center font-medium whitespace-nowrap">{{product.quantity}}</td>
+            </tr>
 
-      </tbody>
+        </tbody>
     </table>
+</div>
 
-    <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
-      <button class="btn btn-secondary mx-2 w-24" (click)="moveToGestionarOrdenCompra()">Atrás</button>
-    </div>
-  </div>
+<!-- Footer -->
+<div class="modal-footer intro-y">
+    <button class="btn btn-secondary w-30" (click)="salir()">Atrás</button>
 </div>

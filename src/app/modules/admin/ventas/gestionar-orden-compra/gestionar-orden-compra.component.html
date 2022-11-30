@@ -8,12 +8,6 @@
 
     <!-- Cabecera -->
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-
-        <button class="btn btn-primary shadow-md mr-2" (click)="openCreatePurchaseOrderDialog()">Registrar Orden de
-            Compra</button>
-
-        <div class="hidden md:block mx-auto text-slate-500">{{Mensaje}}</div>
-
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
                 <input [formControl]="filtro" type="text" class="form-control w-56 box pr-10" placeholder="Buscar...">
@@ -21,6 +15,10 @@
             </div>
         </div>
 
+        <div class="hidden md:block mx-auto text-slate-500">{{Mensaje}}</div>
+        <button class="btn btn-primary shadow-md mr-2" (click)="openCreatePurchaseOrderDialog()">
+            Registrar Orden de Compra
+        </button>
     </div>
 
     <!-- Table -->
@@ -50,16 +48,18 @@
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
 
-                            <button class="flex items-center mr-3" (click)="moveToUpdateOrdenCompra(ordenCompra.id)">
-                                <lucide-icon class="w-4 h-4 mr-1" name="check-square"></lucide-icon>
-                                Editar
-                            </button>
-
-                            <button class="flex items-center text-primary"
+                            <button class="flex items-center mr-3 text-success font-medium"
                                 (click)="moveToVerOrdenCompra(ordenCompra.id)">
                                 <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
                                 Ver
                             </button>
+
+                            <button class="flex items-center text-primary font-medium"
+                                (click)="moveToUpdateOrdenCompra(ordenCompra.id)">
+                                <lucide-icon class="w-4 h-4 mr-1" name="edit"></lucide-icon>
+                                Editar
+                            </button>
+
                         </div>
                     </td>
                 </tr>

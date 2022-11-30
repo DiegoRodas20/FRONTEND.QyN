@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -21,11 +21,12 @@ import { VentasRoutingModule } from './ventas.routing';
 import { CrearOrdenCompraComponent } from './gestionar-orden-compra/crear-orden-compra/crear-orden-compra.component';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { ActualizarOrdenCompraComponent } from './gestionar-orden-compra/actualizar-orden-compra/actualizar-orden-compra.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { VisualizarReportesComponent } from './visualizar-reportes/visualizar-reportes.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const COMPONENTS = [
     GestionarVentaComponent,
@@ -42,7 +43,7 @@ const COMPONENTS = [
 ]
 
 @NgModule({
-  providers:[ {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}],
+    providers: [DatePipe, { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }],
     declarations: [
         COMPONENTS,
         VisualizarReportesComponent
@@ -56,6 +57,9 @@ const COMPONENTS = [
         ReactiveFormsModule,
         NgxPaginationModule,
         LucideAngularModule.pick(icons),
+        SharedModule,
+
+
         MatFormFieldModule,
         MatDatepickerModule,
         MatNativeDateModule,

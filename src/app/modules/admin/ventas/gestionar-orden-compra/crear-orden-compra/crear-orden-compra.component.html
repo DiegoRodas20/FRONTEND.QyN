@@ -1,112 +1,125 @@
-<div class="modal-dialog modal-xl">
-  <div class="modal-content">
+<!-- Cabecera -->
+<div class="modal-header">
+    <h2 class="intro-y font-medium text-lg mr-auto">Crear Orden Compra</h2>
+</div>
 
-    <!-- Cabecera -->
-    <div class="modal-header">
-      <h2 class="font-medium intro-y text-lg mr-auto">Crear Orden Compra</h2>
-    </div>
+<!-- Cuerpo -->
+<div class="modal-body px-5 sm:px-10">
 
-    <!-- Cuerpo -->
-    <div class="modal-body p-0">
-      <!-- Inputs -->
-      <div class="intro-y box py-8 sm:py-8">
-        <div class="px-8 sm:px-8 dark:border-darkmode-400">
+    <ul class="nav nav-boxed-tabs" role="tablist">
+        <li id="example-5-tab" class="nav-item flex-1" role="presentation">
+            <button class="nav-link w-full py-2 active" data-tw-toggle="pill" data-tw-target="#example-tab-5"
+                type="button" role="tab" aria-controls="example-tab-5" aria-selected="true"> Datos Orden de Compra
+            </button>
+        </li>
+        <li id="example-6-tab" class="nav-item flex-1" role="presentation">
+            <button class="nav-link w-full py-2" data-tw-toggle="pill" data-tw-target="#example-tab-6" type="button"
+                role="tab" aria-controls="example-tab-6" aria-selected="false"> Lista de Productos
+            </button>
+        </li>
+    </ul>
 
-          <form [formGroup]="formOrdenCompra">
-            <div class="grid grid-cols-12 gap-4 gap-y-5">
+    <div class="tab-content mt-5">
+        <div id="example-tab-5" class="tab-pane leading-relaxed active" role="tabpanel" aria-labelledby="example-5-tab">
+            <form [formGroup]="formOrdenCompra">
+                <div class="grid grid-cols-12 gap-4 gap-y-5">
 
-              <div class="intro-y col-span-12 sm:col-span-6">
-                <label class="form-label">Proveedores</label>
-                <select class="form-select sm:mr-2 dropdown-content" formControlName="supplierId">
-                  <option *ngFor="let supplier of lSuppliers" [value]="supplier.id">
-                    {{supplier.name}}
-                  </option>
-                </select>
-              </div>
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <label class="form-label">Proveedores</label>
+                        <select class="form-select sm:mr-2 dropdown-content" formControlName="supplierId">
+                            <option *ngFor="let supplier of lSuppliers" [value]="supplier.id">
+                                {{supplier.name}}
+                            </option>
+                        </select>
+                    </div>
 
-              <div class="intro-y col-span-12 sm:col-span-6">
-                <label class="form-label">Fecha de llegada</label>
-                <input formControlName="arrivalDate" type="date" class="form-control">
-              </div>
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <label class="form-label">Fecha de llegada</label>
+                        <input formControlName="arrivalDate" type="date" class="form-control">
+                    </div>
 
+                    <div class="intro-y col-span-12 ">
+                        <label class="form-label">Comentarios</label>
+                        <textarea formControlName="comments" class="form-control"></textarea>
+                    </div>
+                    
+                </div>
 
-              <div class="intro-y col-span-12 ">
-                <label class="form-label">Comentarios</label>
-                <textarea formControlName="comments" class="form-control"></textarea>
-              </div>
+            </form>
+        </div>
+
+        <div id="example-tab-6" class="tab-pane leading-relaxed" role="tabpanel" aria-labelledby="example-6-tab">
+            <div class="grid grid-cols-12 gap-4 gap-y-3">
+
+                <div class="intro-y col-span-4">
+                    <label class="form-label">Producto</label>
+                    <select class="form-select sm:mr-2 dropdown-content" [(ngModel)]="producto">
+                        <option [value]="null" disabled>Selecciona el Producto</option>
+                        <option *ngFor="let product of lProducts" [value]="product.id">
+                            {{product.name}}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="intro-y col-span-4">
+                    <label class="form-label">Precio</label>
+                    <input type="number" class="form-control" min="0" [(ngModel)]="precio">
+                </div>
+
+                <div class="intro-y col-span-3">
+                    <label class="form-label">Cantidad</label>
+                    <input type="number" class="form-control" min="0" [(ngModel)]="cantidad">
+                </div>
+
+                <div class="intro-y col-span-1 flex items-end content-end justify-end">
+                    <button class="btn btn-primary" (click)="addProductPurchaseOrder()"
+                        [disabled]="!precio || !producto || !cantidad">
+                        <lucide-icon class="w-4 h-4" name="package-plus"></lucide-icon>
+                    </button>
+                </div>
+
             </div>
+        </div>
 
-          </form>
-
-
-          <div class="grid grid-cols-12 gap-4 gap-y-3">
-            <div class="intro-y col-span-12">
-              <h4 class="font-medium intro-y text-md mr-auto">Lista Productos</h4>
-
-            </div>
-
-            <div class="intro-y col-span-4">
-              <label class="form-label">Producto</label>
-              <select class="form-select sm:mr-2 dropdown-content" [(ngModel)]="producto">
-                <option [value]="null" disabled>Selecciona el Producto</option>
-                <option *ngFor="let product of lProducts" [value]="product.id">
-                  {{product.name}}
-                </option>
-              </select>
-            </div>
-            <div class="intro-y col-span-4">
-              <label class="form-label">Precio</label>
-              <input type="number" class="form-control" min="0" [(ngModel)]="precio">
-            </div>
-            <div class="intro-y col-span-4">
-              <label class="form-label">Cantidad</label>
-              <input type="number" class="form-control" min="0" [(ngModel)]="cantidad">
-            </div>
-            <div class="intro-y col-span-12 flex items-end content-end justify-end">
-              <button class="btn btn-primary" (click)="addProductPurchaseOrder()"
-                [disabled]="!precio || !producto || !cantidad">
-                Agregar Producto
-                <lucide-icon class="w-4 h-4" name="plus"></lucide-icon>
-              </button>
-            </div>
-          </div>
-
-          <table class="table table-report text-center" *ngIf="formOrdenCompra.value.purchaseOrderDetails.length > 0">
-            <thead>
-              <tr>
-                <th class="text-center">Producto</th>
-                <th class="text-center">Precio</th>
-                <th class="text-center">Cantidad</th>
-                <th class="text-center">Eliminar</th>
-              </tr>
+        <table *ngIf="formOrdenCompra.value.purchaseOrderDetails.length > 0"
+            class="table table-report text-center mt-6">
+            <thead class="table-dark">
+                <tr>
+                    <th class="text-center">Imagen</th>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Precio</th>
+                    <th class="text-center">Cantidad</th>
+                    <th class="text-center">Eliminar</th>
+                </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let product of formOrdenCompra.value.purchaseOrderDetails" class="intro-y">
-                <td class="text-center">{{getNameProduct(product.productId).name}}</td>
-                <td class="text-center">{{product.purchasePrice}}</td>
-                <td class="text-center">{{product.quantity}}</td>
-                <td class="text-center">
-                  <button class="btn btn-primary" (click)="deleteProductPurchaseOrder(product.productId)">
-                    <lucide-icon class="w-4 h-4" name="trash-2"></lucide-icon>
-                  </button>
-                </td>
-              </tr>
+                <tr *ngFor="let product of formOrdenCompra.value.purchaseOrderDetails" class="intro-y">
+                    <td class="">
+                        <div class="flex items-center justify-center text-success">
+                            <div class="w-10 h-10 image-fit zoom-in">
+                                <img class="rounded-lg border-white shadow-md tooltip"
+                                    [src]="getNameProduct(product.productId).urlImage" data-action="zoom">
+                            </div>
+                        </div>
+                    </td>
+                    <td class="text-center font-medium whitespace-nowrap">{{getNameProduct(product.productId).name}}</td>
+                    <td class="text-center font-medium whitespace-nowrap">S/. {{product.purchasePrice | number:'1.2-2'}}</td>
+                    <td class="text-center font-medium whitespace-nowrap">{{product.quantity}}</td>
+                    <td class="text-center font-medium whitespace-nowrap">
+                        <button class="btn btn-primary" (click)="deleteProductPurchaseOrder(product.productId)">
+                            <lucide-icon class="w-4 h-4" name="trash-2"></lucide-icon>
+                        </button>
+                    </td>
+                </tr>
 
             </tbody>
-          </table>
-        </div>
-      </div>
+        </table>
     </div>
+</div>
 
-    <!-- Footer -->
-    <div class="modal-footer intro-y">
-
-
-      <button class="btn btn-secondary w-20 mr-3" (click)="salir()">Atrás
-      </button>
-      <button class="btn btn-primary w-30 " (click)="registerPurchaseOrder()" [disabled]="isInvalidForm()">Registrar
-        Orden Compra
-      </button>
-    </div>
-  </div>
+<!-- Footer -->
+<div class="modal-footer intro-y">
+    <button class="btn btn-primary w-30 mr-2" (click)="registerPurchaseOrder()" [disabled]="isInvalidForm()">Registrar
+        Orden Compra</button>
+    <button class="btn btn-secondary w-30" (click)="salir()">Atrás</button>
 </div>

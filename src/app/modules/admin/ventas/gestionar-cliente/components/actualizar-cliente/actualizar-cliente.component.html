@@ -1,81 +1,72 @@
-<div class="modal-dialog modal-xl">
-    <div class="modal-content">
+<!-- Cabecera -->
+<div class="modal-header">
+    <h2 class="intro-y font-medium text-lg mr-auto">Actualizar Cliente</h2>
+</div>
 
-        <!-- Cabecera -->
-        <div class="modal-header">
-            <h2 class="font-medium intro-y text-lg mr-auto">Actualizar Cliente</h2>
-        </div>
+<!-- Cuerpo -->
+<div class="modal-body px-5 sm:px-10">
+    <form [formGroup]="formCliente">
+        <div class="grid grid-cols-12 gap-4 gap-y-5">
 
-        <!-- Cuerpo -->
-        <div class="modal-body p-0">
-            <!-- Inputs -->
-            <div class="intro-y box py-8 sm:py-8">
-                <div class="px-8 sm:px-8 dark:border-darkmode-400">
-
-                    <form [formGroup]="formCliente">
-                        <div class="grid grid-cols-12 gap-4 gap-y-5">
-
-                            <!-- Tipo Documento -->
-                            <div class="intro-y col-span-12 sm:col-span-4">
-                                <label class="form-label">Tipo Documento</label>
-                                <select class="form-select sm:mr-2 dropdown-content" formControlName="typeDocumentId">
-                                    <option *ngFor="let typedocument of lTypeDocument" [value]="typedocument.id">
-                                        {{typedocument.name}}
-                                    </option>
-                                </select>
-                            </div>
-
-                            <!-- Numero Documento -->
-                            <div class="intro-y col-span-12 sm:col-span-4">
-                                <label class="form-label">Numero Documento</label>
-                                <input formControlName="numberDocument" type="text" class="form-control">
-                            </div>
-
-                            <!-- Nombre -->
-                            <div class="intro-y col-span-12 sm:col-span-4">
-                                <label class="form-label">Nombre</label>
-                                <input formControlName="name" type="text" class="form-control">
-                            </div>
-
-                            <!-- Area -->
-                            <div class="intro-y col-span-12 sm:col-span-4">
-                                <label class="form-label">Area</label>
-                                <input formControlName="area" type="text" class="form-control">
-                            </div>
-
-                            <!-- Telefono -->
-                            <div class="intro-y col-span-12 sm:col-span-4">
-                                <label class="form-label">Telefono</label>
-                                <input formControlName="phone" type="text" class="form-control">
-                            </div>
-
-                            <!-- Email -->
-                            <div class="intro-y col-span-12 sm:col-span-4">
-                                <label class="form-label">Email</label>
-                                <input formControlName="email" type="text" class="form-control">
-                            </div>
-
-                            <!-- Direccion -->
-                            <div class="intro-y col-span-12 sm:col-span-4">
-                                <label class="form-label">Direccion</label>
-                                <input formControlName="address" type="text" class="form-control">
-                            </div>
-
-                        </div>
-                    </form>
-
-
-                </div>
+            <!-- Tipo Documento -->
+            <div class="intro-y col-span-12 sm:col-span-4">
+                <label class="form-label">Tipo Documento</label>
+                <select [class]="'form-select ' + cssValidate('typeDocumentId')" formControlName="typeDocumentId">
+                    <option *ngFor="let typedocument of lTypeDocument" [value]="typedocument.id">
+                        {{typedocument.name}}
+                    </option>
+                </select>
+                <error-message [formControlError]="formCliente.controls['typeDocumentId']"></error-message>
             </div>
-        </div>
 
-        <!-- Footer -->
-        <div class="modal-footer intro-y">
-            <button class="btn btn-primary w-20 mr-1" (click)="actualizarCliente()">Actualizar
-            </button>
-            <button class="btn btn-outline-secondary w-20" (click)="salir()">Atrás
-            </button>
-        </div>
+            <!-- Numero Documento -->
+            <div class="intro-y col-span-12 sm:col-span-4">
+                <label class="form-label">Numero Documento</label>
+                <input formControlName="numberDocument" type="text" [class]="'form-control ' + cssValidate('numberDocument')">
+                <error-message [formControlError]="formCliente.controls['numberDocument']"></error-message>
+            </div>
 
-    </div>
+            <!-- Nombre -->
+            <div class="intro-y col-span-12 sm:col-span-4">
+                <label class="form-label">Nombre</label>
+                <input formControlName="name" type="text" [class]="'form-control ' + cssValidate('name')">
+                <error-message [formControlError]="formCliente.controls['name']"></error-message>
+            </div>
+
+            <!-- Area -->
+            <div class="intro-y col-span-12 sm:col-span-4">
+                <label class="form-label">Area</label>
+                <input formControlName="area" type="text" [class]="'form-control ' + cssValidate('area')">
+                <error-message [formControlError]="formCliente.controls['area']"></error-message>
+            </div>
+
+            <!-- Telefono -->
+            <div class="intro-y col-span-12 sm:col-span-4">
+                <label class="form-label">Telefono</label>
+                <input formControlName="phone" type="text" [class]="'form-control ' + cssValidate('phone')">
+                <error-message [formControlError]="formCliente.controls['phone']"></error-message>
+            </div>
+
+            <!-- Email -->
+            <div class="intro-y col-span-12 sm:col-span-4">
+                <label class="form-label">Email</label>
+                <input formControlName="email" type="text" [class]="'form-control ' + cssValidate('email')">
+                <error-message [formControlError]="formCliente.controls['email']"></error-message>
+            </div>
+
+            <!-- Direccion -->
+            <div class="intro-y col-span-12 sm:col-span-12">
+                <label class="form-label">Direccion</label>
+                <input formControlName="address" type="text" [class]="'form-control ' + cssValidate('address')">
+                <error-message [formControlError]="formCliente.controls['address']"></error-message>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<!-- Footer -->
+<div class="modal-footer intro-y">
+    <button class="btn btn-primary mr-3 w-30" (click)="actualizarCliente()">Actualizar</button>
+    <button class="btn btn-secondary w-30" (click)="salir()">Atrás</button>
 </div>

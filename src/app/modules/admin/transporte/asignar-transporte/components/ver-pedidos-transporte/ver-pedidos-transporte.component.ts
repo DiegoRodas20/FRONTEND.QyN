@@ -77,11 +77,9 @@ export class VerPedidosTransporteComponent implements OnInit {
     this.calendarOptions.events = [...this.pedidos.map(item => { return { title: item.orderId + ' - ' + item.clientName, date: new Date(item.arrivalDate).setDate(new Date(item.arrivalDate).getDate() + 1), data: item } })]
   }
 
-
   verDetalleDePedido(orderVehicle: any) {
     const dialogConfig = new MatDialogConfig()
 
-    dialogConfig.panelClass = ['modal', 'overflow-y-auto', 'show', 'modal-show']
     dialogConfig.data = orderVehicle;
 
     const dialogReg = this._dialog.open(AsignacionPedidoDialogComponent, dialogConfig)
@@ -97,7 +95,6 @@ export class VerPedidosTransporteComponent implements OnInit {
   openCreateOrderVehicle(fecha): void {
     const dialogConfig = new MatDialogConfig()
 
-    dialogConfig.panelClass = ['modal', 'overflow-y-auto', 'show', 'modal-show']
     dialogConfig.data = { idVehiculo: this.idVehiculo, date: fecha?.dateStr, idPedido: this.orderId };
 
     const dialogReg = this._dialog.open(RegistrarPedidosTransporteComponent, dialogConfig)

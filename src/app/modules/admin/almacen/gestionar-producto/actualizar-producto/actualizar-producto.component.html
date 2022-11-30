@@ -29,8 +29,8 @@
                 <label class="form-label">Categoría</label>
                 <select class="form-select" [class]="'form-select ' + cssValidate('categoryId')"
                     formControlName="categoryId">
-                    <option value="null" selected>Seleccione una opción</option>
-                    <option *ngFor="let categoria of lCategorias" [value]="categoria.id">
+                    <option [ngValue]="null" selected>Seleccione una opción</option>
+                    <option *ngFor="let categoria of lCategorias" [ngValue]="categoria.id">
                         {{categoria.name}}
                     </option>
                 </select>
@@ -41,8 +41,8 @@
             <div class="intro-y col-span-12 sm:col-span-4">
                 <label class="form-label">Mostrar en Catálogo</label>
                 <select [class]="'form-select ' + cssValidate('showInCatalog')" formControlName="showInCatalog">
-                    <option value="null" selected>Seleccione una opción</option>
-                    <option *ngFor="let show of lShowCatalog" [value]="show.value">
+                    <option [ngValue]="null" selected>Seleccione una opción</option>
+                    <option *ngFor="let show of lShowCatalog" [ngValue]="show.value">
                         {{show.name}}
                     </option>
                 </select>

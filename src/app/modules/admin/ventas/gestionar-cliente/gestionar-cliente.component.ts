@@ -29,10 +29,9 @@ export class GestionarClienteComponent implements OnInit {
     }
 
     async getClientes() {
-        
+
         try {
             const data: ResponseData = await this._clienteService.getClientes().toPromise()
-
             this.Mensaje = data.message
             this.lClientes = data.data
         }
@@ -41,12 +40,13 @@ export class GestionarClienteComponent implements OnInit {
         }
     }
 
-    actualizarCliente(idCliente: number) { 
-    
+    actualizarCliente(idCliente: number) {
+
         const dialogConfig = new MatDialogConfig()
 
-        dialogConfig.panelClass = ['modal', 'overflow-y-auto', 'show', 'modal-show']
         dialogConfig.data = idCliente
+        dialogConfig.autoFocus = false
+        dialogConfig.width = '55rem'
 
         const dialogReg = this._dialog.open(ActualizarClienteComponent, dialogConfig)
         dialogReg.afterClosed().subscribe(result => this.getClientes())
@@ -56,8 +56,9 @@ export class GestionarClienteComponent implements OnInit {
 
         const dialogConfig = new MatDialogConfig()
 
-        dialogConfig.panelClass = ['modal', 'overflow-y-auto', 'show', 'modal-show']
         dialogConfig.data = idCliente
+        dialogConfig.autoFocus = false
+        dialogConfig.width = '55rem'
 
         const dialogReg = this._dialog.open(VerClienteComponent, dialogConfig)
         dialogReg.afterClosed().subscribe(result => console.log(result))

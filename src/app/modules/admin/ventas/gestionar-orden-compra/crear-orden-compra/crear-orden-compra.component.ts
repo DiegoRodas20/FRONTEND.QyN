@@ -85,11 +85,17 @@ export class CrearOrdenCompraComponent implements OnInit {
       purchasePrice: [this.precio, []],
       quantity: [this.cantidad, []],
     })
+
     let indexProduct: number = this.purchaseOrderDetails.value.findIndex(({ productId }) => productId == productData.value.productId)
+    console.log(productData)
 
     if (indexProduct == -1) {
       this.purchaseOrderDetails.push(productData)
-    } else {
+      console.log(this.purchaseOrderDetails)
+      console.log(this.lProducts)
+    }
+
+    else {
       (<FormArray>this.formOrdenCompra.controls['purchaseOrderDetails']).at(indexProduct).patchValue(productData.value);
     }
 
@@ -118,10 +124,10 @@ export class CrearOrdenCompraComponent implements OnInit {
   }
 
   registerPurchaseOrder() {
-    this.formOrdenCompra.patchValue({supplierId: +this.formOrdenCompra.value.supplierId})
+    this.formOrdenCompra.patchValue({ supplierId: +this.formOrdenCompra.value.supplierId })
     this._ordenCompraService.postOrdenCompra(this.formOrdenCompra.value).subscribe((res) => {
-
-      this._alertService.openModal({typeModal: 'success', contenidoModal: 'La orden de compra fue registrada'})
+      this.salir()
+      this._alertService.openModal({ typeModal: 'success', contenidoModal: res.message })
     })
   }
 

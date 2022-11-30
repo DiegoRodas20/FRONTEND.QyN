@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { PurchaseOrder } from 'src/app/core/models/purchaseOrder';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CrearOrdenCompraComponent } from './crear-orden-compra/crear-orden-compra.component';
+import { VerOrdenCompraComponent } from './ver-orden-compra/ver-orden-compra.component';
+import { ActualizarOrdenCompraComponent } from './actualizar-orden-compra/actualizar-orden-compra.component';
 
 @Component({
   selector: 'app-gestionar-orden-compra',
@@ -43,21 +45,38 @@ export class GestionarOrdenCompraComponent implements OnInit {
   openCreatePurchaseOrderDialog(): void {
     const dialogConfig = new MatDialogConfig()
 
-    dialogConfig.panelClass = ['modal', 'overflow-y-auto', 'show', 'modal-show']
-
+    dialogConfig.width = '60rem'
+    
     const dialogReg = this._dialog.open(CrearOrdenCompraComponent, dialogConfig)
     dialogReg.afterClosed().subscribe(result => {
       this.getOrdenesCompra()
-
     })
   }
 
   moveToVerOrdenCompra(idOrdenCompra) {
-    this._router.navigate(['/ventas/gestionarOrdenCompra/ver/' + idOrdenCompra])
+
+    const dialogConfig = new MatDialogConfig()
+
+    dialogConfig.width = '60rem'
+    dialogConfig.data = idOrdenCompra
+
+    const dialogReg = this._dialog.open(VerOrdenCompraComponent, dialogConfig)
+    dialogReg.afterClosed().subscribe(result => {})
+
+    // this._router.navigate(['/ventas/gestionarOrdenCompra/ver/' + idOrdenCompra])
   }
 
   moveToUpdateOrdenCompra(idOrdenCompra) {
-    this._router.navigate(['/ventas/gestionarOrdenCompra/actualizar/' + idOrdenCompra])
+
+    const dialogConfig = new MatDialogConfig()
+
+    dialogConfig.width = '60rem'
+    dialogConfig.data = idOrdenCompra
+    
+    const dialogReg = this._dialog.open(ActualizarOrdenCompraComponent, dialogConfig)
+    dialogReg.afterClosed().subscribe(result => this.getOrdenesCompra())
+
+    // this._router.navigate(['/ventas/gestionarOrdenCompra/actualizar/' + idOrdenCompra])
   }
 
 }

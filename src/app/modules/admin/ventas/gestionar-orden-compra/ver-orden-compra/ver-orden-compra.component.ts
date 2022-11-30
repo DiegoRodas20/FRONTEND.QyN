@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { OrdenCompraService } from 'src/app/core/services/ordenCompra.service';
 import { SupplierService } from 'src/app/core/services/supplier.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -7,6 +7,8 @@ import { Supplier } from 'src/app/core/models/supplier.model';
 import { PurchaseOrderStatus } from 'src/app/core/models/purchaseOrder';
 import { ProductoService } from 'src/app/core/services/product.service';
 import { Product } from 'src/app/core/models/product.model';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-ver-orden-compra',
   templateUrl: 'ver-orden-compra.component.html'
@@ -20,27 +22,30 @@ export class VerOrdenCompraComponent implements OnInit {
     private _ordenCompraService: OrdenCompraService,
     private _productoService: ProductoService,
     private _supplierService: SupplierService,
-    private _router: Router,
-    private _route: ActivatedRoute,
-    private _formBuilder: FormBuilder
+    private _dialogRef: MatDialogRef<VerOrdenCompraComponent>,
+    private _datePipe: DatePipe,
+    private _formBuilder: FormBuilder,
+
+    @Inject(MAT_DIALOG_DATA) private _dialogData,
   ) { }
 
   ngOnInit() {
-    this._route.params.subscribe(params => {
-      this.idOrdenCompra = params.id
-      this.getInitalData().then(() => {
-        this.getOrdenCompraxID(this.idOrdenCompra)
-      })
-      this.formOrdenCompra = this._formBuilder.group({
-        id: [null, []], supplierData: this._formBuilder.group({
-          id: [null, []],
-          ruc: [null, []],
-          name: [null, []],
-          area: [null, []],
-          email: [null, []]
-        }), arrivalDate: [null, []], comments: [null, []], purchaseOrderStatusId: [null, []], purchaseOrderDetails: [null, []]
-      })
+
+    this.idOrdenCompra = this._dialogData
+    this.getInitalData().then(() => {
+      this.getOrdenCompraxID(this.idOrdenCompra)
     })
+    this.formOrdenCompra = this._formBuilder.group({
+      id: [null, []], supplierData: this._formBuilder.group({
+        id: [null, []],
+        ruc: [null, []],
+        name: [null, []],
+        area: [null, []],
+        email: [null, []]
+      }), arrivalDate: [null, []], comments: [null, []], purchaseOrderStatusId: [null, []], purchaseOrderDetails: [null, []]
+    })
+
+    this.getProductList()
   }
 
   ordenCompraData: Object
@@ -57,7 +62,15 @@ export class VerOrdenCompraComponent implements OnInit {
     try {
       const data: any = await this._ordenCompraService.gestOrdenCompraxID(idOrdenCompra).toPromise()
       this.Mensaje = data.message
-      this.formOrdenCompra.patchValue({ ...data.data, supplierData: this.getPurchaseOrderSupplierData(data.data.supplierId), purchaseOrderStatusId: this.getPurchaseOrderStatusName(data.data.purchaseOrderStatusId) })
+      this.formOrdenCompra.patchValue({
+        ...data.data,
+        supplierData: this.getPurchaseOrderSupplierData(data.data.supplierId),
+        purchaseOrderStatusId: this.getPurchaseOrderStatusName(data.data.purchaseOrderStatusId)
+      })
+
+      let date = new Date(data.data['arrivalDate'])
+      let dateString = this._datePipe.transform(date, 'dd/MM/yyyy')
+      this.formOrdenCompra.controls['arrivalDate'].setValue(dateString)
     }
     catch (error) {
       console.error("Error: ", error)
@@ -101,20 +114,21 @@ export class VerOrdenCompraComponent implements OnInit {
     return supplierOrdenCompra
   }
 
-  getProductList(){
-    this._productoService.getProductos().subscribe((res)=>{
+  getProductList() {
+    this._productoService.getProductos().subscribe((res) => {
       this.lProducts = res.data
+      console.log(this.lProducts)
     })
   }
 
-  getNameProduct(idProduct : number) {
-    let productData : Product
-    productData = this.lProducts.find(({id})=> id == idProduct)
+  getNameProduct(idProduct: number) {
+    let productData: Product
+    productData = this.lProducts.find(({ id }) => id == idProduct)
     return productData
   }
 
-  moveToGestionarOrdenCompra() {
-    this._router.navigate(['/ventas/gestionarOrdenCompra/'])
+  salir() {
+    this._dialogRef.close()
   }
 
 }

@@ -116,6 +116,14 @@ export class VerPedidoComponent implements OnInit {
         this._router.navigate(['/ventas/gestionarpedido'])
     }
 
+    precioTotalProductos() {
+        let precio = 0
+        this.lProductosPedido.forEach(value =>{
+            precio += value.salesPrice * value.quantity
+        })
+        return precio
+    }
+
     asignarTransporte() {
         this._router.navigate(
             ['/transporte/asignartransporte'],

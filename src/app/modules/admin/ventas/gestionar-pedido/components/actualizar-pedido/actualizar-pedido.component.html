@@ -5,129 +5,161 @@
     </h2>
 </div>
 
-<!-- Inputs -->
+<!-- Cuerpo -->
 <div class="intro-y box py-10 sm:py-10 mt-5">
     <div class="px-10 sm:px-10 dark:border-darkmode-400">
 
-        <div class="font-medium text-base">Cliente</div>
+        <!-- Tabs -->
+        <ul class="nav nav-boxed-tabs" role="tablist">
 
-        <form [formGroup]="formCliente">
-            <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+            <li id="example-3-tab" class="nav-item flex-1" role="presentation">
+                <button class="nav-link w-full py-2 active" data-tw-toggle="pill" data-tw-target="#tab-cliente"
+                    role="tab" aria-controls="example-tab-3" aria-selected="true">
+                    Cliente
+                </button>
+            </li>
 
-                <!-- Nombre -->
-                <div class="intro-y col-span-12 sm:col-span-4">
-                    <label class="form-label">Nombre</label>
-                    <input formControlName="name" type="text" class="form-control" readonly>
-                </div>
+            <li id="example-4-tab" class="nav-item flex-1" role="presentation">
+                <button class="nav-link w-full py-2" data-tw-toggle="pill" data-tw-target="#example-tab-4" role="tab"
+                    aria-controls="example-tab-4" aria-selected="false">
+                    Detalle del Pedido
+                </button>
+            </li>
 
-                <!-- Documento -->
-                <div class="intro-y col-span-12 sm:col-span-4">
-                    <label class="form-label">{{tipoDocumento}}</label>
-                    <input formControlName="numberDocument" type="text" class="form-control" readonly>
-                </div>
+            <li *ngIf="this.formAsignacion.controls['date'].value" id="example-5-tab" class="nav-item flex-1" role="presentation">
+                <button class="nav-link w-full py-2" data-tw-toggle="pill" data-tw-target="#example-tab-5" role="tab"
+                    aria-controls="example-tab-5" aria-selected="false">
+                    Asignacion del Pedido
+                </button>
+            </li>
 
-                <!-- Area -->
-                <div class="intro-y col-span-12 sm:col-span-4">
-                    <label class="form-label">Area</label>
-                    <input formControlName="area" type="text" class="form-control" readonly>
-                </div>
+        </ul>
 
-                <!-- Phone -->
-                <div class="intro-y col-span-12 sm:col-span-4">
-                    <label class="form-label">Nro. Teléfono</label>
-                    <input formControlName="phone" type="text" class="form-control" readonly>
-                </div>
+        <!-- Contenido -->
+        <div class="tab-content mt-5">
 
-                <!-- Email -->
-                <div class="intro-y col-span-12 sm:col-span-4">
-                    <label class="form-label">E-mail</label>
-                    <input formControlName="email" type="text" class="form-control" readonly>
-                </div>
-
+            <div id="tab-cliente" class="tab-pane leading-relaxed active" role="tabpanel"
+                aria-labelledby="example-3-tab">
+                <form [formGroup]="formCliente">
+                    <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+        
+                        <!-- Nombre -->
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <label class="form-label">Nombre</label>
+                            <input formControlName="name" type="text" class="form-control" readonly>
+                        </div>
+        
+                        <!-- Documento -->
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <label class="form-label">{{tipoDocumento}}</label>
+                            <input formControlName="numberDocument" type="text" class="form-control" readonly>
+                        </div>
+        
+                        <!-- Area -->
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <label class="form-label">Area</label>
+                            <input formControlName="area" type="text" class="form-control" readonly>
+                        </div>
+        
+                        <!-- Phone -->
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <label class="form-label">Nro. Teléfono</label>
+                            <input formControlName="phone" type="text" class="form-control" readonly>
+                        </div>
+        
+                        <!-- Email -->
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <label class="form-label">E-mail</label>
+                            <input formControlName="email" type="text" class="form-control" readonly>
+                        </div>
+        
+                    </div>
+                </form>
             </div>
-        </form>
 
-        <div class="font-medium text-base pt-8">Detalle del Pedido</div>
-
-        <form [formGroup]="formPedido">
-            <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-
-                <!-- Estado -->
-                <div class="intro-y col-span-12 sm:col-span-4">
-                    <label class="form-label">Estado</label>
-                    <select class="form-select sm:mr-2 dropdown-content" formControlName="orderStatusId">
-                        <option *ngFor="let estadosPedido of lEstadosPedido" [value]="estadosPedido.id"
-                            class="dropdown-item">
-                            {{estadosPedido.name}}
-                        </option>
-                    </select>
-                </div>
-
-                <!-- Fecha Estimada -->
-                <div class="intro-y col-span-12 sm:col-span-4">
-                    <label class="form-label">Fecha estimada de entrega</label>
-                    <input formControlName="estimatedDate" type="date" class="form-control">
-                </div>
-
-                <!-- Direccion -->
-                <div class="intro-y col-span-12 sm:col-span-4">
-                    <label class="form-label">Dirección</label>
-                    <input formControlName="address" type="text" class="form-control">
-                </div>
-
-                <!-- Comentarios -->
-                <div class="intro-y col-span-12 sm:col-span-12">
-                    <label class="form-label">Comentarios</label>
-                    <textarea class="form-control" rows="4" placeholder="Ingresa un comentario deseado."
-                        formControlName="comments"></textarea>
-                </div>
-
+            <div id="example-tab-4" class="tab-pane leading-relaxed" role="tabpanel" aria-labelledby="example-4-tab">
+                <form [formGroup]="formPedido">
+                    <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+        
+                        <!-- Estado -->
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <label class="form-label">Estado</label>
+                            <select class="form-select sm:mr-2 dropdown-content" formControlName="orderStatusId">
+                                <option *ngFor="let estadosPedido of lEstadosPedido" [value]="estadosPedido.id"
+                                    class="dropdown-item">
+                                    {{estadosPedido.name}}
+                                </option>
+                            </select>
+                        </div>
+        
+                        <!-- Fecha Estimada -->
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <label class="form-label">Fecha estimada de entrega</label>
+                            <input formControlName="estimatedDate" type="date" class="form-control">
+                        </div>
+        
+                        <!-- Direccion -->
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <label class="form-label">Dirección</label>
+                            <input formControlName="address" type="text" class="form-control">
+                        </div>
+        
+                        <!-- Comentarios -->
+                        <div class="intro-y col-span-12 sm:col-span-12">
+                            <label class="form-label">Comentarios</label>
+                            <textarea class="form-control" rows="4" placeholder="Ingresa un comentario deseado."
+                                formControlName="comments"></textarea>
+                        </div>
+        
+                    </div>
+                </form>
             </div>
-        </form>
 
-        <div *ngIf="this.formAsignacion.controls['date'].value" class="font-medium text-base pt-8">Asignacion del Pedido
+            <div *ngIf="this.formAsignacion.controls['date'].value" id="example-tab-5" class="tab-pane leading-relaxed"
+                role="tabpanel" aria-labelledby="example-4-tab">
+                <form [formGroup]="formAsignacion">
+                    <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+        
+                        <!-- Tipo Vehiculo -->
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <label class="form-label">Tipo Vehiculo</label>
+                            <input formControlName="typeVehicle" type="text" class="form-control" readonly>
+                        </div>
+        
+                        <!-- Placa -->
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <label class="form-label">Placa</label>
+                            <input formControlName="plate" type="text" class="form-control" readonly>
+                        </div>
+        
+                        <!-- Marca -->
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <label class="form-label">Marca</label>
+                            <input formControlName="brand" type="text" class="form-control" readonly>
+                        </div>
+        
+                        <!-- Color -->
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <label class="form-label">Color</label>
+                            <input formControlName="color" type="text" class="form-control" readonly>
+                        </div>
+        
+                        <!-- Conductor -->
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <label class="form-label">Conductor</label>
+                            <input formControlName="driverName" type="text" class="form-control" readonly>
+                        </div>
+        
+                        <!-- Fecha de llegada de asignacion -->
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <label class="form-label">Fecha de llegada asignada</label>
+                            <input formControlName="date" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
         </div>
-
-        <form [formGroup]="formAsignacion" *ngIf="this.formAsignacion.controls['date'].value">
-            <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-
-                <!-- Tipo Vehiculo -->
-                <div class="intro-y col-span-12 sm:col-span-4">
-                    <label class="form-label">Tipo Vehiculo</label>
-                    <input formControlName="typeVehicle" type="text" class="form-control" readonly>
-                </div>
-
-                <!-- Placa -->
-                <div class="intro-y col-span-12 sm:col-span-4">
-                    <label class="form-label">Placa</label>
-                    <input formControlName="plate" type="text" class="form-control" readonly>
-                </div>
-
-                <!-- Marca -->
-                <div class="intro-y col-span-12 sm:col-span-4">
-                    <label class="form-label">Marca</label>
-                    <input formControlName="brand" type="text" class="form-control" readonly>
-                </div>
-
-                <!-- Color -->
-                <div class="intro-y col-span-12 sm:col-span-4">
-                    <label class="form-label">Color</label>
-                    <input formControlName="color" type="text" class="form-control" readonly>
-                </div>
-
-                <!-- Conductor -->
-                <div class="intro-y col-span-12 sm:col-span-4">
-                    <label class="form-label">Conductor</label>
-                    <input formControlName="driverName" type="text" class="form-control" readonly>
-                </div>
-
-                <!-- Fecha de llegada de asignacion -->
-                <div class="intro-y col-span-12 sm:col-span-4">
-                    <label class="form-label">Fecha de llegada asignada</label>
-                    <input formControlName="date" type="text" class="form-control" readonly>
-                </div>
-            </div>
-        </form>
 
         <div class="font-medium text-base pt-8">Productos</div>
 
@@ -162,14 +194,17 @@
 
                 </tbody>
             </table>
+            <div class="text-right font-medium mt-4 mr-6">
+                Precio total: S/ {{precioTotalProductos() | number:'1.2-2'}}
+            </div>
         </div>
 
         <!-- Options -->
         <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
             <button class="btn btn-primary w-24" (click)="actualizarPedido()">Actualizar</button>
             <button *ngIf="this.actualStatus == 4 && !this.formAsignacion.controls['date'].value"
-                class="btn btn-primary mx-2 w-24" (click)="asignarTransporte()">Asignar
-                transporte</button>
+                class="btn btn-primary mx-2 w-30" (click)="asignarTransporte()">
+                Asignar transporte</button>
             <button class="btn btn-secondary mx-2 w-24" (click)="cerrarVentana()">Atrás</button>
         </div>
     </div>

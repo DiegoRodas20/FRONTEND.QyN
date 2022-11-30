@@ -26,10 +26,6 @@ export class ActualizarPedidoComponent implements OnInit {
     formAsignacion: FormGroup
     formComentario: FormGroup
     actualStatus = 0;
-    // Alert Modal
-    typeModal: string
-    openModal: boolean = false
-    contenidoModal: string
 
     constructor(
         private _router: Router,
@@ -123,8 +119,6 @@ export class ActualizarPedidoComponent implements OnInit {
 
         let form = this.formPedido.value
 
-        console.log(form)
-
         let Pedido: UpdateOrder = {
             id: 0,
             comments: form.comments,
@@ -135,43 +129,31 @@ export class ActualizarPedidoComponent implements OnInit {
 
         try {
             let data: ResponseData = await this._orderService.actualizarPedido(this.idPedido, Pedido)
-
-            if (!data.error) {
-
-                let contenido: any = {
-                    typeModal: 'success',
-                    contenidoModal: data.message
-                }
-
-                this.listarPedidoxID(this.idPedido)
-                this._alertService.openModal(contenido)
+            let contenido: any = {
+                typeModal: 'success',
+                contenidoModal: data.message
             }
+
+            this.listarPedidoxID(this.idPedido)
+            this._alertService.openModal(contenido)
         }
         catch (error) {
             console.log(error)
-
-            let contenido: any = {
-                type: 'error',
-                text: error
-            }
-            this.onOpenModal(contenido)
         }
-
     }
 
-    onOpenModal(contenido: any) {
-        this.openModal = true
-        this.typeModal = contenido.type
-        this.contenidoModal = contenido.text
-    }
-
-    onCloseModal(event: boolean) {
-        this.openModal = event
+    precioTotalProductos() {
+        let precio = 0
+        this.lProductosPedido.forEach(value => {
+            precio += value.salesPrice * value.quantity
+        })
+        return precio
     }
 
     cerrarVentana() {
         this._router.navigate(['/ventas/gestionarpedido'])
     }
+
     asignarTransporte() {
         this._router.navigate(
             ['/transporte/asignartransporte'],

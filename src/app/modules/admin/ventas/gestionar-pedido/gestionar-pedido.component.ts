@@ -52,25 +52,25 @@ export class GestionarPedidoComponent implements OnInit {
 
         switch (orderstatus) {
             case 1:
-                return 'text-primary'
+                return 'bg-success'
                 break;
             case 2:
-                return 'text-danger'
+                return 'bg-danger'
                 break;
             case 3:
-                return 'text-success'
+                return 'bg-success'
                 break;
             case 4:
-                return 'text-success'
+                return 'bg-primary'
                 break;
             case 5:
-                return 'text-warning'
+                return 'bg-warning'
                 break;
             case 6:
-                return 'text-secondary'
+                return 'bg-slate-500'
                 break;
             case 7:
-                return 'text-dark'
+                return 'bg-dark'
                 break;
             default:
                 return ''
@@ -87,16 +87,16 @@ export class GestionarPedidoComponent implements OnInit {
                 return 'package-x'
                 break;
             case 3:
-                return 'check-square'
+                return 'package'
                 break;
             case 4:
-                return 'check-square'
+                return 'package'
                 break;
             case 5:
                 return 'package-plus'
                 break;
             case 6:
-                return 'baggage-claim'
+                return 'truck'
                 break;
             case 7:
                 return 'package-check'
