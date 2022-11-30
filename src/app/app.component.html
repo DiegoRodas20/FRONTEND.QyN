@@ -1,7 +1,10 @@
 <router-outlet></router-outlet>
 
-<alert [type]="this.alertService.typeModal" [open]="this.alertService.opened" [contenido]="this.alertService.contenidoModal"
-    (close)="this.alertService.closeModal($event)">
+<alert 
+    [type]="alertService.typeModal" 
+    [open]="alertService.opened" 
+    [contenido]="alertService.contenidoModal"
+    (close)="alertService.closeModal($event)">
 </alert>
 
 <!-- Loader -->
@@ -9,3 +12,10 @@
     *ngIf="loaderService.opened"
     (close)="loaderService.close()">
 </app-loader>
+
+<toast
+    *ngIf="toastService.opened"
+    [type]="toastService.typeModal"
+    [contenido]="toastService.contenidoModal"
+    (close)="toastService.close()">
+</toast>

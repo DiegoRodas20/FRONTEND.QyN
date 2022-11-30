@@ -4004,6 +4004,10 @@ select {
   width: 6rem;
 }
 
+.w-28 {
+  width: 7rem;
+}
+
 .w-32 {
   width: 8rem;
 }
@@ -4425,7 +4429,7 @@ select {
 
 .border-success {
   --tw-border-opacity: 1;
-  border-color: rgb(var(--color-success) / var(--tw-border-opacity));
+  border-color: rgb(var(--color-success) / var(--tw-border-opacity)) !important;
 }
 
 .border-warning {
@@ -4435,7 +4439,7 @@ select {
 
 .border-danger {
   --tw-border-opacity: 1;
-  border-color: rgb(var(--color-danger) / var(--tw-border-opacity));
+  border-color: rgb(var(--color-danger) / var(--tw-border-opacity)) !important;
 }
 
 .border-white\/\[0\.08\] {
@@ -5130,14 +5134,17 @@ select {
 /* Default colors */
 :root {
   --color-primary: 6 43 97;
+
   --color-secondary: 226 232 240;
-  --color-success: 132 204 22;
+  --color-success: 5 150 105;
   --color-info: 6 182 212;
-  --color-warning: 250 204 21;
-  --color-pending: 249 115 22;
-  --color-danger: 220 38 38;
+  --color-warning: 234 179 8;
+  --color-pending: 234 88 12;
+  --color-danger: 185 28 28;
   --color-light: 241 245 249;
   --color-dark: 30 41 59;
+
+  
   --color-slate-50: 248 250 252;
   --color-slate-100: 241 245 249;
   --color-slate-200: 226 232 240;

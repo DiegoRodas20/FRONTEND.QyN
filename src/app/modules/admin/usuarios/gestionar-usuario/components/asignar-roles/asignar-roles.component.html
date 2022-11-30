@@ -1,26 +1,22 @@
-<div class="modal-dialog modal-x2">
-  <div class="modal-content">
 
-      <!-- Cabecera -->
-      <div class="modal-header">
-          <h2 class="font-medium intro-y text-lg mr-auto">Asignar Roles</h2>
-      </div>
+<!-- Cabecera -->
+<div class="modal-header">
+  <h2 class="font-medium text-lg mr-auto">Asignar Roles</h2>
+</div>
 
-      <div class="modal-body p-4">
+<!-- Cuerpo -->
+<div class="modal-body p-4">
 
-        <div *ngFor="let rol of roles; let i=index" class="col-md-2">
-          <label>
-            <input type="checkbox" [value]="rol.id" (change)="onCheckChange($event)" [checked]="isRol(rol.id)">
-            {{rol.name}}
-          </label>
-        </div>
-
-      </div>
-
-      <!-- Footer -->
-      <div class="modal-footer intro-y">
-          <button class="btn btn-secondary w-20 mr-3" (click)="salir()">Atrás</button>
-          <button class="btn btn-primary w-20 mr-3" (click)="updateRolesUsuario()">Actualizar</button>
-      </div>
+  <div *ngFor="let rol of roles; let i=index" class="form-check mb-2">
+    <input class="form-check-input" type="checkbox" [value]="rol.id" (change)="onCheckChange($event)"
+      [checked]="isRol(rol.id)">
+    <label class="form-check-label">{{rol.name}}</label>
   </div>
- </div>
+
+</div>
+
+<!-- Footer -->
+<div class="modal-footer">
+  <button class="btn btn-primary w-20 mr-3" (click)="updateRolesUsuario()">Actualizar</button>
+  <button class="btn btn-secondary w-20" (click)="salir()">Atrás</button>
+</div>

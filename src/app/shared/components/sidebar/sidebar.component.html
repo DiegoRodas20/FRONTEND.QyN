@@ -13,27 +13,32 @@
     <ul>
         <li *ngFor="let menu of lMenu">
 
-            <a [ngClass]="'side-menu '+ (menu.id == idPadreSeleccionado ? 'side-menu--active' : '')" [routerLink]="menu.url"
-                (click)="menu.childs ? showSubmenu(menu.id) : routerlinkactive(menu.id); showSubmenu(menu.id); cerrarSesion(menu.id)">
+            <a 
+                [class]="'side-menu '+ (menu.id == idPadreSeleccionado ? 'side-menu--active' : '')"
+                [routerLink]="menu.url == '' ? null: menu.url"
+                (click)="menuCondition(menu)">
                 <div class="side-menu__icon">
                     <lucide-icon name="{{menu.icon}}"></lucide-icon>
                 </div>
                 <div class="side-menu__title">
                     {{menu.title}}
-                    <div *ngIf="menu.childs && menu.id != idPadre"
+                    <div 
+                        *ngIf="menu.childs.length && menu.id != idPadre" 
                         class="side-menu__sub-icon transform rotate-180">
                         <lucide-icon class="h-inherit" name="chevron-down"></lucide-icon>
                     </div>
-                    <div *ngIf="menu.childs && menu.id == idPadre"
+                    <div 
+                        *ngIf="menu.childs.length && menu.id == idPadre" 
                         class="side-menu__sub-icon transform rotate-180">
                         <lucide-icon class="h-inherit" name="chevron-up"></lucide-icon>
                     </div>
                 </div>
             </a>
 
-            <ul *ngIf="menu.childs && menu.id == idPadre" class="side-menu__sub-open">
+            <ul *ngIf="menu.childs.length && menu.id == idPadre" class="side-menu__sub-open">
                 <li *ngFor="let submenu of menu.childs">
-                    <a class="side-menu" routerLinkActive="side-menu--active" [routerLink]="submenu.url" (click)="routerlinkactive(menu.id)">
+                    <a class="side-menu" routerLinkActive="side-menu--active" [routerLink]="submenu.url"
+                        (click)="routerlinkactive(menu.id)">
                         <div class="side-menu__icon">
                             <lucide-icon name="{{submenu.icon}}"></lucide-icon>
                         </div>

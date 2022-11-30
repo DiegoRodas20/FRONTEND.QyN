@@ -1,8 +1,12 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Alert } from 'src/app/core/models/alert.model';
 import { UserService } from 'src/app/core/services/user.service';
+import { ToastService } from 'src/app/shared/components/toast/toast.service';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 
 @Component({
@@ -14,27 +18,28 @@ import { UserService } from 'src/app/core/services/user.service';
 export class ActualizarUsuarioComponent implements OnInit {
 
     idUsuario: number
-    lEstados: any [] = [{status: true, name: 'Activo'},{status: false, name: 'Inactivo'}]
+    lEstados: any[] = [{ status: true, name: 'Activo' }, { status: false, name: 'Inactivo' }]
     formUsuario: FormGroup
-    modalClass: string = ''
 
     constructor(
-        private _router: Router,
-        private _route: ActivatedRoute,
+        private _dialogRef: MatDialogRef<ActualizarUsuarioComponent>,
         private _formBuilder: FormBuilder,
+        private _toastService: ToastService,
+        private _alertService: AlertService,
         private _usuarioService: UserService,
         private _datePipe: DatePipe,
+
+        @Inject(MAT_DIALOG_DATA) private _dialogData,
     ) { }
 
     ngOnInit() {
         this.crearFormUsuario()
-        this._route.params.subscribe(params => {
-            this.idUsuario = params.id
-            this.listarUsuarioxID(this.idUsuario)
-        })
+
+        this.idUsuario = this._dialogData
+        this.listarUsuarioxID(this.idUsuario)
     }
 
-    crearFormUsuario(){
+    crearFormUsuario() {
         this.formUsuario = this._formBuilder.group({
             firstName: [null, [Validators.required, Validators.maxLength(30)]],
             lastName: [null, [Validators.required, Validators.maxLength(30)]],
@@ -51,43 +56,49 @@ export class ActualizarUsuarioComponent implements OnInit {
             let date = new Date(data.data['bornDate'])
             date.setDate(date.getDate() + 1);
             this.formUsuario.controls['bornDate'].setValue(this._datePipe.transform(date, 'yyyy-MM-dd'))
-            console.log(data.data)
-            console.log(this.formUsuario.value)
         }
         catch (error) {
             console.log("Error: ", error)
         }
     }
-    
-    async actualizarUsuario(){
-        if(this.formUsuario.invalid){
+
+    async actualizarUsuario() {
+
+        if (this.formUsuario.invalid) {
+            let contenido: Alert = {
+                type: 'alert',
+                contenido: 'Formato inválido, revise los campos porfavor.'
+            }
+            this._toastService.open(contenido)
+            this.formUsuario.markAllAsTouched()
             return
         }
+
         let form = this.formUsuario.value
         let Usuario: any = {
             firstName: form.firstName,
             lastName: form.lastName,
             surName: form.surName,
             bornDate: form.bornDate,
-            isActive: (form.isActive == "true" || form.isActive == true )? true : false 
+            isActive: (form.isActive == "true" || form.isActive == true) ? true : false
         }
 
-        try{
+        try {
             let data = await this._usuarioService.actualizarUsuario(this.idUsuario, Usuario)
-            this.listarUsuarioxID(this.idUsuario)
-            this.modalClass = ' overflow-y-auto show'
+
+            this.salir()
+            this._alertService.openModal({
+                typeModal: 'success',
+                contenidoModal: data.message
+            })
         }
         catch (error) {
             console.log(error)
         }
     }
 
-    modificarCSSModal() {
-        this.modalClass = ''
-    }
-
-    cerrarVentana() {
-        this._router.navigate(['/usuarios/gestionarusuario'])
+    salir(){
+        this._dialogRef.close()
     }
 
 }

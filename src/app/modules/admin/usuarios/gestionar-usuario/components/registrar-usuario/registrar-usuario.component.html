@@ -1,86 +1,67 @@
 <!-- Cabecera -->
-<div class="flex items-center mt-8">
-    <h2 class="intro-y text-lg font-medium mr-auto">
-        Registrar Usuario
-    </h2>
+<div class="modal-header">
+    <h2 class="intro-y font-medium text-lg mr-auto">Asignar Roles</h2>
 </div>
 
-<!-- Inputs -->
-<div class="intro-y box py-10 sm:py-10 mt-5">
-    <div class="px-10 sm:px-10 dark:border-darkmode-400">
-        <form [formGroup]="formUsuario">
-            <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+<!-- Cuerpo -->
+<div class="modal-body px-5 sm:px-10">
+    <form [formGroup]="formUsuario">
+        <div class="grid grid-cols-12 gap-4 gap-y-5">
 
-                <!-- Email -->
-                <div class="intro-y col-span-6 mt-5">
-                    <label class="form-label">E-mail</label>
-                    <input formControlName="email" type="text" class="form-control">
-                    <div *ngIf="formUsuario.controls['email'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
-                    <div *ngIf="formUsuario.controls['email'].hasError('maxlength')" class="text-danger mt-2">Maximo de 30 caracteres</div>
-                    <div *ngIf="formUsuario.controls['email'].hasError('email')" class="text-danger mt-2">Formato de email incorrecto</div>
-                </div>
+            <!-- Email -->
+            <div class="intro-y col-span-6">
+                <label class="form-label">E-mail</label>
+                <input formControlName="email" type="text" [class]="'form-control ' + cssValidate('email')"  placeholder="Ingrese el email">
+                <error-message [formControlError]="formUsuario.controls['email']"></error-message>
 
-                <!-- Password -->
-                <div class="intro-y col-span-6 mt-5">
-                    <label class="form-label">Contraseña</label>
-                    <input formControlName="password" type="text" class="form-control">
-                    <div *ngIf="formUsuario.controls['password'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>               
-                </div>
-                
-                <!-- First Name -->
-                <div class="intro-y col-span-6 mt-5">
-                    <label class="form-label">Primer Nombre</label>
-                    <input formControlName="firstName" type="text" class="form-control">
-                    <div *ngIf="formUsuario.controls['firstName'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
-                </div>
-
-                <!-- Apellido -->
-                <div class="intro-y col-span-6 mt-5">
-                    <label class="form-label">Apellido</label>
-                    <input formControlName="lastName" type="text" class="form-control">
-                    <div *ngIf="formUsuario.controls['lastName'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>                
-                </div>
-
-                 <!-- Segundo Nombre -->
-                 <div class="intro-y col-span-6 mt-5">
-                    <label class="form-label">Segundo Nombre</label>
-                    <input formControlName="surName" type="text" class="form-control">
-                    <div *ngIf="formUsuario.controls['surName'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>                             
-                </div>
-
-                <!-- Dia de Nacimiento -->
-                <div class="intro-y col-span-6 mt-5">
-                    <label class="form-label">Fecha de Nacimiento</label>
-                    <input formControlName="bornDate" type="date" class="form-control">
-                    <div *ngIf="formUsuario.controls['bornDate'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>                                             
-                </div>
-
-                <!-- Boton de Registrar y Atras -->
-                <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                    <button class="btn btn-primary w-24" (click)="registrarUsuario()">Registrar</button>
-                    <button class="btn btn-secondary mx-2 w-24" (click)="cerrarVentana()">Atrás</button>
-                </div>
-           
+                <!-- <div *ngIf="formUsuario.controls['email'].hasError('required')" class="text-danger mt-2">Este campo esta
+                    vacio</div>
+                <div *ngIf="formUsuario.controls['email'].hasError('maxlength')" class="text-danger mt-2">Maximo de 30
+                    caracteres</div>
+                <div *ngIf="formUsuario.controls['email'].hasError('email')" class="text-danger mt-2">Formato de email
+                    incorrecto</div> -->
             </div>
-        </form>
-    </div>
-</div>
 
-<!-- Modal -->
-<div [ngClass]="'modal' + modalClass" style="margin-top: 0px; margin-left: 0px; padding-left: 0px; z-index: 10000;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body p-0">
-                <div class="p-5 text-center">
-                    <lucide-icon name="check-circle" class="w-16 h-16 text-success mx-auto mt-3"></lucide-icon>
-                    <div class="text-3xl mt-5">¡Éxito!</div>
-                    <div class="text-slate-500 mt-2">Se registró correctamente.</div>
-                </div>
-                <div class="px-5 pb-8 text-center">
-                    <button type="button" data-tw-dismiss="modal" class="btn btn-primary w-24"
-                        (click)="modificarCSSModal()">Aceptar</button>
-                </div>
+            <!-- Password -->
+            <div class="intro-y col-span-6">
+                <label class="form-label">Contraseña</label>
+                <input formControlName="password" type="text" [class]="'form-control ' + cssValidate('password')"  placeholder="Ingrese la contraseña">
+                <error-message [formControlError]="formUsuario.controls['password']"></error-message>
+            </div>
+
+            <!-- First Name -->
+            <div class="intro-y col-span-6">
+                <label class="form-label">Primer Nombre</label>
+                <input formControlName="firstName" type="text" [class]="'form-control ' + cssValidate('firstName')"  placeholder="Ingrese el primer nombre">
+                <error-message [formControlError]="formUsuario.controls['firstName']"></error-message>
+            </div>
+
+            <!-- Segundo Nombre -->
+            <div class="intro-y col-span-6">
+                <label class="form-label">Segundo Nombre</label>
+                <input formControlName="surName" type="text" [class]="'form-control ' + cssValidate('surName')"  placeholder="Ingrese el segundo nombre">
+                <error-message [formControlError]="formUsuario.controls['surName']"></error-message>
+            </div>
+
+            <!-- Apellido -->
+            <div class="intro-y col-span-6">
+                <label class="form-label">Apellido</label>
+                <input formControlName="lastName" type="text" [class]="'form-control ' + cssValidate('lastName')"  placeholder="Ingrese el apellido">
+                <error-message [formControlError]="formUsuario.controls['lastName']"></error-message>
+            </div>
+
+            <!-- Dia de Nacimiento -->
+            <div class="intro-y col-span-6">
+                <label class="form-label">Fecha de Nacimiento</label>
+                <input formControlName="bornDate" type="date" [class]="'form-control ' + cssValidate('bornDate')" >
+                <error-message [formControlError]="formUsuario.controls['bornDate']"></error-message>
             </div>
         </div>
-    </div>
+    </form>
+</div>
+
+<!-- Footer -->
+<div class="modal-footer intro-y">
+    <button class="btn btn-primary mr-3 w-24" (click)="registrarUsuario()">Registrar</button>
+    <button class="btn btn-secondary w-24" (click)="salir()">Atrás</button>
 </div>

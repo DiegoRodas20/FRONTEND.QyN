@@ -1,0 +1,10 @@
+<div @toastAnimation [class]="'alert alert-dismissible show flex items-center mb-2 ' + colorAlert(type)">
+    <lucide-icon [name]="iconAlert(type)" class="w-6 h-6 mr-2"></lucide-icon>
+    <div>
+        <span> {{ titleAlert(type) }}: </span>
+        {{contenido}}
+    </div>
+    <button type="button" class="btn-close text-white pb-0" (click)="onClose()">
+        <lucide-icon name="x" class="w-4 h-4"></lucide-icon>
+    </button>
+</div>

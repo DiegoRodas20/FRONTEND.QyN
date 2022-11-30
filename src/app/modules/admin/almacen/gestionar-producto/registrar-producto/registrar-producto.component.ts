@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Alert } from 'src/app/core/models/alert.model';
 import { Category } from 'src/app/core/models/category.model';
 import { Product, RegisterProduct } from 'src/app/core/models/product.model';
 import { ResponseData } from 'src/app/core/models/response.model';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { FirebaseStorageService } from 'src/app/core/services/firebase-storage.service';
-// import { FirebaseStorageService } from 'src/app/core/services/firebase-storage.service';
 import { ProductoService } from 'src/app/core/services/product.service';
+import { ToastService } from 'src/app/shared/components/toast/toast.service';
 import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
@@ -18,13 +20,11 @@ import { AlertService } from 'src/app/shared/services/alert.service';
 export class RegistrarProductoComponent implements OnInit {
 
     formProducto: FormGroup
-    urlPorDefecto: string = '../../../../../assets/images/productodefault.jpg'
     urlImage: string
     lCategorias: Category[] = []
     itemActually: string = ''
 
     mensaje = "";
-    modalClass: string = ''
 
     lShowCatalog: any[] = [
         { value: true, name: 'Si' },
@@ -32,12 +32,15 @@ export class RegistrarProductoComponent implements OnInit {
     ]
 
     fileToUpload: File | null = null;
+    preImage: string
 
     constructor(
         private _productoService: ProductoService,
         private _categoryService: CategoryService,
+        private _sanitizer: DomSanitizer,
         private _dialogRef: MatDialogRef<RegistrarProductoComponent>,
         private _formBuilder: FormBuilder,
+        private _toastService: ToastService,
         private _firebaseStorage: FirebaseStorageService,
         private _alertService: AlertService
 
@@ -50,15 +53,15 @@ export class RegistrarProductoComponent implements OnInit {
 
     crearFormProducto() {
         this.formProducto = this._formBuilder.group({
-            code: [null, []],
-            categoryId: [null, []],
-            name: [null, []],
-            salesPrice: [null, []],
-            purchasePrice: [null, []],
-            minStock: [null, []],
-            maxStock: [null, []],
-            stock: [null, []],
-            showInCatalog: [null, []],
+            code: [null, [Validators.required]],
+            categoryId: [null, [Validators.required]],
+            name: [null, [Validators.required]],
+            salesPrice: [null, [Validators.required]],
+            purchasePrice: [null, [Validators.required]],
+            minStock: [null, [Validators.required]],
+            maxStock: [null, [Validators.required]],
+            stock: [null, [Validators.required]],
+            showInCatalog: [null, [Validators.required]],
             urlImage: [null, []],
             uploadFile: [null, [Validators.required]]
         })
@@ -76,6 +79,11 @@ export class RegistrarProductoComponent implements OnInit {
 
     async registrarProducto() {
         if (this.formProducto.invalid) {
+            let contenido: Alert = {
+                type: 'alert',
+                contenido: 'Formato inválido, revise los campos porfavor.'
+            }
+            this._toastService.open(contenido)
             this.formProducto.markAllAsTouched()
             return
         }
@@ -99,7 +107,7 @@ export class RegistrarProductoComponent implements OnInit {
             producto.urlImage = await this.subirImgProducto(this.fileToUpload)
             let data: ResponseData = await this._productoService.registrarProducto(producto)
             this._alertService.openModal({ typeModal: 'success', contenidoModal: data.message })
-            this._dialogRef.close()
+            this.salir()
         }
         catch (error) {
             console.log(error)
@@ -119,46 +127,41 @@ export class RegistrarProductoComponent implements OnInit {
 
     handleFileInput(event: Event) {
         this.fileToUpload = event.target['files'].item(0);
+
+        this.extraerBase64(this.fileToUpload).then((imagen: any) => {
+            this.preImage = imagen.base
+        })
     }
 
-    // subirImgProducto(file: File, producto: any) {
-
-    //     let numberOnly = new Date().getTime();
-    //     let finalName = String(numberOnly) + file.name
-    //     let referencia = this._firebaseStorage.referenciaCloudStorage(finalName)
-    //     let tarea = this._firebaseStorage.tareaCloudStorage(finalName, file)
-
-    //     return new Promise((resolve, reject) => {
-
-    //         //Cambia el porcentaje
-    //         tarea.percentageChanges().subscribe((porcentaje) => {
-    //             this.subiendoArchivo = true;
-    //             this.porcentajeFile = porcentaje;
-    //             if (porcentaje == 100) {
-    //                 referencia.getDownloadURL().subscribe((URL) => {
-    //                     this.formProducto.controls.urlArchivo.setValue(URL)
-    //                     this.formProducto.controls.nombreArchivo.setValue(file.name)
-    //                     producto.urlArchivo = URL;
-    //                     producto.nombreArchivo = file.name;
-    //                     this.subiendoArchivo = false;
-    //                     resolve('Upload done');
-
-    //                 },
-    //                     (err1) => { reject(err1); console.error(err1) });
-    //             }
-    //         },
-    //             (err2) => { reject(err2); console.error(err2) });
-    //     })
-    // }
-
-    modificarCSSModal() {
-        this.modalClass = ''
-    }
+    extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
+        try {
+            const reader = new FileReader()
+            reader.readAsDataURL($event)
+            reader.onload = () => {
+                resolve({
+                    base: reader.result
+                })
+            }
+            reader.onerror = error => {
+                resolve({
+                    base: null
+                })
+            }
+        }
+        catch (error) {
+            console.log(error)
+        }
+    })
 
     salir() {
         this._dialogRef.close()
     }
 
-
-
+    cssValidate(control: string) {
+        if (this.formProducto.controls[control].touched) {
+            if (this.formProducto.controls[control].errors) return 'border-danger'
+            else return 'border-success'
+        }
+        else return ''
+    }
 }

@@ -1,11 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Alert } from 'src/app/core/models/alert.model';
 import { Category } from 'src/app/core/models/category.model';
 import { ResponseData } from 'src/app/core/models/response.model';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { FirebaseStorageService } from 'src/app/core/services/firebase-storage.service';
 import { ProductoService } from 'src/app/core/services/product.service';
+import { ToastService } from 'src/app/shared/components/toast/toast.service';
 import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
@@ -16,13 +18,9 @@ import { AlertService } from 'src/app/shared/services/alert.service';
 export class ActualizarProductoComponent implements OnInit {
 
     formProducto: FormGroup
-    urlPorDefecto: string = '../../../../../assets/images/productodefault.jpg'
     urlImage: string
     lCategorias: Category[] = []
     itemActually: string = ''
-
-    mensaje = "";
-    modalClass: string = ''
 
     lShowCatalog: any[] = [
         { value: true, name: 'Si' },
@@ -36,29 +34,30 @@ export class ActualizarProductoComponent implements OnInit {
         private _categoryService: CategoryService,
         private _dialogRef: MatDialogRef<ActualizarProductoComponent>,
         private _formBuilder: FormBuilder,
-        @Inject(MAT_DIALOG_DATA) private _dialogData,
+        private _toastService: ToastService,
         private _firebaseStorage: FirebaseStorageService,
-        private _alertService: AlertService
+        private _alertService: AlertService,
+
+        @Inject(MAT_DIALOG_DATA) private _dialogData
     ) { }
 
     ngOnInit() {
         this.listarCategorias()
         this.crearFormProducto()
-
         this.listarProductoxID(this._dialogData)
     }
 
     crearFormProducto() {
         this.formProducto = this._formBuilder.group({
-            code: [null, []],
-            categoryId: [null, []],
-            name: [null, []],
-            salesPrice: [null, []],
-            purchasePrice: [null, []],
-            minStock: [null, []],
-            maxStock: [null, []],
-            stock: [null, []],
-            showInCatalog: [null, []],
+            code: [null, [Validators.required]],
+            categoryId: [null, [Validators.required]],
+            name: [null, [Validators.required]],
+            salesPrice: [null, [Validators.required]],
+            purchasePrice: [null, [Validators.required]],
+            minStock: [null, [Validators.required]],
+            maxStock: [null, [Validators.required]],
+            stock: [null, [Validators.required]],
+            showInCatalog: [null, [Validators.required]],
             urlImage: [null, []],
             uploadFile: [null, []]
         })
@@ -80,7 +79,6 @@ export class ActualizarProductoComponent implements OnInit {
             this.formProducto.patchValue(data.data)
             this.urlImage = data.data['urlImage']
             this.formProducto.controls['urlImage'].setValue(this.urlImage)
-
         }
         catch (error) {
             console.log("Error: ", error)
@@ -88,7 +86,13 @@ export class ActualizarProductoComponent implements OnInit {
     }
 
     async actualizarProducto() {
+
         if (this.formProducto.invalid) {
+            let contenido: Alert = {
+                type: 'alert',
+                contenido: 'Formato inválido, revise los campos porfavor.'
+            }
+            this._toastService.open(contenido)
             this.formProducto.markAllAsTouched()
             return
         }
@@ -108,14 +112,13 @@ export class ActualizarProductoComponent implements OnInit {
             urlImage: form.urlImage,
         }
 
-
         try {
             producto.urlImage = this.fileToUpload ? await this.subirImgProducto(this.fileToUpload) : producto.urlImage
 
             let data: ResponseData = await this._productoService.actualizarProducto(producto, this._dialogData)
 
             this._alertService.openModal({ typeModal: 'success', contenidoModal: data.message });
-            this._dialogRef.close()
+            this.salir()
         }
         catch (error) {
             console.log(error)
@@ -134,11 +137,41 @@ export class ActualizarProductoComponent implements OnInit {
 
     handleFileInput(event: Event) {
         this.fileToUpload = event.target['files'].item(0);
+        this.extraerBase64(this.fileToUpload).then((imagen: any) => {
+            this.urlImage = imagen.base
+        })
     }
 
+    extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
+        try {
+            const reader = new FileReader()
+            reader.readAsDataURL($event)
+            reader.onload = () => {
+                resolve({
+                    base: reader.result
+                })
+            }
+            reader.onerror = error => {
+                resolve({
+                    base: null
+                })
+            }
+        }
+        catch (error) {
+            console.log(error)
+        }
+    })
 
     salir() {
         this._dialogRef.close()
+    }
+
+    cssValidate(control: string) {
+        if (this.formProducto.controls[control].touched) {
+            if (this.formProducto.controls[control].errors) return 'border-danger'
+            else return 'border-success'
+        }
+        else return ''
     }
 
 

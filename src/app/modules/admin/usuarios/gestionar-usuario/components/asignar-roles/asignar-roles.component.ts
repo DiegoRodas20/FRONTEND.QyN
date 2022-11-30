@@ -78,10 +78,10 @@ export class AsignarRolesComponent implements OnInit {
       rolIds: this.formRolesUsuario.controls.rolIds.value,
       userId: this._dialogData
     }
-    this._userService.actualizarRolesUsuario(this._dialogData, bodyUpdateRoles).then(() => {
-      this._alertService.openModal({ typeModal: 'success', contenidoModal: 'Roles actualizados' })
+    this._userService.actualizarRolesUsuario(this._dialogData, bodyUpdateRoles).then((value) => {
+      this._alertService.openModal({ typeModal: 'success', contenidoModal: value.message })
       this.salir()
-    }).catch((error)=>{
+    }).catch((error) => {
       let errorMensaje = error.error.error[0]
       this._alertService.openModal({ typeModal: 'error', contenidoModal: errorMensaje })
       this.salir()

@@ -19,6 +19,7 @@ import { RegistrarProductoComponent } from './gestionar-producto/registrar-produ
 import { AlertComponent } from 'src/app/shared/components/alert/alert.component';
 import { ActualizarProductoComponent } from './gestionar-producto/actualizar-producto/actualizar-producto.component';
 import { VisualizarMovimientosComponent } from './gestionar-producto/visualizar-movimientos/visualizar-movimientos.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const COMPONENTS = [
     GestionarAlmacenComponent,
@@ -53,8 +54,8 @@ const COMPONENTS = [
         NgxPaginationModule,
         FormsModule,
         ReactiveFormsModule,
-
-        LucideAngularModule.pick(icons)
+        LucideAngularModule.pick(icons),
+        SharedModule
     ],
     exports: [
     ],

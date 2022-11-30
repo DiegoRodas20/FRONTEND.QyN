@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Alert } from 'src/app/core/models/alert.model';
 import { SignIn } from 'src/app/core/models/auth.model';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ToastService } from 'src/app/shared/components/toast/toast.service';
 import { AlertService } from 'src/app/shared/services/alert.service';
 
 
@@ -21,7 +22,8 @@ export class SignInComponent implements OnInit {
         private _router: Router,
         private _formBuilder: FormBuilder,
         private _authService: AuthService,
-        private _alertService: AlertService
+        private _alertService: AlertService,
+        private _toastService: ToastService,
     ) { }
 
     ngOnInit() {
@@ -38,7 +40,11 @@ export class SignInComponent implements OnInit {
     async iniciarSesion() {
 
         if (this.formSignIn.invalid) {
-            this._alertService.openModal({ typeModal: 'alert', contenidoModal: 'Formato inválido, revise los campos porfavor.' })
+            let contenido: Alert = {
+                type: 'alert',
+                contenido: 'Formato inválido, revise los campos porfavor.'
+            }
+            this._toastService.open(contenido)
             this.formSignIn.markAllAsTouched()
             return
         }
@@ -50,19 +56,35 @@ export class SignInComponent implements OnInit {
             password: form.password
         }
 
-        const data: any = await this._authService.iniciarSesion(signin)
-        const token = data.headers.get('authorization')
-        const usuario = atob(data.headers.get('authorization').split('.')[1])
+        try {
+            const data: any = await this._authService.iniciarSesion(signin)
 
-        localStorage.setItem('Usuario', usuario)
-        localStorage.setItem('Token', token)
-        this._alertService.openModal({ typeModal: 'success', contenidoModal: data.body.message })
+            const token = data.headers.get('authorization')
+            const usuario = atob(data.headers.get('authorization').split('.')[1])
 
-        this._router.navigate(['/dashboard']).then(() => {
-            window.location.reload();
-        })
+            localStorage.setItem('Usuario', usuario)
+            localStorage.setItem('Token', token)
 
+            // this._toastService.open()
 
+            // this._alertService.openModal({ typeModal: 'success', contenidoModal: data.body.message })
+
+            this._router.navigate(['/dashboard']).then(() => {
+                window.location.reload();
+            })
+        }
+
+        catch (error) {
+
+        }
+    }
+
+    cssValidate(control: string) {
+        if (this.formSignIn.controls[control].touched) {
+            if (this.formSignIn.controls[control].errors) return 'border-danger'
+            else return 'border-success'
+        }
+        else return ''
     }
 
 }

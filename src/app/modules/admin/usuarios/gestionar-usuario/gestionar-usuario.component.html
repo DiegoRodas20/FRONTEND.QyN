@@ -9,16 +9,20 @@
     <!-- Cabecera -->
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
 
-        <button class="btn btn-primary shadow-md mr-2" (click)="registrarUsuario()">Registrar Usuario</button>
-
-        <div class="hidden md:block mx-auto text-slate-500"> {{Mensaje}} </div>
-
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
-                <input [formControl]="filtro" type="text" class="form-control w-56 box pr-10" placeholder="Search...">
+                <input [formControl]="filtro" type="text" class="form-control w-56 box pr-10" placeholder="Buscar Usuario">
                 <lucide-icon class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" name="search"></lucide-icon>
             </div>
         </div>
+
+        <div class="hidden md:block mx-auto text-slate-500">
+            {{Mensaje}}
+        </div>
+
+        <button class="btn btn-primary shadow-md mr-2" (click)="registrarUsuario()">
+            Registrar Usuario
+        </button>
 
     </div>
 
@@ -35,42 +39,42 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="intro-x" *ngFor="let user of lUsuarios | filterPipe: filtro.value | paginate: { itemsPerPage: 5, currentPage: p } ">
+                <tr class="intro-x"
+                    *ngFor="let user of lUsuarios | filterPipe: filtro.value | paginate: { itemsPerPage: 10, currentPage: p } ">
                     <td class="text-center font-medium whitespace-nowrap"> {{ user.id }} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{ user.email }} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{ user.fullName }} </td>
 
-                    <td class="w-40">
-                        <div
-                            [ngClass]="user.isActive ? 'flex items-center justify-center text-success' : 'flex items-center justify-center text-danger'">
-                            <lucide-icon class="w-4 h-4 mr-2" [name]="user.isActive ? 'check-square' : 'x-square'">
+                    <td class="w-32">
+                        <div [class]="'badge py-1 ' + (user.isActive ? 'bg-success' : 'bg-danger')">
+                            <lucide-icon class="w-4 h-4 mr-1" [name]="user.isActive ? 'user-check' : 'user-x'">
                             </lucide-icon>
-                            {{user.isActive ? 'Activo' : 'Inactivo'}}
+                            <span>{{user.isActive ? 'Activo' : 'Inactivo'}}</span>
                         </div>
                     </td>
 
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
 
-                            <button class="flex items-center mr-3" (click)="actualizarUsuario(user.id)">
-                                <lucide-icon class="w-4 h-4 mr-1" name="check-square"></lucide-icon>
+                            <button class="flex items-center mr-3 text-primary font-medium" (click)="actualizarUsuario(user.id)">
+                                <lucide-icon class="w-4 h-4 mr-1" name="edit"></lucide-icon>
                                 Editar
                             </button>
 
-                            <button class="flex items-center text-primary" (click)="verUsuario(user.id)">
-                                <lucide-icon class="w-4 h-4 mr-1" name="eye" ></lucide-icon>
+                            <button class="flex items-center mr-3 text-success font-medium" (click)="verUsuario(user.id)">
+                                <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
                                 Ver
                             </button>
 
-                            <button class="flex items-center mr-3" (click)="actualizarContrasena(user.id)">
-                                <lucide-icon class="w-4 h-4 mr-1" name="check-square" ></lucide-icon>
+                            <button class="flex items-center mr-3 text-danger font-medium" (click)="actualizarContrasena(user.id)">
+                                <lucide-icon class="w-4 h-4 mr-1" name="lock"></lucide-icon>
                                 Contraseña
                             </button>
 
-                            <button class="flex items-center" (click)="openAsignarRolesDialog(user.id)">
-                              <lucide-icon class="w-4 h-4 mr-1" name="user" ></lucide-icon>
-                              Roles
-                          </button>
+                            <button class="flex items-center font-medium" (click)="openAsignarRolesDialog(user.id)">
+                                <lucide-icon class="w-4 h-4 mr-1" name="user"></lucide-icon>
+                                Roles
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -78,10 +82,10 @@
         </table>
     </div>
 
-        <!-- Paginacion -->
-        <div class="intro-y col-span-12 text-right">
-            <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="p = $event">
-            </pagination-controls>
-        </div>
+    <!-- Paginacion -->
+    <div class="intro-y col-span-12 text-right">
+        <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="p = $event">
+        </pagination-controls>
+    </div>
 
 </div>

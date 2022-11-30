@@ -1,123 +1,130 @@
-<div class="modal-dialog modal-xl">
-    <div class="modal-content">
+<!-- Cabecera -->
+<div class="modal-header">
+    <h2 class="intro-y font-medium text-lg mr-auto">Actualizar Producto</h2>
+</div>
 
-        <!-- Cabecera -->
-        <div class="modal-header">
-            <h2 class="font-medium intro-y text-lg mr-auto">Actualizar Producto</h2>
-        </div>
+<!-- Cuerpo -->
+<div class="modal-body px-5 sm:px-10">
+    <form [formGroup]="formProducto">
+        <div class="grid grid-cols-12 gap-4 gap-y-5">
 
-        <!-- Cuerpo -->
-        <div class="modal-body p-0">
-            <!-- Inputs -->
-            <div class="intro-y box py-8 sm:py-8">
-                <div class="px-8 sm:px-8 dark:border-darkmode-400">
+            <!-- Código -->
+            <div class="intro-y col-span-12 sm:col-span-4">
+                <label class="form-label">Código</label>
+                <input formControlName="code" type="text" [class]="'form-control ' + cssValidate('code')"
+                    placeholder="Ingrese el código">
+                <error-message [formControlError]="formProducto.controls['code']"></error-message>
+            </div>
 
-                    <form [formGroup]="formProducto">
-                        <div class="grid grid-cols-12 gap-4 gap-y-5">
+            <!-- Nombre -->
+            <div class="intro-y col-span-12 sm:col-span-4">
+                <label class="form-label">Nombre</label>
+                <input formControlName="name" type="text" [class]="'form-control ' + cssValidate('name')"
+                    placeholder="Ingrese el nombre">
+                <error-message [formControlError]="formProducto.controls['name']"></error-message>
+            </div>
 
-                            <!-- Código -->
-                            <div class="intro-y col-span-12 sm:col-span-4">
-                                <label class="form-label">Código</label>
-                                <input formControlName="code" type="text" class="form-control"
-                                    placeholder="Ingrese el código">
+            <!-- Categoria -->
+            <div class="intro-y col-span-12 sm:col-span-4">
+                <label class="form-label">Categoría</label>
+                <select class="form-select" [class]="'form-select ' + cssValidate('categoryId')"
+                    formControlName="categoryId">
+                    <option value="null" selected>Seleccione una opción</option>
+                    <option *ngFor="let categoria of lCategorias" [value]="categoria.id">
+                        {{categoria.name}}
+                    </option>
+                </select>
+                <error-message [formControlError]="formProducto.controls['categoryId']"></error-message>
+            </div>
+
+            <!-- Mostrar en Catalogo -->
+            <div class="intro-y col-span-12 sm:col-span-4">
+                <label class="form-label">Mostrar en Catálogo</label>
+                <select [class]="'form-select ' + cssValidate('showInCatalog')" formControlName="showInCatalog">
+                    <option value="null" selected>Seleccione una opción</option>
+                    <option *ngFor="let show of lShowCatalog" [value]="show.value">
+                        {{show.name}}
+                    </option>
+                </select>
+                <error-message [formControlError]="formProducto.controls['showInCatalog']"></error-message>
+            </div>
+
+            <!-- Precio de compra -->
+            <div class="intro-y col-span-12 sm:col-span-4">
+                <label class="form-label">Precio de compra</label>
+                <input formControlName="purchasePrice" type="text"
+                    [class]="'form-control ' + cssValidate('purchasePrice')" placeholder="Ingrese el precio de compra">
+                <error-message [formControlError]="formProducto.controls['purchasePrice']"></error-message>
+            </div>
+
+            <!-- Precio de venta -->
+            <div class="intro-y col-span-12 sm:col-span-4">
+                <label class="form-label">Precio de venta</label>
+                <input formControlName="salesPrice" type="text" [class]="'form-control ' + cssValidate('salesPrice')"
+                    placeholder="Ingrese el precio de venta">
+                <error-message [formControlError]="formProducto.controls['salesPrice']"></error-message>
+            </div>
+
+            <!-- Stock Minimo -->
+            <div class="intro-y col-span-12 sm:col-span-4">
+                <label class="form-label">Stock Minimo</label>
+                <input formControlName="minStock" type="text" [class]="'form-control ' + cssValidate('minStock')"
+                    placeholder="Ingrese el stock minimo">
+                <error-message [formControlError]="formProducto.controls['minStock']"></error-message>
+            </div>
+
+            <!-- Stock Maximo -->
+            <div class="intro-y col-span-12 sm:col-span-4">
+                <label class="form-label">Stock Maximo</label>
+                <input formControlName="maxStock" type="text" [class]="'form-control ' + cssValidate('maxStock')"
+                    placeholder="Ingrese el stock máximo">
+                <error-message [formControlError]="formProducto.controls['maxStock']"></error-message>
+            </div>
+
+            <!-- Stock -->
+            <div class="intro-y col-span-12 sm:col-span-4">
+                <label class="form-label">Stock</label>
+                <input formControlName="stock" type="text" [class]="'form-control ' + cssValidate('stock')"
+                    placeholder="Ingrese el stock" readonly>
+                <error-message [formControlError]="formProducto.controls['stock']"></error-message>
+            </div>
+
+            <!-- Imagen -->
+            <div class="intro-y col-span-12 sm:col-span-12">
+                <div class="flex flex-col sm:flex-row items-center mt-1">
+                    <h2 class="font-medium form-label text-base mr-auto">
+                        Imagen
+                    </h2>
+                </div>
+                <div class="pb-4">
+                    <div class="preview">
+                        <div [class]="'dropzone ' + cssValidate('uploadFile')">
+                            <input class="input-file" formControlName="uploadFile" type="file"
+                                (change)="handleFileInput($event)" accept="image/png, image/gif, image/jpeg"
+                                placeholder="Ingrese el enlace de la imagen">
+
+                            <div *ngIf="!urlImage" class="dz-message">
+                                <div class="text-lg font-medium">Arrastra la foto que deseas subir
+                                </div>
+                                <div class="text-slate-500">
+                                    Recuerda que solo puedes subir fotos en formato png, jpeg o gif.
+                                </div>
                             </div>
 
-                            <!-- Nombre -->
-                            <div class="intro-y col-span-12 sm:col-span-4">
-                                <label class="form-label">Nombre</label>
-                                <input formControlName="name" type="text" class="form-control"
-                                    placeholder="Ingrese el nombre">
+                            <div *ngIf="urlImage" class="w-full h-40 image-contain pt-1">
+                                <img [src]="urlImage">
                             </div>
-
-                            <!-- Categoria -->
-                            <div class="intro-y col-span-12 sm:col-span-4">
-                                <label class="form-label">Categoría</label>
-                                <select class="form-select sm:mr-2 dropdown-content" formControlName="categoryId">
-                                    <option *ngFor="let categoria of lCategorias" [value]="categoria.id">
-                                        {{categoria.name}}
-                                    </option>
-                                </select>
-                            </div>
-
-                            <!-- Mostrar en Catalogo -->
-                            <div class="intro-y col-span-12 sm:col-span-4">
-                                <label class="form-label">Mostrar en Catálogo</label>
-                                <select class="form-select sm:mr-2 dropdown-content" formControlName="showInCatalog">
-                                    <option *ngFor="let show of lShowCatalog" [value]="show.value">
-                                        {{show.name}}
-                                    </option>
-                                </select>
-                            </div>
-
-                            <!-- Precio de compra -->
-                            <div class="intro-y col-span-12 sm:col-span-4">
-                                <label class="form-label">Precio de compra</label>
-                                <input formControlName="purchasePrice" type="text" class="form-control"
-                                    placeholder="Ingrese el precio de compra">
-                            </div>
-
-                            <!-- Precio de venta -->
-                            <div class="intro-y col-span-12 sm:col-span-4">
-                                <label class="form-label">Precio de venta</label>
-                                <input formControlName="salesPrice" type="text" class="form-control"
-                                    placeholder="Ingrese el precio de venta">
-                            </div>
-
-                            <!-- Stock Minimo -->
-                            <div class="intro-y col-span-12 sm:col-span-4">
-                                <label class="form-label">Stock Minimo</label>
-                                <input formControlName="minStock" type="text" class="form-control"
-                                    placeholder="Ingrese el stock minimo">
-                            </div>
-
-                            <!-- Stock Maximo -->
-                            <div class="intro-y col-span-12 sm:col-span-4">
-                                <label class="form-label">Stock Maximo</label>
-                                <input formControlName="maxStock" type="text" class="form-control"
-                                    placeholder="Ingrese el stock máximo">
-                            </div>
-
-                            <!-- Stock -->
-                            <div class="intro-y col-span-12 sm:col-span-4">
-                                <label class="form-label">Stock</label>
-                                <input readOnly formControlName="stock" type="text" class="form-control"
-                                    placeholder="Ingrese el stock">
-                            </div>
-
-                            <!-- Imagen -->
-                            <div class="intro-y col-span-12 sm:col-span-12">
-                                <label class="form-label">Imagen</label>
-                                <input formControlName="urlImage" readonly type="text" class="form-control"
-                                    placeholder="Ingrese el enlace de la imagen">
-                            </div>
-
-                            <!-- Subir Imagen -->
-                            <div class="intro-y col-span-12 sm:col-span-12">
-                                <label class="form-label">Imagen</label>
-                                <input formControlName="uploadFile" type="file"
-                                    (change)="handleFileInput($event)"
-                                    accept="image/png, image/gif, image/jpeg" class="form-control"
-                                    placeholder="Ingrese el enlace de la imagen">
-                            </div>
-
                         </div>
-                    </form>
-
-
+                        <error-message [formControlError]="formProducto.controls['uploadFile']"></error-message>
+                    </div>
                 </div>
             </div>
         </div>
+    </form>
+</div>
 
-        <!-- Footer -->
-        <div class="modal-footer intro-y">
-
-            <button class="btn btn-primary w-20 mr-2" (click)="actualizarProducto()">Actualizar
-            </button>
-
-            <button class="btn btn-secondary w-20" (click)="salir()">Atrás
-            </button>
-        </div>
-
-
-    </div>
+<!-- Footer -->
+<div class="modal-footer intro-y">
+    <button class="btn btn-primary w-24 mr-2" (click)="actualizarProducto()">Actualizar</button>
+    <button class="btn btn-secondary w-24" (click)="salir()">Atrás</button>
 </div>

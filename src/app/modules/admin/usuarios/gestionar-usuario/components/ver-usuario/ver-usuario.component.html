@@ -1,66 +1,59 @@
 <!-- Cabecera -->
-<div class="flex items-center mt-8">
-    <h2 class="intro-y text-lg font-medium mr-auto">
-        Ver Usuario
-    </h2>
+<div class="modal-header">
+    <h2 class="intro-y font-medium text-lg mr-auto">Ver Usuario</h2>
 </div>
 
-<!-- Inputs -->
-<div class="intro-y box py-10 sm:py-20 mt-5">
-    <div class="px-5 sm:px-20 dark:border-darkmode-400">
-        <div class="font-medium text-base">ID Usuario: {{idUsuario}}</div>
-        <form [formGroup]="formUsuario">
-            <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+<!-- Cuerpo -->
+<div class="modal-body px-5 sm:px-10">
+    <form [formGroup]="formUsuario">
+        <div class="grid grid-cols-12 gap-4 gap-y-5">
 
-                <!-- E-mail -->
-                <div class="intro-y col-span-12 sm:col-span-6">
-                    <label for="input-wizard-3" class="form-label">E-mail</label>
-                    <input id="input-wizard-3" formControlName="email" type="text" class="form-control"
-                        placeholder="user@hotmail.com" readonly>
-                </div>
-
-                <!-- Estado -->
-                <div class="intro-y col-span-12 sm:col-span-6">
-                    <label for="input-wizard-4" class="form-label">Estado</label>
-                    <input id="input-wizard-4" formControlName="isActive" type="text" class="form-control"
-                        placeholder="Selecciona tu Estado" readonly>
-                </div>
-
-                <!-- Primer Nombre -->
-                <div class="intro-y col-span-12 sm:col-span-6">
-                    <label for="input-wizard-4" class="form-label">Primer Nombre</label>
-                    <input id="input-wizard-4" formControlName="firstName" type="text" class="form-control"
-                        placeholder="Selecciona tu Primer Nombre" readonly>
-                </div>
-
-                <!-- Apellido -->
-                <div class="intro-y col-span-12 sm:col-span-6">
-                    <label for="input-wizard-4" class="form-label">Apellido</label>
-                    <input id="input-wizard-4" formControlName="lastName" type="text" class="form-control"
-                        placeholder="Selecciona tu Apellido" readonly>
-                </div>
-
-                <!-- Segundo Nombre -->
-                <div class="intro-y col-span-12 sm:col-span-6">
-                    <label for="input-wizard-4" class="form-label">Segundo Nombre</label>
-                    <input id="input-wizard-4" formControlName="surName" type="text" class="form-control"
-                        placeholder="Selecciona tu Segundo Nombre" readonly>
-                </div>
-
-                 <!-- Fecha de Nacimiento -->
-                 <div class="intro-y col-span-12 sm:col-span-6">
-                    <label for="input-wizard-4" class="form-label">Fecha de Nacimiento</label>
-                    <input id="input-wizard-4" formControlName="bornDate" type="date" class="form-control"
-                        placeholder="Selecciona tu Fecha de Nacimiento" readonly>
-                </div>
-
-                <!-- Options -->
-                <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                    <button class="btn btn-secondary w-24" (click)="cerrarVentana()">Atrás</button>
-                </div>
-
+            <!-- E-mail -->
+            <div class="intro-y col-span-12 sm:col-span-6">
+                <label for="input-wizard-3" class="form-label">E-mail</label>
+                <input id="input-wizard-3" formControlName="email" type="text" class="form-control"
+                    placeholder="user@hotmail.com" readonly>
             </div>
-        </form>
-    </div>
+
+            <!-- Estado -->
+            <div class="intro-y col-span-12 sm:col-span-6">
+                <label for="input-wizard-4" class="form-label">Estado</label>
+                <input id="input-wizard-4" formControlName="isActive" type="text" class="form-control"
+                    placeholder="Selecciona tu Estado" readonly>
+            </div>
+
+            <!-- Primer Nombre -->
+            <div class="intro-y col-span-12 sm:col-span-6">
+                <label for="input-wizard-4" class="form-label">Primer Nombre</label>
+                <input id="input-wizard-4" formControlName="firstName" type="text" class="form-control"
+                    placeholder="Selecciona tu Primer Nombre" readonly>
+            </div>
+
+            <!-- Segundo Nombre -->
+            <div class="intro-y col-span-12 sm:col-span-6">
+                <label for="input-wizard-4" class="form-label">Segundo Nombre</label>
+                <input id="input-wizard-4" formControlName="surName" type="text" class="form-control"
+                    placeholder="Selecciona tu Segundo Nombre" readonly>
+            </div>
+
+            <!-- Apellido -->
+            <div class="intro-y col-span-12 sm:col-span-6">
+                <label for="input-wizard-4" class="form-label">Apellido</label>
+                <input id="input-wizard-4" formControlName="lastName" type="text" class="form-control"
+                    placeholder="Selecciona tu Apellido" readonly>
+            </div>
+
+            <!-- Fecha de Nacimiento -->
+            <div class="intro-y col-span-12 sm:col-span-6">
+                <label for="input-wizard-4" class="form-label">Fecha de Nacimiento</label>
+                <input id="input-wizard-4" formControlName="bornDate" type="date" class="form-control"
+                    placeholder="Selecciona tu Fecha de Nacimiento" readonly>
+            </div>
+        </div>
+    </form>
 </div>
-<!-- END: Wizard Layout -->
+
+<!-- Footer -->
+<div class="modal-footer intro-y">
+    <button class="btn btn-primary w-24" (click)="salir()">Atrás</button>
+</div>

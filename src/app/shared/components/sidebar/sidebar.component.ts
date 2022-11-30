@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
-
 
 export interface Menu {
     id: number;
@@ -24,12 +21,11 @@ export class SidebarComponent implements OnInit {
     openSubmenu = false
     pruebaString: string
 
-    constructor(
-        private _activatedRoute: ActivatedRoute
-    ) { }
+    constructor() { }
 
     ngOnInit() {
         this.setMenu()
+        this.routerlinkactive(1)
     }
 
     setMenu() {
@@ -52,9 +48,17 @@ export class SidebarComponent implements OnInit {
     }
 
     cerrarSesion(id: number) {
-        if (id == -1){
-            localStorage.clear();
-            
+        if (id == -1) localStorage.clear();
+    }
+
+    menuCondition(menu: Menu){
+        if(menu.childs.length){
+            this.showSubmenu(menu.id)
+        }
+        else {
+            this.routerlinkactive(menu.id)
+            this.showSubmenu(menu.id)
+            this.cerrarSesion(menu.id)
         }
     }
 

@@ -5,6 +5,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { ResponseData } from 'src/app/core/models/response.model';
 import { updatePassword } from 'src/app/core/models/user.model';
+import { Alert } from 'src/app/core/models/alert.model';
+import { ToastService } from 'src/app/shared/components/toast/toast.service';
 
 @Component({
     selector: 'app-actualizar-contrasena',
@@ -15,33 +17,18 @@ export class ActualizarContrasenaComponent implements OnInit {
 
     formContrasena: FormGroup
 
-     // Alert Modal
-     typeModal: string
-     openModal: boolean = false
-     contenidoModal: string
-
     constructor(
         private _formBuilder: FormBuilder,
         private _usuarioService: UserService,
         private _dialogRef: MatDialogRef<ActualizarContrasenaComponent>,
-        
+
         @Inject(MAT_DIALOG_DATA) private _dialogData,
         private _alertService: AlertService,
+        private _toastService: ToastService
     ) { }
 
     ngOnInit() {
         this.crearFormContrasena()
-        this.listarUsuarioxID(this._dialogData)
-    }
-
-    async listarUsuarioxID(idUsuario: number) {
-        try {
-            const data: ResponseData = await this._usuarioService.getUsuarioxID(idUsuario).toPromise()
-            this.formContrasena.patchValue(data.data)
-        }
-        catch (error) {
-            console.log("Error: ", error)
-        }
     }
 
     crearFormContrasena() {
@@ -50,24 +37,49 @@ export class ActualizarContrasenaComponent implements OnInit {
         })
     }
 
-    async actualizarContrasena(){
+    async actualizarContrasena() {
+
+        if (this.formContrasena.invalid) {
+            let contenido: Alert = {
+                type: 'alert',
+                contenido: 'Formato inválido, revise los campos porfavor.'
+            }
+            this._toastService.open(contenido)
+            this.formContrasena.markAllAsTouched()
+            return
+        }
+
         let form = this.formContrasena.value
 
         let Contrasena: updatePassword = {
             id: this._dialogData,
             password: form.password
         }
-        console.log(Contrasena)
 
-        let data: ResponseData = await this._usuarioService.actualizarContrasena(this._dialogData, Contrasena)
+        try {
+            let data: ResponseData = await this._usuarioService.actualizarContrasena(this._dialogData, Contrasena)
 
-        if(!data.error){
-            this.listarUsuarioxID(this._dialogData)
-            this._alertService.openModal({ typeModal: 'success', contenidoModal: data.message })
+            this.salir()
+            this._alertService.openModal({
+                typeModal: 'success',
+                contenidoModal: data.message
+            })
         }
+        catch (error) {
+            console.log(error)
+        }
+
     }
 
     salir() {
         this._dialogRef.close()
-      }
+    }
+
+    cssValidate(control: string) {
+        if (this.formContrasena.controls[control].touched) {
+            if (this.formContrasena.controls[control].errors) return 'border-danger'
+            else return 'border-success'
+        }
+        else return ''
+    }
 }

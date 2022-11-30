@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
-import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActualizarContrasenaComponent } from './components/actualizar-contraseña/actualizar-contrasena.component';
 import { AsignarRolesComponent } from './components/asignar-roles/asignar-roles.component';
+import { RegistrarUsuarioComponent } from './components/registrar-usuario/registrar-usuario.component';
+import { VerUsuarioComponent } from './components/ver-usuario/ver-usuario.component';
+import { ActualizarUsuarioComponent } from './components/actualizar-usuario/actualizar-usuario.component';
 
 @Component({
     selector: 'app-gestionar-usuario',
@@ -20,7 +22,6 @@ export class GestionarUsuarioComponent implements OnInit {
 
     constructor(
         private _usuarioService: UserService,
-        private _router: Router,
         private _dialog: MatDialog
     ) { }
 
@@ -31,7 +32,6 @@ export class GestionarUsuarioComponent implements OnInit {
     async getUsuarios() {
         try {
             const data: any = await this._usuarioService.getUsuarios().toPromise()
-            console.log(data)
             this.Mensaje = data.message
             this.lUsuarios = data.data
         }
@@ -40,37 +40,58 @@ export class GestionarUsuarioComponent implements OnInit {
         }
     }
 
-    registrarUsuario(){
-        this._router.navigate(['/usuarios/gestionarusuario/registrar'])
+    registrarUsuario() {
+        const dialogConfig = new MatDialogConfig()
+
+        dialogConfig.width = '45rem'
+        dialogConfig.autoFocus = false
+
+        const dialogReg = this._dialog.open(RegistrarUsuarioComponent, dialogConfig)
+        dialogReg.afterClosed().subscribe(() => this.getUsuarios())
     }
 
     verUsuario(idUsuario: number) {
-        this._router.navigate(['/usuarios/gestionarusuario/ver/' + idUsuario])
+        const dialogConfig = new MatDialogConfig()
+
+        dialogConfig.width = '45rem'
+        dialogConfig.data = idUsuario
+        dialogConfig.autoFocus = false
+
+        const dialogReg = this._dialog.open(VerUsuarioComponent, dialogConfig)
     }
 
     actualizarUsuario(idUsuario: number) {
-        this._router.navigate(['/usuarios/gestionarusuario/actualizar/' + idUsuario])
+
+        const dialogConfig = new MatDialogConfig()
+
+        dialogConfig.width = '45rem'
+        dialogConfig.data = idUsuario
+        dialogConfig.autoFocus = false
+
+        const dialogReg = this._dialog.open(ActualizarUsuarioComponent, dialogConfig)
+        dialogReg.afterClosed().subscribe(result => this.getUsuarios())
     }
 
     actualizarContrasena(idUsuario: number) {
 
         const dialogConfig = new MatDialogConfig()
 
-        dialogConfig.panelClass = ['modal', 'overflow-y-auto', 'show', 'modal-show']
         dialogConfig.data = idUsuario
+        dialogConfig.width = '25rem'
+        dialogConfig.autoFocus = false
 
         const dialogReg = this._dialog.open(ActualizarContrasenaComponent, dialogConfig)
         dialogReg.afterClosed().subscribe(result => this.getUsuarios())
     }
 
     openAsignarRolesDialog(idUsuario: number): void {
-      const dialogConfig = new MatDialogConfig()
+        const dialogConfig = new MatDialogConfig()
 
-      dialogConfig.panelClass = ['modal', 'overflow-y-auto', 'show', 'modal-show']
-      dialogConfig.data = idUsuario
+        dialogConfig.data = idUsuario
+        dialogConfig.width = '30rem'
+        dialogConfig.autoFocus = false
 
-      const dialogReg = this._dialog.open(AsignarRolesComponent, dialogConfig)
-
-     }
+        const dialogReg = this._dialog.open(AsignarRolesComponent, dialogConfig)
+    }
 
 }

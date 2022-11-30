@@ -10,7 +10,7 @@
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
-                <input [formControl]="filtro" type="text" class="form-control w-56 box pr-10" placeholder="Buscar...">
+                <input [formControl]="filtro" type="text" class="form-control w-56 box pr-10" placeholder="Buscar producto">
                 <lucide-icon class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" name="search"></lucide-icon>
             </div>
         </div>
@@ -24,46 +24,52 @@
             <thead>
                 <tr>
                     <th class="text-center whitespace-nowrap">CÓDIGO</th>
-                    <!-- <th class="text-center whitespace-nowrap">IMAGEN</th> -->
+                    <th class="text-center whitespace-nowrap">IMAGEN</th>
                     <th class="text-center whitespace-nowrap">NOMBRE</th>
                     <th class="text-center whitespace-nowrap">TIPO</th>
-                    <!-- <th class="text-center whitespace-nowrap">PRECIO</th> -->
+                    <th class="text-center whitespace-nowrap">CATÁLOGO</th>
                     <th class="text-center whitespace-nowrap">ACCIONES</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="intro-x" *ngFor="let producto of lProductos | filterPipe: filtro.value | paginate: { itemsPerPage: 5, currentPage: p }">
+                <tr class="intro-x"
+                    *ngFor="let producto of lProductos | filterPipe: filtro.value | paginate: { itemsPerPage: 8, currentPage: p }">
                     <td class="text-center font-medium whitespace-nowrap"> {{ producto.id }} </td>
-                    <!-- <td class="">
+                    <td class="">
                         <div class="flex items-center justify-center text-success">
                             <div class="w-10 h-10 image-fit zoom-in">
-                                <img class="rounded-lg border-white shadow-md tooltip"
-                                    [src]="producto.urlImage == '' ? urlPorDefecto : producto.urlImage"
+                                <img class="rounded-lg border-white shadow-md tooltip" [src]="producto.urlImage"
                                     data-action="zoom">
                             </div>
                         </div>
-                    </td> -->
+                    </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{ producto.name }} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{ producto.type }} </td>
-                    <!-- <td class="text-center font-medium whitespace-nowrap text-danger">
-                        S/. {{ producto.salesPrice | number:'1.2-2' }}
-                    </td> -->
+
+                    <td class="w-32">
+                        <div [class]="'badge py-1 ' + (producto.showInCatalog ? 'bg-success' : 'bg-danger')">
+                            <lucide-icon class="w-4 h-4 mr-2" [name]="producto.showInCatalog ? 'package-check' : 'package-x'">
+                            </lucide-icon>
+                            <span>{{producto.showInCatalog ? 'Si' : 'No'}}</span>
+                        </div>
+                    </td>
 
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
 
-                            <button class="flex items-center mr-3" (click)="actualizarProducto(producto.id)">
-                                <lucide-icon class="w-4 h-4 mr-1" name="check-square"></lucide-icon>
+                            <button class="flex items-center mr-3 text-primary font-medium" (click)="actualizarProducto(producto.id)">
+                                <lucide-icon class="w-4 h-4 mr-1" name="edit"></lucide-icon>
                                 Editar
                             </button>
 
-                            <button class="flex items-center text-primary" (click)="verProducto(producto.id)">
-                                <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
+                            <button class="flex items-center mr-3 text-success font-medium" (click)="verProducto(producto.id)">
+                                <lucide-icon class="w-4 h-4 mr-1" name="package-search"></lucide-icon>
                                 Ver
                             </button>
-                            <button class="flex items-center text-primary" (click)="verProductoMovimientos(producto.id)">
-                                <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
-                                Ver Movimientos
+                            <button class="flex items-center text-secondary font-medium"
+                                (click)="verProductoMovimientos(producto.id, producto.name)">
+                                <lucide-icon class="w-4 h-4 mr-1" name="truck"></lucide-icon>
+                                Movimientos
                             </button>
                         </div>
                     </td>

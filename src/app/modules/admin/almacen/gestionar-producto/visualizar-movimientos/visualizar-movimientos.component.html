@@ -1,52 +1,62 @@
-<!-- Titulo -->
-<h2 class="intro-y text-lg font-medium mt-10">
-    Movimientos del producto con Id: {{idProducto}}
-</h2>
+<!-- Cabecera -->
+<div class="modal-header">
+    <h2 class="intro-y font-medium text-lg mr-auto">
+        Movimientos del producto: {{nameProducto}}
+    </h2>
+</div>
 
 <!-- Cuerpo -->
-<div class="grid grid-cols-12 gap-6 mt-5">
+<div class="modal-body px-5 sm:px-10">
+    <div class="grid grid-cols-12 gap-6 mt-5">
 
-    <!-- Cabecera -->
-    <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
+        <!-- Cabecera -->
+        <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
+            <div class="hidden md:block mx-auto text-slate-500"> {{mensaje}} </div>
+        </div>
 
-        <div class="hidden md:block mx-auto text-slate-500"> {{mensaje}} </div>
+        <!-- Table -->
+        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+            <table class="table table-report -mt-2">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="text-center whitespace-nowrap">Cantidad</th>
+                        <th class="text-center whitespace-nowrap">Stock actual</th>
+                        <th class="text-center whitespace-nowrap">Tipo</th>
+                        <th class="text-center whitespace-nowrap">Fecha Movimiento</th>
+                        <th class="text-center whitespace-nowrap">Hora Movimiento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="intro-x table-dark"
+                        *ngFor="let movimiento of movimientos |paginate: { itemsPerPage: 5, currentPage: p }">
+                        <td class="text-center font-medium whitespace-nowrap"> {{movimiento.quantity}} </td>
+                        <td class="text-center font-medium whitespace-nowrap"> {{movimiento.stock}} </td>
+
+                        <td class="w-32">
+                            <div
+                                [class]="'badge py-1 ' + (movimiento.typeMovement == 'Ingreso' ? 'bg-success' : 'bg-danger')">
+                                <lucide-icon class="w-4 h-4 mr-2"
+                                    [name]="movimiento.typeMovement == 'Ingreso' ? 'package-plus' : 'package-minus'">
+                                </lucide-icon>
+                                <span>{{movimiento.typeMovement}}</span>
+                            </div>
+                        </td>
+                        <td class="text-center font-medium whitespace-nowrap">
+                            {{movimiento.date | date: 'dd/MM/yyyy'}}
+                        </td>
+                        <td class="text-center font-medium whitespace-nowrap">
+                            {{movimiento.date | date: 'mediumTime'}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Paginacion -->
+        <div class="intro-y col-span-12 text-right">
+            <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="p = $event">
+            </pagination-controls>
+        </div>
 
     </div>
-
-    <!-- Table -->
-    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
-        <table class="table table-report -mt-2">
-            <thead>
-                <tr>
-                    <!-- <th class="text-center whitespace-nowrap">ID</th> -->
-                    <th class="text-center whitespace-nowrap">Cantidad</th>
-                    <th class="text-center whitespace-nowrap">Tipo</th>
-                    <th class="text-center whitespace-nowrap">Fecha Movimiento</th>
-                    <th class="text-center whitespace-nowrap">Hora Movimiento</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="intro-x"
-                    *ngFor="let movimiento of movimientos |paginate: { itemsPerPage: 5, currentPage: p }">
-                    <td class="text-center font-medium whitespace-nowrap"> {{movimiento.quantity}} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{movimiento.typeMovement}} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{movimiento.date | date: 'dd/MM/yyyy'}}
-                    </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{movimiento.date | date: 'mediumTime'}}
-                    </td>
-
-                </tr>
-
-
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Paginacion -->
-    <div class="intro-y col-span-12 text-right">
-        <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="p = $event">
-        </pagination-controls>
-    </div>
-
 </div>

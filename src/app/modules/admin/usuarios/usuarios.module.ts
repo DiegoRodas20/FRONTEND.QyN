@@ -12,6 +12,7 @@ import { ActualizarContrasenaComponent } from './gestionar-usuario/components/ac
 import { GestionarUsuarioComponent } from './gestionar-usuario/gestionar-usuario.component';
 import { UsuariosRoutingModule } from './usuarios.routing';
 import { AsignarRolesComponent } from './gestionar-usuario/components/asignar-roles/asignar-roles.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 const COMPONENTS = [
@@ -35,7 +36,8 @@ const COMPONENTS = [
         PipeModule,
         FormsModule,
         ReactiveFormsModule,
-        LucideAngularModule.pick(icons)
+        LucideAngularModule.pick(icons),
+        SharedModule
     ],
     exports: [],
 })

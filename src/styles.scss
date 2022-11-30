@@ -15,6 +15,10 @@
     height: 4rem !important;
 }
 
+.pb-0 {
+    padding-bottom: 0rem !important;
+}
+
 .w-logo {
     width: 53%;
 }
@@ -50,19 +54,6 @@
 }
 
 /*----  Material modal ----*/
-.modal-show {
-    margin-top: 0px !important;
-    margin-left: 0px !important;
-    padding-left: 0px;
-    z-index: 10000;
-    max-width: inherit !important;
-    position: fixed !important;
-}
-
-.modal .modal-dialog {
-    margin-top: 4rem !important;
-    margin-bottom: 4rem !important;
-}
 
 .mat-dialog-container {
     overflow: hidden !important;
@@ -87,6 +78,16 @@
     padding-right: 0.75rem;
 }
 
+.badge {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    border-radius: 9999px;
+}
+
 // Calendario
 .fc-v-event {
     border: 1px solid #062b61 !important;
@@ -95,4 +96,23 @@
 
 .fc .fc-timegrid-slot {
     height: 1.65em !important;
+}
+
+.input-file {
+    width: 100%;
+    background-color: transparent;
+    position: absolute;
+    height: 10rem;
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer !important;
+}
+
+.dropzone {
+    min-height: 11rem !important;
+    padding: 0 !important;
+}
+
+.dropzone .dz-message {
+    margin: 4.5em 0 !important;
 }

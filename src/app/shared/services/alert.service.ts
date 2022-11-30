@@ -15,7 +15,6 @@ export class AlertService {
         this._contenidoModal = ''
     }
 
-    // Listar Cliente por ID
     openModal(content: {
         typeModal: 'success' | 'error' | 'alert',
         contenidoModal: string,
