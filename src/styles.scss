@@ -53,6 +53,14 @@
     transition-duration: 300ms;
 }
 
+.zoom-overlay {
+    z-index: 99999 !important;
+}
+
+.zoom-img, .zoom-img-wrap {
+    z-index: 999999 !important;
+}
+
 /*----  Material modal ----*/
 
 .mat-dialog-container {
@@ -144,3 +152,4 @@
     box-shadow: 0 12.5px 10px rgba(0, 0, 0, 0.035),
         0 100px 80px rgba(0, 0, 0, 0.07);
 }
+

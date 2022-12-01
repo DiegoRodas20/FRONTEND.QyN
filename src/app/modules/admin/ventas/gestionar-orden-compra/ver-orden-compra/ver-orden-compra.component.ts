@@ -61,6 +61,7 @@ export class VerOrdenCompraComponent implements OnInit {
   async getOrdenCompraxID(idOrdenCompra: string) {
     try {
       const data: any = await this._ordenCompraService.gestOrdenCompraxID(idOrdenCompra).toPromise()
+      console.log(data)
       this.Mensaje = data.message
       this.formOrdenCompra.patchValue({
         ...data.data,

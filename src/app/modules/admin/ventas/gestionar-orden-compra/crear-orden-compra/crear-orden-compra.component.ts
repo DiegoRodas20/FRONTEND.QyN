@@ -124,7 +124,7 @@ export class CrearOrdenCompraComponent implements OnInit {
   }
 
   registerPurchaseOrder() {
-    this.formOrdenCompra.patchValue({ supplierId: +this.formOrdenCompra.value.supplierId })
+    this.formOrdenCompra.patchValue({ supplierId: + this.formOrdenCompra.value.supplierId })
     this._ordenCompraService.postOrdenCompra(this.formOrdenCompra.value).subscribe((res) => {
       this.salir()
       this._alertService.openModal({ typeModal: 'success', contenidoModal: res.message })

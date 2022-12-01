@@ -1,10 +1,11 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehiculoService } from 'src/app/core/services/vehicle.service';
 import { DriverService } from 'src/app/core/services/driver.service';
 import { TypeVehicleService } from 'src/app/core/services/typevehicle.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
 
@@ -21,23 +22,24 @@ export class VerVehiculoComponent implements OnInit {
     formVehiculo: FormGroup
 
     constructor(
-        private _router: Router,
-        private _route: ActivatedRoute,
+        private _dialogRef: MatDialogRef<VerVehiculoComponent>,
         private _vehiculoService: VehiculoService,
         private _typeVehicleService: TypeVehicleService,
         private _driverService: DriverService,
         private _formBuildaer: FormBuilder,
+
+        @Inject(MAT_DIALOG_DATA) private _dialogData
     ) { }
 
     ngOnInit() {
         this.crearFormVehiculo()
         this.listarTipoVehiculos()
         this.listarDriver()
-        this._route.params.subscribe(params => {
-            this.idVehiculo = params.id
-            this.listarVehiculoxID(this.idVehiculo)
-        })
+
+        this.idVehiculo = this._dialogData
+        this.listarVehiculoxID(this.idVehiculo)
     }
+
     crearFormVehiculo(){
         this.formVehiculo = this._formBuildaer.group({
             idTypeVehicle: [null, []],
@@ -76,13 +78,13 @@ export class VerVehiculoComponent implements OnInit {
         try{
             const data: any = await this._vehiculoService.gestVehiculoxID(idVehiculo).toPromise()
             this.formVehiculo.patchValue(data.data)
-            console.log(data.data)
         }
         catch (error) {
             console.log("Error: ",error)
         }
     }
-    cerrarVentana() {
-        this._router.navigate(['/transporte/gestionarvehiculos'])
+
+    salir() {
+        this._dialogRef.close()
     }
 }

@@ -43,7 +43,15 @@
                     <td class="text-center font-medium whitespace-nowrap"> {{ordenCompra.arrivalDate | date:
                         'dd/MM/yyyy'}}</td>
                     <td class="text-center font-medium whitespace-nowrap"> {{ordenCompra.comments}} </td>
-                    <td class="text-center font-medium whitespace-nowrap"> {{ordenCompra.purchaseOrderStatus}} </td>
+                    <!-- <td class="text-center font-medium whitespace-nowrap"> {{ordenCompra.purchaseOrderStatus}} </td> -->
+
+                    <td class="w-52">
+                        <div [class]="'badge py-1 ' + colorStatusPedido(ordenCompra.purchaseOrderStatusId)">
+                            <lucide-icon class="w-4 h-4 mr-1" [name]="iconStatusPedido(ordenCompra.purchaseOrderStatusId)">
+                            </lucide-icon>
+                            <span>{{ordenCompra.purchaseOrderStatus}}</span>
+                        </div>
+                    </td>
 
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">

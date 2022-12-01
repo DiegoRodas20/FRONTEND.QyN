@@ -9,10 +9,6 @@
     <!-- Cabecera -->
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
 
-        <button class="btn btn-primary shadow-md mr-2" (click)="registrarVehiculo()">Registrar Vehiculos</button>
-
-        <div class="hidden md:block mx-auto text-slate-500"> {{Mensaje}} </div>
-
         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
             <div class="w-56 relative text-slate-500">
                 <input [formControl]="filtro" type="text" class="form-control w-56 box pr-10" placeholder="Search...">
@@ -20,6 +16,9 @@
             </div>
         </div>
 
+        <div class="hidden md:block mx-auto text-slate-500"> {{Mensaje}} </div>
+
+        <button class="btn btn-primary shadow-md mr-2" (click)="registrarVehiculo()">Registrar Vehiculos</button>
     </div>
 
     <!-- Table -->
@@ -36,36 +35,30 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="intro-x" *ngFor="let vehiculo of lVehiculos | filterPipe: filtro.value| paginate: { itemsPerPage: 5, currentPage: p }">
-                    <!-- <td class="text-center font-medium whitespace-nowrap">  </td> -->
+                <tr class="intro-x"
+                    *ngFor="let vehiculo of lVehiculos | filterPipe: filtro.value| paginate: { itemsPerPage: 8, currentPage: p }">
                     <td class="text-center font-medium whitespace-nowrap"> {{vehiculo.id}} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{vehiculo.plate}} </td>
                     <td class="text-center font-medium whitespace-nowrap"> {{vehiculo.typeVehicle}} </td>
 
                     <td class="w-40">
-                        <div *ngIf="vehiculo.status== true" class="flex items-center justify-center text-success">
-                            <lucide-icon class="w-4 h-4 mr-2" name="check-square"></lucide-icon>
-                            Activo
+                        <div [class]="'badge py-1 ' + (vehiculo.status ? 'bg-success' : 'bg-danger')">
+                            <lucide-icon class="w-4 h-4 mr-1" [name]="vehiculo.status ? 'file-check' : 'file-x'">
+                            </lucide-icon>
+                            <span>{{vehiculo.status ? 'Activo' : 'Inactivo'}}</span>
                         </div>
-
-                        <div *ngIf="vehiculo.status== false" class="flex items-center justify-center text-danger">
-                            <lucide-icon class="w-4 h-4 mr-2" name="package-x"></lucide-icon>
-                            Inactivo
-                        </div>
-
                     </td>
 
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
-
-                            <button class="flex items-center mr-3" (click)="actualizarVehiculo(vehiculo.id)">
-                                <lucide-icon class="w-4 h-4 mr-1" name="check-square"></lucide-icon>
-                                Editar
-                            </button>
-
-                            <button class="flex items-center text-primary" (click)="verVehiculo(vehiculo.id)">
+                            <button class="flex items-center mr-2 text-success font-medium" (click)="verVehiculo(vehiculo.id)">
                                 <lucide-icon class="w-4 h-4 mr-1" name="eye"></lucide-icon>
                                 Ver
+                            </button>
+
+                            <button class="flex items-center text-primary font-medium" (click)="actualizarVehiculo(vehiculo.id)">
+                                <lucide-icon class="w-4 h-4 mr-1" name="check-square"></lucide-icon>
+                                Editar
                             </button>
                         </div>
                     </td>
@@ -76,7 +69,6 @@
         </table>
     </div>
 
-    <!-- Paginacion -->
     <!-- Paginacion -->
     <div class="intro-y col-span-12 text-right">
         <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="p = $event">

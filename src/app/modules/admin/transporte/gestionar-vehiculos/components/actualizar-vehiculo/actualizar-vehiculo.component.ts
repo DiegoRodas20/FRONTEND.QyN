@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehiculoService } from 'src/app/core/services/vehicle.service';
 import { DriverService } from 'src/app/core/services/driver.service';
 import { TypeVehicleService } from 'src/app/core/services/typevehicle.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Alert } from 'src/app/core/models/alert.model';
+import { ToastService } from 'src/app/shared/components/toast/toast.service';
+import { AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
 
@@ -21,22 +25,24 @@ export class ActualizarVehiculoComponent implements OnInit {
     modalClass: string = ''
 
     constructor(
-        private _router: Router,
-        private _route: ActivatedRoute,
         private _vehiculoService: VehiculoService,
         private _typeVehicleService: TypeVehicleService,
         private _driverService: DriverService,
         private _formBuildaer: FormBuilder,
+        private _dialogRef: MatDialogRef<ActualizarVehiculoComponent>,
+        private _toastService: ToastService,
+        private _alertService: AlertService,
+
+        @Inject(MAT_DIALOG_DATA) private _dialogData
     ) { }
 
     ngOnInit() {
         this.crearFormVehiculo()
         this.listarTipoVehiculos()
         this.listarDriver()
-        this._route.params.subscribe(params => {
-            this.idVehiculo = params.id
-            this.listarVehiculoxID(this.idVehiculo)
-        })
+
+        this.idVehiculo = this._dialogData
+        this.listarVehiculoxID(this.idVehiculo)
     }
 
     crearFormVehiculo(){
@@ -84,9 +90,17 @@ export class ActualizarVehiculoComponent implements OnInit {
     }
 
     async actualizarVehiculo(){
-        if(this.formVehiculo.invalid){
+
+        if (this.formVehiculo.invalid) {
+            let contenido: Alert = {
+                type: 'alert',
+                contenido: 'Formato inválido, revise los campos porfavor.'
+            }
+            this._toastService.open(contenido)
+            this.formVehiculo.markAllAsTouched()
             return
         }
+        
         let form = this.formVehiculo.value
         let Vehiculo: any = {
             typeVehicleId: +form.idTypeVehicle,
@@ -99,19 +113,24 @@ export class ActualizarVehiculoComponent implements OnInit {
 
         try {
             let data = await this._vehiculoService.actualizarVehiculo(this.idVehiculo, Vehiculo)
-            this.listarVehiculoxID(this.idVehiculo)
-            this.modalClass = ' overflow-y-auto show'
+            this._alertService.openModal({ typeModal: 'success', contenidoModal: data.message })
+            this.salir()
+            
         }
         catch (error) {
             console.log(error)
         }
     }
 
-    modificarCSSModal() {
-        this.modalClass = ''
+    cssValidate(control: string) {
+        if (this.formVehiculo.controls[control].touched) {
+            if (this.formVehiculo.controls[control].errors) return 'border-danger'
+            else return 'border-success'
+        }
+        else return ''
     }
 
-    cerrarVentana() {
-        this._router.navigate(['/transporte/gestionarvehiculos'])
+    salir() {
+        this._dialogRef.close()
     }
 }

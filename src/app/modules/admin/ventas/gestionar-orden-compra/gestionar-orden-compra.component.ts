@@ -46,7 +46,7 @@ export class GestionarOrdenCompraComponent implements OnInit {
     const dialogConfig = new MatDialogConfig()
 
     dialogConfig.width = '60rem'
-    
+
     const dialogReg = this._dialog.open(CrearOrdenCompraComponent, dialogConfig)
     dialogReg.afterClosed().subscribe(result => {
       this.getOrdenesCompra()
@@ -61,7 +61,7 @@ export class GestionarOrdenCompraComponent implements OnInit {
     dialogConfig.data = idOrdenCompra
 
     const dialogReg = this._dialog.open(VerOrdenCompraComponent, dialogConfig)
-    dialogReg.afterClosed().subscribe(result => {})
+    dialogReg.afterClosed().subscribe(result => { })
 
     // this._router.navigate(['/ventas/gestionarOrdenCompra/ver/' + idOrdenCompra])
   }
@@ -72,11 +72,58 @@ export class GestionarOrdenCompraComponent implements OnInit {
 
     dialogConfig.width = '60rem'
     dialogConfig.data = idOrdenCompra
-    
+
     const dialogReg = this._dialog.open(ActualizarOrdenCompraComponent, dialogConfig)
     dialogReg.afterClosed().subscribe(result => this.getOrdenesCompra())
 
     // this._router.navigate(['/ventas/gestionarOrdenCompra/actualizar/' + idOrdenCompra])
+  }
+
+  colorStatusPedido(orderstatus: number) {
+
+    switch (orderstatus) {
+      case 1:
+        return 'bg-primary'
+        break;
+      case 2:
+        return 'bg-success'
+        break;
+      case 3:
+        return 'bg-danger'
+        break;
+      case 4:
+        return 'bg-slate-500'
+        break;
+      case 5:
+        return 'bg-dark'
+        break;
+      default:
+        return ''
+        break;
+    }
+  }
+
+  iconStatusPedido(orderstatus: number) {
+    switch (orderstatus) {
+      case 1:
+        return 'file-plus-2'
+        break;
+      case 2:
+        return 'file-input'
+        break;
+      case 3:
+        return 'file-x-2'
+        break;
+      case 4:
+        return 'file-check-2'
+        break;
+      case 5:
+        return 'file-output'
+        break;
+      default:
+        return ''
+        break;
+    }
   }
 
 }

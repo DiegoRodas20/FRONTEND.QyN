@@ -14,7 +14,6 @@ import { ProductoService } from 'src/app/core/services/product.service';
 export class VerProductoComponent implements OnInit {
 
     formProducto: FormGroup
-    urlPorDefecto: string = '../../../../../assets/images/productodefault.jpg'
     urlImage: string
     lCategorias: Category[] = []
     itemActually: string = ''

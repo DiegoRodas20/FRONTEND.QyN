@@ -1,19 +1,17 @@
 <!-- Cabecera -->
-<div class="flex items-center mt-8">
-    <h2 class="intro-y text-lg font-medium mr-auto">
+<div class="modal-header">
+    <h2 class="intro-y font-medium text-lg mr-auto">
         Ver Vehiculo
     </h2>
 </div>
 
-<!-- Inputs -->
-<div class="intro-y box py-10 sm:py-10 mt-5">
-    <div class="px-10 sm:px-10 dark:border-darkmode-400">
+<!-- Cuerpo -->
+<div class="modal-body px-5 sm:px-10">
+    <form [formGroup]="formVehiculo">
+        <div class="grid grid-cols-12 gap-4 gap-y-5">
 
-        <form [formGroup]="formVehiculo">
-        <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-            
-             <!-- Tipo de Vehiculo -->
-             <div class="intro-y col-span-6">
+            <!-- Tipo de Vehiculo -->
+            <div class="intro-y col-span-6">
                 <label class="form-label">Tipo Vehiculo</label>
                 <select class="form-select sm:mr-2" formControlName="idTypeVehicle" readonly>
                     <option [value]="tipoVehiculo.id" *ngFor="let tipoVehiculo of lTipoVehiculo" disabled>
@@ -22,8 +20,8 @@
                 </select>
             </div>
 
-             <!-- Driver -->
-             <div class="intro-y col-span-6">
+            <!-- Driver -->
+            <div class="intro-y col-span-6">
                 <label class="form-label">Conductor</label>
                 <select class="form-select sm:mr-2" formControlName="idTypeVehicle" readonly>
                     <option [value]="conductor.id" *ngFor="let conductor of lConductores" disabled>
@@ -32,26 +30,26 @@
                 </select>
             </div>
 
-             <!-- Plate -->
-             <div class="intro-y col-span-6 mt-5">
+            <!-- Plate -->
+            <div class="intro-y col-span-6">
                 <label class="form-label">Placa</label>
                 <input formControlName="plate" type="text" class="form-control" readonly>
             </div>
 
-             <!-- Brand -->
-             <div class="intro-y col-span-6 mt-5">
+            <!-- Brand -->
+            <div class="intro-y col-span-6">
                 <label class="form-label">Marca</label>
                 <input formControlName="brand" type="text" class="form-control" readonly>
             </div>
 
             <!-- Color -->
-            <div class="intro-y col-span-6 mt-5">
+            <div class="intro-y col-span-6">
                 <label class="form-label">Color</label>
                 <input formControlName="color" type="text" class="form-control" readonly>
             </div>
 
-             <!-- Status -->
-            <div class="intro-y col-span-6 mt-5">
+            <!-- Status -->
+            <div class="intro-y col-span-6">
                 <label class="form-label">Estado</label>
                 <select class="form-select sm:mr-2" formControlName="status" readonly>
                     <option [value]="estado.status" *ngFor="let estado of lEstados" disabled>
@@ -59,12 +57,11 @@
                     </option>
                 </select>
             </div>
-
-            <!--Boton Registrar y Atras-->
-            <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                <button class="btn btn-secondary mx-2 w-24" (click)="cerrarVentana()">Atrás</button>
-            </div>
         </div>
     </form>
-    </div>
+</div>
+
+<!-- Footer -->
+<div class="modal-footer intro-y">
+    <button class="btn btn-primary w-24 mr-2" (click)="salir()">Atrás</button>
 </div>

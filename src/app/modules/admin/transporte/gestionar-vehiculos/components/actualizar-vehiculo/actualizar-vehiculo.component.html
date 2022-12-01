@@ -1,100 +1,100 @@
 <!-- Cabecera -->
-<div class="flex items-center mt-8">
-    <h2 class="intro-y text-lg font-medium mr-auto">
+<div class="modal-header">
+    <h2 class="intro-y font-medium text-lg mr-auto">
         Actualizar Vehiculo
     </h2>
 </div>
 
-<!-- Inputs -->
-<div class="intro-y box py-10 sm:py-10 mt-5">
-    <div class="px-10 sm:px-10 dark:border-darkmode-400">
-        <form [formGroup]="formVehiculo">
-        <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+<!-- Cuerpo -->
+<div class="modal-body px-5 sm:px-10">
+    <form [formGroup]="formVehiculo">
+        <div class="grid grid-cols-12 gap-4 gap-y-5">
 
             <!-- Tipo de Vehiculo -->
             <div class="intro-y col-span-6">
                 <label class="form-label">Tipo Vehiculo</label>
-                <select class="form-select sm:mr-2" formControlName="idTypeVehicle">
+                <select [class]="'form-control ' + cssValidate('idTypeVehicle')" formControlName="idTypeVehicle">
                     <option [value]="tipoVehiculo.id" *ngFor="let tipoVehiculo of lTipoVehiculo">
                         {{tipoVehiculo.name}}
                     </option>
                 </select>
-                <div *ngIf="formVehiculo.controls['idTypeVehicle'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
+                <error-message [formControlError]="formVehiculo.controls['idTypeVehicle']"></error-message>
+<!-- 
+                <div *ngIf="formVehiculo.controls['idTypeVehicle'].hasError('required')" class="text-danger mt-2">Este
+                    campo esta vacio</div> -->
             </div>
 
             <!-- Driver -->
             <div class="intro-y col-span-6">
                 <label class="form-label">Conductor</label>
-                <select class="form-select sm:mr-2" formControlName="idDriver">
+                <select [class]="'form-control ' + cssValidate('idDriver')" formControlName="idDriver">
                     <option [value]="conductor.id" *ngFor="let conductor of lConductores">
                         {{conductor.firstName}} {{conductor.lastName}}
                     </option>
                 </select>
-                <div *ngIf="formVehiculo.controls['idDriver'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
+                <error-message [formControlError]="formVehiculo.controls['idDriver']"></error-message>
+                <!-- <div *ngIf="formVehiculo.controls['idDriver'].hasError('required')" class="text-danger mt-2">Este campo
+                    esta vacio</div> -->
             </div>
 
             <!-- Plate -->
-            <div class="intro-y col-span-6 mt-5">
+            <div class="intro-y col-span-6">
                 <label class="form-label">Placa</label>
-                <input formControlName="plate" type="text" class="form-control">
-                <div *ngIf="formVehiculo.controls['plate'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
+                <input formControlName="plate" type="text" [class]="'form-control ' + cssValidate('plate')">
+                <error-message [formControlError]="formVehiculo.controls['plate']"></error-message>
+
+                <!-- <div *ngIf="formVehiculo.controls['plate'].hasError('required')" class="text-danger mt-2">Este campo
+                    esta vacio</div> -->
             </div>
 
             <!-- Brand -->
-            <div class="intro-y col-span-6 mt-5">
+            <div class="intro-y col-span-6">
                 <label class="form-label">Marca</label>
-                <input formControlName="brand" type="text" maxLength="30" class="form-control">
-                <div *ngIf="formVehiculo.controls['brand'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
-                <div *ngIf="formVehiculo.controls['brand'].hasError('maxlength')" class="text-danger mt-2">Maximo de 20 caracteres</div>
-                <div *ngIf="formVehiculo.controls['brand'].hasError('pattern')" class="text-danger mt-2">Solo ingrese letras</div>
+                <input formControlName="brand" type="text" maxLength="30" [class]="'form-control ' + cssValidate('brand')">
+                <error-message [formControlError]="formVehiculo.controls['brand']"></error-message>
+
+                <!-- <div *ngIf="formVehiculo.controls['brand'].hasError('required')" class="text-danger mt-2">Este campo
+                    esta vacio</div>
+                <div *ngIf="formVehiculo.controls['brand'].hasError('maxlength')" class="text-danger mt-2">Maximo de 20
+                    caracteres</div>
+                <div *ngIf="formVehiculo.controls['brand'].hasError('pattern')" class="text-danger mt-2">Solo ingrese
+                    letras</div> -->
             </div>
 
             <!-- Color -->
-            <div class="intro-y col-span-6 mt-5">
+            <div class="intro-y col-span-6">
                 <label class="form-label">Color</label>
-                <input formControlName="color" type="text" class="form-control">
-                <div *ngIf="formVehiculo.controls['color'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
-                <div *ngIf="formVehiculo.controls['color'].hasError('maxlength')" class="text-danger mt-2">Maximo de 20 caracteres</div>
-                <div *ngIf="formVehiculo.controls['color'].hasError('pattern')" class="text-danger mt-2">Solo ingrese letras</div>
+                <input formControlName="color" type="text" [class]="'form-control ' + cssValidate('color')">
+                <error-message [formControlError]="formVehiculo.controls['color']"></error-message>
+
+                <!-- <div *ngIf="formVehiculo.controls['color'].hasError('required')" class="text-danger mt-2">Este campo
+                    esta vacio</div>
+                <div *ngIf="formVehiculo.controls['color'].hasError('maxlength')" class="text-danger mt-2">Maximo de 20
+                    caracteres</div>
+                <div *ngIf="formVehiculo.controls['color'].hasError('pattern')" class="text-danger mt-2">Solo ingrese
+                    letras</div> -->
             </div>
 
             <!-- Status -->
-            <div class="intro-y col-span-6 mt-5">
+            <div class="intro-y col-span-6">
                 <label class="form-label">Estado</label>
-                <select class="form-select sm:mr-2" formControlName="status">
+                <select [class]="'form-control ' + cssValidate('status')" formControlName="status">
                     <option [value]="estado.status" *ngFor="let estado of lEstados">
                         {{estado.name}}
                     </option>
                 </select>
-                <div *ngIf="formVehiculo.controls['status'].hasError('required')" class="text-danger mt-2">Este campo esta vacio</div>
-            </div>
+                <error-message [formControlError]="formVehiculo.controls['status']"></error-message>
 
-            <!--Boton Actualizar y Atras-->
-            <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                <button class="btn btn-primary w-24" (click)="actualizarVehiculo()">Actualizar</button>
-                <button class="btn btn-secondary mx-2 w-24" (click)="cerrarVentana()">Atrás</button>
+                <!-- <div *ngIf="formVehiculo.controls['status'].hasError('required')" class="text-danger mt-2">Este campo
+                    esta vacio</div> -->
             </div>
 
         </div>
     </form>
-    </div>
 </div>
 
-<!-- Modal -->
-<div [ngClass]="'modal' + modalClass" style="margin-top: 0px; margin-left: 0px; padding-left: 0px; z-index: 10000;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body p-0">
-                <div class="p-5 text-center">
-                    <lucide-icon name="check-circle" class="w-16 h-16 text-success mx-auto mt-3"></lucide-icon>
-                    <div class="text-3xl mt-5">¡Éxito!</div>
-                    <div class="text-slate-500 mt-2">Se actualizó correctamente.</div>
-                </div>
-                <div class="px-5 pb-8 text-center">
-                    <button type="button" data-tw-dismiss="modal" class="btn btn-primary w-24"
-                        (click)="modificarCSSModal()">Aceptar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Footer -->
+<div class="modal-footer intro-y">
+    <button class="btn btn-primary w-24 mr-2" (click)="actualizarVehiculo()">Actualizar</button>
+    <button class="btn btn-secondary w-24" (click)="salir()">Atrás</button>
 </div>

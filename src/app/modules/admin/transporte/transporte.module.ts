@@ -19,6 +19,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import { AsignacionPedidoDialogComponent } from './asignar-transporte/components/asignacion-pedido-dialog/asignacion-pedido-dialog.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
@@ -51,7 +52,8 @@ const COMPONENTS = [
         FormsModule,
         ReactiveFormsModule,
         LucideAngularModule.pick(icons),
-        FullCalendarModule 
+        FullCalendarModule,
+        SharedModule
     ],
     exports: [],
 })
