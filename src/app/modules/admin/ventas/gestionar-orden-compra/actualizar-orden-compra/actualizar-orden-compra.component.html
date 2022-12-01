@@ -77,11 +77,12 @@
     </div>
   </form>
 
-  <h4 class="font-medium intro-y text-md mr-auto mt-5 intro-y">Lista Productos</h4>
+  <h4 class="font-medium intro-y text-md mr-auto mt-5 intro-y">Lista de Productos</h4>
 
   <table class="table table-report text-center">
     <thead class="table-dark">
       <tr>
+        <th class="text-center">Imagen</th>
         <th class="text-center">Producto</th>
         <th class="text-center">Precio</th>
         <th class="text-center">Cantidad</th>
@@ -89,8 +90,17 @@
     </thead>
     <tbody>
       <tr *ngFor="let product of formOrdenCompra.value.purchaseOrderDetails" class="intro-y">
+
+        <td class="">
+          <div class="flex items-center justify-center text-success">
+              <div class="w-10 h-10 image-fit zoom-in">
+                  <img class="rounded-lg border-white shadow-md tooltip"
+                      [src]="getNameProduct(product.productId).urlImage" data-action="zoom">
+              </div>
+          </div>
+      </td>
         <td class="text-center font-medium whitespace-nowrap">{{product.productName}}</td>
-        <td class="text-center font-medium whitespace-nowrap">{{product.purchasePrice}}</td>
+        <td class="text-center font-medium whitespace-nowrap">S/. {{product.purchasePrice | number:'1.2-2'}}</td>
         <td class="text-center font-medium whitespace-nowrap">{{product.quantity}}</td>
       </tr>
 

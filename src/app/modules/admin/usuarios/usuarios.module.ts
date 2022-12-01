@@ -13,6 +13,7 @@ import { GestionarUsuarioComponent } from './gestionar-usuario/gestionar-usuario
 import { UsuariosRoutingModule } from './usuarios.routing';
 import { AsignarRolesComponent } from './gestionar-usuario/components/asignar-roles/asignar-roles.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 
 const COMPONENTS = [
@@ -21,7 +22,8 @@ const COMPONENTS = [
     RegistrarUsuarioComponent,
     ActualizarUsuarioComponent,
     ActualizarContrasenaComponent,
-    AsignarRolesComponent
+    AsignarRolesComponent,
+    DashboardComponent
 ]
 
 @NgModule({

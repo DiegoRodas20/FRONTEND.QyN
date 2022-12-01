@@ -140,6 +140,12 @@ export class ActualizarOrdenCompraComponent implements OnInit {
     this._dialogRef.close()
   }
 
+  getNameProduct(idProduct: number) {
+    let productData: Product
+    productData = this.lProducts.find(({ id }) => id == idProduct)
+    return productData
+  }
+  
   // moveToGestionarOrdenCompra() {
   //   this._router.navigate(['/ventas/gestionarOrdenCompra/'])
   // }

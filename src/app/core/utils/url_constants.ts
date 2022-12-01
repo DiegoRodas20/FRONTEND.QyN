@@ -18,6 +18,7 @@ export const PEDIDO_URL             = `${environment.API_URL}order`
 export const TYPEVEHICLE_URL        = `${environment.API_URL}typevehicle`
 export const SUPPLIER_URL           = `${environment.API_URL}supplier`
 export const ROLES_URL              = `${environment.API_URL}rol`
+export const DASHBOARD_URL          = `${environment.API_URL}dashboard`
 
 export const MAPBOX_URL             = `${environment.API_MAPBOX}geocoding/v5/`
 export const DIRECTIONS_URL         = `${environment.API_MAPBOX}directions/v5/mapbox/driving/`
